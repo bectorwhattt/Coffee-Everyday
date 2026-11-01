@@ -1,0 +1,42 @@
+/**import specific fonts from google fonts**/
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
+:root {
+
+/*********************************************************************************
+COLOR VARIABLES
+*********************************************************************************/
+
+    /**primary white color, primary background color**/
+    --bgcolor-light: #F7F1E8;
+
+    /**background color for sections**/
+    --bgcolor-beige: #EFE3D1;
+
+    /**secondary background color for sections, darker**/
+    --bgcolor-khaki: #EBD9C0;
+
+    /**primary black color, primary text color, primary border color**/
+    --color-black: #1E1512;
+
+    /**primary color, color for emphasis, retrieved from logo**/
+    --color-gold: #C98A2B;
+
+    /**lighter font color, for faded/grey text**/
+    --color-grey: #7A685B;
+
+    /**primary pill tag color**/
+    --color-pink: #F1CFC0;
+
+
+/*********************************************************************************
+FONT VARIABLES
+*********************************************************************************/
+
+    /**primary font family for headings**/
+    /* WEIGHT MUST BE SEMIBOLD, AND WONKY */
+    --headings: 'Fraunces', 'Times New Roman', serif;
+
+    /**primary sans font**/
+    --body: 'DM Sans', 'Arial', sans-serif;
+}
