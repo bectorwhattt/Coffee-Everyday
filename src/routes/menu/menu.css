@@ -193,3 +193,4 @@ h1 em, h2 em { font-style: italic; color: var(--gold); }
   .fav-card h4 { font-size: 15px; }
   .addon { width: 100%; }
 }
+@import url("../../lib/variables.css");
