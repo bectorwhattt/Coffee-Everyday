@@ -2,282 +2,260 @@
 @import url("../../lib/variables.css");
 
 
-/*********************************************************************************
-MAIN: BASE + RESET (scoped to .main so the header and footer are not affected)
-*********************************************************************************/
+/**********************************************************
+MAIN                                                      .
+**********************************************************/
 
 .main {
-    /**centered content width, sections keep full-bleed backgrounds**/
-    --gutter: max(1.25rem, calc((100% - 1320px) / 2));
+    display: flex;
+    flex-direction: column;
 
-    /**avatar color that is not in variables.css**/
-    --color-sage: #C3E0BE;
+    width: 100%;
 
     background-color: var(--bgcolor-light);
-    color: var(--color-black);
+
     font-family: var(--body);
-    font-size: 1.125rem;
-    line-height: 1.55;
+    font-size: 18px;
+    line-height: 155%;
+    color: var(--color-black);
 }
 
-/**:where() keeps these resets at zero specificity so components always win**/
-:where(.main) *,
-:where(.main) *::before,
-:where(.main) *::after {
+.main * {
     box-sizing: border-box;
-}
-
-:where(.main) h1,
-:where(.main) h2,
-:where(.main) h3,
-:where(.main) p,
-:where(.main) ul,
-:where(.main) ol,
-:where(.main) blockquote {
     margin: 0;
-}
-
-:where(.main) ul,
-:where(.main) ol {
     padding: 0;
-    list-style: none;
 }
 
-:where(.main) img {
-    display: block;
-    max-width: 100%;
+.main > div {
+    scroll-margin-top: 100px;
 }
 
-:where(.main) a {
-    color: inherit;
-    text-decoration: none;
-}
-
-:where(.main) button {
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-}
-
-/**leave room for the header when jumping to a section**/
-.main [id] {
-    scroll-margin-top: 6rem;
-}
-
-/**headings: Fraunces, semibold, wonky**/
 .main h1,
-.main h2,
-.menu-card h3 {
+.main h2 {
     font-family: var(--headings);
     font-weight: 600;
     font-variation-settings: "WONK" 1;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-}
-
-.main h2 {
-    font-size: clamp(2.25rem, 4.4vw, 4rem);
+    line-height: 110%;
+    letter-spacing: -1px;
 }
 
 
-/*********************************************************************************
-SHARED COMPONENTS: PILL TAGS, BUTTONS, SECTION HEADS
-*********************************************************************************/
+/**********************************************************
+SHARED COMPONENTS                                         .
+**********************************************************/
 
-.pill {
-    display: inline-flex;
+.button {
+    display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.7rem 1.6rem;
-    border-radius: 999px;
-    background-color: var(--color-pink);
-    color: var(--color-black);
-    font-size: 1.0625rem;
-    font-weight: 500;
-    line-height: 1.2;
-}
+    gap: 8px;
 
-.pill--blush {
-    background-color: var(--color-pink);
-}
+    padding: 14px 24px;
 
-.pill--gold {
-    background-color: var(--color-gold);
-}
-
-.icon-cup {
-    width: 1rem;
-    height: 1rem;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.9rem 1.5rem;
     border: 1px solid var(--color-black);
-    border-radius: 999px;
+    border-radius: 100px;
+
     font-family: var(--body);
-    font-size: 1.0625rem;
+    font-size: 17px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 120%;
+    text-decoration: none;
+
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.btn-arrow {
-    display: inline-block;
+.button-arrow {
     transition: transform 0.2s ease;
 }
 
-.btn:hover .btn-arrow {
+.button:hover .button-arrow {
     transform: translateX(4px);
 }
 
-.btn--dark {
+.button-dark {
     background-color: var(--color-black);
+
     color: var(--bgcolor-light);
 }
 
-.btn--dark:hover {
-    background-color: var(--color-gold);
+.button-dark:hover {
     border-color: var(--color-gold);
+    background-color: var(--color-gold);
+
     color: var(--color-black);
 }
 
-.btn--outline {
+.button-outline {
     background-color: transparent;
+
     color: var(--color-black);
 }
 
-.btn--outline:hover {
+.button-outline:hover {
     background-color: var(--color-black);
+
     color: var(--bgcolor-light);
 }
 
-.btn--gold {
-    background-color: var(--color-gold);
+.button-gold {
     border-color: var(--color-gold);
+    background-color: var(--color-gold);
+
     color: var(--color-black);
 }
 
-.btn--gold:hover {
-    background-color: var(--color-black);
+.button-gold:hover {
     border-color: var(--color-black);
+    background-color: var(--color-black);
+
     color: var(--bgcolor-light);
 }
 
-.section-head {
+.pill {
+    display: flex;
+    align-items: center;
+
+    padding: 12px 25px;
+
+    border-radius: 100px;
+
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 120%;
+    color: var(--color-black);
+}
+
+.pill-pink {
+    background-color: var(--color-pink);
+}
+
+.pill-gold {
+    background-color: var(--color-gold);
+}
+
+.section-heading {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: 20px;
+
     text-align: center;
 }
 
-.section-head p {
-    max-width: 40rem;
+.section-heading-description {
+    max-width: 640px;
+
     color: var(--color-grey);
 }
 
 
-/*********************************************************************************
-1. HERO
-*********************************************************************************/
+/**********************************************************
+HERO                                                      .
+**********************************************************/
 
 .hero {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 2rem;
-    align-items: end;
-    min-height: clamp(520px, 43vw, 620px);
-    padding-inline: var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    height: 614px;
+    padding: 0 5%;
 }
 
 .hero-text {
-    align-self: center;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem;
-    padding-block: 3.5rem;
+    align-self: center;
+    gap: 24px;
+
+    width: 55%;
+    padding: 56px 0;
 }
 
-/**the hero tag is a smaller version of the pill**/
-.hero .pill {
-    padding: 0.2rem 0.65rem;
+.hero-tag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    padding: 3px 5px;
+
+    border-radius: 100px;
+    background-color: var(--color-pink);
+
+    font-size: 18px;
+    line-height: 120%;
+    color: var(--color-black);
 }
 
-.hero h1 {
-    margin-bottom: 0.75rem;
-    font-size: clamp(2.75rem, 5.6vw, 5rem);
+.hero-tag-icon {
+    width: 16px;
+    height: 16px;
 }
 
-.hero h1 em {
+.hero-title {
+    margin-bottom: 12px;
+
+    font-size: 80px;
+}
+
+.hero-highlight {
     font-style: italic;
     color: var(--color-gold);
 }
 
-.hero-text p {
-    max-width: 31rem;
+.hero-description {
+    max-width: 496px;
+
     color: var(--color-grey);
 }
 
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 0.5rem;
+    gap: 16px;
+
+    margin-top: 8px;
 }
 
-/**the cutout sits on the bottom edge so the cup meets the ticker strip**/
 .hero-image {
-    align-self: end;
-    justify-self: center;
-    width: min(100%, 430px);
+    display: flex;
+    align-self: flex-end;
+
+    height: 98%;
+    margin-right: 60px;
 }
 
 .hero-image img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
 }
 
 
-/*********************************************************************************
-2. TICKER STRIP
-*********************************************************************************/
+/**********************************************************
+TICKER                                                    .
+**********************************************************/
 
 .ticker {
-    padding: 1.25rem 1rem;
-    background-color: var(--color-black);
-    color: var(--bgcolor-light);
-    overflow: hidden;
-}
-
-.ticker-list {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0.25rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+
+    padding: 20px 16px;
+
+    background-color: var(--color-black);
+
     font-family: var(--headings);
-    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    font-size: 24px;
     font-weight: 500;
+    line-height: 120%;
+    color: var(--bgcolor-light);
 }
 
-.ticker-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-}
-
-/**gold cup separator, recolored with a mask so any single-color svg works**/
-.ticker-list li:not(:last-child)::after {
-    content: "";
-    width: 1.1rem;
-    height: 1.1rem;
-    background-color: var(--color-gold);
-    -webkit-mask: url("images/icon-cup.svg") center / contain no-repeat;
-    mask: url("images/icon-cup.svg") center / contain no-repeat;
+.ticker-icon {
+    width: 16px;
+    height: 16px;
 }
 
 .ticker-accent {
@@ -286,346 +264,414 @@ SHARED COMPONENTS: PILL TAGS, BUTTONS, SECTION HEADS
 }
 
 
-/*********************************************************************************
-3. ABOUT
-*********************************************************************************/
+/**********************************************************
+ABOUT                                                     .
+**********************************************************/
 
 .about {
-    display: grid;
-    grid-template-columns: 1.35fr 1fr;
-    gap: 3.5rem;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 4rem var(--gutter) 5rem;
+
+    padding: 64px 5% 80px;
 }
 
 .about-images {
     display: flex;
     flex-direction: column;
-    gap: 1.4rem;
+    gap: 22px;
+
+    width: 55%;
 }
 
-.about-img {
+.about-image {
     width: 75%;
+
+    border-radius: 60px;
+
     object-fit: cover;
-    border-radius: 3.75rem;
 }
 
-.about-img--top {
+.about-image-top {
     align-self: flex-start;
-    aspect-ratio: 3 / 2;
+
+    height: 352px;
 }
 
-/**staggered: the second photo sits lower and shifted toward the text**/
-.about-img--bottom {
+.about-image-bottom {
     align-self: flex-end;
-    aspect-ratio: 25 / 16;
+
+    height: 345px;
 }
 
 .about-text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem;
+    gap: 24px;
+
+    width: 40%;
 }
 
-.about-text h2 {
-    font-size: clamp(2.25rem, 3.8vw, 3.5rem);
+.about-title {
+    font-size: 54px;
 }
 
-.about-text > p {
+.about-description {
     color: var(--color-grey);
 }
 
 .about-list {
-    display: grid;
-    gap: 1.4rem;
-    margin-block: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+
+    margin: 8px 0;
 }
 
-.about-list li {
-    display: grid;
-    grid-template-columns: 2.75rem 1fr;
-    align-items: start;
+.about-item {
+    display: flex;
+    align-items: flex-start;
 }
 
-.about-num {
+.about-number {
+    flex: none;
+
+    width: 44px;
+
     font-family: var(--headings);
+    font-size: 20px;
     font-style: italic;
-    font-size: 1.25rem;
-    line-height: 1.5;
+    line-height: 150%;
     color: var(--color-gold);
 }
 
-.about-list h3 {
+.about-item-title {
     font-family: var(--body);
-    font-size: 1.1875rem;
+    font-size: 19px;
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 130%;
 }
 
-.about-list li p {
-    font-size: 1rem;
+.about-item-description {
+    font-size: 16px;
+    line-height: 150%;
     color: var(--color-grey);
 }
 
 
-/*********************************************************************************
-4. MENU
-*********************************************************************************/
+/**********************************************************
+MENU                                                      .
+**********************************************************/
 
 .menu {
-    margin-bottom: 3rem;
-    padding: 5rem var(--gutter) 4.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-bottom: 48px;
+    padding: 80px 5% 72px;
+
     background-color: var(--bgcolor-beige);
+}
+
+.menu-title {
+    font-size: 64px;
 }
 
 .menu-filters {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 1.25rem 1.9rem;
-    margin: 2.75rem 0 3rem;
+    flex-wrap: wrap;
+    gap: 20px 30px;
+
+    margin: 44px 0 48px;
 }
 
-.filter-btn {
-    min-width: 4.8rem;
-    padding: 0.7rem 1.4rem;
+.filter-button {
+    min-width: 77px;
+    padding: 11px 22px;
+
     border: 1px solid var(--color-black);
-    border-radius: 999px;
+    border-radius: 100px;
     background-color: transparent;
-    font-size: 1.0625rem;
+
+    font-family: var(--body);
+    font-size: 17px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 120%;
+    color: var(--color-black);
+
+    cursor: pointer;
+
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.filter-btn:hover {
+.filter-button:hover {
     background-color: var(--bgcolor-khaki);
 }
 
-.filter-btn.is-active {
+.filter-button-active,
+.filter-button-active:hover {
     background-color: var(--color-black);
+
     color: var(--bgcolor-light);
 }
 
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2.5rem;
+.menu-cards {
+    display: flex;
+    gap: 40px;
+
+    width: 100%;
 }
 
 .menu-card {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    flex: 1;
+    gap: 8px;
 }
 
-/**needed because display:flex above would override the hidden attribute**/
+/* display: flex above would override the hidden attribute used by the filter */
 .menu-card[hidden] {
     display: none;
 }
 
-.menu-card img {
+.menu-card-image {
     width: 100%;
-    aspect-ratio: 296 / 320;
-    margin-bottom: 0.75rem;
+    height: 320px;
+    margin-bottom: 12px;
+
+    border-radius: 28px;
+
     object-fit: cover;
-    border-radius: 1.75rem;
 }
 
-.menu-card h3 {
-    font-size: 1.5rem;
+.menu-card-name {
+    font-family: var(--headings);
+    font-size: 24px;
+    font-weight: 600;
+    font-variation-settings: "WONK" 1;
+    line-height: 120%;
 }
 
-.menu-card p {
-    font-size: 1rem;
-    line-height: 1.45;
+.menu-card-description {
+    font-size: 16px;
+    line-height: 145%;
     color: var(--color-grey);
 }
 
-/**margin-top:auto pins the price row to the bottom so all prices line up**/
 .menu-card-footer {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+
     margin-top: auto;
-    padding-top: 1rem;
+    padding-top: 16px;
 }
 
-.price {
-    font-size: 1.25rem;
+.menu-card-price {
+    font-size: 20px;
     font-weight: 500;
     color: var(--color-gold);
 }
 
-.add-btn {
-    display: grid;
-    place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
+.add-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+
     border: 0;
     border-radius: 50%;
     background-color: var(--color-black);
+
+    font-family: var(--body);
+    font-size: 24px;
+    line-height: 100%;
     color: var(--bgcolor-light);
-    font-size: 1.5rem;
-    line-height: 1;
+
+    cursor: pointer;
+
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.add-btn:hover {
+.add-button:hover {
     background-color: var(--color-gold);
+
     color: var(--color-black);
 }
 
-.menu-cta {
+.menu-call-to-action {
     display: flex;
     justify-content: center;
-    margin-top: 3rem;
+
+    margin-top: 48px;
 }
 
 
-/*********************************************************************************
-5. REVIEWS
-*********************************************************************************/
+/**********************************************************
+REVIEWS                                                   .
+**********************************************************/
 
 .reviews {
-    padding: 3rem var(--gutter) 4.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+    padding: 48px 5% 72px;
+
     background-color: var(--color-black);
 }
 
-.reviews h2 {
+.reviews-title {
+    font-size: 64px;
     color: var(--bgcolor-light);
 }
 
-.reviews .section-head {
-    margin-bottom: 2.5rem;
-}
+.review-cards {
+    display: flex;
+    gap: 44px;
 
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2.75rem;
+    width: 100%;
 }
 
 .review-card {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 1.75rem;
-    border-radius: 1.75rem;
+    flex: 1;
+    gap: 16px;
+
+    padding: 28px;
+
+    border-radius: 28px;
     background-color: var(--bgcolor-light);
+
     color: var(--color-black);
 }
 
-.stars {
-    font-size: 1.25rem;
-    letter-spacing: 0.4rem;
-    line-height: 1;
+.review-stars {
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 6px;
     color: var(--color-gold);
 }
 
 .review-text {
     font-family: var(--headings);
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: 500;
-    line-height: 1.3;
+    line-height: 130%;
 }
 
-/**margin-top:auto keeps the author row aligned across cards of different text length**/
 .review-author {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 12px;
+
     margin-top: auto;
-    padding-top: 1rem;
+    padding-top: 16px;
 }
 
-.review-author div {
+.review-avatar {
     display: flex;
-    flex-direction: column;
-    line-height: 1.25;
-}
+    justify-content: center;
+    align-items: center;
+    flex: none;
 
-.review-author strong {
-    font-size: 1rem;
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    font-size: 16px;
     font-weight: 600;
+    color: var(--color-black);
 }
 
-.review-author div span {
-    font-size: 0.875rem;
+.review-avatar-khaki {
+    background-color: var(--bgcolor-khaki);
+}
+
+.review-author-name {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 125%;
+}
+
+.review-author-role {
+    font-size: 14px;
+    line-height: 125%;
     color: var(--color-grey);
 }
 
-.avatar {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    font-size: 1rem;
-    font-weight: 600;
+.review-avatar-pink {
+    background-color: var(--color-pink);
 }
 
-.avatar--sand {
-    background-color: var(--bgcolor-khaki);
-    color: var(--color-black);
-}
-
-.avatar--sage {
-    background-color: var(--color-sage);
-    color: var(--color-black);
-}
-
-.avatar--brown {
+.review-avatar-grey {
     background-color: var(--color-grey);
+
     color: var(--bgcolor-light);
 }
 
 
-/*********************************************************************************
-6. PHOTO BANNER
-*********************************************************************************/
+/**********************************************************
+BANNER                                                    .
+**********************************************************/
 
 .banner {
     position: relative;
-    height: clamp(340px, 56vw, 800px);
-    margin-top: 2rem;
+
+    display: flex;
+
+    height: 800px;
+    margin-top: 32px;
     overflow: hidden;
 }
 
 .banner img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 
-.banner h2 {
+.banner-title {
     position: absolute;
-    right: clamp(1rem, 4vw, 3.5rem);
-    bottom: clamp(1rem, 3.5vw, 3rem);
+    right: 56px;
+    bottom: 48px;
+
     max-width: 90%;
-    font-size: clamp(1.75rem, 3.6vw, 3rem);
+
+    font-size: 48px;
     text-align: right;
 }
 
 
-/*********************************************************************************
-7. VISIT
-*********************************************************************************/
+/**********************************************************
+VISIT                                                     .
+**********************************************************/
 
 .visit {
-    padding: 2rem var(--gutter) 6rem;
+    display: flex;
+    justify-content: center;
+
+    padding: 32px 5% 96px;
 }
 
 .visit-card {
-    display: grid;
-    grid-template-columns: 1.05fr 1fr;
-    gap: 2.5rem;
+    display: flex;
+    gap: 40px;
+
+    width: 100%;
     max-width: 1250px;
-    margin-inline: auto;
-    padding: 4.5rem 4rem 3.5rem 5.5rem;
-    border-radius: 4rem;
+    padding: 72px 64px 56px 88px;
+
+    border-radius: 64px;
     background-color: var(--color-gold);
 }
 
@@ -633,133 +679,346 @@ SHARED COMPONENTS: PILL TAGS, BUTTONS, SECTION HEADS
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    flex: 1;
+    gap: 16px;
 }
 
-.visit h2 {
-    font-size: clamp(2.5rem, 4.6vw, 4rem);
+.visit-title {
+    font-size: 64px;
 }
 
-.visit-text p {
-    max-width: 30rem;
+.visit-description {
+    max-width: 480px;
 }
 
-/**margin-top:auto pins the buttons to the bottom of the left column**/
 .visit-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 16px;
+
     margin-top: auto;
-    padding-top: 2rem;
+    padding-top: 32px;
 }
 
 .visit-info {
-    display: grid;
-    align-content: center;
-    gap: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 14px;
 }
 
 .info-card {
-    padding: 1.25rem 1.5rem;
-    border-radius: 1.5rem;
+    padding: 20px 24px;
+
+    border-radius: 24px;
     background-color: var(--bgcolor-light);
 }
 
 .info-label {
-    display: block;
-    margin-bottom: 0.35rem;
-    font-size: 0.875rem;
+    margin-bottom: 6px;
+
+    font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0.04em;
+    line-height: 150%;
+    letter-spacing: 1px;
     color: var(--color-gold);
 }
 
-.info-card p {
-    font-size: 1.0625rem;
-    line-height: 1.5;
+.info-description {
+    font-size: 17px;
+    line-height: 150%;
 }
 
 
 /*********************************************************************************
-RESPONSIVE
+HEADER + FOOTER: BASE + RESET (shared components loaded into #header and #footer)
+This whole block is self-contained, so it can be moved to html-components.css.
+*********************************************************************************/
+
+.header,
+.footer {
+    /**same centered content width as .main**/
+    --gutter: max(1.25rem, calc((100% - 1320px) / 2));
+
+    font-family: var(--body);
+    line-height: 1.5;
+}
+
+:where(.header, .footer) *,
+:where(.header, .footer) *::before,
+:where(.header, .footer) *::after {
+    box-sizing: border-box;
+}
+
+:where(.header, .footer) h3,
+:where(.header, .footer) p,
+:where(.header, .footer) ul {
+    margin: 0;
+}
+
+:where(.header, .footer) ul {
+    padding: 0;
+    list-style: none;
+}
+
+:where(.header, .footer) img {
+    display: block;
+    max-width: 100%;
+}
+
+:where(.header, .footer) a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/*********************************************************************************
+HEADER
+*********************************************************************************/
+
+/**the browser's default 8px body margin would keep the header off the window edges**/
+body {
+    margin: 0;
+}
+
+.header {
+    /**block layout, so the inner grid always spans the full width**/
+    display: block;
+
+    /**delete position, top and z-index if you do not want a sticky header**/
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--color-black);
+    background-color: var(--bgcolor-light);
+    color: var(--color-black);
+    font-size: 1.125rem;
+}
+
+/**three parts: logo | centered nav | button. 1fr auto 1fr keeps the nav truly centered**/
+.header-inner {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: 2rem;
+    padding: 0.35rem var(--gutter);
+}
+
+.header-logo {
+    justify-self: start;
+}
+
+.header-logo img {
+    width: auto;
+    height: 5.25rem;
+}
+
+.header-nav ul {
+    display: flex;
+    gap: clamp(1.5rem, 6.6vw, 6rem);
+}
+
+.header-nav a {
+    display: block;
+    padding-bottom: 0.65rem;
+    border-bottom: 2px solid transparent;
+    line-height: 1.2;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-nav a:hover,
+.header-nav a[aria-current="page"] {
+    color: var(--color-gold);
+}
+
+/**the underline only shows on the current page**/
+.header-nav a[aria-current="page"] {
+    border-bottom-color: var(--color-gold);
+}
+
+.header-cta {
+    justify-self: end;
+    padding: 0.55rem 1.65rem;
+    border: 1px solid var(--color-black);
+    border-radius: 999px;
+    background-color: var(--color-black);
+    color: var(--bgcolor-light);
+    font-weight: 500;
+    line-height: 1.2;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-cta:hover {
+    background-color: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-black);
+}
+
+
+/*********************************************************************************
+FOOTER
+*********************************************************************************/
+
+.footer {
+    display: block;
+
+    /**light plate behind the logo, not in variables.css**/
+    --footer-plate: #E9E6E1;
+
+    padding: 5.25rem var(--gutter) 1.5rem;
+    background-color: var(--color-black);
+    color: var(--bgcolor-light);
+    font-size: 1rem;
+}
+
+.footer-inner {
+    width: 100%;
+}
+
+/**brand column is about three times wider than each link column**/
+.footer-top {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.footer-logo {
+    display: inline-block;
+    padding: 0.6rem 1.25rem;
+    border-radius: 0.875rem;
+    background-color: var(--footer-plate);
+}
+
+.footer-logo img {
+    width: auto;
+    height: 3.5rem;
+}
+
+.footer-tagline {
+    margin-top: 1rem;
+    font-family: var(--headings);
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.footer-heading {
+    margin-bottom: 1rem;
+    font-family: var(--body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--color-gold);
+}
+
+.footer-col p {
+    line-height: 1.35;
+}
+
+.footer-col p + p {
+    margin-top: 0.9rem;
+}
+
+.footer-links {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.footer-col a {
+    transition: color 0.2s ease;
+}
+
+.footer-col a:hover {
+    color: var(--color-gold);
+}
+
+.footer-bottom {
+    margin-top: 3.75rem;
+    padding-top: 4rem;
+    border-top: 1px solid color-mix(in srgb, var(--bgcolor-light) 25%, transparent);
+    font-size: 0.9375rem;
+    color: color-mix(in srgb, var(--bgcolor-light) 60%, transparent);
+}
+
+
+/*********************************************************************************
+HEADER + FOOTER: RESPONSIVE
 *********************************************************************************/
 
 @media (max-width: 1024px) {
-    .menu-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    /**the nav drops to its own row, so the header is no longer sticky**/
+    .header {
+        position: static;
     }
 
-    .reviews-grid {
-        gap: 1.5rem;
+    .header-inner {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        row-gap: 0.5rem;
+        padding-block: 0.5rem;
     }
 
-    .visit-card {
-        padding: 3.5rem 2.5rem;
+    .header-logo img {
+        height: 4rem;
+    }
+
+    .header-nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: center;
+    }
+
+    .header-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem 2rem;
+    }
+
+    /**brand takes the whole first row, link columns share the next**/
+    .footer-top {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
     }
 }
 
 @media (max-width: 860px) {
-    .hero {
-        grid-template-columns: 1fr;
-        min-height: 0;
+    .footer {
+        padding-top: 3.5rem;
+    }
+
+    .footer-top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .footer-bottom {
+        margin-top: 2.5rem;
         padding-top: 2rem;
-    }
-
-    .hero-text {
-        padding-block: 1rem 0;
-    }
-
-    .hero-image {
-        width: min(80%, 380px);
-    }
-
-    .about {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        padding-block: 3rem;
-    }
-
-    .about-text {
-        order: -1;
-    }
-
-    .reviews-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .visit-card {
-        grid-template-columns: 1fr;
-        border-radius: 2.5rem;
-    }
-
-    .visit-actions {
-        margin-top: 0;
     }
 }
 
 @media (max-width: 560px) {
-    .menu {
-        padding-block: 3.5rem;
+    .header-logo img {
+        height: 3.5rem;
     }
 
-    .menu-grid {
+    .header-nav ul {
+        gap: 0.5rem 1.25rem;
+    }
+
+    .header-cta {
+        padding: 0.5rem 1.25rem;
+        font-size: 1rem;
+    }
+
+    .footer-top {
         grid-template-columns: 1fr;
-    }
-
-    .menu-filters {
-        gap: 0.75rem;
-    }
-
-    .about-img {
-        width: 88%;
-        border-radius: 2.25rem;
-    }
-
-    .visit-card {
-        padding: 2.5rem 1.5rem;
-    }
-
-    .info-card {
-        padding: 1rem 1.25rem;
     }
 }
