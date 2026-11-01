@@ -3,9 +3,56 @@
     <head>
         <title></title>
         <link rel="stylesheet" href="menu.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&display=swap" rel="stylesheet" />
     </head>
     <body>
         
-        
+        <main>
+            <section class="hero">
+                <div class="container">
+                    <span class="pill" id="hero-pill">Our Menu</span>
+                    <h1 id="hero-title"></h1>
+                    <p id="hero-sub"></p>
+                </div>
+            </section>
+
+            <section class="favorites container">
+                <div class="favorites-head">
+                    <div>
+                        <h2>Fan favorites</h2>
+                        <p id="fav-sub"></p>
+                    </div>
+                    <div class="chips" role="tablist" aria-label="Menu categories">
+                        <button class="chip" role="tab" data-tab="coffee">Coffee</button>
+                        <button class="chip" role="tab" data-tab="non-coffee">Non-coffee</button>
+                        <button class="chip" role="tab" data-tab="pastries">Pastries</button>
+                        <button class="chip" role="tab" data-tab="snacks">Snacks &amp; meals</button>
+                    </div>
+                </div>
+
+                <div class="fav-grid" id="fav-grid"></div>
+            </section>
+
+            <div class="container" id="sections"></div>
+
+            <section class="container addons-wrap" id="addons" hidden>
+                <div class="addons">
+                    <h2>Make it <em>yours</em>.</h2>
+                    <div class="addons-grid" id="addons-grid"></div>
+                </div>
+            </section>
+
+            <sections class="container">
+                <div class="cta" id="cta">
+                    <h3 id="cta-text"></h3>
+                    <div class="cta-actions" id="cta-actions"></div>
+                </div>
+            </sections>
+        </main>
+
+        <script src="menu.js"></script>
+
     </body>
 </html>
