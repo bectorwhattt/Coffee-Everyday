@@ -9,20 +9,31 @@
 
     <!--HOME-->
     <div class="main">
-        <!--Start of HERO DIV-->
+        <!-- HERO -->
         <div class="hero" id="home">
             <div class="hero-text">
-                <span class="pill pill--blush">
+                <div class="hero-tag">
                     Fresh
-                    <img class="icon-cup" src="assets/images/logos/cup-hot-fill.svg" alt="" />
+                    <img
+                        class="hero-tag-icon"
+                        src="images/icon-cup.svg"
+                        alt=""
+                    />
                     Cozy
-                    <img class="icon-cup" src="assets/images/logos/cup-hot-fill.svg" alt="" />
+                    <img
+                        class="hero-tag-icon"
+                        src="images/icon-cup.svg"
+                        alt=""
+                    />
                     Everyday
-                </span>
+                </div>
 
-                <h1>Start your day with <em>coffee,</em> everyday.</h1>
+                <h1 class="hero-title">
+                    Start your day with
+                    <em class="hero-highlight">coffee,</em> everyday.
+                </h1>
 
-                <p>
+                <p class="hero-description">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -30,145 +41,161 @@
                 </p>
 
                 <div class="hero-actions">
-                    <a class="btn btn--dark" href="#menu"
+                    <a class="button button-dark" href="#menu"
                         >View menu
-                        <span class="btn-arrow" aria-hidden="true"
-                            >&rarr;</span
-                        ></a
+                        <div class="button-arrow">&rarr;</div></a
                     >
-                    <a class="btn btn--outline" href="#about">Our story</a>
+                    <a class="button button-outline" href="#about">Our story</a>
                 </div>
             </div>
 
             <div class="hero-image">
                 <img
-                    src="assets/images/products/hero-cup-image.png"
+                    src="images/hero-iced-coffee.png"
                     alt="Espresso being poured over iced milk coffee"
                 />
             </div>
         </div>
-        <!--End of HERO DIV-->
 
-        <!--Start of TICKER STRIP DIV-->
+        <!-- TICKER -->
         <div class="ticker">
-            <ul class="ticker-list">
-                <li>iced drinks</li>
-                <li>fresh pastry</li>
-                <li>cozy corners</li>
-                <li>sip &amp; stay</li>
-                <li class="ticker-accent">coffee everyday</li>
-            </ul>
+            <div>iced drinks</div>
+            <img class="ticker-icon" src="images/icon-cup.svg" alt="" />
+            <div>fresh pastry</div>
+            <img class="ticker-icon" src="images/icon-cup.svg" alt="" />
+            <div>cozy corners</div>
+            <img class="ticker-icon" src="images/icon-cup.svg" alt="" />
+            <div>sip &amp; stay</div>
+            <img class="ticker-icon" src="images/icon-cup.svg" alt="" />
+            <div class="ticker-accent">coffee everyday</div>
         </div>
-        <!--End of TICKER STRIP DIV-->
 
-        <!--Start of ABOUT DIV-->
+        <!-- ABOUT -->
         <div class="about" id="about">
             <div class="about-images">
                 <img
-                    class="about-img about-img--top"
-                    src="assets/images/products/about_display1.png"
+                    class="about-image about-image-top"
+                    src="images/about-meals.jpg"
                     alt="Rice meals with sausage, egg and fries"
                 />
                 <img
-                    class="about-img about-img--bottom"
-                    src="assets/images/products/about_display2.png"
+                    class="about-image about-image-bottom"
+                    src="images/about-choco-drink.jpg"
                     alt="Layered chocolate iced drink"
                 />
             </div>
 
             <div class="about-text">
-                <span class="pill pill--blush">About</span>
+                <div class="pill pill-pink">About</div>
 
-                <h2>A little corner for slow mornings &amp; big cravings.</h2>
+                <h2 class="about-title">
+                    A little corner for slow mornings &amp; big cravings.
+                </h2>
 
-                <p>
+                <p class="about-description">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
 
-                <ol class="about-list">
-                    <li>
-                        <span class="about-num">01</span>
+                <div class="about-list">
+                    <div class="about-item">
+                        <div class="about-number">01</div>
                         <div>
-                            <h3>Handcrafted drinks</h3>
-                            <p>Colorful, refreshing and made to order.</p>
+                            <h3 class="about-item-title">Handcrafted drinks</h3>
+                            <p class="about-item-description">
+                                Colorful, refreshing and made to order.
+                            </p>
                         </div>
-                    </li>
-                    <li>
-                        <span class="about-num">02</span>
-                        <div>
-                            <h3>Freshly-baked treats</h3>
-                            <p>Perfect for a sweet tooth&rsquo;s bite.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="about-num">03</span>
-                        <div>
-                            <h3>A cozy hangout spot</h3>
-                            <p>Study, chill or catch up with friends.</p>
-                        </div>
-                    </li>
-                </ol>
+                    </div>
 
-                <a class="btn btn--gold" href="#"
+                    <div class="about-item">
+                        <div class="about-number">02</div>
+                        <div>
+                            <h3 class="about-item-title">
+                                Freshly-baked treats
+                            </h3>
+                            <p class="about-item-description">
+                                Perfect for a sweet tooth&rsquo;s bite.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="about-item">
+                        <div class="about-number">03</div>
+                        <div>
+                            <h3 class="about-item-title">
+                                A cozy hangout spot
+                            </h3>
+                            <p class="about-item-description">
+                                Study, chill or catch up with friends.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="button button-gold" href="#"
                     >Read our story
-                    <span class="btn-arrow" aria-hidden="true">&rarr;</span></a
+                    <div class="button-arrow">&rarr;</div></a
                 >
             </div>
         </div>
-        <!--End of ABOUT DIV-->
 
-        <!--Start of MENU DIV-->
+        <!-- MENU -->
         <div class="menu" id="menu">
-            <div class="section-head">
-                <span class="pill pill--blush">Menu</span>
-                <h2>Fan favorites</h2>
-                <p>
+            <div class="section-heading">
+                <div class="pill pill-pink">Menu</div>
+                <h2 class="menu-title">Fan favorites</h2>
+                <p class="section-heading-description">
                     A taste of what&rsquo;s brewing, baking and plating up at
                     Coffee Everyday
                 </p>
             </div>
 
-            <div
-                class="menu-filters"
-                role="group"
-                aria-label="Filter menu items"
-            >
+            <div class="menu-filters">
                 <button
-                    class="filter-btn is-active"
+                    class="filter-button filter-button-active"
                     type="button"
                     data-filter="all"
                 >
                     All
                 </button>
-                <button class="filter-btn" type="button" data-filter="drinks">
+                <button
+                    class="filter-button"
+                    type="button"
+                    data-filter="drinks"
+                >
                     Drinks
                 </button>
-                <button class="filter-btn" type="button" data-filter="pastries">
+                <button
+                    class="filter-button"
+                    type="button"
+                    data-filter="pastries"
+                >
                     Pastries
                 </button>
-                <button class="filter-btn" type="button" data-filter="meals">
+                <button class="filter-button" type="button" data-filter="meals">
                     Meals
                 </button>
             </div>
 
-            <div class="menu-grid">
+            <div class="menu-cards">
                 <div class="menu-card" data-category="drinks">
                     <img
-                        src="assets/images/products/blue_lemonade.png"
+                        class="menu-card-image"
+                        src="images/menu-blue-lemonade.jpg"
                         alt="Blue lemonade with popping boba"
                     />
-                    <h3>Blue Lemonade</h3>
-                    <p>
+                    <h3 class="menu-card-name">Blue Lemonade</h3>
+                    <p class="menu-card-description">
                         Fizzy blue lemonade topped with popping boba and a slice
                         of real lemon.
                     </p>
                     <div class="menu-card-footer">
-                        <span class="price">&#8369;100</span>
+                        <div class="menu-card-price">&#8369;100</div>
                         <button
-                            class="add-btn"
+                            class="add-button"
                             type="button"
                             aria-label="Add Blue Lemonade"
                         >
@@ -179,15 +206,18 @@
 
                 <div class="menu-card" data-category="drinks">
                     <img
-                        src="assets/images/products/signature_choco.png"
+                        class="menu-card-image"
+                        src="images/menu-signature-choco.jpg"
                         alt="Signature Choco iced drink"
                     />
-                    <h3>Signature Choco</h3>
-                    <p>Layers of chocolate and milk with a splash of coffee.</p>
+                    <h3 class="menu-card-name">Signature Choco</h3>
+                    <p class="menu-card-description">
+                        Layers of chocolate and milk with a splash of coffee.
+                    </p>
                     <div class="menu-card-footer">
-                        <span class="price">&#8369;120</span>
+                        <div class="menu-card-price">&#8369;120</div>
                         <button
-                            class="add-btn"
+                            class="add-button"
                             type="button"
                             aria-label="Add Signature Choco"
                         >
@@ -198,15 +228,18 @@
 
                 <div class="menu-card" data-category="pastries">
                     <img
-                        src="assets/images/products/loaded_waffles.png"
+                        class="menu-card-image"
+                        src="images/menu-loaded-waffles.jpg"
                         alt="Loaded waffles with assorted toppings"
                     />
-                    <h3>Loaded Waffles</h3>
-                    <p>Crisp waffles piled high with toppings.</p>
+                    <h3 class="menu-card-name">Loaded Waffles</h3>
+                    <p class="menu-card-description">
+                        Crisp waffles piled high with toppings.
+                    </p>
                     <div class="menu-card-footer">
-                        <span class="price">&#8369;120</span>
+                        <div class="menu-card-price">&#8369;120</div>
                         <button
-                            class="add-btn"
+                            class="add-button"
                             type="button"
                             aria-label="Add Loaded Waffles"
                         >
@@ -217,18 +250,19 @@
 
                 <div class="menu-card" data-category="meals">
                     <img
-                        src="assets/images/products/sausage_delight.png"
+                        class="menu-card-image"
+                        src="images/menu-sausage-delight.jpg"
                         alt="Garlic rice with sunny egg and hungarian sausage"
                     />
-                    <h3>Sausage Delight</h3>
-                    <p>
+                    <h3 class="menu-card-name">Sausage Delight</h3>
+                    <p class="menu-card-description">
                         Garlic rice, sunny egg and 2 pieces of cheesy hungarian
                         sausage.
                     </p>
                     <div class="menu-card-footer">
-                        <span class="price">&#8369;200</span>
+                        <div class="menu-card-price">&#8369;200</div>
                         <button
-                            class="add-btn"
+                            class="add-button"
                             type="button"
                             aria-label="Add Sausage Delight"
                         >
@@ -238,111 +272,106 @@
                 </div>
             </div>
 
-            <div class="menu-cta">
-                <a class="btn btn--dark" href="#"
+            <div class="menu-call-to-action">
+                <a class="button button-dark" href="#"
                     >See full menu
-                    <span class="btn-arrow" aria-hidden="true">&rarr;</span></a
+                    <div class="button-arrow">&rarr;</div></a
                 >
             </div>
         </div>
-        <!--End of MENU DIV-->
 
-        <!--Start of REVIEWS DIV-->
+        <!-- REVIEWS -->
         <div class="reviews">
-            <div class="section-head">
-                <span class="pill pill--gold">Reviews</span>
-                <h2>Cups full, hearts fuller.</h2>
+            <div class="section-heading">
+                <div class="pill pill-gold">Reviews</div>
+                <h2 class="reviews-title">Cups full, hearts fuller.</h2>
             </div>
 
-            <div class="reviews-grid">
+            <div class="review-cards">
                 <div class="review-card">
-                    <div class="stars" role="img" aria-label="5 out of 5 stars">
+                    <div class="review-stars">
                         &#9733;&#9733;&#9733;&#9733;&#9733;
                     </div>
-                    <blockquote class="review-text">
+                    <p class="review-text">
                         &ldquo;Budget friendly coffee shop pero quality foods
                         and drinks! Hindi tinipid, masarap talaga. Kudos!&rdquo;
-                    </blockquote>
+                    </p>
                     <div class="review-author">
-                        <span class="avatar avatar--sand">R</span>
+                        <div class="review-avatar review-avatar-khaki">R</div>
                         <div>
-                            <strong>Rj E.</strong>
-                            <span>Regular customer</span>
+                            <p class="review-author-name">Rj E.</p>
+                            <p class="review-author-role">Regular customer</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="review-card">
-                    <div class="stars" role="img" aria-label="5 out of 5 stars">
+                    <div class="review-stars">
                         &#9733;&#9733;&#9733;&#9733;&#9733;
                     </div>
-                    <blockquote class="review-text">
+                    <p class="review-text">
                         &ldquo;First time to try their coffee. Masarap siya
                         lasang kape ng sikat na brand pero mas
                         affordable.&rdquo;
-                    </blockquote>
+                    </p>
                     <div class="review-author">
-                        <span class="avatar avatar--sage">D</span>
+                        <div class="review-avatar review-avatar-pink">D</div>
                         <div>
-                            <strong>Danilo M.</strong>
-                            <span>Regular customer</span>
+                            <p class="review-author-name">Danilo M.</p>
+                            <p class="review-author-role">Regular customer</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="review-card">
-                    <div class="stars" role="img" aria-label="5 out of 5 stars">
+                    <div class="review-stars">
                         &#9733;&#9733;&#9733;&#9733;&#9733;
                     </div>
-                    <blockquote class="review-text">
+                    <p class="review-text">
                         &ldquo;Quality food and drinks na pasok na pasok sa
                         budget. Masarap ung kape, ipaglalaban ka talaga. Masarap
                         din mga pastries at sandwich nila.&rdquo;
-                    </blockquote>
+                    </p>
                     <div class="review-author">
-                        <span class="avatar avatar--brown">Y</span>
+                        <div class="review-avatar review-avatar-grey">Y</div>
                         <div>
-                            <strong>Youlike M.</strong>
-                            <span>Regular customer</span>
+                            <p class="review-author-name">Youlike M.</p>
+                            <p class="review-author-role">Regular customer</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--End of REVIEWS DIV-->
 
-        <!--Start of PHOTO BANNER DIV-->
+        <!-- BANNER -->
         <div class="banner">
             <img
-                src="assets/images/products/banner.png"
+                src="images/banner-sandwiches.jpg"
                 alt="Croissant sandwich and a boxed sandwich on a wooden board"
             />
-            <h2>Your favorites, all in one.</h2>
+            <h2 class="banner-title">Your favorites, all in one.</h2>
         </div>
-        <!--Start of PHOTO BANNER DIV-->
 
-        <!--Start of VISIT DIV-->
+        <!-- VISIT -->
         <div class="visit" id="contact">
             <div class="visit-card">
                 <div class="visit-text">
-                    <h2>Come sip and dine with us.</h2>
-                    <p>
+                    <h2 class="visit-title">Come sip and dine with us.</h2>
+                    <p class="visit-description">
                         Drop by for your daily cup, grab a pastry for the road,
                         or bring your friends and stay a while.
                     </p>
 
                     <div class="visit-actions">
                         <a
-                            class="btn btn--dark"
+                            class="button button-dark"
                             href="https://www.google.com/maps/search/?api=1&amp;query=114+Dr.+Sixto+Ave.+Caniogan+Pasig+City"
                             target="_blank"
                             rel="noopener"
                             >Get directions
-                            <span class="btn-arrow" aria-hidden="true"
-                                >&rarr;</span
-                            ></a
+                            <div class="button-arrow">&rarr;</div></a
                         >
-                        <a class="btn btn--outline" href="#"
+                        <a class="button button-outline" href="#"
                             >Order for pickup</a
                         >
                     </div>
@@ -350,21 +379,23 @@
 
                 <div class="visit-info">
                     <div class="info-card">
-                        <span class="info-label">Find us</span>
-                        <p>
+                        <p class="info-label">Find us</p>
+                        <p class="info-description">
                             114 Dr. Sixto Ave. Caniogan, Pasig City, Metro
                             Manila, Philippines, 1606
                         </p>
                     </div>
 
                     <div class="info-card">
-                        <span class="info-label">Open daily</span>
-                        <p>Mondays to Sundays<br />8:00am &ndash; 10:00pm</p>
+                        <p class="info-label">Open daily</p>
+                        <p class="info-description">
+                            Mondays to Sundays<br />8:00am &ndash; 10:00pm
+                        </p>
                     </div>
 
                     <div class="info-card">
-                        <span class="info-label">Follow us</span>
-                        <p>
+                        <p class="info-label">Follow us</p>
+                        <p class="info-description">
                             Facebook: Coffee Everyday<br />Instagram:
                             @coffee.everyday08
                         </p>
@@ -377,7 +408,4 @@
 
     <!--IMPORTED FOOTER-->
     <div id="footer"></div>
-
-    <!--IMPORT HEADER AND FOOTER HTML-->
-    <script src="../../lib/components.js"></script>
 </body>
