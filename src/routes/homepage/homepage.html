@@ -1,11 +1,383 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Coffee Everyday</title>
-        <link rel="stylesheet" href="homepage.css">
-    </head>
-    <body>
-        
-        
-    </body>
-</html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="../../components/html-components.css" />
+    <link rel="stylesheet" href="homepage.css" />
+</head>
+<body>
+    <!--IMPORTED HEADER-->
+    <div id="header"></div>
+
+    <!--HOME-->
+    <div class="main">
+        <!--Start of HERO DIV-->
+        <div class="hero" id="home">
+            <div class="hero-text">
+                <span class="pill pill--blush">
+                    Fresh
+                    <img class="icon-cup" src="assets/images/logos/cup-hot-fill.svg" alt="" />
+                    Cozy
+                    <img class="icon-cup" src="assets/images/logos/cup-hot-fill.svg" alt="" />
+                    Everyday
+                </span>
+
+                <h1>Start your day with <em>coffee,</em> everyday.</h1>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="btn btn--dark" href="#menu"
+                        >View menu
+                        <span class="btn-arrow" aria-hidden="true"
+                            >&rarr;</span
+                        ></a
+                    >
+                    <a class="btn btn--outline" href="#about">Our story</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img
+                    src="assets/images/products/hero-cup-image.png"
+                    alt="Espresso being poured over iced milk coffee"
+                />
+            </div>
+        </div>
+        <!--End of HERO DIV-->
+
+        <!--Start of TICKER STRIP DIV-->
+        <div class="ticker">
+            <ul class="ticker-list">
+                <li>iced drinks</li>
+                <li>fresh pastry</li>
+                <li>cozy corners</li>
+                <li>sip &amp; stay</li>
+                <li class="ticker-accent">coffee everyday</li>
+            </ul>
+        </div>
+        <!--End of TICKER STRIP DIV-->
+
+        <!--Start of ABOUT DIV-->
+        <div class="about" id="about">
+            <div class="about-images">
+                <img
+                    class="about-img about-img--top"
+                    src="assets/images/products/about_display1.png"
+                    alt="Rice meals with sausage, egg and fries"
+                />
+                <img
+                    class="about-img about-img--bottom"
+                    src="assets/images/products/about_display2.png"
+                    alt="Layered chocolate iced drink"
+                />
+            </div>
+
+            <div class="about-text">
+                <span class="pill pill--blush">About</span>
+
+                <h2>A little corner for slow mornings &amp; big cravings.</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+
+                <ol class="about-list">
+                    <li>
+                        <span class="about-num">01</span>
+                        <div>
+                            <h3>Handcrafted drinks</h3>
+                            <p>Colorful, refreshing and made to order.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="about-num">02</span>
+                        <div>
+                            <h3>Freshly-baked treats</h3>
+                            <p>Perfect for a sweet tooth&rsquo;s bite.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="about-num">03</span>
+                        <div>
+                            <h3>A cozy hangout spot</h3>
+                            <p>Study, chill or catch up with friends.</p>
+                        </div>
+                    </li>
+                </ol>
+
+                <a class="btn btn--gold" href="#"
+                    >Read our story
+                    <span class="btn-arrow" aria-hidden="true">&rarr;</span></a
+                >
+            </div>
+        </div>
+        <!--End of ABOUT DIV-->
+
+        <!--Start of MENU DIV-->
+        <div class="menu" id="menu">
+            <div class="section-head">
+                <span class="pill pill--blush">Menu</span>
+                <h2>Fan favorites</h2>
+                <p>
+                    A taste of what&rsquo;s brewing, baking and plating up at
+                    Coffee Everyday
+                </p>
+            </div>
+
+            <div
+                class="menu-filters"
+                role="group"
+                aria-label="Filter menu items"
+            >
+                <button
+                    class="filter-btn is-active"
+                    type="button"
+                    data-filter="all"
+                >
+                    All
+                </button>
+                <button class="filter-btn" type="button" data-filter="drinks">
+                    Drinks
+                </button>
+                <button class="filter-btn" type="button" data-filter="pastries">
+                    Pastries
+                </button>
+                <button class="filter-btn" type="button" data-filter="meals">
+                    Meals
+                </button>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card" data-category="drinks">
+                    <img
+                        src="assets/images/products/blue_lemonade.png"
+                        alt="Blue lemonade with popping boba"
+                    />
+                    <h3>Blue Lemonade</h3>
+                    <p>
+                        Fizzy blue lemonade topped with popping boba and a slice
+                        of real lemon.
+                    </p>
+                    <div class="menu-card-footer">
+                        <span class="price">&#8369;100</span>
+                        <button
+                            class="add-btn"
+                            type="button"
+                            aria-label="Add Blue Lemonade"
+                        >
+                            +
+                        </button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="drinks">
+                    <img
+                        src="assets/images/products/signature_choco.png"
+                        alt="Signature Choco iced drink"
+                    />
+                    <h3>Signature Choco</h3>
+                    <p>Layers of chocolate and milk with a splash of coffee.</p>
+                    <div class="menu-card-footer">
+                        <span class="price">&#8369;120</span>
+                        <button
+                            class="add-btn"
+                            type="button"
+                            aria-label="Add Signature Choco"
+                        >
+                            +
+                        </button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="pastries">
+                    <img
+                        src="assets/images/products/loaded_waffles.png"
+                        alt="Loaded waffles with assorted toppings"
+                    />
+                    <h3>Loaded Waffles</h3>
+                    <p>Crisp waffles piled high with toppings.</p>
+                    <div class="menu-card-footer">
+                        <span class="price">&#8369;120</span>
+                        <button
+                            class="add-btn"
+                            type="button"
+                            aria-label="Add Loaded Waffles"
+                        >
+                            +
+                        </button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="meals">
+                    <img
+                        src="assets/images/products/sausage_delight.png"
+                        alt="Garlic rice with sunny egg and hungarian sausage"
+                    />
+                    <h3>Sausage Delight</h3>
+                    <p>
+                        Garlic rice, sunny egg and 2 pieces of cheesy hungarian
+                        sausage.
+                    </p>
+                    <div class="menu-card-footer">
+                        <span class="price">&#8369;200</span>
+                        <button
+                            class="add-btn"
+                            type="button"
+                            aria-label="Add Sausage Delight"
+                        >
+                            +
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-cta">
+                <a class="btn btn--dark" href="#"
+                    >See full menu
+                    <span class="btn-arrow" aria-hidden="true">&rarr;</span></a
+                >
+            </div>
+        </div>
+        <!--End of MENU DIV-->
+
+        <!--Start of REVIEWS DIV-->
+        <div class="reviews">
+            <div class="section-head">
+                <span class="pill pill--gold">Reviews</span>
+                <h2>Cups full, hearts fuller.</h2>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars" role="img" aria-label="5 out of 5 stars">
+                        &#9733;&#9733;&#9733;&#9733;&#9733;
+                    </div>
+                    <blockquote class="review-text">
+                        &ldquo;Budget friendly coffee shop pero quality foods
+                        and drinks! Hindi tinipid, masarap talaga. Kudos!&rdquo;
+                    </blockquote>
+                    <div class="review-author">
+                        <span class="avatar avatar--sand">R</span>
+                        <div>
+                            <strong>Rj E.</strong>
+                            <span>Regular customer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars" role="img" aria-label="5 out of 5 stars">
+                        &#9733;&#9733;&#9733;&#9733;&#9733;
+                    </div>
+                    <blockquote class="review-text">
+                        &ldquo;First time to try their coffee. Masarap siya
+                        lasang kape ng sikat na brand pero mas
+                        affordable.&rdquo;
+                    </blockquote>
+                    <div class="review-author">
+                        <span class="avatar avatar--sage">D</span>
+                        <div>
+                            <strong>Danilo M.</strong>
+                            <span>Regular customer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars" role="img" aria-label="5 out of 5 stars">
+                        &#9733;&#9733;&#9733;&#9733;&#9733;
+                    </div>
+                    <blockquote class="review-text">
+                        &ldquo;Quality food and drinks na pasok na pasok sa
+                        budget. Masarap ung kape, ipaglalaban ka talaga. Masarap
+                        din mga pastries at sandwich nila.&rdquo;
+                    </blockquote>
+                    <div class="review-author">
+                        <span class="avatar avatar--brown">Y</span>
+                        <div>
+                            <strong>Youlike M.</strong>
+                            <span>Regular customer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of REVIEWS DIV-->
+
+        <!--Start of PHOTO BANNER DIV-->
+        <div class="banner">
+            <img
+                src="assets/images/products/banner.png"
+                alt="Croissant sandwich and a boxed sandwich on a wooden board"
+            />
+            <h2>Your favorites, all in one.</h2>
+        </div>
+        <!--Start of PHOTO BANNER DIV-->
+
+        <!--Start of VISIT DIV-->
+        <div class="visit" id="contact">
+            <div class="visit-card">
+                <div class="visit-text">
+                    <h2>Come sip and dine with us.</h2>
+                    <p>
+                        Drop by for your daily cup, grab a pastry for the road,
+                        or bring your friends and stay a while.
+                    </p>
+
+                    <div class="visit-actions">
+                        <a
+                            class="btn btn--dark"
+                            href="https://www.google.com/maps/search/?api=1&amp;query=114+Dr.+Sixto+Ave.+Caniogan+Pasig+City"
+                            target="_blank"
+                            rel="noopener"
+                            >Get directions
+                            <span class="btn-arrow" aria-hidden="true"
+                                >&rarr;</span
+                            ></a
+                        >
+                        <a class="btn btn--outline" href="#"
+                            >Order for pickup</a
+                        >
+                    </div>
+                </div>
+
+                <div class="visit-info">
+                    <div class="info-card">
+                        <span class="info-label">Find us</span>
+                        <p>
+                            114 Dr. Sixto Ave. Caniogan, Pasig City, Metro
+                            Manila, Philippines, 1606
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <span class="info-label">Open daily</span>
+                        <p>Mondays to Sundays<br />8:00am &ndash; 10:00pm</p>
+                    </div>
+
+                    <div class="info-card">
+                        <span class="info-label">Follow us</span>
+                        <p>
+                            Facebook: Coffee Everyday<br />Instagram:
+                            @coffee.everyday08
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End of VISIT DIV-->
+
+    <!--IMPORTED FOOTER-->
+    <div id="footer"></div>
+
+    <!--IMPORT HEADER AND FOOTER HTML-->
+    <script src="../../lib/components.js"></script>
+</body>
