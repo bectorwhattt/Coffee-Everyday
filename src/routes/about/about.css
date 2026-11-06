@@ -1,0 +1,180 @@
+/* 1. CSS VARIABLES */
+:root {
+    --cream: #f8f1e7;
+    --beige: #ead9bf;
+    --orange: #df9e38;
+    --brown: #281c17;
+    --gold: #c58d38;
+    --white: #ffffff;
+}
+
+
+/* 2. GENERAL STYLE */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--cream);
+    color: var(--brown);
+    font-family: Georgia, serif;
+}
+
+
+/* 3. HOME SECTION */
+.home {
+    display: flex;
+    align-items: center;
+    padding: 50px 7%;
+    gap: 30px;
+}
+
+.home-text {
+    width: 50%;
+}
+
+.tag {
+    background-color: #e9c9bd;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+}
+
+.home h1 {
+    font-size: 40px;
+    margin: 15px 0;
+}
+
+.home h1 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.home p {
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.home-image {
+    width: 50%;
+}
+
+.home-image img {
+    width: 100%;
+    height: 220px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+
+/* BUTTONS */
+.button {
+    background-color: var(--brown);
+    color: var(--white);
+    padding: 9px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.outline {
+    border: 1px solid var(--brown);
+    color: var(--brown);
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+
+/* 4. SHOTS SECTION */
+.shots {
+    background-color: var(--beige);
+    padding: 35px 7%;
+}
+
+.shots h2 {
+    font-size: 30px;
+    margin: 20px 0 20px;
+}
+
+.shots h2 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.pictures {
+    display: flex;
+    gap: 15px;
+}
+
+.pictures img {
+    width: 33.33%;
+    height: 120px;
+    border-radius: 10px;
+}
+
+
+/* 5. TEAM SECTION */
+.team {
+    padding: 40px 7%;
+}
+
+.team h2 {
+    font-size: 30px;
+    margin: 15px 0 25px;
+}
+
+.team h2 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.members {
+    display: flex;
+    gap: 20px;
+}
+
+.member {
+    width: 33.33%;
+}
+
+.member-image {
+    background-color: var(--beige);
+    height: 200px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.second {
+    background-color: #ad9b8e;
+}
+
+.member b {
+    font-size: 11px;
+}
+
+.member p {
+    font-size: 10px;
+}
+
+
+/* 6. VISIT US SECTION */
+.visit {
+    background-color: var(--orange);
+    margin: 30px 7% 45px;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.visit h2 {
+    font-size: 22px;
+    font-weight: normal;
+}
+
+
