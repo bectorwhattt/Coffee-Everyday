@@ -2,6 +2,9 @@
         <title></title>
         <link rel="stylesheet" href="../../components/html-components.css">
         <link rel="stylesheet" href="menu.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&display=swap" rel="stylesheet" />
     </head>
     <body>
         <!--IMPORTED HEADER-->
@@ -9,12 +12,58 @@
 
         <!--MENU-->
         <div class="main">
-            <!--only add new html codes here-->
+              <!-- HERO -->
+            <div class="hero">
+                <div class="container">
+                    <span class="pill" id="hero-pill">Our Menu</span>
+                    <h1 id="hero-title"></h1>
+                    <p id="hero-subtitle"></p>
+                </div>
+            </div>
+ 
+            <!-- FAVORITES -->
+            <div class="favorites container">
+                <div class="favorites-header">
+                    <div>
+                        <h2>Fan favorites</h2>
+                        <p id="favorite-subtitle"></p>
+                    </div>
+                    <div class="chips" role="tablist" aria-label="Menu categories">
+                        <button class="chip" role="tab" data-tab="coffee">Coffee</button>
+                        <button class="chip" role="tab" data-tab="non-coffee">Non-coffee</button>
+                        <button class="chip" role="tab" data-tab="pastries">Pastries</button>
+                        <button class="chip" role="tab" data-tab="snacks">Snacks &amp; meals</button>
+                    </div>
+                </div>
+ 
+                <div class="favorite-grid" id="favorite-grid"></div>
+            </div>
+ 
+            <!-- MENU SECTIONS -->
+            <div class="menu-sections container" id="sections"></div>
+ 
+            <!-- ADD-ONS -->
+            <div class="addons-wrapper container" id="addons" hidden>
+                <div class="addons">
+                    <h2>Make it <em>yours</em>.</h2>
+                    <div class="addons-grid" id="addons-grid"></div>
+                </div>
+            </div>
+ 
+            <!-- CALL TO ACTION -->
+            <div class="container">
+                <div class="call-to-action" id="call-to-action">
+                    <h3 id="call-to-action-text"></h3>
+                    <div class="call-to-action-actions" id="call-to-action-actions"></div>
+                </div>
+            </div>
         </div>
 
         <!--IMPORTED FOOTER-->
         <div class="footer" id="footer"></div>
     
     <!--IMPORT HEADER AND FOOTER HTML-->
+    <script src="menu.js"></script>
     <script src="../../lib/components.js"></script>
     </body>
+</html>
