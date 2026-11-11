@@ -1,53 +1,53 @@
 @charset "UTF-8";
 @import url("../../lib/variables.css");
 
-* {
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
 
-body {
+.main {
   background-color: var(--bgcolor-light);
   font-family: var(--body);
   line-height: 150%;
   color: var(--color-black);
-
-  -webkit-font-smoothing: antialiased;
 }
 
-img {
+.main img {
   display: block;
   max-width: 100%;
 }
 
-a {
+.main a {
   color: inherit;
   text-decoration: none;
 }
 
-button {
+.main button {
   font-family: inherit;
   cursor: pointer;
 }
 
-h1, h2, h3, h4 {
+.main h1, h2, h3, h4 {
   font-family: var(--headings);
   font-weight: 600;
   line-height: 110%;
   font-variation-settings: "WONK" 1;
 }
 
-h1 em, h2 em {
+.main h1 em, h2 em {
   font-style: italic;
   color: var(--color-gold);
 }
 
-.button {
+.main .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -59,110 +59,28 @@ h1 em, h2 em {
   transition: transform .15s, background-color .2s, color .2s;
 }
 
-.button:hover {
+.main .button:hover {
   transform: translateY(-1px);
 }
 
-.button-dark {
+.main .button-dark {
   background-color: var(--color-black);
   color: var(--bgcolor-light);
 }
 
-.button-outline {
+.main .button-outline {
   background-color: transparent;
   color: var(--color-black);
 }
 
-.button-outline:hover {
+.main .button-outline:hover {
   background-color: var(--color-black);
   color: var(--bgcolor-light);
 }
 
-.button-small {
+.main .button-small {
   padding: 7px 16px;
   font-size: 12px;
-}
-
-/*********************************************************
-HEADER
-*********************************************************/
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 14px 32px;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-black) 35%, transparent);
-  background-color: var(--bgcolor-light);
-}
-
-.logo {
-  display: flex;
-  flex-direction: column;
-  font-family: var(--headings);
-  line-height: 100%;
-}
-
-.logo-top {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.logo-bottom {
-  margin-top: 3px;
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  color: var(--color-gold);
-}
-
-.site-navigation {
-  display: flex;
-  gap: 56px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.site-navigation a {
-  padding: 4px 0;
-  border-bottom: 1px solid transparent;
-  font-size: 15px;
-  color: var(--color-grey);
-}
-
-.site-navigation a.active {
-  border-bottom-color: var(--color-gold);
-  color: var(--color-gold);
-}
-
-.site-navigation a:hover {
-  color: var(--color-black);
-}
-
-.order-now {
-  padding: 9px 22px;
-}
-
-.navigation-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 32px;
-  height: 32px;
-  border: 0;
-  background-color: transparent;
-}
-
-.navigation-toggle span {
-  display: block;
-  height: 2px;
-  border-radius: 2px;
-  background-color: var(--color-black);
 }
 
 .fade-in {
@@ -338,12 +256,12 @@ FAVORITES
 MENU SECTIONS
 *********************************************************/
 
-.menu-sections {
+.main .menu-sections {
   display: flex;
   flex-direction: column;
 }
 
-.menu-section {
+.main .menu-section {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -351,7 +269,7 @@ MENU SECTIONS
   margin-top: 72px;
 }
 
-.menu-section h3 {
+.main .menu-section h3 {
   width: 100%;
   margin-bottom: 24px;
   font-size: 26px;
@@ -495,7 +413,7 @@ ADD-ONS
 CALL TO ACTION
 *********************************************************/
 
-.call-to-action {
+.main .call-to-action {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -507,13 +425,13 @@ CALL TO ACTION
   background-color: var(--color-gold);
 }
 
-.call-to-action h3 {
+.main .call-to-action h3 {
   max-width: 380px;
   font-size: 32px;
   font-weight: 600;
 }
 
-.call-to-action-actions {
+.main .call-to-action-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
