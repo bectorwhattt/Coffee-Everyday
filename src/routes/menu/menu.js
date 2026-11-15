@@ -1,23 +1,24 @@
 const PESO = "\u20B1";
+const GRAB_URL = "https://app.grab.com/s/joOMQISo";
 
 const MENU = {
   coffee: {
     hero: {
       title: 'Coffee, <em>classic</em> &amp; special.',
-      sub: "From a simple americano to our barista blends, every cup is made to order. Hot or iced, it is your call.",
+      subtitle: "From a simple americano to our barista blends, every cup is made to order. Hot or iced, it is your call.",
     },
-    favSub: "Our most loved coffee, all in one place.",
+    favoriteSubtitle: "Our most loved coffee, all in one place.",
     favorites: [
-      { name: "Salted Caramel", price: 170, img: "images/salted-caramel.jpg" },
-      { name: "Caramel Macchiato", price: 150, img: "images/caramel-macchiato.jpg" },
-      { name: "Biscoffee", price: 120, img: "images/biscoffee.jpg" },
-      { name: "C.E. Barista Blend", price: 200, img: "images/barista-blend.jpg" },
+      { name: "Salted Caramel", price: 170, image: "images/salted-caramel.jpg" },
+      { name: "Caramel Macchiato", price: 150, image: "images/caramel-macchiato.jpg" },
+      { name: "Biscoffee", price: 120, image: "images/biscoffee.jpg" },
+      { name: "C.E. Barista Blend", price: 200, image: "images/barista-blend.jpg" },
     ],
     sections: [
       {
         title: "Coffee Classics",
         tag: "Hot 12oz / Iced 16oz",
-        img: "images/coffee-classics.png",
+        image: "images/coffee-classics.png",
         items: [
           ["Americano", 120], ["Cafe Latte", 150], ["Cappuccino", 150], ["French Vanilla", 170],
           ["Salted Caramel", 170], ["Spanish Latte", 180], ["Caramel Macchiato", 180], ["Cafe Mocha", 180],
@@ -27,7 +28,7 @@ const MENU = {
       {
         title: "Coffee Specials",
         tag: "Iced only / 16oz",
-        img: "images/coffee-specials.png",
+        image: "images/coffee-specials.png",
         items: [
           ["Coffee Jelly", 180], ["Dirty Matcha", 200], ["Brown Sugar Brulee", 190], ["Toffeedamia", 190],
           ["Roasted Almondamia", 190], ["Biscoffee", 200], ["Oreo Matcha", 200], ["C.E. Barista Blend", 220],
@@ -42,7 +43,7 @@ const MENU = {
       { name: "Flavored syrup", note: "Per pump.", price: 20 },
       { name: "Cold foam", note: "Ube cloud or strawberry cloud.", price: 30 },
     ],
-    cta: {
+    callToAction: {
       text: "Hungry? Check out our pasta and meals.",
       actions: [
         { label: "Bakes", tab: "pastries", dark: true },
@@ -54,20 +55,20 @@ const MENU = {
   "non-coffee": {
     hero: {
       title: 'Cold, creamy &amp; <em>sweet</em>.',
-      sub: "Milk-based drinks, frappes, and frizzy sodas for the days that call for something a little more fun.",
+      subtitle: "Milk-based drinks, frappes, and frizzy sodas for the days that call for something a little more fun.",
     },
-    favSub: "Our most loved drinks, all in one place.",
+    favoriteSubtitle: "Our most loved drinks, all in one place.",
     favorites: [
-      { name: "Matcha Latte", price: 170, img: "images/matcha-latte.jpg" },
-      { name: "Mocha Frappe", price: 150, img: "images/mocha-frappe.jpg" },
-      { name: "Milky Strawberry", price: 120, img: "images/milky-strawberry.jpg" },
-      { name: "Seasalt Frappe", price: 200, img: "images/seasalt-frappe.jpg" },
+      { name: "Matcha Latte", price: 170, image: "images/matcha-latte.jpg" },
+      { name: "Mocha Frappe", price: 150, image: "images/mocha-frappe.jpg" },
+      { name: "Milky Strawberry", price: 120, image: "images/milky-strawberry.jpg" },
+      { name: "Seasalt Frappe", price: 200, image: "images/seasalt-frappe.jpg" },
     ],
     sections: [
       {
         title: "Non-coffee, milk-based",
         tag: "Hot 12oz / Iced 16oz",
-        img: "images/milk-based.png",
+        image: "images/milk-based.png",
         items: [
           ["Signature Choco", 150], ["Milky Strawberry", 150], ["Dark Chocolate", 150], ["Matcha Latte", 170],
           ["Berry Matcha", 190], ["Oreo Milk", 150], ["Nutella Latte", 150], ["Biscoff Latte", 150],
@@ -75,7 +76,7 @@ const MENU = {
       },
       {
         title: "Frappes & Milkshakes",
-        img: "images/frappes.png",
+        image: "images/frappes.png",
         items: [
           ["Vanilla Milkshake", 170], ["Strawberries & Cream", 170], ["Oreos & Cream", 170], ["Biscoff Frappe", 180],
           ["Oreo Matcha", 200], ["Matcha Frappe", 190], ["Dark Mocha Frappe", 190], ["Java Chip Frappe", 190],
@@ -84,11 +85,11 @@ const MENU = {
       },
       {
         title: "Soda Pop Series",
-        img: "images/soda-pop.png",
+        image: "images/soda-pop.png",
         items: [["Strawberry Fizz", 100], ["Blue Lemonade", 100], ["Mango Yakult Tea", 100]],
       },
     ],
-    cta: {
+    callToAction: {
       text: "Hungry? Check out our pasta and meals.",
       actions: [
         { label: "Bakes", tab: "pastries", dark: true },
@@ -100,36 +101,36 @@ const MENU = {
   pastries: {
     hero: {
       title: 'Fresh <em>bakes</em> and pasta.',
-      sub: "Tasty pastries, warm cookies, sandwiches, and pasta to pair with your cup of coffee.",
+      subtitle: "Tasty pastries, warm cookies, sandwiches, and pasta to pair with your cup of coffee.",
     },
-    favSub: "Our most loved bakes, in one place.",
+    favoriteSubtitle: "Our most loved bakes, in one place.",
     favorites: [
-      { name: "Choco Chip Cookies", price: 90, img: "images/choco-chip-cookies.jpg" },
-      { name: "Butter Croissant", price: 70, img: "images/butter-croissant.jpg" },
-      { name: "Spam Sandwich", price: 170, img: "images/spam-sandwich.jpg" },
-      { name: "Carbonara Buldak", price: 160, img: "images/carbonara-buldak.jpg" },
+      { name: "Choco Chip Cookies", price: 90, image: "images/choco-chip-cookies.jpg" },
+      { name: "Butter Croissant", price: 70, image: "images/butter-croissant.jpg" },
+      { name: "Spam Sandwich", price: 170, image: "images/spam-sandwich.jpg" },
+      { name: "Carbonara Buldak", price: 160, image: "images/carbonara-buldak.jpg" },
     ],
     sections: [
       {
         title: "Bread & Pastries",
-        img: "images/bread-pastries.png",
+        image: "images/bread-pastries.png",
         items: [["Butter Croissant", 70], ["Pain au Chocolat", 80], ["Choco Chip Cookies", 90], ["White Chocochip Cookies", 90]],
       },
       {
         title: "Sandwiches",
-        img: "images/sandwiches.png",
+        image: "images/sandwiches.png",
         items: [["Ham & Egg Sandwich", 160], ["Spam Sandwich", 170], ["Chicken Fillet Sandwich", 180]],
       },
       {
         title: "Pastas & Buldak",
-        img: "images/pastas.png",
+        image: "images/pastas.png",
         items: [
           ["Creamy Sausage & Shrimp Cajun", 250], ["Shrimp Aglio Olio", 220], ["Cheesy Tuna Pesto", 220],
           ["Classic Mom's Spaghetti", 200], ["Carbonara Buldak", 160],
         ],
       },
     ],
-    cta: {
+    callToAction: {
       text: "Still hungry? We have snacks and rice meals for you.",
       actions: [
         { label: "Snack & rice", tab: "snacks", dark: true },
@@ -141,19 +142,19 @@ const MENU = {
   snacks: {
     hero: {
       title: 'Hearty <em>bites</em> &amp; rice meals.',
-      sub: "Crispy snacks to share and filling rice meals for when a coffee just is not enough.",
+      subtitle: "Crispy snacks to share and filling rice meals for when a coffee just is not enough.",
     },
-    favSub: "Our most loved snacks and meals, all in one place.",
+    favoriteSubtitle: "Our most loved snacks and meals, all in one place.",
     favorites: [
-      { name: "French Fries", price: 90, img: "images/french-fries.jpg" },
-      { name: "Chicken Tenders", price: 160, img: "images/chicken-tenders.jpg" },
-      { name: "Allday Spam Rice", price: 180, img: "images/spam-rice.jpg" },
-      { name: "Sausage Delight", price: 160-200, img: "images/sausage-delight.jpg" },
+      { name: "French Fries", price: 90, image: "images/french-fries.jpg" },
+      { name: "Chicken Tenders", price: 160, image: "images/chicken-tenders.jpg" },
+      { name: "Allday Spam Rice", price: 180, image: "images/spam-rice.jpg" },
+      { name: "Sausage Delight", price: "160 - 200", image: "images/sausage-delight.jpg" },
     ],
     sections: [
       {
         title: "Snacks",
-        img: "images/snacks.png",
+        image: "images/snacks.png",
         items: [
           ["French Fries (salted / cheese)", 90], ["Twister Fries", 110], ["Mojos", 120], ["Pica Platter", 199],
           ["4 pcs Nuggets & Fries", 140], ["3 pcs Chicken Tenders with dip", 160], ["Chicken Popcorn", 110],
@@ -161,7 +162,7 @@ const MENU = {
       },
       {
         title: "Rice meals",
-        img: "images/rice-meals.png",
+        image: "images/rice-meals.png",
         items: [
           ["Allday Spam Rice", 180], ["Sausage Delight, 1 pc", 160], ["Sausage Delight, 2 pcs", 200],
           ["Chicken Pastil (spicy / original)", 170], ["Tori Katsu with Cabbage Salad", 180],
@@ -169,7 +170,7 @@ const MENU = {
         ],
       },
     ],
-    cta: {
+    callToAction: {
       text: "Come sip and dine with us.",
       actions: [
         { label: "Find us", href: "#", dark: true },
@@ -179,110 +180,104 @@ const MENU = {
   },
 };
 
-const GRAB_URL = "https://app.grab.com/s/joOMQISo";
+const selectElement = (selector) => document.querySelector(selector);
+const money = (amount) => `${PESO} ${amount}`;
 
-/* ---------- helpers ---------- */
-const $ = (sel) => document.querySelector(sel);
-const money = (n) => `${PESO} ${n}`;
-
-function imageEl(src, alt, className = "") {
-  const img = document.createElement("img");
-  img.src = src;
-  img.alt = alt;
-  img.loading = "lazy";
-  if (className) img.className = className;
-  img.addEventListener("error", () => {
-    const ph = document.createElement("div");
-    ph.className = "ph";
-    ph.textContent = alt;
-    img.replaceWith(ph);
-  });
-  return img;
+function fill(selector, value, asHTML = false) {
+  const element = selectElement(selector);
+  if (!element) { console.warn(`[menu] Element ${selector} not found in the HTML`); return; }
+  if (asHTML) element.innerHTML = value; else element.textContent = value;
 }
 
-/* ---------- renderers ---------- */
+function createImage(source, alternativeText) {
+  const image = document.createElement("img");
+  image.src = source;
+  image.alt = alternativeText;
+  image.loading = "lazy";
+  image.addEventListener("error", () => {
+    const placeholder = document.createElement("div");
+    placeholder.className = "placeholder";
+    placeholder.textContent = alternativeText;
+    image.replaceWith(placeholder);
+  });
+  return image;
+}
+
 function renderFavorites(data) {
-  const grid = $("#fav-grid");
-  if (!grid) { console.warn("[menu] #fav-grid not found in the HTML"); return; }
+  const grid = selectElement("#favorite-grid");
+  if (!grid) { console.warn("[menu] #favorite-grid not found in the HTML"); return; }
   grid.innerHTML = "";
-  data.favorites.forEach((f) => {
-    const card = document.createElement("article");
-    card.className = "fav-card";
-    const wrap = document.createElement("div");
-    wrap.className = "fav-img";
-    wrap.appendChild(imageEl(f.img, f.name));
-    card.appendChild(wrap);
+  data.favorites.forEach((favorite) => {
+    const card = document.createElement("div");
+    card.className = "favorite-card";
+    const imageWrapper = document.createElement("div");
+    imageWrapper.className = "favorite-image";
+    imageWrapper.appendChild(createImage(favorite.image, favorite.name));
+    card.appendChild(imageWrapper);
     card.insertAdjacentHTML(
       "beforeend",
-      `<h4>${f.name}</h4><span class="price">${money(f.price)}</span>`
+      `<h4>${favorite.name}</h4><span class="price">${money(favorite.price)}</span>`
     );
     grid.appendChild(card);
   });
 }
 
 function renderSections(data) {
-  const root = $("#sections");
+  const root = selectElement("#sections");
   if (!root) { console.warn("[menu] #sections not found in the HTML"); return; }
   root.innerHTML = "";
-  data.sections.forEach((s, i) => {
-    const reverse = i % 2 === 1;
-    const sec = document.createElement("section");
-    sec.className = "menu-section" + (reverse ? " reverse" : "");
+  data.sections.forEach((section, index) => {
+    const reverse = index % 2 === 1;
+    const sectionElement = document.createElement("div");
+    sectionElement.className = "menu-section" + (reverse ? " reverse" : "");
 
-    const rows = s.items
-      .map(([n, p]) => `<li><span>${n}</span><span>${money(p)}</span></li>`)
+    const rows = section.items
+      .map(([name, price]) => `<li><span>${name}</span><span>${money(price)}</span></li>`)
       .join("");
 
     const media = document.createElement("div");
     media.className = "section-media";
-    media.appendChild(imageEl(s.img, s.title));
+    media.appendChild(createImage(section.image, section.title));
 
     const body = document.createElement("div");
     body.className = "section-body";
     body.innerHTML =
-      (s.tag ? `<span class="size-tag">${s.tag}</span>` : "") +
+      (section.tag ? `<span class="size-tag">${section.tag}</span>` : "") +
       `<ul class="menu-list">${rows}</ul>` +
-      `<a class="btn btn-dark btn-sm grab" href="${GRAB_URL}" target="_blank" rel="noopener">Order on Grab</a>`;
+      `<a class="button button-dark button-small grab" href="${GRAB_URL}" target="_blank" rel="noopener">Order on Grab</a>`;
 
-    sec.insertAdjacentHTML("beforeend", `<h3>${s.title}</h3>`);
-    sec.appendChild(media);
-    sec.appendChild(body);
-    root.appendChild(sec);
+    sectionElement.insertAdjacentHTML("beforeend", `<h3>${section.title}</h3>`);
+    sectionElement.appendChild(media);
+    sectionElement.appendChild(body);
+    root.appendChild(sectionElement);
   });
 }
 
 function renderAddons(data) {
-  const wrap = $("#addons");
-  const grid = $("#addons-grid");
-  if (!wrap || !grid) { if (data.addons) console.warn("[menu] #addons / #addons-grid not found in the HTML"); return; }
-  if (!data.addons) { wrap.hidden = true; return; }
-  wrap.hidden = false;
+  const wrapper = selectElement("#addons");
+  const grid = selectElement("#addons-grid");
+  if (!wrapper || !grid) { if (data.addons) console.warn("[menu] #addons / #addons-grid not found in the HTML"); return; }
+  if (!data.addons) { wrapper.hidden = true; return; }
+  wrapper.hidden = false;
   grid.innerHTML = data.addons
     .map(
-      (a) => `<div class="addon"><h4>${a.name}</h4><p>${a.note}</p><span class="price">${money(a.price)}</span></div>`
+      (addon) => `<div class="addon"><h4>${addon.name}</h4><p>${addon.note}</p><span class="price">${money(addon.price)}</span></div>`
     )
     .join("");
 }
 
-function renderCta(data) {
-  fill("#cta-text", data.cta.text);
-  const box = $("#cta-actions");
-  if (!box) { console.warn("[menu] #cta-actions not found in the HTML"); return; }
+function renderCallToAction(data) {
+  fill("#call-to-action-text", data.callToAction.text);
+  const box = selectElement("#call-to-action-actions");
+  if (!box) { console.warn("[menu] #call-to-action-actions not found in the HTML"); return; }
   box.innerHTML = "";
-  data.cta.actions.forEach((a) => {
-    const el = document.createElement("a");
-    el.className = "btn " + (a.dark ? "btn-dark" : "btn-outline");
-    el.textContent = a.label;
-    el.href = a.tab ? `#${a.tab}` : a.href || "#";
-    box.appendChild(el);
+  data.callToAction.actions.forEach((action) => {
+    const link = document.createElement("a");
+    link.className = "button " + (action.dark ? "button-dark" : "button-outline");
+    link.textContent = action.label;
+    link.href = action.tab ? `#${action.tab}` : action.href || "#";
+    box.appendChild(link);
   });
-}
-
-/* ---------- tab switching ---------- */
-function fill(sel, value, asHTML = false) {
-  const el = $(sel);
-  if (!el) { console.warn(`[menu] Element ${sel} not found in the HTML`); return; }
-  if (asHTML) el.innerHTML = value; else el.textContent = value;
 }
 
 function showTab(tab, { scroll = false } = {}) {
@@ -290,36 +285,34 @@ function showTab(tab, { scroll = false } = {}) {
   const data = MENU[tab];
 
   fill("#hero-title", data.hero.title, true);
-  fill("#hero-sub", data.hero.sub);
-  fill("#fav-sub", data.favSub);
+  fill("#hero-subtitle", data.hero.subtitle);
+  fill("#favorite-subtitle", data.favoriteSubtitle);
 
-  document.querySelectorAll(".chip").forEach((c) => {
-    const active = c.dataset.tab === tab;
-    c.classList.toggle("active", active);
-    c.setAttribute("aria-selected", active);
+  document.querySelectorAll(".chip").forEach((chip) => {
+    const active = chip.dataset.tab === tab;
+    chip.classList.toggle("active", active);
+    chip.setAttribute("aria-selected", active);
   });
 
   renderFavorites(data);
   renderSections(data);
   renderAddons(data);
-  renderCta(data);
+  renderCallToAction(data);
 
-  const main = document.querySelector("main");
+  const main = selectElement(".main");
   if (main) {
     main.classList.remove("fade-in");
     void main.offsetWidth;
     main.classList.add("fade-in");
   }
 
-  document.title = `Menu | Coffee Everyday`;
   if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-/* ---------- events ---------- */
 function setHash(tab) {
   try {
     history.replaceState(null, "", `#${tab}`);
-  } catch (e) {
+  } catch (error) {
   }
 }
 
@@ -335,12 +328,12 @@ window.addEventListener("hashchange", () => {
   if (MENU[tab]) showTab(tab, { scroll: true });
 });
 
-const toggle = document.querySelector(".nav-toggle");
-const nav = $("#site-nav");
-if (toggle && nav) {
-  toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", open);
+const navigationToggle = selectElement(".navigation-toggle");
+const navigation = selectElement("#site-navigation");
+if (navigationToggle && navigation) {
+  navigationToggle.addEventListener("click", () => {
+    const open = navigation.classList.toggle("open");
+    navigationToggle.setAttribute("aria-expanded", open);
   });
 }
 
