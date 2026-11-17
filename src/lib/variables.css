@@ -16,6 +16,9 @@ COLOR VARIABLES
     /**secondary background color for sections, darker**/
     --bgcolor-khaki: #EBD9C0;
 
+    /**primary inner-shadow color**/
+    --bgcolor-darkbrown: #371509;
+
     /**primary black color, primary text color, primary border color**/
     --color-black: #1E1512;
 
