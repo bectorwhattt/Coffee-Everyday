@@ -155,7 +155,7 @@ PHOTOS                                                    .
 
 .gallery-date {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: bold;
     text-decoration: underline;
     color: var(--color-gold);
 }
