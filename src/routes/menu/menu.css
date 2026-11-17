@@ -13,11 +13,11 @@ body {
 
 
 .main {
-  background-color: #F7F1E8;
+  background-color: var(--bgcolor-light);
 
   font-family: var(--body);
   line-height: 150%;
-  color: #1E1512;
+  color: var(--color-black);
 }
 
 .main img {
@@ -37,16 +37,20 @@ body {
   cursor: pointer;
 }
 
-.main h1, h2, h3, h4 {
+.main h1,
+.main h2,
+.main h3,
+.main h4 {
   font-family: var(--headings);
   font-weight: 600;
   line-height: 110%;
   font-variation-settings: "WONK" 1;
 }
 
-.main h1 em, h2 em {
+.main h1 em,
+.main h2 em {
   font-style: italic;
-  color: #C98A2B;
+  color: var(--color-gold);
 }
 
 .main .button {
@@ -56,7 +60,7 @@ body {
 
   padding: 10px 22px;
 
-  border: 1px solid #1E1512;
+  border: 1px solid var(--color-black);
   border-radius: 999px;
 
   font-size: 14px;
@@ -70,21 +74,21 @@ body {
 }
 
 .main .button-dark {
-  background-color: #1E1512;
+  background-color: var(--color-black);
 
-  color: #F7F1E8;
+  color: var(--bgcolor-light);
 }
 
 .main .button-outline {
   background-color: transparent;
 
-  color: #1E1512;
+  color: var(--color-black);
 }
 
 .main .button-outline:hover {
-  background-color: #1E1512;
+  background-color: var(--color-black);
 
-  color: #F7F1E8;
+  color: var(--bgcolor-light);
 }
 
 .main .button-small {
@@ -108,6 +112,16 @@ body {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
+
+  .main .button {
+    transition: none;
+  }
+}
+
 .container {
   width: 100%;
   max-width: 1120px;
@@ -123,7 +137,7 @@ HERO
 .hero {
   padding: 36px 0 44px;
 
-  background-color: #E9D9C4;
+  background-color: var(--bgcolor-khaki);
 }
 
 .hero .container {
@@ -132,15 +146,16 @@ HERO
   align-items: flex-start;
 }
 
+
 .pill {
   margin-bottom: 18px;
   padding: 4px 14px;
 
   border-radius: 999px;
-  background-color: #C98A2B;
+  background-color: var(--color-gold);
 
   font-size: 16px;
-  color: #1E1512;
+  color: var(--color-black);
 }
 
 .hero h1 {
@@ -155,7 +170,7 @@ HERO
   max-width: 400px;
 
   font-size: 18px;
-  color: #7A685B;
+  color: var(--color-grey);
 }
 
 /*********************************************************
@@ -182,14 +197,14 @@ FAVORITES
 .favorites-header h2 {
   font-size: 40px;
   font-weight: 600;
-  color: #1E1512;
+  color: var(--color-black);
 }
 
 .favorites-header p {
   margin-top: 4px;
 
   font-size: 18px;
-  color: #7A685B;
+  color: var(--color-grey);
 }
 
 .chips {
@@ -201,24 +216,24 @@ FAVORITES
 .chip {
   padding: 7px 18px;
 
-  border: 1px solid #7A685B;
+  border: 1px solid var(--color-grey);
   border-radius: 999px;
   background-color: transparent;
 
   font-size: 13px;
-  color: #1E1512;
+  color: var(--color-black);
 
   transition: background-color .2s, color .2s;
 }
 
 .chip:hover {
-  background-color: #C98A2B;
+  background-color: var(--color-gold);
 }
 
 .chip.active {
-  background-color: #1E1512;
+  background-color: var(--color-black);
 
-  color: #F7F1E8;
+  color: var(--bgcolor-light);
 }
 
 .favorite-grid {
@@ -246,7 +261,7 @@ FAVORITES
 
   font-size: 20px;
   font-weight: 500;
-  color: #C98A2B;
+  color: var(--color-gold);
 }
 
 .favorite-image {
@@ -257,7 +272,7 @@ FAVORITES
   aspect-ratio: 100 / 108;
 
   border-radius: 16px;
-  background-color: #E9D9C4;
+  background-color: var(--bgcolor-khaki);
 }
 
 .favorite-image img {
@@ -276,11 +291,11 @@ FAVORITES
   height: 100%;
   padding: 12px;
 
-  background: linear-gradient(135deg, #E9D9C4, #C98A2B);
+  background: linear-gradient(135deg, var(--bgcolor-khaki), var(--color-gold));
 
   font-size: 12px;
   text-align: center;
-  color: #7A685B;
+  color: var(--color-grey);
 }
 
 /*********************************************************
@@ -346,12 +361,12 @@ MENU SECTIONS
 
   padding: 5px 12px;
 
-  border: 1px solid #7A685B;
+  border: 1px solid var(--color-grey);
   border-radius: 999px;
-  background-color: #1E1512;
+  background-color: var(--color-black);
 
   font-size: 16px;
-  color: #F7F1E8;
+  color: var(--bgcolor-light);
 }
 
 .menu-section.reverse .size-tag {
@@ -368,11 +383,11 @@ MENU SECTIONS
   max-width: 645px;
   padding: 32px 36px;
 
-  border: 0.4px solid #1E1512;
+  border: 0.4px solid var(--color-black);
   border-radius: 20px;
-  background-color: #EDE0D0;
+  background-color: var(--bgcolor-beige);
 
-  box-shadow: 0 3px 3px #1E1512;
+  box-shadow: 0 3px 3px var(--color-black);
 }
 
 .main .menu-section .menu-list li {
@@ -383,12 +398,12 @@ MENU SECTIONS
 
   font-size: 20px;
   line-height: 35px;
-  color: #7A685B;
+  color: var(--color-grey);
 }
 
 .menu-list li span:last-child {
   white-space: nowrap;
-  color: #1E1512;
+  color: var(--color-black);
 }
 
 .grab {
@@ -411,7 +426,7 @@ ADD-ONS
   padding: 56px 46px 46px;
 
   border-radius: 36px;
-  background-color: #1E1512;
+  background-color: var(--color-black);
 }
 
 .addons h2 {
@@ -419,7 +434,7 @@ ADD-ONS
 
   font-size: 60px;
   font-weight: 600;
-  color: #F7F1E8;
+  color: var(--bgcolor-light);
 }
 
 .addons-grid {
@@ -436,50 +451,56 @@ ADD-ONS
   padding: 16px 14px;
 
   border-radius: 10px;
-  background-color: #3A2B2B;
+  background-color: color-mix(in srgb, var(--bgcolor-light) 8%, var(--color-black));
 
-  color: #F7F1E8;
+  color: var(--bgcolor-light);
 }
 
 .addon h4 {
   font-family: var(--body);
   font-size: 20px;
   font-weight: 700;
-  color: #F7F1E8;
+  color: var(--bgcolor-light);
 }
 
 .addon p {
   margin: 4px 0 6px;
 
   font-size: 15px;
-  color: #F7F1E8D4;
+  color: color-mix(in srgb, var(--bgcolor-light) 83%, transparent);
 }
 
 .addon .price {
   font-size: 13px;
-  color: #C98A2B;
+  color: var(--color-gold);
 }
 
 /*********************************************************
 CALL TO ACTION
 *********************************************************/
 
+/* FIX: replaced the fixed 1297px width / 222px height and the separate
+   1345px breakpoint with one fluid rule. The box is still wider than the
+   container, centered on it, and never overflows the viewport. */
 .main .call-to-action {
+  position: relative;
+  left: 50%;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
 
-  width: 1297px;
-  height: 222px;
-  margin: 72px 0 56px 50%;
-  padding: 0 44px;
+  width: min(1297px, calc(100vw - 32px));
+  min-height: 222px;
+  margin: 72px 0 56px;
+  padding: 32px 44px;
 
   border-radius: 25px;
-  background-color: #C98A2B;
+  background-color: var(--color-gold);
 
-  transform: translateX(-50%); /* centers the wider box in the container */
+  transform: translateX(-50%);
 }
 
 .main .call-to-action h3 {
@@ -498,18 +519,6 @@ CALL TO ACTION
 /*********************************************************
 MEDIA
 *********************************************************/
-
-@media (max-width: 1345px) {
-  .main .call-to-action {
-    width: 100%;
-    height: auto;
-    min-height: 222px;
-    margin-left: 0;
-    padding: 32px 44px;
-
-    transform: none;
-  }
-}
 
 @media (max-width: 1100px) {
   .hero h1 {
@@ -534,11 +543,13 @@ MEDIA
     width: 48.4%;
   }
 
-  .menu-section {
+  /* FIX: prefixed with .main so these actually beat the base rules
+     (.main .menu-section has higher specificity than .menu-section) */
+  .main .menu-section {
     margin-top: 56px;
   }
 
-  .menu-section h3 {
+  .main .menu-section h3 {
     margin-bottom: 28px;
   }
 
@@ -647,5 +658,15 @@ MEDIA
 
   .addon {
     width: 100%;
+  }
+
+  /* FIX: menu list was too roomy on phones */
+  .main .menu-section .menu-list {
+    padding: 20px 18px;
+  }
+
+  .main .menu-section .menu-list li {
+    font-size: 16px;
+    line-height: 30px;
   }
 }
