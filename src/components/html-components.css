@@ -178,3 +178,29 @@ FOOTER
     font-size: 14px;
     color: var(--color-grey);
 }
+
+
+/*********************************************************************************
+ADMIN NAVIGATION BAR
+*********************************************************************************/
+.admin-navigation-bar {
+    position: fixed;
+    height: 100%;
+    width: 290px;
+    
+    background-color: var(--adm-bgcolor-brown);
+    color: var(--bgcolor-light);
+}
+
+/*********************************************************************************
+ADMIN HEADER
+*********************************************************************************/
+.admin-header {
+    width: 100%;
+    height: 80px;
+
+    border-bottom: 1px solid var(--color-gold);
+
+    background-color: var(--bgcolor-light);
+    color: var(--color-black);
+}
