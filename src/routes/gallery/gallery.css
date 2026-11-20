@@ -1,6 +1,10 @@
 /**import all color and font variables**/
 @import url("../../lib/variables.css");
 
+body {
+    margin: 0;
+    padding: 0;
+}
 
 /**********************************************************
 MAIN                                                      .
