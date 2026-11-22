@@ -12,13 +12,220 @@
         <div class="main-container">
             <!--IMPORTED HEADER-->
             <div id="admin-header"></div>
-            
+
             <!--PURCHASING ORDERS-->
             <div class="main">
-                only add new html codes here
+                <!-- PURCHASE ORDERS CARD -->
+                <div class="purchase-orders-card">
+
+                    <!-- CARD HEADER -->
+                    <div class="card-header">
+                        <div class="card-title">Recent purchase orders</div>
+                        <button class="button-primary new-purchase-order-button" id="open-panel-button" type="button">+ New purchase order</button>
+                    </div>
+
+                    <!-- PURCHASE ORDERS TABLE -->
+                    <div class="purchase-orders-table">
+                        <div class="table-header">
+                            <div class="cell-order-number">PO #</div>
+                            <div class="cell-supplier">Supplier</div>
+                            <div class="cell-date">Date Ordered</div>
+                            <div class="cell-items">Items</div>
+                            <div class="cell-total">Total</div>
+                            <div class="cell-status">Status</div>
+                        </div>
+
+                        <div class="purchase-orders-body" id="purchase-orders-body">
+                            <div class="purchase-order-row">
+                                <div class="cell-order-number">PO-0010</div>
+                                <div class="cell-supplier">Coffee Beans</div>
+                                <div class="cell-date">Nov 14</div>
+                                <div class="cell-items">2</div>
+                                <div class="cell-total">&#8369;6,100</div>
+                                <div class="cell-status">
+                                    <div class="status-pill status-ordered">Ordered</div>
+                                </div>
+                            </div>
+
+                            <div class="purchase-order-row">
+                                <div class="cell-order-number">PO-0009</div>
+                                <div class="cell-supplier">Supplier Inc.</div>
+                                <div class="cell-date">Nov 12</div>
+                                <div class="cell-items">2</div>
+                                <div class="cell-total">&#8369;3,050</div>
+                                <div class="cell-status">
+                                    <div class="status-pill status-received">Received</div>
+                                </div>
+                            </div>
+
+                            <div class="purchase-order-row">
+                                <div class="cell-order-number">PO-0008</div>
+                                <div class="cell-supplier">Dairy supplier</div>
+                                <div class="cell-date">Nov 10</div>
+                                <div class="cell-items">4</div>
+                                <div class="cell-total">&#8369;2,600</div>
+                                <div class="cell-status">
+                                    <div class="status-pill status-received">Received</div>
+                                </div>
+                            </div>
+
+                            <div class="purchase-order-row">
+                                <div class="cell-order-number">PO-0007</div>
+                                <div class="cell-supplier">SM Aura (market run)</div>
+                                <div class="cell-date">Nov 9</div>
+                                <div class="cell-items">3</div>
+                                <div class="cell-total">&#8369;8,400</div>
+                                <div class="cell-status">
+                                    <div class="status-pill status-received">Received</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL OVERLAY -->
+                <div class="panel-overlay" id="panel-overlay"></div>
+
+                <!-- NEW PURCHASE ORDER PANEL -->
+                <div class="panel" id="new-purchase-order-panel" aria-hidden="true">
+
+                    <!-- PANEL HEADER -->
+                    <div class="panel-header">
+                        <div class="panel-heading">
+                            <div class="panel-title">New purchase order</div>
+                            <div class="panel-subtitle">Add the items you want to buy, then place the order.</div>
+                        </div>
+                        <button class="close-button" id="close-panel-button" type="button" aria-label="Close panel">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                                <line x1="2" y1="2" x2="10" y2="10"></line>
+                                <line x1="10" y1="2" x2="2" y2="10"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <!-- ORDER DETAILS -->
+                        <div class="order-details-row">
+                            <div class="field field-grow">
+                                <label class="field-label" for="supplier-select">Supplier</label>
+                                <select class="field-input" id="supplier-select" required>
+                                    <option value="" disabled>Select supplier</option>
+                                    <option value="Supplier Inc." selected>Supplier Inc.</option>
+                                    <option value="Coffee Beans">Coffee Beans</option>
+                                    <option value="Dairy supplier">Dairy supplier</option>
+                                    <option value="SM Aura (market run)">SM Aura (market run)</option>
+                                </select>
+                            </div>
+                            <div class="field field-grow">
+                                <label class="field-label" for="delivery-date-input">Expected delivery</label>
+                                <input class="field-input" id="delivery-date-input" type="date" value="2026-11-24">
+                            </div>
+                        </div>
+
+                        <!-- ADD ITEM -->
+                        <div class="add-item-card">
+                            <div class="section-title">Add item</div>
+
+                            <div class="add-item-row">
+                                <div class="field field-grow">
+                                    <label class="field-label" for="item-select">Item</label>
+                                    <select class="field-input" id="item-select" required>
+                                        <option value="" disabled selected>Select item</option>
+                                        <option value="Whole Milk">Whole Milk</option>
+                                        <option value="Coffee Beans">Coffee Beans</option>
+                                        <option value="Matcha Powder">Matcha Powder</option>
+                                        <option value="Vanilla Syrup">Vanilla Syrup</option>
+                                        <option value="Chocolate Sauce">Chocolate Sauce</option>
+                                        <option value="Brown Sugar">Brown Sugar</option>
+                                        <option value="Cup Lid">Cup Lid</option>
+                                        <option value="Paper Cup">Paper Cup</option>
+                                    </select>
+                                </div>
+                                <div class="field field-quantity">
+                                    <label class="field-label" for="quantity-input">Qty</label>
+                                    <input class="field-input" id="quantity-input" type="number" min="1" step="1" placeholder="0">
+                                </div>
+                                <div class="field field-unit">
+                                    <label class="field-label" for="unit-select">Unit</label>
+                                    <select class="field-input" id="unit-select">
+                                        <option value="Pack">Pack</option>
+                                        <option value="Carton">Carton</option>
+                                        <option value="Bottle">Bottle</option>
+                                        <option value="Sleeve">Sleeve</option>
+                                        <option value="Box">Box</option>
+                                        <option value="Bag">Bag</option>
+                                    </select>
+                                </div>
+                                <div class="field field-cost">
+                                    <label class="field-label" for="cost-input">Cost each (&#8369;)</label>
+                                    <input class="field-input" id="cost-input" type="number" min="0" step="0.01" placeholder="&#8369; 0.00">
+                                </div>
+                            </div>
+
+                            <div class="add-item-row">
+                                <div class="field field-amount">
+                                    <label class="field-label" for="amount-input">Amount per unit</label>
+                                    <input class="field-input" id="amount-input" type="number" min="0" step="any" placeholder="0">
+                                </div>
+                                <div class="field field-measure">
+                                    <label class="field-label" for="measure-select">Measure</label>
+                                    <select class="field-input" id="measure-select">
+                                        <option value="mL">mL</option>
+                                        <option value="L">L</option>
+                                        <option value="g">g</option>
+                                        <option value="kg">kg</option>
+                                        <option value="pcs">pcs</option>
+                                    </select>
+                                </div>
+                                <div class="add-item-actions">
+                                    <button class="button-secondary" id="reset-button" type="button">Reset</button>
+                                    <button class="button-primary" id="add-item-button" type="button">+ Add item</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ITEMS IN THIS ORDER -->
+                        <div class="order-items-card">
+                            <div class="order-items-heading">
+                                <div class="section-title">Items in this order</div>
+                                <div class="order-items-count" id="order-items-count">0 items</div>
+                            </div>
+
+                            <div class="order-items-table-header">
+                                <div class="order-item-name">Item</div>
+                                <div class="order-item-quantity">Qty</div>
+                                <div class="order-item-unit">Unit</div>
+                                <div class="order-item-amount">Amount</div>
+                                <div class="order-item-cost">Cost each</div>
+                                <div class="order-item-subtotal">Subtotal</div>
+                                <div class="order-item-action"></div>
+                            </div>
+
+                            <div class="order-items-list" id="order-items-list"></div>
+
+                            <div class="order-items-footer">
+                                <div class="order-items-summary" id="order-items-summary">0 items - 0 total units</div>
+                                <div class="order-items-total">
+                                    <div class="order-items-total-label">Total</div>
+                                    <div class="order-items-total-amount" id="order-items-total">&#8369;0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PANEL FOOTER -->
+                    <div class="panel-footer">
+                        <button class="button-secondary" id="save-draft-button" type="button">Save as draft</button>
+                        <button class="button-primary" id="place-order-button" type="button">Place order</button>
+                    </div>
+                </div>
+
+                <!-- PURCHASING ORDERS SCRIPT -->
+                <script src="purchasing-orders.js"></script>
             </div>
         </div>
-    
+
     <!--IMPORT SIDEBAR AND HEADER HTML-->
     <script src="../../../lib/components.js"></script>
     </body>
