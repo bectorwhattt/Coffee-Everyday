@@ -14,7 +14,11 @@ body {
 }
 
 .main-container {
+    display: flex;
+    flex-direction: column;
+
     width: 100%;
+    min-height: 100vh;
 
     margin-left: var(--adm-navbar-width);
 }
@@ -23,3 +27,636 @@ body {
 /*********************************************************************************
 MAIN
 *********************************************************************************/
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 16px;
+
+    box-sizing: border-box;
+    padding: 12px 24px 40px 24px;
+
+    background-color: var(--bgcolor-beige);
+
+    color: var(--color-black);
+}
+
+
+/*********************************************************************************
+WELCOME BANNER
+*********************************************************************************/
+.main .welcome-banner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    box-sizing: border-box;
+    padding: 26px 30px;
+
+    border-radius: 14px;
+    background-image: linear-gradient(90deg, var(--bgcolor-khaki), var(--bgcolor-beige));
+
+    color: var(--color-black);
+}
+
+.main .welcome-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.main .welcome-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.main .welcome-date {
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.main .welcome-subtitle {
+    font-size: 14px;
+    color: #938884;
+}
+
+
+/*********************************************************************************
+STATISTICS
+*********************************************************************************/
+.main .statistics-row {
+    display: flex;
+    gap: 16px;
+}
+
+.main .statistic-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+
+    box-sizing: border-box;
+    min-width: 0;
+    padding: 24px 20px;
+
+    border-radius: 16px;
+    background-color: var(--bgcolor-light);
+}
+
+.main .statistic-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+    background-color: var(--bgcolor-khaki);
+
+    font-size: 18px;
+    font-weight: 600;
+    color: #4A2C20;
+}
+
+.main .statistic-icon-warning {
+    background-color: var(--color-pink);
+
+    color: var(--color-black);
+}
+
+.main .statistic-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+
+    min-width: 0;
+}
+
+.main .statistic-label {
+    font-size: 14px;
+    color: #4A2C20;
+}
+
+.main .statistic-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4A2C20;
+}
+
+.main .statistic-note {
+    display: flex;
+    gap: 4px;
+
+    font-size: 11px;
+    color: #938884;
+}
+
+.main .statistic-percentage-positive {
+    color: #3CA22A;
+}
+
+.main .statistic-note-negative {
+    color: #DA1818;
+}
+
+.main .statistic-note-neutral {
+    color: #938884;
+}
+
+.main .statistic-arrow {
+    display: flex;
+    align-self: flex-start;
+
+    color: var(--color-black);
+}
+
+
+/*********************************************************************************
+CHARTS
+*********************************************************************************/
+.main .charts-row {
+    display: flex;
+    gap: 16px;
+}
+
+.main .dashboard-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    box-sizing: border-box;
+    min-width: 0;
+    padding: 22px 24px;
+
+    border-radius: 16px;
+    background-color: var(--bgcolor-light);
+}
+
+.main .card-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.main .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4A2C20;
+}
+
+.main .card-subtitle {
+    font-size: 11px;
+    color: #938884;
+}
+
+
+/*********************************************************************************
+SALES THIS WEEK
+*********************************************************************************/
+.main .sales-card {
+    flex: 1.15;
+}
+
+.main .bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.main .bar-plot {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+
+    box-sizing: border-box;
+    height: 210px;
+    padding: 0 6px;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+}
+
+.main .bar-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    flex: 1;
+}
+
+.main .bar-value {
+    font-size: 11px;
+    color: #4A2C20;
+}
+
+.main .bar-value-highlighted {
+    font-weight: 600;
+}
+
+.main .bar {
+    width: 100%;
+    max-width: 44px;
+
+    border-radius: 6px 6px 0 0;
+    background-color: var(--bgcolor-khaki);
+
+    transition: height 0.4s ease;
+}
+
+.main .bar-highlighted {
+    background-color: var(--adm-bgcolor-terracotta);
+}
+
+.main .bar-labels {
+    display: flex;
+    gap: 14px;
+
+    padding: 0 6px;
+}
+
+.main .bar-label {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+
+    font-size: 11px;
+    color: #938884;
+}
+
+
+/*********************************************************************************
+STOCK HEALTH
+*********************************************************************************/
+.main .stock-card {
+    flex: 1;
+}
+
+.main .stock-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 24px;
+    flex: 1;
+}
+
+.main .donut-chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+    background-color: var(--bgcolor-khaki);
+}
+
+.main .donut-hole {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 104px;
+    height: 104px;
+
+    border-radius: 50%;
+    background-color: var(--bgcolor-light);
+}
+
+.main .donut-total {
+    font-size: 26px;
+    font-weight: 600;
+    color: #4A2C20;
+}
+
+.main .donut-caption {
+    font-size: 11px;
+    color: #938884;
+}
+
+.main .stock-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+
+    max-width: 230px;
+}
+
+.main .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 13px;
+    color: #4A2C20;
+}
+
+.main .legend-dot {
+    flex-shrink: 0;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+}
+
+.main .legend-dot-in-stock {
+    background-color: #3CA22A;
+}
+
+.main .legend-dot-low {
+    background-color: #E0B232;
+}
+
+.main .legend-dot-no-stock {
+    background-color: #99080F;
+}
+
+.main .legend-label {
+    flex: 1;
+}
+
+.main .legend-value {
+    font-weight: 600;
+}
+
+
+/*********************************************************************************
+TOP SELLERS
+*********************************************************************************/
+.main .top-sellers-card {
+    gap: 18px;
+}
+
+.main .top-sellers-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .period-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 18px;
+
+    border-radius: 999px;
+    background-color: var(--bgcolor-darkbrown);
+
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bgcolor-light);
+}
+
+.main .top-sellers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.main .top-seller-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    font-size: 13px;
+    color: #4A2C20;
+}
+
+.main .top-seller-rank {
+    width: 20px;
+    flex-shrink: 0;
+
+    font-size: 20px;
+    font-weight: 600;
+    color: #916553;
+}
+
+.main .top-seller-name {
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.main .progress-track {
+    display: flex;
+    flex: 1;
+
+    height: 8px;
+
+    border-radius: 999px;
+    background-color: var(--bgcolor-beige);
+}
+
+.main .progress-fill {
+    height: 100%;
+
+    border-radius: 999px;
+    background-color: #9D6048;
+
+    transition: width 0.4s ease;
+}
+
+.main .top-seller-sold {
+    width: 60px;
+    flex-shrink: 0;
+
+    font-size: 12px;
+    text-align: right;
+    color: #4A2C2074;
+}
+
+
+/*********************************************************************************
+ORDERS
+*********************************************************************************/
+.main .orders-row {
+    display: flex;
+    gap: 16px;
+}
+
+
+/*********************************************************************************
+TODAY'S ORDERS
+*********************************************************************************/
+.main .todays-orders-card {
+    flex: 1.15;
+}
+
+.main .todays-orders-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .view-all-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 11px;
+    text-decoration: none;
+    color: #938884;
+}
+
+.main .view-all-link:hover {
+    color: #4A2C20;
+}
+
+.main .todays-orders-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.main .table-header {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 9px 14px;
+
+    border-radius: 4px;
+    background-color: var(--bgcolor-khaki);
+
+    font-size: 11px;
+    color: #4A2C20;
+}
+
+.main .table-row {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 14px;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+
+    font-size: 11px;
+    color: #4A2C20;
+}
+
+.main .cell-order-number {
+    display: flex;
+    align-items: center;
+
+    width: 70px;
+    flex-shrink: 0;
+}
+
+.main .table-row .cell-order-number {
+    font-weight: 600;
+}
+
+.main .cell-time {
+    display: flex;
+    align-items: center;
+
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.main .cell-items {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+    padding-right: 12px;
+}
+
+.main .cell-total {
+    display: flex;
+    align-items: center;
+
+    width: 70px;
+    flex-shrink: 0;
+}
+
+.main .table-row .cell-total {
+    font-weight: 600;
+}
+
+.main .cell-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.main .status-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 2px 12px;
+
+    border-radius: 999px;
+
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.main .status-processing {
+    background-color: #0796C127;
+
+    color: #0044F0;
+}
+
+.main .status-completed {
+    background-color: #3CA22A27;
+
+    color: #167A04;
+}
+
+
+/*********************************************************************************
+ORDERS BY TYPE
+*********************************************************************************/
+.main .order-types-card {
+    flex: 1;
+}
+
+.main .order-types-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 22px;
+    flex: 1;
+
+    padding: 8px 0;
+}
+
+.main .order-type-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    font-size: 13px;
+    color: #4A2C20;
+}
+
+.main .order-type-name {
+    width: 72px;
+    flex-shrink: 0;
+}
+
+.main .order-type-count {
+    width: 24px;
+    flex-shrink: 0;
+
+    font-weight: 600;
+    text-align: right;
+}

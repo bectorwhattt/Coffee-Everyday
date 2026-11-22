@@ -12,13 +12,213 @@
         <div class="main-container">
             <!--IMPORTED HEADER-->
             <div id="admin-header"></div>
-            
+
             <!--DASHBOARD-->
             <div class="main">
-                only add new html codes here
+                <!-- WELCOME BANNER -->
+                <div class="welcome-banner">
+                    <div class="welcome-title-row">
+                        <div class="welcome-title">Welcome, Admin.</div>
+                        <div class="welcome-date">Today is <span id="current-date">Saturday, November 21, 2026</span></div>
+                    </div>
+                    <div class="welcome-subtitle">Here's the business performance for Coffee Everyday.</div>
+                </div>
+
+                <!-- STATISTICS -->
+                <div class="statistics-row">
+                    <div class="statistic-card">
+                        <div class="statistic-icon">&#8369;</div>
+                        <div class="statistic-details">
+                            <div class="statistic-label">Today's total sales</div>
+                            <div class="statistic-value">&#8369;2,350</div>
+                            <div class="statistic-note">
+                                <div class="statistic-percentage statistic-percentage-positive">13%</div>
+                                <div class="statistic-note-text">vs. yesterday</div>
+                            </div>
+                        </div>
+                        <div class="statistic-arrow">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3,1.5 6.5,5 3,8.5"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="statistic-card">
+                        <div class="statistic-icon">#</div>
+                        <div class="statistic-details">
+                            <div class="statistic-label">Today's total orders</div>
+                            <div class="statistic-value">15</div>
+                            <div class="statistic-note">
+                                <div class="statistic-percentage statistic-percentage-positive">5%</div>
+                                <div class="statistic-note-text">vs. yesterday</div>
+                            </div>
+                        </div>
+                        <div class="statistic-arrow">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3,1.5 6.5,5 3,8.5"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="statistic-card">
+                        <div class="statistic-icon statistic-icon-warning">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                        <div class="statistic-details">
+                            <div class="statistic-label">Low/No Stock</div>
+                            <div class="statistic-value">5 items</div>
+                            <div class="statistic-note statistic-note-negative">3 low, 2 no stock</div>
+                        </div>
+                        <div class="statistic-arrow">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3,1.5 6.5,5 3,8.5"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="statistic-card">
+                        <div class="statistic-icon"></div>
+                        <div class="statistic-details">
+                            <div class="statistic-label">Average Orders</div>
+                            <div class="statistic-value">18 orders</div>
+                            <div class="statistic-note statistic-note-neutral">per day, this week</div>
+                        </div>
+                        <div class="statistic-arrow">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3,1.5 6.5,5 3,8.5"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARTS -->
+                <div class="charts-row">
+
+                    <!-- SALES THIS WEEK -->
+                    <div class="dashboard-card sales-card">
+                        <div class="card-heading">
+                            <div class="card-title">Sales This Week</div>
+                            <div class="card-subtitle">Sales per day (sample data)</div>
+                        </div>
+                        <div class="bar-chart">
+                            <div class="bar-plot" id="sales-bar-plot"></div>
+                            <div class="bar-labels" id="sales-bar-labels"></div>
+                        </div>
+                    </div>
+
+                    <!-- STOCK HEALTH -->
+                    <div class="dashboard-card stock-card">
+                        <div class="card-heading">
+                            <div class="card-title">Stock Health</div>
+                            <div class="card-subtitle">Items in inventory</div>
+                        </div>
+                        <div class="stock-body">
+                            <div class="donut-chart" id="stock-donut">
+                                <div class="donut-hole">
+                                    <div class="donut-total" id="stock-total">0</div>
+                                    <div class="donut-caption">Items</div>
+                                </div>
+                            </div>
+                            <div class="stock-legend" id="stock-legend"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TOP SELLERS -->
+                <div class="dashboard-card top-sellers-card">
+                    <div class="top-sellers-header">
+                        <div class="card-title">Top Sellers</div>
+                        <div class="period-pill">This Week</div>
+                    </div>
+                    <div class="top-sellers-list" id="top-sellers-list"></div>
+                </div>
+
+                <!-- ORDERS -->
+                <div class="orders-row">
+
+                    <!-- TODAY'S ORDERS -->
+                    <div class="dashboard-card todays-orders-card">
+                        <div class="todays-orders-header">
+                            <div class="card-title">Today's Orders</div>
+                            <a class="view-all-link" href="../orders/orders.html">
+                                <div class="view-all-text">View all</div>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="1.5" y1="6" x2="10" y2="6"></line>
+                                    <polyline points="7,3 10,6 7,9"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="todays-orders-table">
+                            <div class="table-header">
+                                <div class="cell-order-number">Order #</div>
+                                <div class="cell-time">Time</div>
+                                <div class="cell-items">Items</div>
+                                <div class="cell-total">Total</div>
+                                <div class="cell-status">Status</div>
+                            </div>
+
+                            <div class="table-row">
+                                <div class="cell-order-number">#0018</div>
+                                <div class="cell-time">10:45 AM</div>
+                                <div class="cell-items">French Vanilla x1, NYC Style Cookies x1</div>
+                                <div class="cell-total">&#8369;325</div>
+                                <div class="cell-status">
+                                    <div class="status-pill status-processing">Processing</div>
+                                </div>
+                            </div>
+
+                            <div class="table-row">
+                                <div class="cell-order-number">#0017</div>
+                                <div class="cell-time">10:21 AM</div>
+                                <div class="cell-items">Pain Au Chocolat x1</div>
+                                <div class="cell-total">&#8369;110</div>
+                                <div class="cell-status">
+                                    <div class="status-pill status-completed">Completed</div>
+                                </div>
+                            </div>
+
+                            <div class="table-row">
+                                <div class="cell-order-number">#0016</div>
+                                <div class="cell-time">9:58 AM</div>
+                                <div class="cell-items">Nutella Latte x1</div>
+                                <div class="cell-total">&#8369;150</div>
+                                <div class="cell-status">
+                                    <div class="status-pill status-completed">Completed</div>
+                                </div>
+                            </div>
+
+                            <div class="table-row">
+                                <div class="cell-order-number">#0015</div>
+                                <div class="cell-time">9:30 AM</div>
+                                <div class="cell-items">Cafe Latte x1</div>
+                                <div class="cell-total">&#8369;130</div>
+                                <div class="cell-status">
+                                    <div class="status-pill status-completed">Completed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ORDERS BY TYPE -->
+                    <div class="dashboard-card order-types-card">
+                        <div class="card-heading">
+                            <div class="card-title">Orders by type</div>
+                            <div class="card-subtitle">Today, 15 orders (sample data)</div>
+                        </div>
+                        <div class="order-types-list" id="order-types-list"></div>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD SCRIPT -->
+                <script src="dashboard.js"></script>
             </div>
         </div>
-    
+
     <!--IMPORT SIDEBAR AND HEADER HTML-->
     <script src="../../../lib/components.js"></script>
     </body>
