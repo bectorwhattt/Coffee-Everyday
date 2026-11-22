@@ -12,13 +12,241 @@
         <div class="main-container">
             <!--IMPORTED HEADER-->
             <div id="admin-header"></div>
-            
+
             <!--ORDERS-->
             <div class="main">
-                only add new html codes here
+                <!-- ORDERS CARD -->
+                <div class="orders-card">
+
+                    <!-- FILTER TABS -->
+                    <div class="filter-tabs">
+                        <div class="filter-tab active" data-filter="all">All (10)</div>
+                        <div class="filter-tab" data-filter="processing">Processing (2)</div>
+                        <div class="filter-tab" data-filter="completed">Completed (7)</div>
+                        <div class="filter-tab" data-filter="canceled">Canceled (1)</div>
+                    </div>
+
+                    <!-- ORDERS TABLE -->
+                    <div class="orders-table">
+
+                        <!-- TABLE HEADER -->
+                        <div class="table-header">
+                            <div class="order-number">PO #</div>
+                            <div class="order-time">Time</div>
+                            <div class="order-items">Items</div>
+                            <div class="order-type">Type</div>
+                            <div class="order-payment">Pay</div>
+                            <div class="order-total">Total</div>
+                            <div class="order-status">Status</div>
+                            <div class="order-toggle-spacer"></div>
+                        </div>
+
+                        <!-- ORDER 0018 -->
+                        <div class="order-row expanded" data-status="processing">
+                            <div class="order-summary">
+                                <div class="order-number">#0018</div>
+                                <div class="order-time">10:45 AM</div>
+                                <div class="order-items">French Vanilla x1, NYC Style Cookies x1</div>
+                                <div class="order-type">Dine in</div>
+                                <div class="order-payment">Cash</div>
+                                <div class="order-total">&#8369;325</div>
+                                <div class="order-status">
+                                    <div class="status-pill status-processing">Processing</div>
+                                </div>
+                                <div class="order-toggle" role="button" aria-expanded="true" aria-label="Toggle order details">
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="2.5,4.5 6,8 9.5,4.5"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="order-details">
+                                <div class="order-details-header">
+                                    <div class="detail-item">Item</div>
+                                    <div class="detail-quantity">Qty</div>
+                                    <div class="detail-price">Price each</div>
+                                    <div class="detail-subtotal">Subtotal</div>
+                                </div>
+                                <div class="order-details-line">
+                                    <div class="detail-item">French Vanilla</div>
+                                    <div class="detail-quantity">1</div>
+                                    <div class="detail-price">&#8369;170</div>
+                                    <div class="detail-subtotal detail-bold">&#8369;170</div>
+                                </div>
+                                <div class="order-details-line">
+                                    <div class="detail-item">NYC Style Cookies</div>
+                                    <div class="detail-quantity">1</div>
+                                    <div class="detail-price">&#8369;155</div>
+                                    <div class="detail-subtotal detail-bold">&#8369;155</div>
+                                </div>
+                                <div class="order-details-divider"></div>
+                                <div class="order-details-line">
+                                    <div class="detail-item"></div>
+                                    <div class="detail-quantity"></div>
+                                    <div class="detail-price">VAT (12%, included)</div>
+                                    <div class="detail-subtotal">&#8369;34.82</div>
+                                </div>
+                                <div class="order-details-line">
+                                    <div class="detail-item"></div>
+                                    <div class="detail-quantity"></div>
+                                    <div class="detail-price detail-bold">Total</div>
+                                    <div class="detail-subtotal detail-bold">&#8369;325</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ORDER 0017 -->
+                        <div class="order-row" data-status="completed">
+                            <div class="order-summary">
+                                <div class="order-number">#0017</div>
+                                <div class="order-time">10:21 AM</div>
+                                <div class="order-items">Pain au Chocolat x1</div>
+                                <div class="order-type">Take out</div>
+                                <div class="order-payment">GCash</div>
+                                <div class="order-total">&#8369;80</div>
+                                <div class="order-status">
+                                    <div class="status-pill status-completed">Completed</div>
+                                </div>
+                                <div class="order-toggle" role="button" aria-expanded="false" aria-label="Toggle order details">
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="2.5,4.5 6,8 9.5,4.5"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="order-details">
+                                <div class="order-details-header">
+                                    <div class="detail-item">Item</div>
+                                    <div class="detail-quantity">Qty</div>
+                                    <div class="detail-price">Price each</div>
+                                    <div class="detail-subtotal">Subtotal</div>
+                                </div>
+                                <div class="order-details-line">
+                                    <div class="detail-item">Pain au Chocolat</div>
+                                    <div class="detail-quantity">1</div>
+                                    <div class="detail-price">&#8369;80</div>
+                                    <div class="detail-subtotal detail-bold">&#8369;80</div>
+                                </div>
+                                <div class="order-details-divider"></div>
+                                <div class="order-details-line">
+                                    <div class="detail-item"></div>
+                                    <div class="detail-quantity"></div>
+                                    <div class="detail-price">VAT (12%, included)</div>
+                                    <div class="detail-subtotal">&#8369;8.57</div>
+                                </div>
+                                <div class="order-details-line">
+                                    <div class="detail-item"></div>
+                                    <div class="detail-quantity"></div>
+                                    <div class="detail-price detail-bold">Total</div>
+                                    <div class="detail-subtotal detail-bold">&#8369;80</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ORDER 0016 -->
+                        <div class="order-row" data-status="completed">
+                            <div class="order-summary">
+                                <div class="order-number">#0016</div>
+                                <div class="order-time">9:58 AM</div>
+                                <div class="order-items">Nutella Latte x1</div>
+                                <div class="order-type">Dine in</div>
+                                <div class="order-payment">Cash</div>
+                                <div class="order-total">&#8369;150</div>
+                                <div class="order-status">
+                                    <div class="status-pill status-completed">Completed</div>
+                                </div>
+                                <div class="order-toggle" role="button" aria-expanded="false" aria-label="Toggle order details">
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="2.5,4.5 6,8 9.5,4.5"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="order-details">
+                                <div class="order-details-header">
+                                    <div class="detail-item">Item</div>
+                                    <div class="detail-quantity">Qty</div>
+                                    <div class="detail-price">Price each</div>
+                                    <div class="detail-subtotal">Subtotal</div>
+                                </div>
+                                <div class="order-details-line">
+                                    <div class="detail-item">Nutella Latte</div>
+                                    <div class="detail-quantity">1</div>
+                                    <div class="detail-price">&#8369;150</div>
+                                    <div class="detail-subtotal detail-bold">&#8369;150</div>
+                                </div>
+                                <div class="order-details-divider"></div>
+                                <div class="order-details-line">
+                                    <div class="detail-item"></div>
+                                    <div class="detail-quantity"></div>
+                                    <div class="detail-price">VAT (12%, included)</div>
+                                    <div class="detail-subtotal">&#8369;16.07</div>
+                                </div>
+                                <div class="order-details-line">
+                                    <div class="detail-item"></div>
+                                    <div class="detail-quantity"></div>
+                                    <div class="detail-price detail-bold">Total</div>
+                                    <div class="detail-subtotal detail-bold">&#8369;150</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ORDER 0015 -->
+                        <div class="order-row" data-status="canceled">
+                            <div class="order-summary">
+                                <div class="order-number">#0015</div>
+                                <div class="order-time">9:30 AM</div>
+                                <div class="order-items">Cafe Latte x1</div>
+                                <div class="order-type">Take out</div>
+                                <div class="order-payment">Cash</div>
+                                <div class="order-total">&#8369;150</div>
+                                <div class="order-status">
+                                    <div class="status-pill status-canceled">Cancelled</div>
+                                </div>
+                                <div class="order-toggle" role="button" aria-expanded="false" aria-label="Toggle order details">
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="2.5,4.5 6,8 9.5,4.5"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="order-details">
+                                <div class="order-details-header">
+                                    <div class="detail-item">Item</div>
+                                    <div class="detail-quantity">Qty</div>
+                                    <div class="detail-price">Price each</div>
+                                    <div class="detail-subtotal">Subtotal</div>
+                                </div>
+                                <div class="order-details-line">
+                                    <div class="detail-item">Cafe Latte</div>
+                                    <div class="detail-quantity">1</div>
+                                    <div class="detail-price">&#8369;150</div>
+                                    <div class="detail-subtotal detail-bold">&#8369;150</div>
+                                </div>
+                                <div class="order-details-divider"></div>
+                                <div class="order-details-line">
+                                    <div class="detail-item"></div>
+                                    <div class="detail-quantity"></div>
+                                    <div class="detail-price">VAT (12%, included)</div>
+                                    <div class="detail-subtotal">&#8369;16.07</div>
+                                </div>
+                                <div class="order-details-line">
+                                    <div class="detail-item"></div>
+                                    <div class="detail-quantity"></div>
+                                    <div class="detail-price detail-bold">Total</div>
+                                    <div class="detail-subtotal detail-bold">&#8369;150</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ORDERS SCRIPT -->
+                <script src="orders.js"></script>
             </div>
         </div>
-    
+
     <!--IMPORT SIDEBAR AND HEADER HTML-->
     <script src="../../../lib/components.js"></script>
     </body>

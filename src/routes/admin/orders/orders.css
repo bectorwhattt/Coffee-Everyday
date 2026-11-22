@@ -14,7 +14,11 @@ body {
 }
 
 .main-container {
+    display: flex;
+    flex-direction: column;
+
     width: 100%;
+    min-height: 100vh;
 
     margin-left: var(--adm-navbar-width);
 }
@@ -23,3 +27,337 @@ body {
 /*********************************************************************************
 MAIN
 *********************************************************************************/
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    box-sizing: border-box;
+    padding: 12px 24px 40px 24px;
+
+    background-color: var(--bgcolor-beige);
+
+    color: var(--color-black);
+}
+
+
+/*********************************************************************************
+ORDERS CARD
+*********************************************************************************/
+.main .orders-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    box-sizing: border-box;
+    padding: 22px 30px 40px 30px;
+
+    border-radius: 24px;
+    background-color: var(--bgcolor-light);
+}
+
+
+/*********************************************************************************
+FILTER TABS
+*********************************************************************************/
+.main .filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.main .filter-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 5px 13px;
+
+    border: 1px solid var(--color-black);
+    border-radius: 999px;
+    background-color: transparent;
+
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main .filter-tab:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+.main .filter-tab.active {
+    background-color: var(--bgcolor-darkbrown);
+
+    color: var(--bgcolor-light);
+}
+
+
+/*********************************************************************************
+ORDERS TABLE
+*********************************************************************************/
+.main .orders-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.main .table-header {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 8px 20px 8px 12px;
+
+    border-radius: 4px;
+    background-color: var(--bgcolor-khaki);
+
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-black);
+}
+
+/*********************************************************************************
+ORDER ROWS
+*********************************************************************************/
+.main .order-row {
+    display: flex;
+    flex-direction: column;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+}
+
+.main .order-summary {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 14px 20px 8px 12px;
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .order-number {
+    display: flex;
+    align-items: center;
+
+    width: 74px;
+    flex-shrink: 0;
+
+    font-weight: 600;
+}
+
+.main .table-header .order-number {
+    font-weight: 400;
+}
+
+.main .order-time {
+    display: flex;
+    align-items: center;
+
+    width: 64px;
+    flex-shrink: 0;
+}
+
+.main .order-items {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+}
+
+.main .order-type {
+    display: flex;
+    align-items: center;
+
+    width: 68px;
+    flex-shrink: 0;
+}
+
+.main .order-payment {
+    display: flex;
+    align-items: center;
+
+    width: 64px;
+    flex-shrink: 0;
+}
+
+.main .order-total {
+    display: flex;
+    align-items: center;
+
+    width: 90px;
+    flex-shrink: 0;
+
+    font-weight: 600;
+}
+
+.main .table-header .order-total {
+    font-weight: 400;
+}
+
+.main .order-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.main .status-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 2px 12px;
+
+    border-radius: 999px;
+
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.main .status-processing {
+    background-color: #0796C127;
+
+    color: #0044F0;
+}
+
+.main .status-completed {
+    background-color: #3CA22A27;
+
+    color: #167A04;
+}
+
+.main .status-canceled {
+    background-color: #A22A2C27;
+
+    color: #99080F;
+}
+
+.main .order-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+
+    border: 1px solid var(--color-black);
+    border-radius: 50%;
+    background-color: transparent;
+
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main .order-toggle svg {
+    transition: transform 0.2s ease;
+}
+
+.main .order-toggle-spacer {
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.main .order-row.expanded .order-toggle {
+    background-color: var(--bgcolor-darkbrown);
+
+    color: var(--bgcolor-light);
+}
+
+.main .order-row.expanded .order-toggle svg {
+    transform: rotate(180deg);
+}
+
+
+/*********************************************************************************
+ORDER DETAILS
+*********************************************************************************/
+.main .order-details {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+
+    box-sizing: border-box;
+    margin: 4px 0 12px 0;
+    padding: 12px 20px 12px 12px;
+
+    border-radius: 6px;
+    background-color: var(--bgcolor-beige);
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .order-row.expanded .order-details {
+    display: flex;
+}
+
+.main .order-details-header {
+    display: flex;
+    align-items: center;
+
+    color: var(--color-grey);
+}
+
+.main .order-details-line {
+    display: flex;
+    align-items: center;
+}
+
+.main .detail-item {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+}
+
+.main .detail-quantity {
+    display: flex;
+    align-items: center;
+
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.main .detail-price {
+    display: flex;
+    align-items: center;
+
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.main .detail-subtotal {
+    display: flex;
+    align-items: center;
+
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.main .detail-bold {
+    font-weight: 600;
+}
+
+.main .order-details-divider {
+    width: 100%;
+    height: 1px;
+    margin: 6px 0;
+
+    background-color: var(--color-grey);
+}
