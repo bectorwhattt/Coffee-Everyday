@@ -16,6 +16,7 @@ async function loadHTML(elementID, filePath) {
 
 loadHTML("header", "../../components/header.html");
 loadHTML("footer", "../../components/footer.html");
-
+loadHTML("admin-navigation-bar", "../../../components/admin-navbar.html");
+loadHTML("admin-header", "../../../components/admin-header.html");
 
 

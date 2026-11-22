@@ -1,2 +1,235 @@
 /**import all color and font variables**/
 @import url("../../lib/variables.css");
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/**********************************************************
+MAIN                                                      .
+**********************************************************/
+
+.main {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    background-color: var(--bgcolor-light);
+
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 155%;
+    color: var(--color-black);
+}
+
+.main * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/**********************************************************
+INTRODUCTION                                              .
+**********************************************************/
+
+.gallery-introduction {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    padding: 59px 5% 64px;
+}
+
+.gallery-introduction-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: none;
+    gap: 16px;
+}
+
+.gallery-pill {
+    display: flex;
+    align-items: center;
+
+    padding: 10px 27px;
+
+    border-radius: 100px;
+    background-color: var(--color-pink);
+
+    font-size: 17px;
+    line-height: 120%;
+    color: var(--color-black);
+}
+
+.gallery-title {
+    font-family: var(--headings);
+    font-size: 80px;
+    font-weight: 600;
+    font-variation-settings: "WONK" 1;
+    line-height: 95%;
+    letter-spacing: -1px;
+}
+
+.gallery-title-highlight {
+    font-style: italic;
+    color: var(--color-gold);
+}
+
+.gallery-description {
+    width: 43%;
+
+    color: var(--color-grey);
+}
+
+
+/**********************************************************
+PHOTOS                                                    .
+**********************************************************/
+
+.gallery-photos {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+
+    padding: 0 5% 104px;
+}
+
+.gallery-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 30px;
+}
+
+.gallery-item {
+    position: relative;
+
+    display: flex;
+
+    border-radius: 28px;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 16px 32px -8px var(--color-grey);
+}
+
+.gallery-photo {
+    width: 100%;
+    height: auto;
+
+    border-radius: 28px;
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 2px;
+
+    padding: 32px;
+
+    border-radius: 28px;
+    background-image: linear-gradient(to bottom, transparent 20%, var(--bgcolor-darkbrown));
+
+    text-decoration: none;
+    color: var(--bgcolor-light);
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay,
+.gallery-overlay:focus-visible {
+    opacity: 1;
+}
+
+.gallery-date {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+    color: var(--color-gold);
+}
+
+.gallery-caption {
+    text-decoration: underline;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.gallery-check-post {
+    display: inline-block;
+
+    font-size: 14px;
+    font-style: italic;
+    text-decoration: underline;
+    color: var(--color-gold);
+}
+
+
+/**********************************************************
+CALL TO ACTION                                            .
+**********************************************************/
+
+.gallery-call-to-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 30px 5%;
+
+    background-color: var(--color-gold);
+}
+
+.gallery-call-to-action-title {
+    font-family: var(--headings);
+    font-size: 52px;
+    font-weight: 600;
+    font-variation-settings: "WONK" 1;
+    line-height: 110%;
+    letter-spacing: -1px;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+
+    padding: 9px 24px;
+
+    border: 1px solid var(--color-black);
+    border-radius: 100px;
+
+    font-family: var(--body);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 120%;
+    text-decoration: none;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.button-dark {
+    background-color: var(--color-black);
+
+    color: var(--bgcolor-light);
+}
+
+.button-dark:hover {
+    border-color: var(--color-black);
+    background-color: var(--color-gold);
+
+    color: var(--color-black);
+}
