@@ -56,5 +56,8 @@ ADMIN EXCLUSIVES
     /**admin-exclusive: highlight brown color**/
     --adm-bgcolor-terracotta: #9D6048;
 
+    /**admin-exclusive background white**/
+    --adm-bgcolor-white: #F9F6F2;
+
     --adm-navbar-width: 290px;
 }
