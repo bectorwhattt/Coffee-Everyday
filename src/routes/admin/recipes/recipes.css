@@ -35,7 +35,7 @@ MAIN
 
     min-width: 0;
     min-height: 0;
-    padding: 16px 24px 24px 25px;
+    padding: 16px 24px 16px 25px;
 
     background-color: var(--bgcolor-beige);
 
@@ -86,10 +86,10 @@ RECIPE BROWSER
     display: flex;
     flex: 1;
     align-items: stretch;
-    gap: 26px;
+    gap: 22px;
 
     width: 100%;
-    max-width: 1068px;
+    min-width: 0;
     min-height: 0;
 }
 
@@ -158,7 +158,7 @@ RECIPE CARDS
 .main .recipes-catalog {
     display: flex;
     flex-direction: column;
-    flex: 1 1 430px;
+    flex: 0 0 430px;
     gap: 8px;
 
     min-width: 0;
@@ -345,9 +345,9 @@ SELECTED RECIPE PREVIEW
 .main .recipes-preview {
     display: flex;
     flex-direction: column;
-    flex: 0 0 416px;
+    flex: 1 1 0;
 
-    width: 416px;
+    width: auto;
     min-width: 0;
     min-height: 0;
     padding: 20px 23px 18px;
@@ -529,7 +529,6 @@ ADD AND EDIT RECIPE
     gap: 24px;
 
     width: 100%;
-    max-width: 1080px;
     min-width: 0;
     min-height: 0;
     padding: 0 1px 30px 0;
@@ -604,7 +603,7 @@ ADD AND EDIT RECIPE
 .main .recipes-editor-columns {
     display: flex;
     align-items: flex-start;
-    gap: 24px;
+    gap: 22px;
 
     width: 100%;
     min-width: 0;
@@ -1017,26 +1016,25 @@ INGREDIENTS
 /*********************************************************************************
 RESPONSIVE LAYOUT
 *********************************************************************************/
-@media (max-width: 1510px) {
-    .main .recipes-card {
-        width: calc((100% - 10px) / 2);
-    }
-}
-
 @media (max-width: 1370px) {
     .main .recipes-browser {
         gap: 16px;
     }
 
-    .main .recipes-preview {
-        flex-basis: 330px;
+    .main .recipes-categories {
+        width: 160px;
+    }
 
-        width: 330px;
+    .main .recipes-catalog {
+        flex-basis: 390px;
+    }
+
+    .main .recipes-preview {
         padding: 18px 17px;
     }
 
     .main .recipes-editor-columns {
-        gap: 15px;
+        gap: 16px;
     }
 
     .main .recipes-editor-left {
@@ -1058,31 +1056,13 @@ RESPONSIVE LAYOUT
     }
 }
 
-@media (max-width: 1180px) {
-    .main {
-        padding: 14px 15px 20px;
-    }
-
-    .main .recipes-browser {
-        flex-wrap: wrap;
-        align-content: flex-start;
-
-        overflow-y: auto;
-    }
-
+@media (max-width: 1240px) {
     .main .recipes-categories {
         width: 150px;
     }
 
     .main .recipes-catalog {
-        flex: 1 1 calc(100% - 166px);
-    }
-
-    .main .recipes-preview {
-        flex: 1 1 100%;
-
-        width: 100%;
-        min-height: 360px;
+        flex-basis: 355px;
     }
 
     .main .recipes-preview-table-heading,
@@ -1092,6 +1072,34 @@ RESPONSIVE LAYOUT
 
         padding-right: 6px;
         padding-left: 6px;
+    }
+}
+
+@media (max-width: 1180px) {
+    .main {
+        padding: 14px 15px 16px;
+    }
+
+    .main .recipes-browser {
+        flex-wrap: wrap;
+        align-content: flex-start;
+
+        overflow-y: auto;
+    }
+
+    .main .recipes-catalog {
+        flex: 1 1 calc(100% - 166px);
+    }
+
+    .main .recipes-card {
+        width: calc((100% - 10px) / 2);
+    }
+
+    .main .recipes-preview {
+        flex: 1 1 100%;
+
+        width: 100%;
+        min-height: 360px;
     }
 
     .main .recipes-editor-columns {
@@ -1107,25 +1115,12 @@ RESPONSIVE LAYOUT
 }
 
 @media (max-width: 850px) {
-    .main .recipes-browser {
-        flex-wrap: wrap;
-
-        overflow-y: auto;
-    }
-
     .main .recipes-categories {
-        width: 150px;
+        width: 140px;
     }
 
     .main .recipes-catalog {
-        flex: 1;
-    }
-
-    .main .recipes-preview {
-        flex: 1 1 100%;
-
-        width: 100%;
-        min-height: 360px;
+        flex: 1 1 calc(100% - 156px);
     }
 
     .main .recipes-editor-actions {
