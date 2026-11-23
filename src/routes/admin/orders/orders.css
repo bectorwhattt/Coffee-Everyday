@@ -109,6 +109,7 @@ ORDERS TABLE
 .main .table-header {
     display: flex;
     align-items: center;
+    gap: 12px;
 
     box-sizing: border-box;
     padding: 8px 20px 8px 12px;
@@ -134,6 +135,7 @@ ORDER ROWS
 .main .order-summary {
     display: flex;
     align-items: center;
+    gap: 12px;
 
     box-sizing: border-box;
     padding: 14px 20px 8px 12px;
@@ -154,6 +156,14 @@ ORDER ROWS
 
 .main .table-header .order-number {
     font-weight: 400;
+}
+
+.main .order-date {
+    display: flex;
+    align-items: center;
+
+    width: 92px;
+    flex-shrink: 0;
 }
 
 .main .order-time {
