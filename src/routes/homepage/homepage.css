@@ -87,6 +87,18 @@ SHARED COMPONENTS                                         .
     color: var(--color-black);
 }
 
+.button-dark-outline {
+    background-color: var(--color-black);
+
+    color: var(--bgcolor-light);
+}
+
+.button-dark-outline:hover {
+    background-color: transparent;
+
+    color: var(--color-black);
+}
+
 .button-outline {
     background-color: transparent;
 

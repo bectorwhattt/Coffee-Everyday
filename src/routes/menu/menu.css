@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("../../lib/variables.css");
 
 body {
@@ -15,6 +14,7 @@ body {
 
 .main {
   background-color: var(--bgcolor-light);
+
   font-family: var(--body);
   line-height: 150%;
   color: var(--color-black);
@@ -22,6 +22,7 @@ body {
 
 .main img {
   display: block;
+
   max-width: 100%;
 }
 
@@ -32,17 +33,22 @@ body {
 
 .main button {
   font-family: inherit;
+
   cursor: pointer;
 }
 
-.main h1, h2, h3, h4 {
+.main h1,
+.main h2,
+.main h3,
+.main h4 {
   font-family: var(--headings);
   font-weight: 600;
   line-height: 110%;
   font-variation-settings: "WONK" 1;
 }
 
-.main h1 em, h2 em {
+.main h1 em,
+.main h2 em {
   font-style: italic;
   color: var(--color-gold);
 }
@@ -51,11 +57,15 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   padding: 10px 22px;
+
   border: 1px solid var(--color-black);
   border-radius: 999px;
+
   font-size: 14px;
   font-weight: 500;
+
   transition: transform .15s, background-color .2s, color .2s;
 }
 
@@ -65,21 +75,25 @@ body {
 
 .main .button-dark {
   background-color: var(--color-black);
+
   color: var(--bgcolor-light);
 }
 
 .main .button-outline {
   background-color: transparent;
+
   color: var(--color-black);
 }
 
 .main .button-outline:hover {
   background-color: var(--color-black);
+
   color: var(--bgcolor-light);
 }
 
 .main .button-small {
   padding: 7px 16px;
+
   font-size: 12px;
 }
 
@@ -98,6 +112,16 @@ body {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
+
+  .main .button {
+    transition: none;
+  }
+}
+
 .container {
   width: 100%;
   max-width: 1120px;
@@ -112,6 +136,7 @@ HERO
 
 .hero {
   padding: 36px 0 44px;
+
   background-color: var(--bgcolor-khaki);
 }
 
@@ -121,26 +146,30 @@ HERO
   align-items: flex-start;
 }
 
+
 .pill {
   margin-bottom: 18px;
   padding: 4px 14px;
+
   border-radius: 999px;
-  background-color: var(--color-pink);
-  font-size: 12px;
+  background-color: var(--color-gold);
+
+  font-size: 16px;
   color: var(--color-black);
 }
 
 .hero h1 {
   max-width: 520px;
   margin-bottom: 14px;
-  font-size: 64px;
+
+  font-size: 84px;
   font-weight: 600;
 }
 
 .hero p {
   max-width: 400px;
 
-  font-size: 15px;
+  font-size: 18px;
   color: var(--color-grey);
 }
 
@@ -151,6 +180,7 @@ FAVORITES
 .favorites {
   display: flex;
   flex-direction: column;
+
   padding-top: 36px;
 }
 
@@ -160,17 +190,20 @@ FAVORITES
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
+
   margin-bottom: 28px;
 }
 
 .favorites-header h2 {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 600;
+  color: var(--color-black);
 }
 
 .favorites-header p {
   margin-top: 4px;
-  font-size: 14px;
+
+  font-size: 18px;
   color: var(--color-grey);
 }
 
@@ -182,20 +215,24 @@ FAVORITES
 
 .chip {
   padding: 7px 18px;
-  border: 1px solid var(--color-black);
+
+  border: 1px solid var(--color-grey);
   border-radius: 999px;
   background-color: transparent;
+
   font-size: 13px;
   color: var(--color-black);
+
   transition: background-color .2s, color .2s;
 }
 
 .chip:hover {
-  background-color: var(--bgcolor-khaki);
+  background-color: var(--color-gold);
 }
 
 .chip.active {
   background-color: var(--color-black);
+
   color: var(--bgcolor-light);
 }
 
@@ -208,18 +245,21 @@ FAVORITES
 .favorite-card {
   display: flex;
   flex-direction: column;
+
   width: 23.4%;
 }
 
 .favorite-card h4 {
   margin-top: 14px;
-  font-size: 18px;
+
+  font-size: 24px;
   font-weight: 600;
 }
 
 .favorite-card .price {
   margin-top: 14px;
-  font-size: 15px;
+
+  font-size: 20px;
   font-weight: 500;
   color: var(--color-gold);
 }
@@ -227,15 +267,18 @@ FAVORITES
 .favorite-image {
   display: flex;
   overflow: hidden;
+
   width: 100%;
   aspect-ratio: 100 / 108;
+
   border-radius: 16px;
-  background-color: var(--bgcolor-beige);
+  background-color: var(--bgcolor-khaki);
 }
 
 .favorite-image img {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
 }
 
@@ -243,10 +286,13 @@ FAVORITES
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   height: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, var(--bgcolor-beige), var(--bgcolor-khaki));
+
+  background: linear-gradient(135deg, var(--bgcolor-khaki), var(--color-gold));
+
   font-size: 12px;
   text-align: center;
   color: var(--color-grey);
@@ -266,12 +312,14 @@ MENU SECTIONS
   flex-wrap: wrap;
   align-items: center;
   column-gap: 4%;
+
   margin-top: 72px;
 }
 
 .main .menu-section h3 {
   width: 100%;
   margin-bottom: 24px;
+
   font-size: 26px;
   font-weight: 600;
 }
@@ -284,19 +332,19 @@ MENU SECTIONS
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48%;
+
+  width: 36%;
 }
 
 .section-media img {
-  width: auto;
-  max-height: 340px;
-
-  object-fit: contain;
-  filter: drop-shadow(0 6px 10px color-mix(in srgb, var(--color-black) 18%, transparent));
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
 }
 
 .section-media .placeholder {
   min-height: 260px;
+
   border-radius: 20px;
 }
 
@@ -304,15 +352,20 @@ MENU SECTIONS
   display: flex;
   flex-direction: column;
   gap: 14px;
-  width: 48%;
+
+  width: 60%;
 }
 
 .size-tag {
   align-self: flex-end;
+
   padding: 5px 12px;
+
+  border: 1px solid var(--color-grey);
   border-radius: 999px;
   background-color: var(--color-black);
-  font-size: 11px;
+
+  font-size: 16px;
   color: var(--bgcolor-light);
 }
 
@@ -320,24 +373,31 @@ MENU SECTIONS
   align-self: flex-start;
 }
 
-.menu-list {
+.main .menu-section .menu-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  width: 100%;
-  padding: 22px;
-  border: 1px solid color-mix(in srgb, var(--color-black) 25%, transparent);
-  border-radius: 16px;
-  background-color: var(--bgcolor-beige);
+  gap: 0;
   list-style: none;
-  box-shadow: 0 3px 3px color-mix(in srgb, var(--color-black) 20%, transparent);
+
+  width: 100%;
+  max-width: 645px;
+  padding: 32px 36px;
+
+  border: 0.4px solid var(--color-black);
+  border-radius: 20px;
+  background-color: var(--bgcolor-beige);
+
+  box-shadow: 0 3px 3px var(--color-black);
 }
 
-.menu-list li {
+.main .menu-section .menu-list li {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 16px;
-  font-size: 15px;
+
+  font-size: 20px;
+  line-height: 35px;
   color: var(--color-grey);
 }
 
@@ -364,13 +424,15 @@ ADD-ONS
 
 .addons {
   padding: 56px 46px 46px;
+
   border-radius: 36px;
   background-color: var(--color-black);
 }
 
 .addons h2 {
   margin-bottom: 18px;
-  font-size: 40px;
+
+  font-size: 60px;
   font-weight: 600;
   color: var(--bgcolor-light);
 }
@@ -384,24 +446,28 @@ ADD-ONS
 .addon {
   display: flex;
   flex-direction: column;
+
   width: 31.9%;
   padding: 16px 14px;
+
   border-radius: 10px;
-  background-color: color-mix(in srgb, var(--color-grey) 25%, var(--color-black));
+  background-color: color-mix(in srgb, var(--bgcolor-light) 8%, var(--color-black));
 
   color: var(--bgcolor-light);
 }
 
 .addon h4 {
   font-family: var(--body);
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
+  color: var(--bgcolor-light);
 }
 
 .addon p {
   margin: 4px 0 6px;
-  font-size: 12px;
-  color: var(--bgcolor-khaki);
+
+  font-size: 15px;
+  color: color-mix(in srgb, var(--bgcolor-light) 83%, transparent);
 }
 
 .addon .price {
@@ -413,21 +479,34 @@ ADD-ONS
 CALL TO ACTION
 *********************************************************/
 
+/* FIX: replaced the fixed 1297px width / 222px height and the separate
+   1345px breakpoint with one fluid rule. The box is still wider than the
+   container, centered on it, and never overflows the viewport. */
 .main .call-to-action {
+  position: relative;
+  left: 50%;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+
+  width: min(1297px, calc(100vw - 32px));
+  min-height: 222px;
   margin: 72px 0 56px;
-  padding: 44px 48px;
-  border-radius: 18px;
+  padding: 32px 44px;
+
+  border-radius: 25px;
   background-color: var(--color-gold);
+
+  transform: translateX(-50%);
 }
 
 .main .call-to-action h3 {
   max-width: 380px;
-  font-size: 32px;
+
+  font-size: 50px;
   font-weight: 600;
 }
 
@@ -436,6 +515,10 @@ CALL TO ACTION
   flex-wrap: wrap;
   gap: 14px;
 }
+
+/*********************************************************
+MEDIA
+*********************************************************/
 
 @media (max-width: 1100px) {
   .hero h1 {
@@ -460,11 +543,13 @@ CALL TO ACTION
     width: 48.4%;
   }
 
-  .menu-section {
+  /* FIX: prefixed with .main so these actually beat the base rules
+     (.main .menu-section has higher specificity than .menu-section) */
+  .main .menu-section {
     margin-top: 56px;
   }
 
-  .menu-section h3 {
+  .main .menu-section h3 {
     margin-bottom: 28px;
   }
 
@@ -494,8 +579,8 @@ CALL TO ACTION
     width: 48.4%;
   }
 
-  .call-to-action h3 {
-    font-size: 28px;
+  .main .call-to-action h3 {
+    font-size: 36px;
   }
 }
 
@@ -510,6 +595,7 @@ CALL TO ACTION
     display: none;
     flex-direction: column;
     gap: 12px;
+
     width: 100%;
     margin-left: 0;
     margin-right: 0;
@@ -548,12 +634,12 @@ CALL TO ACTION
     font-size: 32px;
   }
 
-  .call-to-action {
+  .main .call-to-action {
     padding: 32px 24px;
   }
 
-  .call-to-action h3 {
-    font-size: 24px;
+  .main .call-to-action h3 {
+    font-size: 28px;
   }
 }
 
@@ -572,5 +658,15 @@ CALL TO ACTION
 
   .addon {
     width: 100%;
+  }
+
+  /* FIX: menu list was too roomy on phones */
+  .main .menu-section .menu-list {
+    padding: 20px 18px;
+  }
+
+  .main .menu-section .menu-list li {
+    font-size: 16px;
+    line-height: 30px;
   }
 }

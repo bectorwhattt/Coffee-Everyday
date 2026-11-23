@@ -3,10 +3,7 @@
 
 /* 1. CSS VARIABLES */
 :root {
-    --cream: #f8f1e7;
-    --beige: #ead9bf;
     --orange: #df9e38;
-    --brown: #281c17;
     --gold: #c58d38;
     --white: #ffffff;
 }
@@ -19,9 +16,19 @@
 }
 
 body {
-    background-color: var(--cream);
-    color: var(--brown);
-    font-family: Georgia, serif;
+    background-color: var(--bgcolor-light);
+    color: var(--bgcolor-darkbrown);
+    font-family: var(--body);
+}
+
+h1, h2 {
+    font-family: var(--headings);
+    font-weight: 600;
+}
+
+.main {
+    
+    font-size: 18px;
 }
 
 
@@ -41,21 +48,23 @@ body {
     background-color: #e9c9bd;
     padding: 5px 12px;
     border-radius: 20px;
-    font-size: 10px;
+    border: 1px solid var(--bgcolor-darkbrown);
+    font-size: 14px;
 }
 
 .home h1 {
-    font-size: 40px;
+    font-size: 80px;
     margin: 15px 0;
+    line-height: 1;
 }
 
 .home h1 span {
-    color: var(--gold);
+    color: var(--orange);
     font-style: italic;
 }
 
 .home p {
-    font-size: 12px;
+    font-size: 15px;
     line-height: 1.6;
     margin-bottom: 20px;
 }
@@ -74,27 +83,27 @@ body {
 
 /* BUTTONS */
 .button {
-    background-color: var(--brown);
+    background-color: var(--bgcolor-darkbrown);
     color: var(--white);
     padding: 9px 16px;
     border-radius: 20px;
     text-decoration: none;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .outline {
-    border: 1px solid var(--brown);
-    color: var(--brown);
+    border: 1px solid var(--bgcolor-darkbrown);
+    color: var(--bgcolor-darkbrown);
     padding: 8px 15px;
     border-radius: 20px;
     text-decoration: none;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 
 /* 4. SHOTS SECTION */
 .shots {
-    background-color: var(--beige);
+    background-color: var(--bgcolor-beige);
     padding: 35px 7%;
 }
 
@@ -104,18 +113,18 @@ body {
 }
 
 .shots h2 span {
-    color: var(--gold);
+    color: var(--orange);
     font-style: italic;
 }
 
 .pictures {
     display: flex;
-    gap: 15px;
+    gap: 12px;
 }
 
 .pictures img {
     width: 33.33%;
-    height: 120px;
+    height: 130px;
     border-radius: 10px;
 }
 
@@ -131,22 +140,22 @@ body {
 }
 
 .team h2 span {
-    color: var(--gold);
+    color: var(--orange);
     font-style: italic;
 }
 
 .members {
     display: flex;
-    gap: 20px;
+    gap: 35px;
 }
 
 .member {
-    width: 33.33%;
+    width: 40%;
 }
 
 .member-image {
-    background-color: var(--beige);
-    height: 200px;
+    background-color: var(--bgcolor-beige);
+    height: 300px;
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -156,11 +165,12 @@ body {
 }
 
 .member b {
-    font-size: 11px;
+    font-size: 15px;
+    font: var(--headings);
 }
 
 .member p {
-    font-size: 10px;
+    font-size: 13px;
 }
 
 
@@ -176,8 +186,5 @@ body {
 }
 
 .visit h2 {
-    font-size: 22px;
-    font-weight: normal;
+    font-size: 25px;
 }
-
-

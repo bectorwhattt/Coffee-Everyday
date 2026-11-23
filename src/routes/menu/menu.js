@@ -1,5 +1,6 @@
 const PESO = "\u20B1";
 const GRAB_URL = "https://app.grab.com/s/joOMQISo";
+const IMG = "../../../assets/images/products/";
 
 const MENU = {
   coffee: {
@@ -113,17 +114,17 @@ const MENU = {
     sections: [
       {
         title: "Bread & Pastries",
-        image: "images/bread-pastries.png",
+        image: IMG + "Menu-BreadnPastries.png",
         items: [["Butter Croissant", 70], ["Pain au Chocolat", 80], ["Choco Chip Cookies", 90], ["White Chocochip Cookies", 90]],
       },
       {
         title: "Sandwiches",
-        image: "images/sandwiches.png",
+        image: IMG + "Menu-Sandwiches.png",
         items: [["Ham & Egg Sandwich", 160], ["Spam Sandwich", 170], ["Chicken Fillet Sandwich", 180]],
       },
       {
         title: "Pastas & Buldak",
-        image: "images/pastas.png",
+        image: IMG + "Menu-PastanBuldak.png",
         items: [
           ["Creamy Sausage & Shrimp Cajun", 250], ["Shrimp Aglio Olio", 220], ["Cheesy Tuna Pesto", 220],
           ["Classic Mom's Spaghetti", 200], ["Carbonara Buldak", 160],
@@ -154,7 +155,7 @@ const MENU = {
     sections: [
       {
         title: "Snacks",
-        image: "images/snacks.png",
+        image: IMG + "Menu-Snacks.png",
         items: [
           ["French Fries (salted / cheese)", 90], ["Twister Fries", 110], ["Mojos", 120], ["Pica Platter", 199],
           ["4 pcs Nuggets & Fries", 140], ["3 pcs Chicken Tenders with dip", 160], ["Chicken Popcorn", 110],
@@ -162,7 +163,7 @@ const MENU = {
       },
       {
         title: "Rice meals",
-        image: "images/rice-meals.png",
+        image: IMG + "Menu-RiceMeals.png",
         items: [
           ["Allday Spam Rice", 180], ["Sausage Delight, 1 pc", 160], ["Sausage Delight, 2 pcs", 200],
           ["Chicken Pastil (spicy / original)", 170], ["Tori Katsu with Cabbage Salad", 180],
@@ -253,7 +254,7 @@ function renderSections(data) {
   });
 }
 
-function renderAddons(data) {
+function renderaddons(data) {
   const wrapper = selectElement("#addons");
   const grid = selectElement("#addons-grid");
   if (!wrapper || !grid) { if (data.addons) console.warn("[menu] #addons / #addons-grid not found in the HTML"); return; }
@@ -296,7 +297,7 @@ function showTab(tab, { scroll = false } = {}) {
 
   renderFavorites(data);
   renderSections(data);
-  renderAddons(data);
+  renderaddons(data);
   renderCallToAction(data);
 
   const main = selectElement(".main");
