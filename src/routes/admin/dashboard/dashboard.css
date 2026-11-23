@@ -160,6 +160,10 @@ STATISTICS
     color: #3CA22A;
 }
 
+.main .statistic-percentage-negative {
+    color: #DA1818;
+}
+
 .main .statistic-note-negative {
     color: #DA1818;
 }
@@ -531,6 +535,11 @@ TODAY'S ORDERS
     color: #4A2C20;
 }
 
+.main .todays-orders-body {
+    display: flex;
+    flex-direction: column;
+}
+
 .main .table-row {
     display: flex;
     align-items: center;
@@ -619,6 +628,12 @@ TODAY'S ORDERS
     background-color: #3CA22A27;
 
     color: #167A04;
+}
+
+.main .status-canceled {
+    background-color: #A22A2C27;
+
+    color: #99080F;
 }
 
 

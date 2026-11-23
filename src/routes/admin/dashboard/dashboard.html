@@ -30,9 +30,9 @@
                         <div class="statistic-icon">&#8369;</div>
                         <div class="statistic-details">
                             <div class="statistic-label">Today's total sales</div>
-                            <div class="statistic-value">&#8369;2,350</div>
+                            <div class="statistic-value" id="sales-total">&#8369;2,350</div>
                             <div class="statistic-note">
-                                <div class="statistic-percentage statistic-percentage-positive">13%</div>
+                                <div class="statistic-percentage statistic-percentage-positive" id="sales-change">13%</div>
                                 <div class="statistic-note-text">vs. yesterday</div>
                             </div>
                         </div>
@@ -47,9 +47,9 @@
                         <div class="statistic-icon">#</div>
                         <div class="statistic-details">
                             <div class="statistic-label">Today's total orders</div>
-                            <div class="statistic-value">15</div>
+                            <div class="statistic-value" id="orders-total">15</div>
                             <div class="statistic-note">
-                                <div class="statistic-percentage statistic-percentage-positive">5%</div>
+                                <div class="statistic-percentage statistic-percentage-positive" id="orders-change">5%</div>
                                 <div class="statistic-note-text">vs. yesterday</div>
                             </div>
                         </div>
@@ -70,8 +70,8 @@
                         </div>
                         <div class="statistic-details">
                             <div class="statistic-label">Low/No Stock</div>
-                            <div class="statistic-value">5 items</div>
-                            <div class="statistic-note statistic-note-negative">3 low, 2 no stock</div>
+                            <div class="statistic-value" id="low-stock-total">5 items</div>
+                            <div class="statistic-note statistic-note-negative" id="low-stock-note">3 low, 2 no stock</div>
                         </div>
                         <div class="statistic-arrow">
                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
@@ -84,7 +84,7 @@
                         <div class="statistic-icon"></div>
                         <div class="statistic-details">
                             <div class="statistic-label">Average Orders</div>
-                            <div class="statistic-value">18 orders</div>
+                            <div class="statistic-value" id="average-orders">18 orders</div>
                             <div class="statistic-note statistic-note-neutral">per day, this week</div>
                         </div>
                         <div class="statistic-arrow">
@@ -162,45 +162,7 @@
                                 <div class="cell-status">Status</div>
                             </div>
 
-                            <div class="table-row">
-                                <div class="cell-order-number">#0018</div>
-                                <div class="cell-time">10:45 AM</div>
-                                <div class="cell-items">French Vanilla x1, NYC Style Cookies x1</div>
-                                <div class="cell-total">&#8369;325</div>
-                                <div class="cell-status">
-                                    <div class="status-pill status-processing">Processing</div>
-                                </div>
-                            </div>
-
-                            <div class="table-row">
-                                <div class="cell-order-number">#0017</div>
-                                <div class="cell-time">10:21 AM</div>
-                                <div class="cell-items">Pain Au Chocolat x1</div>
-                                <div class="cell-total">&#8369;110</div>
-                                <div class="cell-status">
-                                    <div class="status-pill status-completed">Completed</div>
-                                </div>
-                            </div>
-
-                            <div class="table-row">
-                                <div class="cell-order-number">#0016</div>
-                                <div class="cell-time">9:58 AM</div>
-                                <div class="cell-items">Nutella Latte x1</div>
-                                <div class="cell-total">&#8369;150</div>
-                                <div class="cell-status">
-                                    <div class="status-pill status-completed">Completed</div>
-                                </div>
-                            </div>
-
-                            <div class="table-row">
-                                <div class="cell-order-number">#0015</div>
-                                <div class="cell-time">9:30 AM</div>
-                                <div class="cell-items">Cafe Latte x1</div>
-                                <div class="cell-total">&#8369;130</div>
-                                <div class="cell-status">
-                                    <div class="status-pill status-completed">Completed</div>
-                                </div>
-                            </div>
+                            <div class="todays-orders-body" id="todays-orders-body"></div>
                         </div>
                     </div>
 
@@ -208,7 +170,7 @@
                     <div class="dashboard-card order-types-card">
                         <div class="card-heading">
                             <div class="card-title">Orders by type</div>
-                            <div class="card-subtitle">Today, 15 orders (sample data)</div>
+                            <div class="card-subtitle" id="order-types-subtitle">Today, 15 orders (sample data)</div>
                         </div>
                         <div class="order-types-list" id="order-types-list"></div>
                     </div>
