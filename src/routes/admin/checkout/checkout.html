@@ -434,11 +434,105 @@
                             return element;
                         };
 
-                        const makeImage = (className) => {
-                            const image = makeElement("div", className);
-                            image.innerHTML =
-                                '<svg class="checkout-image-icon" aria-hidden="true"><use href="#checkout-image-symbol"></use></svg>';
-                            return image;
+                        // Product photos belong to assets/images/products/inventory/.
+                        // Use the same filenames on the Checkout and Recipes pages.
+                        // Keep the photo extension when renaming the original image file.
+                        const inventoryImageDirectory =
+                            "../../../../assets/images/products/inventory/";
+                        const inventoryImageExtensions = [
+                            "jpg",
+                            "jpeg",
+                            "png",
+                            "webp",
+                        ];
+                        const inventoryImageNames = {
+                            "pica platter": "pica-platter",
+                            mojos: "mojos",
+                            "twister fries": "twister-fries",
+                            "berry matcha": "berry-matcha",
+                            "dark chocolate": "dark-chocolate",
+                            "matcha latte": "matcha-latte",
+                            "milky strawberry": "milky-strawberry",
+                            "signature choco": "signature-choco",
+                            toffeedamia: "toffeedamia",
+                            "seasalt latte": "seasalt-latte",
+                            "cafe mocha": "mocha-white-mocha",
+                            "white mocha": "mocha-white-mocha",
+                            "salted caramel": "salted-caramel",
+                            "spanish latte": "spanish-latte",
+                            "caramel macchiato": "caramel-macchiato",
+                            "french vanilla": "french-vanilla",
+                            "cafe latte": "cafe-latte",
+                            cappucino: "cappuccino",
+                            americano: "americano",
+                            "pain au chocolat": "pain-au-chocolat",
+                            "spicy shrimp aglio olio":
+                                "spicy-shrimp-aglio-olio",
+                            "cheesy tuna pesto": "cheesy-tuna-pesto",
+                            "tori katsu with cabbage salad":
+                                "tori-katsu-with-cabbage-salad",
+                            "2-pc mushroom burger steak":
+                                "mushroom-burger-steak",
+                            "chicken pastil (spicy / orig)": "chicken-pastil",
+                            "sausage delight, 1pc": "sausage-delight",
+                            "sausage delight, 2pcs": "sausage-delight",
+                            "chicken fillet sandwich":
+                                "chicken-fillet-sandwich",
+                            "ham & egg sandwich": "ham-egg-sandwich",
+                            // Tentative matches: verify the product/photo identity before use.
+                            "french fries (salted/cheese)":
+                                "french-fries-salted-cheese",
+                            "choco chip cookies": "choco-chip-cookies",
+                            "allday spam rice": "allday-spam-rice",
+                        };
+                        const inventoryImageStem = (name) =>
+                            inventoryImageNames[
+                                String(name || "")
+                                    .trim()
+                                    .toLowerCase()
+                            ] || "";
+
+                        const makeImage = (className, productName) => {
+                            const container = makeElement("div", className);
+                            const placeholder = () => {
+                                container.innerHTML =
+                                    '<svg class="checkout-image-icon" aria-hidden="true"><use href="#checkout-image-symbol"></use></svg>';
+                            };
+                            const filename = inventoryImageStem(productName);
+                            if (!filename) {
+                                placeholder();
+                                return container;
+                            }
+
+                            const image = document.createElement("img");
+                            image.alt = productName;
+                            image.loading = "lazy";
+                            image.decoding = "async";
+                            let extensionIndex = 0;
+                            image.addEventListener("error", () => {
+                                extensionIndex++;
+                                if (
+                                    extensionIndex <
+                                    inventoryImageExtensions.length
+                                ) {
+                                    image.src =
+                                        inventoryImageDirectory +
+                                        filename +
+                                        "." +
+                                        inventoryImageExtensions[
+                                            extensionIndex
+                                        ];
+                                } else {
+                                    placeholder();
+                                }
+                            });
+                            image.src =
+                                inventoryImageDirectory +
+                                filename +
+                                "." +
+                                inventoryImageExtensions[0];
+                            container.appendChild(image);
+                            return container;
                         };
 
                         const calculateTotal = () => {
@@ -529,7 +623,7 @@
                                     );
 
                                 product.appendChild(
-                                    makeImage("checkout-product-image"),
+                                    makeImage("checkout-product-image", name),
                                 );
                                 product.appendChild(
                                     makeElement(
