@@ -1,17 +1,16 @@
-
 (() => {
     "use strict";
 
     const categories = [
-        { name: "Coffee Classics", count: 12 },
-        { name: "Coffee Specials", count: 7 },
+        { name: "Coffee Classics", count: 11 },
+        { name: "Coffee Specials", count: 3 },
         { name: "Non-coffee", count: 8 },
-        { name: "Frappes & Shakes", count: 9 },
-        { name: "Soda Pop", count: 3 },
+        { name: "Frappes & Shakes", count: 6 },
+        { name: "Soda Pop", count: 0 },
         { name: "Bread & Pastries", count: 4 },
         { name: "Sandwiches", count: 3 },
         { name: "Snacks", count: 7 },
-        { name: "Pastas", count: 5 },
+        { name: "Pastas", count: 3 },
         { name: "Rice Meals", count: 8 }
     ];
 
@@ -120,23 +119,29 @@
             ]
         },
         ...[
-            ["Dirty Matcha", 45],
-            ["Matcha Latte", 39], ["Mocha Frappe", 59],
-            ["Americano", 23], ["Spanish Latte", 45]
-        ].map(([name, costEstimate], index) => ({
-            id: "special-" + index, name, category: "Coffee Specials",
+            { id: "special-0", name: "Dirty Matcha", costEstimate: 45 },
+            { id: "special-2", name: "Mocha Frappe", costEstimate: 59 }
+        ].map(({ id, name, costEstimate }) => ({
+            id, name, category: "Coffee Specials",
             serving: "", price: checkoutPriceFor(name), labor: 10,
             costEstimate, image: "", ingredients: []
         })),
         ...sample("Coffee Classics", [
             "Americano", "Cafe Latte", "Cappucino", "French Vanilla",
-            "Salted Caramel", "Spanish Latte", "Seasalt Latte", "Caramel Macchiato",
+            "Spanish Latte", "Seasalt Latte", "Caramel Macchiato",
             "Cafe Mocha", "Dark Choc Mocha", "White Mocha", "Hazelnut Mocha"
-        ]),
+        ]).map(recipe => ({
+            ...recipe,
+            costEstimate: recipe.name === "Americano" ? 23 :
+                recipe.name === "Spanish Latte" ? 45 : null
+        })),
         ...sample("Non-coffee", [
             "Signature Choco", "Milky Strawberry", "Dark Chocolate", "Matcha Latte",
             "Berry Matcha", "Oreo Milk", "Nutella Latte", "Biscoff Latte"
-        ]),
+        ]).map(recipe => ({
+            ...recipe,
+            costEstimate: recipe.name === "Matcha Latte" ? 39 : null
+        })),
         ...sample("Frappes & Shakes", [
             "Vanilla Milkshake", "Strawberries & Cream", "Oreos & Cream",
             "Dark Mocha Frappe", "Java Chip Frappe", "Seasalt Frappe"
@@ -197,11 +202,9 @@
         "toffeedamia": "toffeedamia",
         "seasalt latte": "seasalt-latte",
         "cafe mocha": "mocha-white-mocha",
-        "white mocha": "mocha-white-mocha",
         "salted caramel": "salted-caramel",
         "spanish latte": "spanish-latte",
         "caramel macchiato": "caramel-macchiato",
-        "french vanilla": "french-vanilla",
         "cafe latte": "cafe-latte",
         "cappucino": "cappuccino",
         "americano": "americano",
@@ -211,7 +214,6 @@
         "tori katsu with cabbage salad": "tori-katsu-with-cabbage-salad",
         "2-pc mushroom burger steak": "mushroom-burger-steak",
         "chicken pastil (spicy / orig)": "chicken-pastil",
-        "sausage delight, 1pc": "sausage-delight",
         "sausage delight, 2pcs": "sausage-delight",
         "chicken fillet sandwich": "chicken-fillet-sandwich",
         "ham & egg sandwich": "ham-egg-sandwich",
@@ -219,7 +221,7 @@
         "french fries (salted/cheese)": "french-fries-salted-cheese",
         "choco chip cookies": "choco-chip-cookies",
         "allday spam rice": "allday-spam-rice",
-    "dirty matcha": "dirty-matcha",
+        "dirty matcha": "dirty-matcha",
     };
     const inventoryImageStem = (name) =>
         inventoryImageNames[String(name || "").trim().toLowerCase()] || "";
@@ -255,21 +257,66 @@
     const lineCost = ingredient => Number(ingredient.quantity) * Number(ingredient.unitCost);
     const newIdentifier = prefix => prefix + "-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
 
+    // Only migrate duplicate records from older sample data, not custom recipes.
+    const retiredSampleRecipes = new Map([
+        ["coffee-classics-4", { name: "salted caramel", category: "Coffee Specials" }],
+        ["special-1", { name: "matcha latte", category: "Non-coffee" }],
+        ["special-3", { name: "americano", category: "Coffee Classics" }],
+        ["special-4", { name: "spanish latte", category: "Coffee Classics" }]
+    ]);
+
+    const normalizeSavedRecipes = stored => {
+        const normalized = stored.filter(recipe =>
+            String(recipe.name).trim().toLowerCase() !== "spanish latte dwadaw"
+        ).map(recipe => ({ ...recipe }));
+
+        for (const duplicate of [...normalized]) {
+            const correction = retiredSampleRecipes.get(duplicate.id);
+            if (!correction || String(duplicate.name).trim().toLowerCase() !== correction.name) {
+                continue;
+            }
+
+            const preferred = normalized.find(recipe => recipe !== duplicate &&
+                String(recipe.name).trim().toLowerCase() === correction.name &&
+                recipe.category === correction.category);
+            if (!preferred) {
+                // If the preferred record was deleted, keep the existing recipe.
+                duplicate.category = correction.category;
+                continue;
+            }
+
+            // Preserve any recipe details entered in the older record.
+            if (!preferred.ingredients.length && duplicate.ingredients.length) {
+                preferred.ingredients = duplicate.ingredients;
+                preferred.costEstimate = duplicate.costEstimate;
+            } else if (preferred.costEstimate == null && duplicate.costEstimate != null) {
+                preferred.costEstimate = duplicate.costEstimate;
+            }
+            if (!preferred.image && duplicate.image) preferred.image = duplicate.image;
+            if (!preferred.serving && duplicate.serving) preferred.serving = duplicate.serving;
+
+            normalized.splice(normalized.indexOf(duplicate), 1);
+        }
+
+        return normalized.map(recipe => {
+            const menuPrice = checkoutPriceFor(recipe.name);
+            return menuPrice > 0 && !(Number(recipe.price) > 0)
+                ? { ...recipe, price: menuPrice }
+                : recipe;
+        });
+    };
+
     try {
         const stored = JSON.parse(localStorage.getItem(storageKey) || "null");
-        if (Array.isArray(stored) && stored.every(item => item && item.id && item.category && Array.isArray(item.ingredients))) {
-            // Exclude the retired sample recipe from previously saved browser data.
-            recipes = stored.filter(recipe =>
-                String(recipe.name).trim().toLowerCase() !== "spanish latte dwadaw"
-            ).map(recipe => {
-                const menuPrice = checkoutPriceFor(recipe.name);
-                return menuPrice > 0 && !(Number(recipe.price) > 0)
-                    ? { ...recipe, price: menuPrice }
-                    : recipe;
-            });
+        if (Array.isArray(stored) && stored.every(item =>
+            item && item.id && item.category && Array.isArray(item.ingredients))) {
+            recipes = normalizeSavedRecipes(stored);
+            if (JSON.stringify(recipes) !== JSON.stringify(stored)) {
+                localStorage.setItem(storageKey, JSON.stringify(recipes));
+            }
         }
     } catch (error) {
-        recipes = initialRecipes;
+        // Retain the in-memory catalog if browser storage is unavailable.
     }
 
     function persist() {
@@ -290,8 +337,7 @@
     }
 
     function categoryCount(category) {
-        const actual = recipes.filter(recipe => recipe.category === category.name).length;
-        return Math.max(category.count, actual);
+        return recipes.filter(recipe => recipe.category === category.name).length;
     }
 
     function renderCategories() {
