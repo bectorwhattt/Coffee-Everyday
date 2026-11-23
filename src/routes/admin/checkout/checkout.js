@@ -1,4 +1,3 @@
-
 (() => {
     const checkout = document.querySelector(".main");
     if (!checkout) return;
@@ -97,11 +96,9 @@
         "toffeedamia": "toffeedamia",
         "seasalt latte": "seasalt-latte",
         "cafe mocha": "mocha-white-mocha",
-        "white mocha": "mocha-white-mocha",
         "salted caramel": "salted-caramel",
         "spanish latte": "spanish-latte",
         "caramel macchiato": "caramel-macchiato",
-        "french vanilla": "french-vanilla",
         "cafe latte": "cafe-latte",
         "cappucino": "cappuccino",
         "americano": "americano",
@@ -111,7 +108,6 @@
         "tori katsu with cabbage salad": "tori-katsu-with-cabbage-salad",
         "2-pc mushroom burger steak": "mushroom-burger-steak",
         "chicken pastil (spicy / orig)": "chicken-pastil",
-        "sausage delight, 1pc": "sausage-delight",
         "sausage delight, 2pcs": "sausage-delight",
         "chicken fillet sandwich": "chicken-fillet-sandwich",
         "ham & egg sandwich": "ham-egg-sandwich",
