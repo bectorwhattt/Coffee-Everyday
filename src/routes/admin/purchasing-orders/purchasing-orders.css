@@ -18,9 +18,12 @@ body {
     flex-direction: column;
 
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
+    min-height: 0;
 
     margin-left: var(--adm-navbar-width);
+
+    overflow: hidden;
 }
 
 
@@ -31,6 +34,7 @@ MAIN
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-height: 0;
 
     box-sizing: border-box;
     padding: 12px 24px 40px 24px;
@@ -38,6 +42,8 @@ MAIN
     background-color: var(--bgcolor-beige);
 
     color: var(--color-black);
+
+    overflow: hidden;
 }
 
 
@@ -47,7 +53,9 @@ PURCHASE ORDERS CARD
 .main .purchase-orders-card {
     display: flex;
     flex-direction: column;
+    flex: 0 1 auto;
     gap: 20px;
+    min-height: 0;
 
     box-sizing: border-box;
     padding: 22px 24px 28px 24px;
@@ -141,9 +149,17 @@ PURCHASE ORDERS TABLE
 .main .purchase-orders-table {
     display: flex;
     flex-direction: column;
+    flex: 0 1 auto;
+    min-height: 0;
+
+    overflow-y: auto;
 }
 
 .main .table-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
     display: flex;
     align-items: center;
 
@@ -153,6 +169,8 @@ PURCHASE ORDERS TABLE
     border-radius: 8px;
     background-color: var(--bgcolor-khaki);
 
+    flex-shrink: 0;
+
     font-size: 12px;
     color: var(--color-black);
 }
@@ -160,6 +178,7 @@ PURCHASE ORDERS TABLE
 .main .purchase-orders-body {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .main .purchase-order-row {
@@ -480,12 +499,12 @@ ORDER DETAILS
 
 
 /*********************************************************************************
-ADD ITEM
+ADD ITEM (COLLAPSIBLE)
 *********************************************************************************/
 .main .add-item-card {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    flex-shrink: 0;
 
     box-sizing: border-box;
     padding: 18px 20px 20px 20px;
@@ -498,6 +517,58 @@ ADD ITEM
     font-size: 15px;
     font-weight: 600;
     color: var(--color-black);
+}
+
+.main .collapsible-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    font-family: var(--adm-font);
+    color: var(--color-black);
+
+    cursor: pointer;
+}
+
+.main .collapsible-chevron {
+    transition: transform 0.25s ease;
+}
+
+.main .add-item-card.collapsed .collapsible-chevron {
+    transform: rotate(-90deg);
+}
+
+.main .collapsible-content {
+    display: grid;
+    grid-template-rows: 1fr;
+
+    transition: grid-template-rows 0.25s ease, visibility 0.25s ease;
+}
+
+.main .add-item-card.collapsed .collapsible-content {
+    grid-template-rows: 0fr;
+    visibility: hidden;
+}
+
+.main .collapsible-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    min-height: 0;
+    padding-top: 14px;
+
+    overflow: hidden;
+}
+
+.main .add-item-card.collapsed .collapsible-inner {
+    padding-top: 0;
 }
 
 .main .add-item-row {
@@ -520,6 +591,7 @@ ITEMS IN THIS ORDER
 .main .order-items-card {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     gap: 12px;
 
     box-sizing: border-box;
@@ -557,6 +629,9 @@ ITEMS IN THIS ORDER
 .main .order-items-list {
     display: flex;
     flex-direction: column;
+
+    max-height: 240px;
+    overflow-y: auto;
 }
 
 .main .order-items-empty {
@@ -573,6 +648,7 @@ ITEMS IN THIS ORDER
 .main .order-item-row {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 
     box-sizing: border-box;
     padding: 12px;

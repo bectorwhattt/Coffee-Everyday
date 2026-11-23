@@ -10,6 +10,9 @@ const purchaseOrdersBody = mainContainer.querySelector("#purchase-orders-body");
 const supplierSelect = mainContainer.querySelector("#supplier-select");
 const deliveryDateInput = mainContainer.querySelector("#delivery-date-input");
 
+const addItemCard = mainContainer.querySelector("#add-item-card");
+const addItemToggle = mainContainer.querySelector("#add-item-toggle");
+
 const itemSelect = mainContainer.querySelector("#item-select");
 const quantityInput = mainContainer.querySelector("#quantity-input");
 const unitSelect = mainContainer.querySelector("#unit-select");
@@ -161,6 +164,12 @@ function updateOrderSummary() {
 /*********************************************************************************
 ADD ITEM
 *********************************************************************************/
+// Collapse / expand the Add item form
+addItemToggle.addEventListener("click", function () {
+    const isCollapsed = addItemCard.classList.toggle("collapsed");
+    addItemToggle.setAttribute("aria-expanded", String(!isCollapsed));
+});
+
 function resetAddItemForm() {
     itemSelect.selectedIndex = 0;
     quantityInput.value = "";
@@ -251,6 +260,8 @@ function placeOrder() {
     }
 
     if (orderItems.length === 0) {
+        addItemCard.classList.remove("collapsed");
+        addItemToggle.setAttribute("aria-expanded", "true");
         flagInvalid(itemSelect);
         isValid = false;
     }
@@ -263,7 +274,6 @@ function placeOrder() {
 
     // Start fresh for the next order
     orderItems = [];
-    supplierSelect.selectedIndex = 0;
     deliveryDateInput.value = "";
     resetAddItemForm();
     renderOrderItems();

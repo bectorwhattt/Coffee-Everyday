@@ -123,64 +123,75 @@
                             </div>
                         </div>
 
-                        <!-- ADD ITEM -->
-                        <div class="add-item-card">
-                            <div class="section-title">Add item</div>
+                        <!-- ADD ITEM (COLLAPSIBLE) -->
+                        <div class="add-item-card" id="add-item-card">
+                            <button class="collapsible-toggle" id="add-item-toggle" type="button" aria-expanded="true" aria-controls="add-item-content">
+                                <span class="section-title">Add item</span>
+                                <svg class="collapsible-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
 
-                            <div class="add-item-row">
-                                <div class="field field-grow">
-                                    <label class="field-label" for="item-select">Item</label>
-                                    <select class="field-input" id="item-select" required>
-                                        <option value="" disabled selected>Select item</option>
-                                        <option value="Whole Milk">Whole Milk</option>
-                                        <option value="Coffee Beans">Coffee Beans</option>
-                                        <option value="Matcha Powder">Matcha Powder</option>
-                                        <option value="Vanilla Syrup">Vanilla Syrup</option>
-                                        <option value="Chocolate Sauce">Chocolate Sauce</option>
-                                        <option value="Brown Sugar">Brown Sugar</option>
-                                        <option value="Cup Lid">Cup Lid</option>
-                                        <option value="Paper Cup">Paper Cup</option>
-                                    </select>
-                                </div>
-                                <div class="field field-quantity">
-                                    <label class="field-label" for="quantity-input">Qty</label>
-                                    <input class="field-input" id="quantity-input" type="number" min="1" step="1" placeholder="0">
-                                </div>
-                                <div class="field field-unit">
-                                    <label class="field-label" for="unit-select">Unit</label>
-                                    <select class="field-input" id="unit-select">
-                                        <option value="Pack">Pack</option>
-                                        <option value="Carton">Carton</option>
-                                        <option value="Bottle">Bottle</option>
-                                        <option value="Sleeve">Sleeve</option>
-                                        <option value="Box">Box</option>
-                                        <option value="Bag">Bag</option>
-                                    </select>
-                                </div>
-                                <div class="field field-cost">
-                                    <label class="field-label" for="cost-input">Cost each (&#8369;)</label>
-                                    <input class="field-input" id="cost-input" type="number" min="0" step="0.01" placeholder="&#8369; 0.00">
-                                </div>
-                            </div>
+                            <div class="collapsible-content" id="add-item-content">
+                                <div class="collapsible-inner">
 
-                            <div class="add-item-row">
-                                <div class="field field-amount">
-                                    <label class="field-label" for="amount-input">Amount per unit</label>
-                                    <input class="field-input" id="amount-input" type="number" min="0" step="any" placeholder="0">
-                                </div>
-                                <div class="field field-measure">
-                                    <label class="field-label" for="measure-select">Measure</label>
-                                    <select class="field-input" id="measure-select">
-                                        <option value="mL">mL</option>
-                                        <option value="L">L</option>
-                                        <option value="g">g</option>
-                                        <option value="kg">kg</option>
-                                        <option value="pcs">pcs</option>
-                                    </select>
-                                </div>
-                                <div class="add-item-actions">
-                                    <button class="button-secondary" id="reset-button" type="button">Reset</button>
-                                    <button class="button-primary" id="add-item-button" type="button">+ Add item</button>
+                                    <div class="add-item-row">
+                                        <div class="field field-grow">
+                                            <label class="field-label" for="item-select">Item</label>
+                                            <select class="field-input" id="item-select" required>
+                                                <option value="" disabled selected>Select item</option>
+                                                <option value="Whole Milk">Whole Milk</option>
+                                                <option value="Coffee Beans">Coffee Beans</option>
+                                                <option value="Matcha Powder">Matcha Powder</option>
+                                                <option value="Vanilla Syrup">Vanilla Syrup</option>
+                                                <option value="Chocolate Sauce">Chocolate Sauce</option>
+                                                <option value="Brown Sugar">Brown Sugar</option>
+                                                <option value="Cup Lid">Cup Lid</option>
+                                                <option value="Paper Cup">Paper Cup</option>
+                                            </select>
+                                        </div>
+                                        <div class="field field-quantity">
+                                            <label class="field-label" for="quantity-input">Qty</label>
+                                            <input class="field-input" id="quantity-input" type="number" min="1" step="1" placeholder="0">
+                                        </div>
+                                        <div class="field field-unit">
+                                            <label class="field-label" for="unit-select">Unit</label>
+                                            <select class="field-input" id="unit-select">
+                                                <option value="Pack">Pack</option>
+                                                <option value="Carton">Carton</option>
+                                                <option value="Bottle">Bottle</option>
+                                                <option value="Sleeve">Sleeve</option>
+                                                <option value="Box">Box</option>
+                                                <option value="Bag">Bag</option>
+                                            </select>
+                                        </div>
+                                        <div class="field field-cost">
+                                            <label class="field-label" for="cost-input">Cost each (&#8369;)</label>
+                                            <input class="field-input" id="cost-input" type="number" min="0" step="0.01" placeholder="&#8369; 0.00">
+                                        </div>
+                                    </div>
+
+                                    <div class="add-item-row">
+                                        <div class="field field-amount">
+                                            <label class="field-label" for="amount-input">Amount per unit</label>
+                                            <input class="field-input" id="amount-input" type="number" min="0" step="any" placeholder="0">
+                                        </div>
+                                        <div class="field field-measure">
+                                            <label class="field-label" for="measure-select">Measure</label>
+                                            <select class="field-input" id="measure-select">
+                                                <option value="mL">mL</option>
+                                                <option value="L">L</option>
+                                                <option value="g">g</option>
+                                                <option value="kg">kg</option>
+                                                <option value="pcs">pcs</option>
+                                            </select>
+                                        </div>
+                                        <div class="add-item-actions">
+                                            <button class="button-secondary" id="reset-button" type="button">Reset</button>
+                                            <button class="button-primary" id="add-item-button" type="button">+ Add item</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
