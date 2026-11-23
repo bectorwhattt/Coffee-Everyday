@@ -15,3 +15,278 @@ body {
 /*********************************************************************************
 MAIN
 *********************************************************************************/
+.main {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: 24px;
+
+    background-color: var(--bgcolor-beige);
+
+    font-family: var(--adm-font);
+    font-size: 14px;
+    color: var(--adm-bgcolor-brown);
+
+    overflow-y: auto;
+}
+
+.main * {
+    box-sizing: border-box;
+}
+
+.main .login-card {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+
+    width: 444px;
+    max-width: 100%;
+    margin: auto;
+    padding: 36px 38px 40px;
+
+    border-radius: 20px;
+    background-color: var(--bgcolor-light);
+}
+
+/*********************************************************
+BRAND AND HEADING
+*********************************************************/
+.main .login-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 28px;
+}
+
+.main .login-brand-logo {
+    display: block;
+    flex: none;
+
+    width: 28px;
+    height: 28px;
+
+    object-fit: contain;
+}
+
+.main .login-brand-name {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.main .login-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.main .login-title {
+    margin: 0;
+
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 35px;
+}
+
+.main .login-description {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 19px;
+    color: var(--color-grey);
+}
+
+/*********************************************************
+ACCOUNT SELECTION
+*********************************************************/
+.main .login-account-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    margin-bottom: 18px;
+}
+
+.main .login-account-label {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 17px;
+}
+
+.main .login-account-options {
+    display: flex;
+    gap: 7px;
+
+    width: 100%;
+    padding: 5px;
+
+    border-radius: 10px;
+    background-color: var(--bgcolor-beige);
+}
+
+.main .login-account-option {
+    flex: 1;
+
+    min-width: 0;
+    min-height: 38px;
+    padding: 8px 6px;
+
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background-color: transparent;
+
+    font-family: var(--adm-font);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--adm-bgcolor-brown);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.main .login-account-option:hover,
+.main .login-account-option:focus-visible {
+    border-color: var(--adm-bgcolor-terracotta);
+}
+
+.main .login-account-option-active {
+    background-color: var(--bgcolor-light);
+
+    box-shadow: 0 1px 3px var(--bgcolor-khaki);
+}
+
+/*********************************************************
+LOGIN FORM
+*********************************************************/
+.main .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.main .login-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    min-width: 0;
+}
+
+.main .login-label {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 17px;
+}
+
+.main .login-input {
+    width: 100%;
+    height: 42px;
+    padding: 0 13px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background-color: var(--bgcolor-beige);
+
+    font-family: var(--adm-font);
+    font-size: 13px;
+    color: var(--adm-bgcolor-brown);
+
+    outline: none;
+
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.main .login-input::placeholder {
+    color: var(--color-grey);
+}
+
+.main .login-input:focus {
+    border-color: var(--adm-bgcolor-terracotta);
+}
+
+.main .login-input.login-input-invalid {
+    border-color: var(--adm-bgcolor-terracotta);
+    background-color: var(--bgcolor-light);
+}
+
+.main .login-field-error {
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--adm-bgcolor-terracotta);
+}
+
+.main .login-field-error:empty {
+    display: none;
+}
+
+.main .login-submit {
+    width: 100%;
+    height: 40px;
+    margin-top: 6px;
+
+    border: 0;
+    border-radius: 7px;
+    background-color: var(--adm-bgcolor-brown);
+
+    font-family: var(--adm-font);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bgcolor-light);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.main .login-submit:hover,
+.main .login-submit:focus-visible {
+    background-color: var(--adm-bgcolor-terracotta);
+}
+
+.main .login-submit:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+}
+
+.main .login-form-status {
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--adm-bgcolor-terracotta);
+}
+
+.main .login-form-status:empty {
+    display: none;
+}
+
+/*********************************************************
+RESPONSIVE LAYOUT
+*********************************************************/
+@media (max-width: 480px) {
+    .main {
+        padding: 16px;
+    }
+
+    .main .login-card {
+        width: 100%;
+        padding: 28px 24px 32px;
+    }
+
+    .main .login-title {
+        font-size: 25px;
+        line-height: 33px;
+    }
+}
