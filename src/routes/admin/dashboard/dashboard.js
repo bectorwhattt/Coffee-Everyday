@@ -28,11 +28,6 @@ const DASHBOARD = {
       { number: "#0016", time: "9:58 AM", items: "Nutella Latte x1", total: 150, status: "Completed" },
       { number: "#0015", time: "9:30 AM", items: "Cafe Latte x1", total: 130, status: "Completed" },
     ],
-    ordersByType: [
-      { type: "Dine in", count: 8 },
-      { type: "Take out", count: 5 },
-      { type: "Grab", count: 2 },
-    ],
   },
 
   "2026-11-22": {
@@ -55,11 +50,6 @@ const DASHBOARD = {
       { number: "#0021", time: "9:42 AM", items: "Americano x1", total: 120, status: "Completed" },
       { number: "#0020", time: "9:25 AM", items: "Iced Matcha x1", total: 160, status: "Completed" },
       { number: "#0019", time: "9:10 AM", items: "Spanish Latte x1", total: 150, status: "Completed" },
-    ],
-    ordersByType: [
-      { type: "Dine in", count: 11 },
-      { type: "Take out", count: 9 },
-      { type: "Grab", count: 4 },
     ],
   },
 };
@@ -301,29 +291,6 @@ function renderTodaysOrders(data) {
 
 
 /*********************************************************************************
-ORDERS BY TYPE
-*********************************************************************************/
-function renderOrdersByType(data) {
-  const orderTypesList = clearElement("#order-types-list");
-  if (!orderTypesList) return;
-
-  const mostOrders = Math.max(...data.ordersByType.map((entry) => entry.count));
-
-  fill("#order-types-subtitle", `Today, ${data.statistics.orders} orders (sample data)`);
-
-  data.ordersByType.forEach((entry) => {
-    const orderTypeRow = createDiv("order-type-row");
-
-    orderTypeRow.appendChild(createDiv("order-type-name", entry.type));
-    orderTypeRow.appendChild(createProgressTrack((entry.count / mostOrders) * 100));
-    orderTypeRow.appendChild(createDiv("order-type-count", entry.count));
-
-    orderTypesList.appendChild(orderTypeRow);
-  });
-}
-
-
-/*********************************************************************************
 SHOW A DATE
 *********************************************************************************/
 function showDate(requestedKey) {
@@ -336,7 +303,6 @@ function showDate(requestedKey) {
   renderStockHealth(data);
   renderTopSellers(data);
   renderTodaysOrders(data);
-  renderOrdersByType(data);
 }
 
 window.addEventListener("hashchange", () => {

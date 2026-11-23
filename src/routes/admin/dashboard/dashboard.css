@@ -13,11 +13,15 @@ body {
     font-family: var(--adm-font);
 }
 
+/* Locked to the viewport height so the page never scrolls.
+   .main takes whatever is left under the header and the charts row flexes to absorb the rest. */
 .main-container {
     display: flex;
     flex-direction: column;
 
+    box-sizing: border-box;
     width: 100%;
+    min-width: 0;
     min-height: 100vh;
 
     margin-left: var(--adm-navbar-width);
@@ -31,7 +35,7 @@ MAIN
     display: flex;
     flex-direction: column;
     flex: 1;
-    gap: 16px;
+    gap: clamp(8px, 1.2vh, 16px);
 
     box-sizing: border-box;
     padding: 12px 24px 40px 24px;
@@ -48,10 +52,11 @@ WELCOME BANNER
 .main .welcome-banner {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    flex-shrink: 0;
+    gap: 2px;
 
     box-sizing: border-box;
-    padding: 26px 30px;
+    padding: clamp(14px, 2vh, 26px) 30px;
 
     border-radius: 14px;
     background-image: linear-gradient(90deg, var(--bgcolor-khaki), var(--bgcolor-beige));
@@ -88,7 +93,8 @@ STATISTICS
 *********************************************************************************/
 .main .statistics-row {
     display: flex;
-    gap: 16px;
+    flex-shrink: 0;
+    gap: 12px;
 }
 
 .main .statistic-card {
@@ -99,7 +105,7 @@ STATISTICS
 
     box-sizing: border-box;
     min-width: 0;
-    padding: 24px 20px;
+    padding: clamp(12px, 1.8vh, 24px) 20px;
 
     border-radius: 16px;
     background-color: var(--bgcolor-light);
@@ -183,19 +189,22 @@ STATISTICS
 /*********************************************************************************
 CHARTS
 *********************************************************************************/
+/* This row is the flexible one: it grows or shrinks to fill the leftover height. */
 .main .charts-row {
     display: flex;
-    gap: 16px;
+    flex-shrink: 0;
+    gap: 12px;
 }
 
 .main .dashboard-card {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 
     box-sizing: border-box;
     min-width: 0;
-    padding: 22px 24px;
+    min-height: 0;
+    padding: clamp(12px, 1.6vh, 22px) 24px;
 
     border-radius: 16px;
     background-color: var(--bgcolor-light);
@@ -223,7 +232,7 @@ CHARTS
 SALES THIS WEEK
 *********************************************************************************/
 .main .sales-card {
-    flex: 1.15;
+    flex: 1.3;
 }
 
 .main .bar-chart {
@@ -231,15 +240,19 @@ SALES THIS WEEK
     flex-direction: column;
     gap: 8px;
     flex: 1;
+
+    min-height: 0;
 }
 
+/* Height is no longer fixed, it stretches with the card */
 .main .bar-plot {
     display: flex;
     align-items: stretch;
     gap: 14px;
+    flex: 1;
 
     box-sizing: border-box;
-    height: 210px;
+    min-height: 130px;
     padding: 0 6px;
 
     border-bottom: 1px solid var(--bgcolor-khaki);
@@ -307,6 +320,8 @@ STOCK HEALTH
     justify-content: space-around;
     gap: 24px;
     flex: 1;
+
+    min-height: 0;
 }
 
 .main .donut-chart {
@@ -315,8 +330,8 @@ STOCK HEALTH
     justify-content: center;
     flex-shrink: 0;
 
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
 
     border-radius: 50%;
     background-color: var(--bgcolor-khaki);
@@ -328,8 +343,8 @@ STOCK HEALTH
     align-items: center;
     justify-content: center;
 
-    width: 104px;
-    height: 104px;
+    width: 90px;
+    height: 90px;
 
     border-radius: 50%;
     background-color: var(--bgcolor-light);
@@ -349,7 +364,7 @@ STOCK HEALTH
 .main .stock-legend {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     flex: 1;
 
     max-width: 230px;
@@ -398,7 +413,8 @@ STOCK HEALTH
 TOP SELLERS
 *********************************************************************************/
 .main .top-sellers-card {
-    gap: 18px;
+    flex: 1;
+    gap: 10px;
 }
 
 .main .top-sellers-header {
@@ -412,7 +428,7 @@ TOP SELLERS
     align-items: center;
     justify-content: center;
 
-    padding: 8px 18px;
+    padding: 6px 18px;
 
     border-radius: 999px;
     background-color: var(--bgcolor-darkbrown);
@@ -425,7 +441,7 @@ TOP SELLERS
 .main .top-sellers-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: clamp(6px, 1vh, 16px);
 }
 
 .main .top-seller-row {
@@ -485,7 +501,8 @@ ORDERS
 *********************************************************************************/
 .main .orders-row {
     display: flex;
-    gap: 16px;
+    flex-shrink: 0;
+    gap: 12px;
 }
 
 
@@ -493,7 +510,8 @@ ORDERS
 TODAY'S ORDERS
 *********************************************************************************/
 .main .todays-orders-card {
-    flex: 1.15;
+    flex: 1.65;
+    gap: 10px;
 }
 
 .main .todays-orders-header {
@@ -526,7 +544,7 @@ TODAY'S ORDERS
     align-items: center;
 
     box-sizing: border-box;
-    padding: 9px 14px;
+    padding: 6px 14px;
 
     border-radius: 4px;
     background-color: var(--bgcolor-khaki);
@@ -545,7 +563,7 @@ TODAY'S ORDERS
     align-items: center;
 
     box-sizing: border-box;
-    padding: 14px;
+    padding: clamp(7px, 1.1vh, 14px) 14px;
 
     border-bottom: 1px solid var(--bgcolor-khaki);
 
@@ -638,40 +656,11 @@ TODAY'S ORDERS
 
 
 /*********************************************************************************
-ORDERS BY TYPE
+SMALL SCREENS
 *********************************************************************************/
-.main .order-types-card {
-    flex: 1;
-}
-
-.main .order-types-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 22px;
-    flex: 1;
-
-    padding: 8px 0;
-}
-
-.main .order-type-row {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-
-    font-size: 13px;
-    color: #4A2C20;
-}
-
-.main .order-type-name {
-    width: 72px;
-    flex-shrink: 0;
-}
-
-.main .order-type-count {
-    width: 24px;
-    flex-shrink: 0;
-
-    font-weight: 600;
-    text-align: right;
+@media (max-width: 1100px) {
+    .main .charts-row,
+    .main .orders-row {
+        flex-direction: column;
+    }
 }
