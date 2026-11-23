@@ -666,14 +666,123 @@
                             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.4" cy="8.4" r="1.4"/><path d="m3 17 5-5 4 3 4-5 5 6"/></svg>';
                         const trashIcon = () =>
                             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6"/></svg>';
-                        const imageMarkup = (recipe, large = false) =>
-                            recipe.image
-                                ? '<img src="' +
-                                  escapeHtml(recipe.image) +
-                                  '" alt="' +
-                                  escapeHtml(recipe.name) +
-                                  '">'
-                                : imageIcon();
+                        // Product photos belong to assets/images/products/inventory/.
+                        // Use the same filenames on the Checkout and Recipes pages.
+                        // Keep the photo extension when renaming the original image file.
+                        const inventoryImageDirectory =
+                            "../../../../assets/images/products/inventory/";
+                        const inventoryImageExtensions = [
+                            "jpg",
+                            "jpeg",
+                            "png",
+                            "webp",
+                        ];
+                        const inventoryImageNames = {
+                            "pica platter": "pica-platter",
+                            mojos: "mojos",
+                            "twister fries": "twister-fries",
+                            "berry matcha": "berry-matcha",
+                            "dark chocolate": "dark-chocolate",
+                            "matcha latte": "matcha-latte",
+                            "milky strawberry": "milky-strawberry",
+                            "signature choco": "signature-choco",
+                            toffeedamia: "toffeedamia",
+                            "seasalt latte": "seasalt-latte",
+                            "cafe mocha": "mocha-white-mocha",
+                            "white mocha": "mocha-white-mocha",
+                            "salted caramel": "salted-caramel",
+                            "spanish latte": "spanish-latte",
+                            "caramel macchiato": "caramel-macchiato",
+                            "french vanilla": "french-vanilla",
+                            "cafe latte": "cafe-latte",
+                            cappucino: "cappuccino",
+                            americano: "americano",
+                            "pain au chocolat": "pain-au-chocolat",
+                            "spicy shrimp aglio olio":
+                                "spicy-shrimp-aglio-olio",
+                            "cheesy tuna pesto": "cheesy-tuna-pesto",
+                            "tori katsu with cabbage salad":
+                                "tori-katsu-with-cabbage-salad",
+                            "2-pc mushroom burger steak":
+                                "mushroom-burger-steak",
+                            "chicken pastil (spicy / orig)": "chicken-pastil",
+                            "sausage delight, 1pc": "sausage-delight",
+                            "sausage delight, 2pcs": "sausage-delight",
+                            "chicken fillet sandwich":
+                                "chicken-fillet-sandwich",
+                            "ham & egg sandwich": "ham-egg-sandwich",
+                            // Tentative matches: verify the product/photo identity before use.
+                            "french fries (salted/cheese)":
+                                "french-fries-salted-cheese",
+                            "choco chip cookies": "choco-chip-cookies",
+                            "allday spam rice": "allday-spam-rice",
+                        };
+                        const inventoryImageStem = (name) =>
+                            inventoryImageNames[
+                                String(name || "")
+                                    .trim()
+                                    .toLowerCase()
+                            ] || "";
+
+                        const imageMarkup = (recipe) => {
+                            // A manually uploaded recipe photo overrides its catalog photo.
+                            if (recipe.image) {
+                                return (
+                                    '<img src="' +
+                                    escapeHtml(recipe.image) +
+                                    '" alt="' +
+                                    escapeHtml(recipe.name) +
+                                    '" loading="lazy">'
+                                );
+                            }
+                            const filename = inventoryImageStem(recipe.name);
+                            if (!filename) return imageIcon();
+                            return (
+                                '<img src="' +
+                                escapeHtml(
+                                    inventoryImageDirectory +
+                                        filename +
+                                        "." +
+                                        inventoryImageExtensions[0],
+                                ) +
+                                '" data-inventory-stem="' +
+                                escapeHtml(filename) +
+                                '" data-inventory-index="0" alt="' +
+                                escapeHtml(recipe.name) +
+                                '" loading="lazy">'
+                            );
+                        };
+
+                        // An image may be JPG, JPEG, PNG or WebP. If none exists, keep the SVG placeholder.
+                        document.querySelector(".main").addEventListener(
+                            "error",
+                            (event) => {
+                                const image = event.target;
+                                if (
+                                    !image.matches ||
+                                    !image.matches("img[data-inventory-stem]")
+                                )
+                                    return;
+                                const nextIndex =
+                                    Number(image.dataset.inventoryIndex) + 1;
+                                if (
+                                    nextIndex < inventoryImageExtensions.length
+                                ) {
+                                    image.dataset.inventoryIndex =
+                                        String(nextIndex);
+                                    image.src =
+                                        inventoryImageDirectory +
+                                        image.dataset.inventoryStem +
+                                        "." +
+                                        inventoryImageExtensions[nextIndex];
+                                } else {
+                                    const container = image.parentElement;
+                                    if (container)
+                                        container.innerHTML = imageIcon();
+                                }
+                            },
+                            true,
+                        );
                         const ingredientCost = (recipe) =>
                             recipe.ingredients.length
                                 ? recipe.ingredients.reduce(
@@ -987,10 +1096,11 @@
                         }
 
                         function renderImage() {
-                            el("recipes-image-preview").innerHTML = draft.image
-                                ? '<img src="' +
-                                  escapeHtml(draft.image) +
-                                  '" alt="Recipe preview">'
+                            const hasImage = Boolean(
+                                draft.image || inventoryImageStem(draft.name),
+                            );
+                            el("recipes-image-preview").innerHTML = hasImage
+                                ? imageMarkup(draft)
                                 : '<div class="recipes-upload-placeholder">' +
                                   (addingNew
                                       ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 16V4m-5 5 5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>No image yet</span>'
@@ -998,7 +1108,7 @@
                                   "</div>";
                             el("recipes-image-preview").classList.toggle(
                                 "recipes-image-upload-empty",
-                                addingNew && !draft.image,
+                                addingNew && !hasImage,
                             );
                         }
 
@@ -1329,15 +1439,15 @@
                             },
                         );
                         el("recipes-name").addEventListener("change", () => {
+                            if (!draft) return;
+                            draft.name = el("recipes-name").value;
+                            renderImage();
                             if (
                                 !addingNew ||
-                                !draft ||
                                 Number(el("recipes-price").value) > 0
                             )
                                 return;
-                            const menuPrice = checkoutPriceFor(
-                                el("recipes-name").value,
-                            );
+                            const menuPrice = checkoutPriceFor(draft.name);
                             if (menuPrice > 0) {
                                 el("recipes-price").value = menuPrice;
                                 draft.price = menuPrice;
