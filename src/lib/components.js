@@ -35,6 +35,28 @@ function highlightActiveNavLink() {
     });
 }
 
+function syncAdminHeaderTitle() {
+    const titleEl = document.getElementById("page-title");
+    if (!titleEl) return;
+
+    const currentFile = window.location.pathname.split("/").pop() || "index.html";
+    const navLinks = document.querySelectorAll("#admin-navLinks a");
+
+    for (const link of navLinks) {
+        const href = link.getAttribute("href");
+        if (!href) continue;
+
+        const linkFile = href.split("/").pop();
+        if (linkFile === currentFile) {
+            const label = link.querySelector(".frame span")?.textContent.trim();
+            if (label) {
+                titleEl.textContent = titleEl.textContent + label;
+                return;
+            }
+        }
+    }
+}
+
 async function initLayout() {
     await Promise.all([
         loadHTML("header", "../../components/header.html"),
@@ -45,6 +67,7 @@ async function initLayout() {
 
     // Runs only after #navLinks has been injected into the DOM
     highlightActiveNavLink();
+    syncAdminHeaderTitle();
 }
 
 initLayout();

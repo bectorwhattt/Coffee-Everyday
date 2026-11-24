@@ -274,11 +274,119 @@ ADMIN NAVIGATION BAR
 ADMIN HEADER
 *********************************************************************************/
 .admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
     width: 100%;
     height: 80px;
+    box-sizing: border-box;
+    padding: 0 30px;
 
-    border-bottom: 1px solid var(--color-gold);
+    border-bottom: 1px solid var(--bgcolor-khaki);
+    background-color: var(--bgcolor-beige);
+    color: var(--bgcolor-darkbrown);
+    font-family: var(--adm-font);
+}
 
-    background-color: var(--bgcolor-light);
+.admin-header .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bgcolor-darkbrown);
+    white-space: nowrap;
+}
+
+.admin-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+/* Pill Search Input */
+.admin-search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 510px;
+    max-width: 100%;
+    height: 42px;
+    padding: 0 18px;
+    box-sizing: border-box;
+
+    background-color: var(--adm-bgcolor-white);
+    border: 1px solid var(--bgcolor-khaki);
+    border-radius: 999px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-search-box:focus-within {
+    border-color: var(--color-gold);
+}
+
+.admin-search-box .search-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    opacity: 0.65;
+    flex-shrink: 0;
+}
+
+.admin-search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--adm-font);
+    font-size: 13px;
     color: var(--color-black);
+}
+
+.admin-search-box input::placeholder {
+    color: var(--color-grey);
+}
+
+/* Notification Button */
+.admin-header .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.admin-header .icon-btn:hover {
+    background-color: var(--color-pink);
+}
+
+.admin-header .icon-btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Admin Profile Badge */
+.admin-header .admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.admin-header .profile-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-header .profile-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bgcolor-darkbrown);
 }
