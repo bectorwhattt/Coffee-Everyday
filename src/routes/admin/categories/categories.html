@@ -12,13 +12,78 @@
         <div class="main-container">
             <!--IMPORTED HEADER-->
             <div id="admin-header"></div>
-            
+
             <!--CATEGORIES-->
             <div class="main">
-                only add new html codes here
+                <!-- CATEGORIES CARD -->
+                <div class="categories-card">
+
+                    <!-- CATEGORY FORM (ADD / EDIT) -->
+                    <div class="category-form" id="category-form">
+                        <div class="category-form-title" id="category-form-title">Add category</div>
+
+                        <div class="category-form-row">
+                            <button class="delete-button" id="delete-category-button" type="button" aria-label="Delete category">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                    <path d="M10 11v6M14 11v6"></path>
+                                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                                </svg>
+                            </button>
+
+                            <div class="field field-grow">
+                                <label class="field-label" for="category-name-input">Category name</label>
+                                <input class="field-input" id="category-name-input" type="text" placeholder="Enter category name" autocomplete="off">
+                            </div>
+                            <div class="field field-category-for">
+                                <label class="field-label" for="category-for-select">Category for</label>
+                                <select class="field-input" id="category-for-select">
+                                    <option value="items">Items</option>
+                                    <option value="recipes">Recipes</option>
+                                </select>
+                            </div>
+
+                            <button class="button-secondary form-action-button" id="cancel-category-button" type="button" aria-label="Cancel">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                                    <line x1="2" y1="2" x2="10" y2="10"></line>
+                                    <line x1="10" y1="2" x2="2" y2="10"></line>
+                                </svg>
+                            </button>
+                            <button class="button-primary form-action-button" id="save-category-button" type="button" aria-label="Save category">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="4 12 10 18 20 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD HEADER -->
+                    <div class="card-header">
+                        <div class="filter-tabs">
+                            <div class="filter-tab active" data-filter="items">Items (0)</div>
+                            <div class="filter-tab" data-filter="recipes">Recipes (0)</div>
+                        </div>
+                        <button class="button-primary add-category-button" id="open-add-category-button" type="button">+ Add category</button>
+                    </div>
+
+                    <!-- CATEGORIES TABLE -->
+                    <div class="categories-table">
+                        <div class="table-header">
+                            <div class="cell-category-name">Category Name</div>
+                            <div class="cell-category-count" id="category-count-header">Items</div>
+                            <div class="cell-action"></div>
+                        </div>
+
+                        <div class="categories-body" id="categories-body"></div>
+                    </div>
+                </div>
+
+                <!-- CATEGORIES SCRIPT -->
+                <script src="categories.js"></script>
             </div>
         </div>
-    
+
     <!--IMPORT SIDEBAR AND HEADER HTML-->
     <script src="../../../lib/components.js"></script>
     </body>
