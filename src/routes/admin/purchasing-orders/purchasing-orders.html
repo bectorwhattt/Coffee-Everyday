@@ -20,7 +20,12 @@
 
                     <!-- CARD HEADER -->
                     <div class="card-header">
-                        <div class="card-title">Recent purchase orders</div>
+                        <div class="filter-tabs">
+                            <div class="filter-tab active" data-filter="all">All (4)</div>
+                            <div class="filter-tab" data-filter="received">Received (3)</div>
+                            <div class="filter-tab" data-filter="ordered">Ordered (1)</div>
+                            <div class="filter-tab" data-filter="canceled">Canceled (0)</div>
+                        </div>
                         <button class="button-primary new-purchase-order-button" id="open-panel-button" type="button">+ New purchase order</button>
                     </div>
 
@@ -33,53 +38,10 @@
                             <div class="cell-items">Items</div>
                             <div class="cell-total">Total</div>
                             <div class="cell-status">Status</div>
+                            <div class="cell-toggle-spacer"></div>
                         </div>
 
-                        <div class="purchase-orders-body" id="purchase-orders-body">
-                            <div class="purchase-order-row">
-                                <div class="cell-order-number">PO-0010</div>
-                                <div class="cell-supplier">Coffee Beans</div>
-                                <div class="cell-date">Nov 14</div>
-                                <div class="cell-items">2</div>
-                                <div class="cell-total">&#8369;6,100</div>
-                                <div class="cell-status">
-                                    <div class="status-pill status-ordered">Ordered</div>
-                                </div>
-                            </div>
-
-                            <div class="purchase-order-row">
-                                <div class="cell-order-number">PO-0009</div>
-                                <div class="cell-supplier">Supplier Inc.</div>
-                                <div class="cell-date">Nov 12</div>
-                                <div class="cell-items">2</div>
-                                <div class="cell-total">&#8369;3,050</div>
-                                <div class="cell-status">
-                                    <div class="status-pill status-received">Received</div>
-                                </div>
-                            </div>
-
-                            <div class="purchase-order-row">
-                                <div class="cell-order-number">PO-0008</div>
-                                <div class="cell-supplier">Dairy supplier</div>
-                                <div class="cell-date">Nov 10</div>
-                                <div class="cell-items">4</div>
-                                <div class="cell-total">&#8369;2,600</div>
-                                <div class="cell-status">
-                                    <div class="status-pill status-received">Received</div>
-                                </div>
-                            </div>
-
-                            <div class="purchase-order-row">
-                                <div class="cell-order-number">PO-0007</div>
-                                <div class="cell-supplier">SM Aura (market run)</div>
-                                <div class="cell-date">Nov 9</div>
-                                <div class="cell-items">3</div>
-                                <div class="cell-total">&#8369;8,400</div>
-                                <div class="cell-status">
-                                    <div class="status-pill status-received">Received</div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="purchase-orders-body" id="purchase-orders-body"></div>
                     </div>
                 </div>
 

@@ -74,12 +74,6 @@ CARD HEADER
     justify-content: space-between;
 }
 
-.main .card-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--color-black);
-}
-
 /* SHARED BUTTONS */
 .main .button-primary {
     display: flex;
@@ -144,6 +138,47 @@ CARD HEADER
 
 
 /*********************************************************************************
+FILTER TABS
+*********************************************************************************/
+.main .filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.main .filter-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 5px 13px;
+
+    border: 1px solid var(--color-black);
+    border-radius: 999px;
+    background-color: transparent;
+
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main .filter-tab:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+.main .filter-tab.active {
+    background-color: var(--bgcolor-darkbrown);
+
+    color: var(--bgcolor-light);
+}
+
+
+/*********************************************************************************
 PURCHASE ORDERS TABLE
 *********************************************************************************/
 .main .purchase-orders-table {
@@ -181,14 +216,31 @@ PURCHASE ORDERS TABLE
     flex-shrink: 0;
 }
 
+.main .purchase-orders-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px 0;
+
+    font-size: 12px;
+    color: var(--color-grey);
+}
+
 .main .purchase-order-row {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+}
+
+.main .purchase-order-summary {
     display: flex;
     align-items: center;
 
     box-sizing: border-box;
     padding: 16px 24px;
-
-    border-bottom: 1px solid var(--bgcolor-khaki);
 
     font-size: 12px;
     color: var(--color-black);
@@ -282,6 +334,169 @@ PURCHASE ORDERS TABLE
     background-color: #3CA22A27;
 
     color: #167A04;
+}
+
+.main .status-canceled {
+    background-color: #A22A2C27;
+
+    color: #99080F;
+}
+
+.main .cell-toggle-spacer {
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.main .order-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+
+    border: 1px solid var(--color-black);
+    border-radius: 50%;
+    background-color: transparent;
+
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main .order-toggle svg {
+    transition: transform 0.2s ease;
+}
+
+.main .purchase-order-row.expanded .order-toggle {
+    background-color: var(--bgcolor-darkbrown);
+
+    color: var(--bgcolor-light);
+}
+
+.main .purchase-order-row.expanded .order-toggle svg {
+    transform: rotate(180deg);
+}
+
+
+/*********************************************************************************
+PURCHASE ORDER DETAILS
+*********************************************************************************/
+.main .purchase-order-details {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+
+    box-sizing: border-box;
+    margin: 0 12px 14px 12px;
+    padding: 16px 24px 18px 24px;
+
+    border-radius: 12px;
+    background-color: var(--bgcolor-beige);
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .purchase-order-row.expanded .purchase-order-details {
+    display: flex;
+}
+
+.main .details-header {
+    display: flex;
+    align-items: center;
+
+    font-size: 11px;
+    color: var(--color-grey);
+}
+
+.main .details-line {
+    display: flex;
+    align-items: center;
+}
+
+.main .detail-item {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+}
+
+.main .detail-quantity {
+    display: flex;
+    align-items: center;
+
+    width: 56px;
+    flex-shrink: 0;
+}
+
+.main .detail-unit {
+    display: flex;
+    align-items: center;
+
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.main .detail-amount {
+    display: flex;
+    align-items: center;
+
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.main .detail-measure {
+    display: flex;
+    align-items: center;
+
+    width: 90px;
+    flex-shrink: 0;
+}
+
+.main .detail-price {
+    display: flex;
+    align-items: center;
+
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.main .detail-subtotal {
+    display: flex;
+    align-items: center;
+
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.main .details-divider {
+    width: 100%;
+    height: 1px;
+    margin: 6px 0;
+
+    background-color: var(--color-grey);
+}
+
+.main .detail-summary-label {
+    display: flex;
+    align-items: center;
+
+    width: 310px;
+    flex-shrink: 0;
+}
+
+.main .detail-bold {
+    font-weight: 600;
+}
+
+.main .detail-muted {
+    color: var(--color-grey);
 }
 
 
