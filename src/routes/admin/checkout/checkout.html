@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Coffee Everyday</title>
+        <link rel="stylesheet" href="../../../components/html-components.css" />
+        <link rel="stylesheet" href="checkout.css" />
+    </head>
+    <body>
+        <!--IMPORTED SIDEBAR-->
+        <div id="admin-navigation-bar"></div>
+
+        <div class="main-container">
+            <!--IMPORTED HEADER-->
+            <div id="admin-header"></div>
+
+            <!-- CHECKOUT -->
+            <div class="main">
+                <!-- CATEGORIES -->
+                <div class="checkout-categories" role="group" aria-label="Menu categories">
+                    <button class="checkout-category checkout-category-active" type="button" data-category="Coffee Classics" aria-pressed="true">
+                        <div class="checkout-category-name">Coffee Classics</div>
+                        <div class="checkout-category-count">12</div>
+                    </button>
+                    <button class="checkout-category" type="button" data-category="Coffee Specials" aria-pressed="false">
+                        <div class="checkout-category-name">Coffee Specials</div>
+                        <div class="checkout-category-count">8</div>
+                    </button>
+                    <button class="checkout-category" type="button" data-category="Non-coffee" aria-pressed="false">
+                        <div class="checkout-category-name">Non-coffee</div>
+                        <div class="checkout-category-count">8</div>
+                    </button>
+                    <button class="checkout-category" type="button" data-category="Frappes & Shakes" aria-pressed="false">
+                        <div class="checkout-category-name">Frappes &amp; Shakes</div>
+                        <div class="checkout-category-count">9</div>
+                    </button>
+                    <button class="checkout-category" type="button" data-category="Soda Pop" aria-pressed="false">
+                        <div class="checkout-category-name">Soda Pop</div>
+                        <div class="checkout-category-count">3</div>
+                    </button>
+                    <button class="checkout-category" type="button" data-category="Bread & Pastries" aria-pressed="false">
+                        <div class="checkout-category-name">Bread &amp; Pastries</div>
+                        <div class="checkout-category-count">4</div>
+                    </button>
+                    <button class="checkout-category" type="button" data-category="Sandwiches" aria-pressed="false">
+                        <div class="checkout-category-name">Sandwiches</div>
+                        <div class="checkout-category-count">3</div>
+                    </button>
+                    <button class="checkout-category" type="button" data-category="Snacks" aria-pressed="false">
+                        <div class="checkout-category-name">Snacks</div>
+                        <div class="checkout-category-count">7</div>
+                    </button>
+                    <button class="checkout-category" type="button" data-category="Pastas" aria-pressed="false">
+                        <div class="checkout-category-name">Pastas</div>
+                        <div class="checkout-category-count">5</div>
+                    </button>
+                    <button class="checkout-category" type="button" data-category="Rice Meals" aria-pressed="false">
+                        <div class="checkout-category-name">Rice Meals</div>
+                        <div class="checkout-category-count">8</div>
+                    </button>
+                </div>
+
+                <!-- MENU ITEMS -->
+                <div class="checkout-items">
+                    <h2 class="checkout-items-title" id="checkout-items-title">Coffee Classics</h2>
+                    <div class="checkout-products" id="checkout-products"></div>
+                </div>
+
+                <!-- CURRENT ORDER -->
+                <div class="checkout-order">
+                    <div class="order-heading">
+                        <p class="order-label">Current order</p>
+                        <h2 class="order-title">Order #0019</h2>
+                        <p class="order-details">Cashier: Admin &bull; Nov 20</p>
+                    </div>
+
+                    <div class="order-options">
+                        <div class="order-field">
+                            <label class="order-field-label" for="order-type">Type</label>
+                            <select class="order-select" id="order-type">
+                                <option selected>Dine-in</option>
+                                <option>Take-out</option>
+                            </select>
+                        </div>
+                        <div class="order-field">
+                            <label class="order-field-label" for="order-payment">Pay</label>
+                            <select class="order-select" id="order-payment">
+                                <option>Cash</option>
+                                <option selected>GCash</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- ORDER LIST COLUMN LABELS -->
+                    <div class="order-list-heading" aria-hidden="true">
+                        <div class="order-list-heading-item">
+                            <div class="order-list-heading-image-label">Item</div>
+                        </div>
+                        <div class="order-list-heading-quantity">Quantity</div>
+                        <div class="order-list-heading-amount">Amount</div>
+                    </div>
+                    <!-- SCROLLABLE ORDER LIST -->
+                    <div class="order-list-scroll" id="order-list-scroll">
+                        <div class="order-items" id="order-items" aria-live="polite"></div>
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="order-line">
+                            <p class="order-line-label">Subtotal</p>
+                            <p class="order-line-amount" id="order-subtotal">&#8369;232.14</p>
+                        </div>
+                        <div class="order-line">
+                            <p class="order-line-label">VAT (12%, included)</p>
+                            <p class="order-line-amount" id="order-vat">&#8369;27.86</p>
+                        </div>
+                        <div class="order-total">
+                            <p class="order-total-label">Total</p>
+                            <p class="order-total-amount" id="order-total">&#8369;260</p>
+                        </div>
+                        <div class="order-line">
+                            <p class="order-line-label">Change</p>
+                            <p class="order-line-amount" id="order-change">&#8369;0</p>
+                        </div>
+
+                        <div class="order-cash-heading">
+                            <label class="order-cash-label" for="order-cash-amount">Cash received</label>
+                            <p class="order-cash-error" id="order-cash-error" role="alert" aria-live="polite"></p>
+                        </div>
+                        <div class="order-cash-row">
+                            <input class="order-cash-input" id="order-cash-amount" type="text" inputmode="decimal" placeholder="Enter amount (&#8369;)" aria-invalid="false" aria-describedby="order-cash-error" />
+                            <div class="order-exact">
+                                <input class="order-exact-checkbox" id="order-exact" type="checkbox" />
+                                <label class="order-exact-label" for="order-exact">Exact</label>
+                            </div>
+                            <button class="order-calculate order-button" id="order-calculate" type="button">Calculate</button>
+                        </div>
+                        <div class="order-actions">
+                            <button class="order-cancel order-button" id="order-cancel" type="button">Cancel Order</button>
+                            <button class="order-submit order-button" id="order-submit" type="button">Submit Order</button>
+                        </div>
+                        <p class="order-status" id="order-status" role="status" aria-live="polite"></p>
+                    </div>
+                </div>
+
+                <!-- REUSABLE PLACEHOLDER IMAGE -->
+                <svg class="checkout-icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <symbol id="checkout-image-symbol" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                        <path d="m4 18 6-6 4 3 3-3 4 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+                    </symbol>
+                </svg>
+
+                <!-- CHECKOUT FUNCTIONALITY -->
+                <script src="checkout.js" defer></script>
+            </div>
+        </div>
+
+        <!--IMPORT SIDEBAR AND HEADER HTML-->
+        <script src="../../../lib/components.js"></script>
+    </body>
+</html>

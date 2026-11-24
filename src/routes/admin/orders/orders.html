@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Coffee Everyday</title>
+        <link rel="stylesheet" href="../../../components/html-components.css">
+        <link rel="stylesheet" href="orders.css">
+    </head>
+    <body>
+        <!--IMPORTED SIDEBAR-->
+        <div id="admin-navigation-bar"></div>
+
+        <div class="main-container">
+            <!--IMPORTED HEADER-->
+            <div id="admin-header"></div>
+
+            <!--ORDERS-->
+            <div class="main">
+                <!-- ORDERS CARD -->
+                <div class="orders-card">
+
+                    <!-- FILTER TABS -->
+                    <div class="filter-tabs" id="filter-tabs"></div>
+
+                    <!-- ORDERS TABLE -->
+                    <div class="orders-table">
+
+                        <!-- TABLE HEADER -->
+                        <div class="table-header">
+                            <div class="order-number">PO #</div>
+                            <div class="order-date">Date</div>
+                            <div class="order-time">Time</div>
+                            <div class="order-items">Items</div>
+                            <div class="order-type">Type</div>
+                            <div class="order-payment">Pay</div>
+                            <div class="order-total">Total</div>
+                            <div class="order-status">Status</div>
+                            <div class="order-toggle-spacer"></div>
+                        </div>
+
+                        <!-- ORDER ROWS -->
+                        <div id="order-rows"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!--IMPORT ORDERS AND SIDEBAR/HEADER HTML-->
+    <script src="orders.js"></script>
+    <script src="../../../lib/components.js"></script>
+    </body>
+</html>
