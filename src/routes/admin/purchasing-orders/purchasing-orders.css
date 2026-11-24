@@ -53,7 +53,7 @@ PURCHASE ORDERS CARD
 .main .purchase-orders-card {
     display: flex;
     flex-direction: column;
-    flex: 0 1 auto;
+    flex: 1;
     gap: 20px;
     min-height: 0;
 
@@ -184,7 +184,7 @@ PURCHASE ORDERS TABLE
 .main .purchase-orders-table {
     display: flex;
     flex-direction: column;
-    flex: 0 1 auto;
+    flex: 1;
     min-height: 0;
 
     overflow-y: auto;
