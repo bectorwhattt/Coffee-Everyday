@@ -82,6 +82,46 @@ HEADER
     color: var(--bgcolor-light);
 } 
 
+/* Hamburger toggle – hidden on desktop, shown on mobile */
+.header .nav-toggle {
+    display: none;
+}
+
+.header .nav-toggle-label {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.header .nav-toggle-label span,
+.header .nav-toggle-label span::before,
+.header .nav-toggle-label span::after {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background-color: var(--color-black);
+    transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.header .nav-toggle-label span::before,
+.header .nav-toggle-label span::after {
+    content: "";
+    position: relative;
+}
+
+.header .nav-toggle-label span::before {
+    top: -7px;
+}
+
+.header .nav-toggle-label span::after {
+    top: 5px;
+}
 
 /*********************************************************************************
 FOOTER
@@ -624,4 +664,383 @@ BEFORE YOU VISIT                                         .
 .main .visit-answer {
   font-size: 16px;
   line-height: 150%;
+}
+
+
+/*********************************************************************************
+RESPONSIVE — TABLET (max-width: 1024px)
+*********************************************************************************/
+@media (max-width: 1024px) {
+  /* HEADER */
+  .header {
+    height: 80px;
+    padding: 0 24px;
+  }
+  .header .navigation-bar {
+    width: auto;
+    gap: 24px;
+  }
+  .header a {
+    font-size: 16px;
+  }
+  .header a::after {
+    top: 22px;
+  }
+  .header button {
+    width: 120px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  /* CONTACT HERO */
+  .main .contact-hero {
+    flex-direction: column;
+    gap: 48px;
+    padding: 48px 5% 56px;
+  }
+  .main .contact-hero-content {
+    width: 100%;
+    gap: 40px;
+  }
+  .main .contact-hero-title {
+    font-size: 60px;
+    letter-spacing: -1.5px;
+  }
+  .main .contact-hero-description {
+    max-width: 100%;
+  }
+
+  /* CONTACT INFORMATION */
+  .main .contact-information-detail {
+    max-width: 100%;
+  }
+
+  /* CONTACT VISUAL — stack images, drop the absolute overlay */
+  .main .contact-hero-visual {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .main .contact-storefront-image,
+  .main .contact-map-image {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+  .main .contact-storefront-image {
+    height: 420px;
+  }
+  .main .contact-map-image {
+    width: 55%;
+    height: 260px;
+    align-self: flex-start;
+  }
+  .main .contact-directions-button {
+    position: static;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  /* GRAB BANNER */
+  .main .grab-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 48px 40px;
+    border-radius: 40px;
+  }
+  .main .grab-banner-content {
+    width: 100%;
+  }
+  .main .grab-banner-title {
+    font-size: 42px;
+  }
+  .main .grab-banner-description {
+    max-width: 100%;
+  }
+
+  /* SEND US A MESSAGE */
+  .main .contact-message {
+    flex-direction: column;
+    gap: 32px;
+    padding: 72px 5% 0;
+  }
+  .main .contact-message-heading-group {
+    width: 100%;
+  }
+  .main .contact-section-title {
+    font-size: 42px;
+  }
+  .main .contact-section-description {
+    max-width: 100%;
+  }
+  .main .contact-form {
+    width: 100%;
+  }
+
+  /* VISIT QUESTIONS */
+  .main .visit-questions {
+    flex-direction: column;
+    gap: 32px;
+    padding: 64px 5% 72px;
+  }
+  .main .visit-questions-heading-group {
+    width: 100%;
+  }
+  .main .visit-questions-list {
+    width: 100%;
+  }
+
+  /* FOOTER */
+  .footer {
+    height: auto;
+    padding: 48px 24px 24px;
+  }
+  .footer .footer-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    height: auto;
+  }
+  .footer-main .footer-menu {
+    width: 100%;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .footer .copyright-section {
+    height: auto;
+    padding-top: 24px;
+    padding-bottom: 0;
+  }
+}
+
+
+/*********************************************************************************
+RESPONSIVE — MOBILE (max-width: 640px)
+*********************************************************************************/
+@media (max-width: 640px) {
+  /* HEADER — hamburger toggle */
+  .header {
+    height: 70px;
+    padding: 0 16px;
+    position: relative;
+  }
+  .header .logo img {
+    height: 40px;
+    width: auto;
+  }
+  .header .call-to-action button {
+    width: 110px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  /* Show the hamburger label */
+  .header .nav-toggle-label {
+    display: flex;
+    order: 3;
+  }
+
+  /* Dropdown nav panel */
+  .header .navigation-bar {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    width: 100%;
+    padding: 20px 24px 28px;
+    background-color: var(--bgcolor-light);
+    border-bottom: 1px solid var(--color-black);
+    transform: translateY(-150%);
+    visibility: hidden;
+    transition: transform 0.3s ease, visibility 0.3s ease;
+    z-index: 15;
+  }
+  .header .nav-toggle:checked ~ .navigation-bar {
+    transform: translateY(0);
+    visibility: visible;
+  }
+  .header .navigation-bar a {
+    font-size: 18px;
+  }
+  .header .navigation-bar a::after {
+    top: 24px;
+  }
+
+  /* Animate the hamburger into an X when open */
+  .header .nav-toggle:checked ~ .nav-toggle-label span {
+    background-color: transparent;
+  }
+  .header .nav-toggle:checked ~ .nav-toggle-label span::before {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .header .nav-toggle:checked ~ .nav-toggle-label span::after {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* MAIN */
+  .main {
+    font-size: 16px;
+  }
+
+  /* CONTACT HERO */
+  .main .contact-hero {
+    padding: 36px 6% 48px;
+    gap: 36px;
+  }
+  .main .contact-hero-content {
+    gap: 32px;
+  }
+  .main .contact-hero-heading-group {
+    gap: 18px;
+  }
+  .main .contact-hero-title {
+    font-size: 44px;
+    letter-spacing: -1px;
+  }
+  .main .pill {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  /* CONTACT INFORMATION */
+  .main .contact-information-item {
+    padding: 20px 0 22px 12px;
+    gap: 12px;
+  }
+  .main .contact-information-label {
+    font-size: 17px;
+  }
+  .main .contact-information-detail {
+    font-size: 15px;
+  }
+
+  /* CONTACT VISUAL */
+  .main .contact-hero-visual {
+    gap: 12px;
+  }
+  .main .contact-storefront-image {
+    height: 280px;
+  }
+  .main .contact-map-image {
+    width: 100%;
+    height: 200px;
+  }
+
+  /* GRAB BANNER */
+  .main .grab-banner {
+    margin: 0 6%;
+    padding: 36px 24px;
+    border-radius: 28px;
+    gap: 20px;
+  }
+  .main .grab-banner-title {
+    font-size: 34px;
+  }
+  .main .grab-banner-description {
+    font-size: 15px;
+  }
+  .main .button {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 16px;
+  }
+
+  /* SEND US A MESSAGE */
+  .main .contact-message {
+    padding: 56px 6% 0;
+    gap: 28px;
+  }
+  .main .contact-message-heading-group {
+    gap: 16px;
+  }
+  .main .contact-section-title {
+    font-size: 34px;
+  }
+  .main .contact-section-description {
+    font-size: 15px;
+  }
+  .main .contact-form {
+    gap: 22px;
+  }
+  /* Stack the two name/email inputs */
+  .main .contact-form-row {
+    flex-direction: column;
+    gap: 22px;
+  }
+  .main .contact-form-field input {
+    height: 44px;
+    font-size: 16px;
+  }
+  .main .contact-form-field textarea {
+    height: 130px;
+    font-size: 16px;
+  }
+
+  /* VISIT QUESTIONS */
+  .main .visit-questions {
+    padding: 48px 6% 56px;
+    gap: 24px;
+  }
+  .main .visit-questions-heading-group {
+    gap: 16px;
+  }
+  .main .visit-question {
+    font-size: 17px;
+  }
+  .main .visit-answer {
+    font-size: 15px;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 40px 20px 20px;
+  }
+  .footer-logo .logo-frame {
+    width: 160px;
+    height: 70px;
+  }
+  .footer-logo p {
+    font-size: 16px;
+  }
+  .footer-main .footer-menu {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .footer-menu .menu-group {
+    width: 100%;
+  }
+  .footer hr {
+    width: 100%;
+    margin: 24px 0 0;
+  }
+  .copyright-section p {
+    font-size: 13px;
+  }
+}
+
+
+/*********************************************************************************
+RESPONSIVE — SMALL MOBILE (max-width: 380px)
+*********************************************************************************/
+@media (max-width: 380px) {
+  .main .contact-hero-title {
+    font-size: 36px;
+  }
+  .main .grab-banner-title,
+  .main .contact-section-title {
+    font-size: 28px;
+  }
+  .header .call-to-action button {
+    width: 100px;
+    font-size: 14px;
+  }
 }
