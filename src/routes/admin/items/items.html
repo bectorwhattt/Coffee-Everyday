@@ -1,77 +1,177 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Coffee Everyday</title>
-        <link rel="stylesheet" href="../../../components/html-components.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="items.css">
     </head>
     <body>
-        <!--IMPORTED SIDEBAR-->
-        <div id="admin-navigation-bar"></div>
+        <!--SIDEBAR-->
+        <div class="admin-navigation-bar">
+            <div class="sidebar-logo">
+                <div class="logo-frame">
+                    <img src="../../../../assets/images/logos/brandmark-tight.png" alt="Coffee Everyday">
+                </div>
+            </div>
+
+            <div class="navigation" id="admin-navLinks">
+                <hr>
+                <span class="section-title">GENERAL</span>
+
+                <a href="../dashboard/dashboard.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/dashboard-icon.png" alt="Dashboard">
+                        <span>Dashboard</span>
+                    </div>
+                </a>
+
+                <a href="../orders/orders.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/orders-icon.png" alt="Orders">
+                        <span>Orders</span>
+                    </div>
+                </a>
+
+                <a href="../reports/reports.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/reports-icon.png" alt="Reports">
+                        <span>Reports</span>
+                    </div>
+                </a>
+
+                <hr>
+                <span class="section-title">INVENTORY MANAGEMENT</span>
+
+                <a href="../items/items.html" class="active" aria-current="page">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/items-icon.png" alt="Items">
+                        <span>Items</span>
+                    </div>
+                </a>
+
+                <a href="../categories/categories.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/categories-icon.png" alt="Categories">
+                        <span>Categories</span>
+                    </div>
+                </a>
+
+                <a href="../recipes/recipes.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/recipes-icon.png" alt="Recipes">
+                        <span>Recipes</span>
+                    </div>
+                </a>
+
+                <a href="../stock-adjustments/stock-adjustments.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/stockadjustments-icon.png" alt="Stock Adjustments">
+                        <span>Stock Adjustments</span>
+                    </div>
+                </a>
+
+                <hr>
+                <span class="section-title">RESTOCKING</span>
+
+                <a href="../purchasing-orders/purchasing-orders.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/purchasingorders-icon.png" alt="Purchasing Orders">
+                        <span>Purchasing Orders</span>
+                    </div>
+                </a>
+
+                <a href="../suppliers/suppliers.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/suppliers-icon.png" alt="Suppliers">
+                        <span>Suppliers</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Decorative coffee bean -->
+            <div class="sidebar-decor" aria-hidden="true">
+                <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <g transform="rotate(35 60 60)">
+                        <ellipse cx="60" cy="60" rx="30" ry="46"/>
+                        <path d="M60 14c-14 20 14 36 0 46s14 26 0 46"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!--DRAWER OVERLAY (tablet & mobile)-->
+        <div class="nav-overlay"></div>
 
         <div class="main-container">
-            <!--IMPORTED HEADER-->
-            <div id="admin-header"></div>
+            <header class="admin-header">
+                <!--HAMBURGER BUTTON (tablet & mobile)-->
+                <button type="button" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <path d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+
+                <span class="page-title" id="page-title">Items</span>
+
+                <div class="admin-header-actions">
+                    <label class="admin-search-box" aria-label="Global search">
+                        <img
+                            class="search-icon"
+                            src="../../../../assets/images/admin-header/search-icon.png"
+                            alt="Search"
+                        >
+                        <input
+                            type="search"
+                            id="adminGlobalSearch"
+                            placeholder="Search products, orders, or inventory..."
+                        >
+                    </label>
+
+                    <button type="button" class="icon-btn notif-btn" aria-label="Notifications">
+                        <img
+                            src="../../../../assets/images/admin-header/notifbell-icon.png"
+                            alt="Notifications"
+                        >
+                    </button>
+
+                    <div class="admin-profile" id="admin-profile" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Open account menu">
+                        <img
+                            class="profile-avatar"
+                            src="../../../../assets/images/admin-header/profile-icon.png"
+                            alt="Admin"
+                        >
+                        <span class="profile-name">Admin</span>
+                        <svg class="profile-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="2.5,4.5 6,8 9.5,4.5"></polyline>
+                        </svg>
+                        <div class="profile-dropdown" id="profile-dropdown" role="menu">
+                            <a href="../login/login.html" class="dropdown-item" role="menuitem">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
 
             <!--ITEMS-->
             <div class="main">
                 <!-- ITEMS CARD -->
                 <div class="items-card">
 
-                    <!-- ITEM FORM (ADD / EDIT) -->
-                    <div class="item-form" id="item-form">
-                        <div class="item-form-title" id="item-form-title">Add item</div>
-
-                        <div class="item-form-row">
-                            <button class="delete-button" id="delete-item-button" type="button" aria-label="Delete item">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
-                                    <path d="M10 11v6M14 11v6"></path>
-                                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
-                                </svg>
-                            </button>
-
-                            <div class="field field-grow">
-                                <label class="field-label" for="item-name-input">Item name</label>
-                                <input class="field-input" id="item-name-input" type="text" placeholder="Enter item name" autocomplete="off">
-                            </div>
-                            <div class="field field-category">
-                                <label class="field-label" for="item-category-select">Category</label>
-                                <select class="field-input" id="item-category-select" required>
-                                    <option value="" disabled selected>Category</option>
-                                </select>
-                            </div>
-                            <div class="field field-unit">
-                                <label class="field-label" for="item-unit-select">Unit</label>
-                                <select class="field-input" id="item-unit-select">
-                                    <option value="mL">mL</option>
-                                    <option value="L">L</option>
-                                    <option value="g">g</option>
-                                    <option value="kg">kg</option>
-                                    <option value="pcs">pcs</option>
-                                    <option value="Packet">Packet</option>
-                                </select>
-                            </div>
-
-                            <button class="button-secondary form-action-button" id="cancel-item-button" type="button" aria-label="Cancel">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                                    <line x1="2" y1="2" x2="10" y2="10"></line>
-                                    <line x1="10" y1="2" x2="2" y2="10"></line>
-                                </svg>
-                            </button>
-                            <button class="button-primary form-action-button" id="save-item-button" type="button" aria-label="Save item">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="4 12 10 18 20 6"></polyline>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- CATEGORY FILTER -->
-                    <div class="items-toolbar">
+                    <!-- CARD HEADER -->
+                    <div class="card-header">
                         <select class="category-filter" id="category-filter-select" aria-label="Filter items by category"></select>
-                        <button class="button-primary add-item-button" id="open-add-item-button" type="button">+ Add item</button>
+                        <button class="button-primary add-item-button" id="open-panel-button" type="button">+ Add item</button>
                     </div>
 
                     <!-- ITEMS TABLE -->
@@ -89,12 +189,74 @@
                     </div>
                 </div>
 
+                <!-- PANEL OVERLAY -->
+                <div class="panel-overlay" id="panel-overlay"></div>
+
+                <!-- ADD / EDIT ITEM PANEL -->
+                <div class="panel" id="item-panel" aria-hidden="true">
+
+                    <!-- PANEL HEADER -->
+                    <div class="panel-header">
+                        <div class="panel-heading">
+                            <div class="panel-title" id="panel-title">Add item</div>
+                            <div class="panel-subtitle" id="panel-subtitle">Add a new item to your inventory.</div>
+                        </div>
+                        <button class="close-button" id="close-panel-button" type="button" aria-label="Close panel">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                                <line x1="2" y1="2" x2="10" y2="10"></line>
+                                <line x1="10" y1="2" x2="2" y2="10"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="item-details-row">
+                            <div class="field field-grow">
+                                <label class="field-label" for="item-name-input">Item name</label>
+                                <input class="field-input" id="item-name-input" type="text" placeholder="Enter item name" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="item-details-row">
+                            <div class="field field-grow">
+                                <label class="field-label" for="item-category-select">Category</label>
+                                <select class="field-input" id="item-category-select" required>
+                                    <option value="" disabled selected>Category</option>
+                                </select>
+                            </div>
+                            <div class="field field-unit">
+                                <label class="field-label" for="item-unit-select">Unit</label>
+                                <select class="field-input" id="item-unit-select">
+                                    <option value="mL">mL</option>
+                                    <option value="L">L</option>
+                                    <option value="g">g</option>
+                                    <option value="kg">kg</option>
+                                    <option value="pcs">pcs</option>
+                                    <option value="Packet">Packet</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PANEL FOOTER -->
+                    <div class="panel-footer">
+                        <button class="delete-button" id="delete-item-button" type="button" aria-label="Delete item">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                <path d="M10 11v6M14 11v6"></path>
+                                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                            </svg>
+                        </button>
+                        <button class="button-secondary" id="cancel-item-button" type="button">Cancel</button>
+                        <button class="button-primary" id="save-item-button" type="button">Save item</button>
+                    </div>
+                </div>
+
                 <!-- ITEMS SCRIPT -->
                 <script src="items.js"></script>
             </div>
         </div>
 
-    <!--IMPORT SIDEBAR AND HEADER HTML-->
-    <script src="../../../lib/components.js"></script>
     </body>
 </html>

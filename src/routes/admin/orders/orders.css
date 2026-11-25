@@ -10,17 +10,252 @@ body {
     margin: 0;
     padding: 0;
 
-    font-family: var(--adm-font);
+    font-family: var(--adm-font, 'Poppins', 'Roboto', sans-serif);
+}
+
+/* Lock page scroll while the panel or the drawer is open */
+body:has(.panel.open),
+body.nav-open {
+    overflow: hidden;
 }
 
 .main-container {
     display: flex;
     flex-direction: column;
 
+    box-sizing: border-box;
     width: 100%;
     min-height: 100vh;
 
-    margin-left: var(--adm-navbar-width);
+    margin-left: var(--adm-navbar-width, 290px);
+}
+
+/*********************************************************************************
+ADMIN NAVIGATION BAR
+*********************************************************************************/
+.admin-navigation-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+    height: 100%;
+    width: var(--adm-navbar-width, 290px);
+    padding: 0 20px 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    /* Hide the scrollbar but keep the sidebar scrollable */
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;       /* old Edge / IE */
+
+    background-color: var(--adm-bgcolor-brown, #4A2C20);
+    color: var(--bgcolor-light, #F7F1E8);
+}
+
+.admin-navigation-bar::-webkit-scrollbar {
+    display: none;                  /* Chrome, Safari, new Edge */
+}
+
+.admin-navigation-bar .sidebar-logo {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+
+    padding: 24px 0 8px;
+}
+
+.admin-navigation-bar .logo-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 80px;
+    width: 185px;
+
+    background-color: var(--bgcolor-light, #F7F1E8);
+    border-radius: 15px;
+}
+
+.admin-navigation-bar .logo-frame img {
+    max-width: 150px;
+    max-height: 60px;
+}
+
+.admin-navigation-bar .navigation {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 4px;
+}
+
+.admin-navigation-bar .navigation hr {
+    width: 100%;
+    margin: 16px 0 8px;
+
+    border: none;
+    border-top: 1px solid rgba(247, 241, 232, 0.2);
+}
+
+.admin-navigation-bar .section-title {
+    margin: 0 12px 6px;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--color-gold, #C98A2B);
+}
+
+.admin-navigation-bar .navigation a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.admin-navigation-bar .frame {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: background-color 0.2s ease;
+}
+
+.admin-navigation-bar .frame img {
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+.admin-navigation-bar .navigation a:hover .frame {
+    background-color: rgba(247, 241, 232, 0.12);
+}
+
+/* Current page */
+.admin-navigation-bar .navigation a.active .frame {
+    background-color: var(--adm-bgcolor-terracotta, #9D6048);
+}
+
+/* Decorative coffee bean at the bottom of the sidebar */
+.admin-navigation-bar .sidebar-decor {
+    width: 110px;
+    flex-shrink: 0;
+    margin: auto 0 0 8px;
+    padding-top: 40px;
+
+    color: rgba(247, 241, 232, 0.85);
+}
+
+.admin-navigation-bar .sidebar-decor svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/*********************************************************************************
+ADMIN HEADER
+*********************************************************************************/
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 80px;
+    padding: 0 24px;
+
+    border-bottom: 1px solid var(--color-gold, #C98A2B);
+
+    background-color: var(--bgcolor-light, #F7F1E8);
+    color: var(--color-black, #1E1512);
+}
+
+.admin-header .page-title {
+    font-size: 22px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.admin-header-actions {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.admin-search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    box-sizing: border-box;
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    max-width: 420px;
+    margin-left: auto;
+    padding: 8px 16px;
+
+    border-radius: 999px;
+    background-color: var(--bgcolor-beige, #EFE3D1);
+}
+
+.admin-search-box .search-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.admin-search-box input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--color-black, #1E1512);
+}
+
+.admin-header .icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+    background-color: var(--bgcolor-beige, #EFE3D1);
+
+    cursor: pointer;
+}
+
+.admin-header .notif-btn {
+    margin-left: auto;
+}
+
+.admin-header .icon-btn img {
+    width: 20px;
+    height: 20px;
 }
 
 
@@ -31,13 +266,20 @@ MAIN
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-height: 0;
 
     box-sizing: border-box;
-    padding: 12px 24px 40px 24px;
+    padding: 20px 24px 40px;
 
-    background-color: var(--bgcolor-beige);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
+}
+
+.main button,
+.main input,
+.main select {
+    font-family: inherit;
 }
 
 
@@ -47,13 +289,16 @@ ORDERS CARD
 .main .orders-card {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 20px;
+    min-height: 0;
 
     box-sizing: border-box;
-    padding: 22px 30px 40px 30px;
+    padding: 22px 24px 28px 24px;
 
     border-radius: 24px;
-    background-color: var(--bgcolor-light);
+    background-color: var(--bgcolor-light, #F7F1E8);
+    box-shadow: 0 1px 8px rgba(59, 36, 24, 0.08);
 }
 
 
@@ -74,13 +319,13 @@ FILTER TABS
     box-sizing: border-box;
     padding: 5px 13px;
 
-    border: 1px solid var(--color-black);
+    border: 1px solid var(--color-black, #1E1512);
     border-radius: 999px;
     background-color: transparent;
 
     font-size: 13px;
     font-weight: 400;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 
     cursor: pointer;
 
@@ -88,13 +333,13 @@ FILTER TABS
 }
 
 .main .filter-tab:hover {
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 }
 
 .main .filter-tab.active {
-    background-color: var(--bgcolor-darkbrown);
+    background-color: var(--bgcolor-darkbrown, #371509);
 
-    color: var(--bgcolor-light);
+    color: var(--bgcolor-light, #F7F1E8);
 }
 
 
@@ -104,32 +349,56 @@ ORDERS TABLE
 .main .orders-table {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    min-height: 0;
+
+    overflow-y: auto;
 }
 
 .main .table-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
     display: flex;
     align-items: center;
     gap: 12px;
 
     box-sizing: border-box;
-    padding: 8px 20px 8px 12px;
+    padding: 10px 24px;
 
-    border-radius: 4px;
-    background-color: var(--bgcolor-khaki);
+    border-radius: 8px;
+    background-color: var(--bgcolor-khaki, #EBD9C0);
+
+    flex-shrink: 0;
 
     font-size: 12px;
-    font-weight: 400;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
-/*********************************************************************************
-ORDER ROWS
-*********************************************************************************/
+.main .orders-body {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.main .orders-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px 0;
+
+    font-size: 12px;
+    color: var(--color-grey, #7A685B);
+}
+
 .main .order-row {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 
-    border-bottom: 1px solid var(--bgcolor-khaki);
+    border-bottom: 1px solid var(--bgcolor-khaki, #EBD9C0);
 }
 
 .main .order-summary {
@@ -138,13 +407,13 @@ ORDER ROWS
     gap: 12px;
 
     box-sizing: border-box;
-    padding: 14px 20px 8px 12px;
+    padding: 16px 24px;
 
     font-size: 12px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
-.main .order-number {
+.main .cell-order-number {
     display: flex;
     align-items: center;
 
@@ -154,11 +423,11 @@ ORDER ROWS
     font-weight: 600;
 }
 
-.main .table-header .order-number {
+.main .table-header .cell-order-number {
     font-weight: 400;
 }
 
-.main .order-date {
+.main .cell-date {
     display: flex;
     align-items: center;
 
@@ -166,7 +435,7 @@ ORDER ROWS
     flex-shrink: 0;
 }
 
-.main .order-time {
+.main .cell-time {
     display: flex;
     align-items: center;
 
@@ -174,7 +443,7 @@ ORDER ROWS
     flex-shrink: 0;
 }
 
-.main .order-items {
+.main .cell-items {
     display: flex;
     align-items: center;
 
@@ -182,7 +451,7 @@ ORDER ROWS
     min-width: 0;
 }
 
-.main .order-type {
+.main .cell-type {
     display: flex;
     align-items: center;
 
@@ -190,7 +459,7 @@ ORDER ROWS
     flex-shrink: 0;
 }
 
-.main .order-payment {
+.main .cell-payment {
     display: flex;
     align-items: center;
 
@@ -198,7 +467,7 @@ ORDER ROWS
     flex-shrink: 0;
 }
 
-.main .order-total {
+.main .cell-total {
     display: flex;
     align-items: center;
 
@@ -208,11 +477,11 @@ ORDER ROWS
     font-weight: 600;
 }
 
-.main .table-header .order-total {
+.main .table-header .cell-total {
     font-weight: 400;
 }
 
-.main .order-status {
+.main .cell-status {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -227,13 +496,13 @@ ORDER ROWS
     justify-content: center;
 
     box-sizing: border-box;
-    padding: 2px 12px;
+    padding: 3px 14px;
 
     border-radius: 999px;
 
     font-size: 9px;
     font-weight: 600;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .status-processing {
@@ -254,20 +523,26 @@ ORDER ROWS
     color: #99080F;
 }
 
+.main .cell-toggle-spacer {
+    width: 20px;
+    flex-shrink: 0;
+}
+
 .main .order-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
 
+    box-sizing: border-box;
     width: 20px;
     height: 20px;
     flex-shrink: 0;
 
-    border: 1px solid var(--color-black);
+    border: 1px solid var(--color-black, #1E1512);
     border-radius: 50%;
     background-color: transparent;
 
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 
     cursor: pointer;
 
@@ -278,15 +553,10 @@ ORDER ROWS
     transition: transform 0.2s ease;
 }
 
-.main .order-toggle-spacer {
-    width: 20px;
-    flex-shrink: 0;
-}
-
 .main .order-row.expanded .order-toggle {
-    background-color: var(--bgcolor-darkbrown);
+    background-color: var(--bgcolor-darkbrown, #371509);
 
-    color: var(--bgcolor-light);
+    color: var(--bgcolor-light, #F7F1E8);
 }
 
 .main .order-row.expanded .order-toggle svg {
@@ -300,31 +570,32 @@ ORDER DETAILS
 .main .order-details {
     display: none;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 
     box-sizing: border-box;
-    margin: 4px 0 12px 0;
-    padding: 12px 20px 12px 12px;
+    margin: 0 12px 14px 12px;
+    padding: 16px 24px 18px 24px;
 
-    border-radius: 6px;
-    background-color: var(--bgcolor-beige);
+    border-radius: 12px;
+    background-color: var(--bgcolor-beige, #EFE3D1);
 
     font-size: 12px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .order-row.expanded .order-details {
     display: flex;
 }
 
-.main .order-details-header {
+.main .details-header {
     display: flex;
     align-items: center;
 
-    color: var(--color-grey);
+    font-size: 11px;
+    color: var(--color-grey, #7A685B);
 }
 
-.main .order-details-line {
+.main .details-line {
     display: flex;
     align-items: center;
 }
@@ -334,6 +605,7 @@ ORDER DETAILS
     align-items: center;
 
     flex: 1;
+    min-width: 0;
 }
 
 .main .detail-quantity {
@@ -360,14 +632,385 @@ ORDER DETAILS
     flex-shrink: 0;
 }
 
-.main .detail-bold {
-    font-weight: 600;
+.main .detail-summary-label {
+    display: flex;
+    align-items: center;
+
+    width: 130px;
+    flex-shrink: 0;
 }
 
-.main .order-details-divider {
+.main .details-divider {
     width: 100%;
     height: 1px;
     margin: 6px 0;
 
-    background-color: var(--color-grey);
+    background-color: var(--color-grey, #7A685B);
+}
+
+.main .detail-bold {
+    font-weight: 600;
+}
+
+
+/*********************************************************************************
+ADMIN PROFILE + LOGOUT DROPDOWN
+*********************************************************************************/
+.admin-profile {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s ease;
+}
+
+.admin-profile:hover,
+.admin-profile:focus-visible {
+    background-color: var(--bgcolor-beige, #EFE3D1);
+}
+
+.admin-profile .profile-avatar {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-profile .profile-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Small caret next to the name to hint that the profile is clickable */
+.admin-profile .profile-caret {
+    flex-shrink: 0;
+
+    color: var(--color-black, #1E1512);
+    transition: transform 0.2s ease;
+}
+
+.admin-profile.open .profile-caret {
+    transform: rotate(180deg);
+}
+
+/* The dropdown panel that contains the Logout link */
+.admin-profile .profile-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 50;
+
+    display: none;
+    min-width: 170px;
+
+    box-sizing: border-box;
+    padding: 6px;
+
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(59, 36, 24, 0.18);
+}
+
+.admin-profile.open .profile-dropdown {
+    display: block;
+}
+
+.admin-profile .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-black, #1E1512);
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.admin-profile .dropdown-item:hover,
+.admin-profile .dropdown-item:focus-visible {
+    background-color: var(--bgcolor-beige, #EFE3D1);
+
+    color: var(--adm-bgcolor-brown, #4A2C20);
+}
+
+.admin-profile .dropdown-item svg {
+    flex-shrink: 0;
+}
+
+/*********************************************************************************
+MOBILE: hide the caret when the profile name is collapsed to just the avatar
+*********************************************************************************/
+@media (max-width: 640px) {
+    .admin-profile {
+        padding: 4px;
+    }
+
+    .admin-profile .profile-name,
+    .admin-profile .profile-caret {
+        display: none;
+    }
+}
+
+
+/*********************************************************************************
+HAMBURGER MENU + RESPONSIVE
+*********************************************************************************/
+/* Hamburger button: hidden on desktop */
+.menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+    background-color: var(--bgcolor-beige, #EFE3D1);
+    color: var(--color-black, #1E1512);
+
+    cursor: pointer;
+}
+
+.nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+
+    background-color: rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+/* TABLET (<= 1024px): sidebar becomes a drawer */
+@media (max-width: 1024px) {
+    body {
+        display: block;
+    }
+
+    body.nav-open .nav-overlay {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+
+    .admin-navigation-bar {
+        z-index: 100;
+
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    body.nav-open .admin-navigation-bar {
+        transform: translateX(0);
+
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .main-container {
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+    }
+
+    .admin-header {
+        padding: 0 16px;
+    }
+
+    .admin-header .page-title {
+        font-size: 20px;
+    }
+
+    /* Let the page scroll naturally instead of being locked to the viewport */
+    .main {
+        padding: 16px 16px 32px;
+
+        overflow: visible;
+    }
+
+    .main .orders-card {
+        padding: 18px 16px 24px;
+        border-radius: 18px;
+    }
+
+    .main .orders-table {
+        overflow: visible;
+    }
+}
+
+/* Small tablet / large phone (<= 760px): table rows become cards */
+@media (max-width: 760px) {
+    .main .table-header {
+        display: none;
+    }
+
+    .main .order-summary {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto auto;
+        gap: 10px;
+
+        padding: 16px 12px 12px;
+    }
+
+    /* Number, total, status and toggle share the first line */
+    .main .order-summary .cell-order-number {
+        grid-row: 1;
+        grid-column: 1;
+        width: auto;
+
+        font-size: 13px;
+    }
+
+    .main .order-summary .cell-total {
+        grid-row: 1;
+        grid-column: 2;
+        width: auto;
+    }
+
+    .main .order-summary .cell-status {
+        grid-row: 1;
+        grid-column: 3;
+        width: auto;
+    }
+
+    .main .order-summary .order-toggle {
+        grid-row: 1;
+        grid-column: 4;
+
+        width: 32px;
+        height: 32px;
+    }
+
+    .main .order-summary .cell-date,
+    .main .order-summary .cell-time,
+    .main .order-summary .cell-items,
+    .main .order-summary .cell-type,
+    .main .order-summary .cell-payment {
+        grid-column: 1 / -1;
+        width: auto;
+    }
+
+    .main .order-summary .cell-date::before,
+    .main .order-summary .cell-time::before,
+    .main .order-summary .cell-items::before,
+    .main .order-summary .cell-type::before,
+    .main .order-summary .cell-payment::before {
+        margin-right: 6px;
+
+        color: var(--color-grey, #7A685B);
+    }
+
+    .main .order-summary .cell-date::before    { content: "Date:"; }
+    .main .order-summary .cell-time::before    { content: "Time:"; }
+    .main .order-summary .cell-items::before   { content: "Items:"; }
+    .main .order-summary .cell-type::before    { content: "Type:"; }
+    .main .order-summary .cell-payment::before { content: "Payment:"; }
+
+    /* Expanded details: each line becomes a stacked block */
+    .main .order-details {
+        margin: 0 6px 12px;
+        padding: 12px 14px;
+    }
+
+    .main .details-header {
+        display: none;
+    }
+
+    .main .details-line {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 2px;
+
+        padding: 10px 0;
+
+        border-bottom: 1px solid var(--bgcolor-khaki, #EBD9C0);
+    }
+
+    .main .details-line:last-child {
+        border-bottom: none;
+    }
+
+    .main .details-line .detail-item {
+        grid-column: 1 / -1;
+
+        font-size: 12px;
+        font-weight: 700;
+        width: auto;
+    }
+
+    .main .details-line .detail-quantity,
+    .main .details-line .detail-price,
+    .main .details-line .detail-subtotal,
+    .main .details-line .detail-summary-label {
+        width: auto;
+    }
+
+    .main .details-line .detail-quantity::before { content: "Qty: ";        color: var(--color-grey, #7A685B); }
+    .main .details-line .detail-price::before    { content: "Price each: "; color: var(--color-grey, #7A685B); }
+    .main .details-line .detail-subtotal::before { content: "Subtotal: ";   color: var(--color-grey, #7A685B); }
+
+    /* VAT and total lines: label on the left, amount on the right, no empty cells */
+    .main .details-line:has(.detail-summary-label) {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .main .details-line .detail-item:empty,
+    .main .details-line .detail-quantity:empty {
+        display: none;
+    }
+
+    .main .details-line:has(.detail-summary-label) .detail-subtotal::before {
+        content: none;
+    }
+}
+
+/* MOBILE (<= 640px): matches dashboard's mobile breakpoint */
+@media (max-width: 640px) {
+    /* Header: search hidden, name collapses to the avatar */
+    .admin-header {
+        height: 64px;
+        gap: 8px;
+    }
+
+    .admin-header .page-title {
+        font-size: 18px;
+    }
+
+    .admin-search-box {
+        display: none;
+    }
+
+    .main {
+        padding: 12px 16px 32px;
+    }
+
+    .main .orders-card {
+        padding: 16px 12px 20px;
+        border-radius: 14px;
+    }
 }

@@ -1,19 +1,22 @@
 const mainContainer = document.querySelector(".main");
 
-const itemsCard = mainContainer.querySelector(".items-card");
+const openPanelButton = mainContainer.querySelector("#open-panel-button");
+const closePanelButton = mainContainer.querySelector("#close-panel-button");
+const panelOverlay = mainContainer.querySelector("#panel-overlay");
+const panel = mainContainer.querySelector("#item-panel");
+const panelTitle = mainContainer.querySelector("#panel-title");
+const panelSubtitle = mainContainer.querySelector("#panel-subtitle");
 
-const itemForm = mainContainer.querySelector("#item-form");
-const itemFormTitle = mainContainer.querySelector("#item-form-title");
-const deleteItemButton = mainContainer.querySelector("#delete-item-button");
+const categoryFilterSelect = mainContainer.querySelector("#category-filter-select");
+const itemsBody = mainContainer.querySelector("#items-body");
+
 const itemNameInput = mainContainer.querySelector("#item-name-input");
 const itemCategorySelect = mainContainer.querySelector("#item-category-select");
 const itemUnitSelect = mainContainer.querySelector("#item-unit-select");
+
+const deleteItemButton = mainContainer.querySelector("#delete-item-button");
 const cancelItemButton = mainContainer.querySelector("#cancel-item-button");
 const saveItemButton = mainContainer.querySelector("#save-item-button");
-
-const categoryFilterSelect = mainContainer.querySelector("#category-filter-select");
-const openAddItemButton = mainContainer.querySelector("#open-add-item-button");
-const itemsBody = mainContainer.querySelector("#items-body");
 
 const editIcon =
     '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
@@ -50,9 +53,9 @@ const STATUS_LOW = { label: "Low", className: "status-low" };
 const STATUS_NO_STOCK = { label: "No stock", className: "status-no-stock" };
 const STATUS_IN_STOCK = { label: "In stock", className: "status-in-stock" };
 
-// Which category is shown, and which form mode is open ("closed", "add" or "edit")
+// Which category is shown, and which panel mode is used ("add" or "edit")
 let activeCategory = categories[0];
-let formMode = "closed";
+let formMode = "add";
 let editingItemId = null;
 
 
@@ -66,6 +69,13 @@ function createDiv(className, text) {
         element.textContent = text;
     }
     return element;
+}
+
+function createOption(value, label) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    return option;
 }
 
 function flagInvalid(field) {
@@ -98,12 +108,75 @@ function getNextItemId() {
     }, 0) + 1;
 }
 
-function createOption(value, label) {
-    const option = document.createElement("option");
-    option.value = value;
-    option.textContent = label;
-    return option;
+
+/*********************************************************************************
+PANEL
+*********************************************************************************/
+function clearFormValidation() {
+    [itemNameInput, itemCategorySelect].forEach(clearInvalid);
 }
+
+function openPanel() {
+    panel.classList.add("open");
+    panel.classList.toggle("editing", formMode === "edit");
+    panelOverlay.classList.add("open");
+    panel.setAttribute("aria-hidden", "false");
+
+    panelTitle.textContent = formMode === "edit" ? "Edit item" : "Add item";
+    panelSubtitle.textContent = formMode === "edit"
+        ? "Update the details of this item."
+        : "Add a new item to your inventory.";
+
+    clearFormValidation();
+
+    // A hidden panel can't take focus yet, so wait for the slide-in to start
+    window.setTimeout(function () {
+        itemNameInput.focus({ preventScroll: true });
+    }, 50);
+}
+
+function closePanel() {
+    panel.classList.remove("open", "editing");
+    panelOverlay.classList.remove("open");
+    panel.setAttribute("aria-hidden", "true");
+
+    formMode = "add";
+    editingItemId = null;
+    clearFormValidation();
+}
+
+function openAddPanel() {
+    formMode = "add";
+    editingItemId = null;
+
+    itemNameInput.value = "";
+    itemCategorySelect.value = activeCategory;
+    itemUnitSelect.selectedIndex = 0;
+
+    openPanel();
+}
+
+function openEditPanel(item) {
+    formMode = "edit";
+    editingItemId = item.id;
+
+    itemNameInput.value = item.name;
+    itemCategorySelect.value = item.category;
+    itemUnitSelect.value = item.unit;
+
+    openPanel();
+}
+
+openPanelButton.addEventListener("click", openAddPanel);
+closePanelButton.addEventListener("click", closePanel);
+cancelItemButton.addEventListener("click", closePanel);
+panelOverlay.addEventListener("click", closePanel);
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+        closePanel();
+    }
+});
 
 
 /*********************************************************************************
@@ -118,10 +191,10 @@ function renderCategoryOptions() {
     categoryFilterSelect.value = activeCategory;
 }
 
-// Show the items of the chosen category, and close the form since the list changed
+// Show the items of the chosen category
 categoryFilterSelect.addEventListener("change", function () {
     activeCategory = categoryFilterSelect.value;
-    closeForm();
+    renderItems();
 });
 
 
@@ -141,15 +214,8 @@ function createItemRow(item) {
     editButton.type = "button";
     editButton.setAttribute("aria-label", "Edit " + item.name);
     editButton.innerHTML = editIcon;
-    editButton.classList.toggle("active", formMode === "edit" && editingItemId === item.id);
-
-    // Clicking the edit button of the item being edited closes the form
     editButton.addEventListener("click", function () {
-        if (formMode === "edit" && editingItemId === item.id) {
-            closeForm();
-        } else {
-            openEditForm(item);
-        }
+        openEditPanel(item);
     });
 
     actionCell.appendChild(editButton);
@@ -182,56 +248,8 @@ function renderItems() {
 
 
 /*********************************************************************************
-ITEM FORM (ADD / EDIT)
+SAVE / DELETE ITEM
 *********************************************************************************/
-function clearFormValidation() {
-    [itemNameInput, itemCategorySelect].forEach(clearInvalid);
-}
-
-function showForm() {
-    itemForm.classList.add("open");
-    itemForm.classList.toggle("editing", formMode === "edit");
-    itemsCard.classList.add("form-open");
-    itemFormTitle.textContent = formMode === "edit" ? "Edit item" : "Add item";
-
-    clearFormValidation();
-    renderItems();
-    itemNameInput.focus();
-}
-
-function openAddForm() {
-    formMode = "add";
-    editingItemId = null;
-
-    itemNameInput.value = "";
-    itemCategorySelect.value = activeCategory;
-    itemUnitSelect.selectedIndex = 0;
-
-    showForm();
-}
-
-function openEditForm(item) {
-    formMode = "edit";
-    editingItemId = item.id;
-
-    itemNameInput.value = item.name;
-    itemCategorySelect.value = item.category;
-    itemUnitSelect.value = item.unit;
-
-    showForm();
-}
-
-function closeForm() {
-    formMode = "closed";
-    editingItemId = null;
-
-    itemForm.classList.remove("open", "editing");
-    itemsCard.classList.remove("form-open");
-
-    clearFormValidation();
-    renderItems();
-}
-
 function isDuplicateName(name, category) {
     return items.some(function (item) {
         return item.id !== editingItemId
@@ -282,7 +300,8 @@ function saveItem() {
     activeCategory = category;
     categoryFilterSelect.value = category;
 
-    closeForm();
+    closePanel();
+    renderItems();
 }
 
 function deleteItem() {
@@ -295,14 +314,13 @@ function deleteItem() {
     }
 
     items = items.filter(function (current) {
-        return current.id !== editingItemId;
+        return current.id !== item.id;
     });
 
-    closeForm();
+    closePanel();
+    renderItems();
 }
 
-openAddItemButton.addEventListener("click", openAddForm);
-cancelItemButton.addEventListener("click", closeForm);
 saveItemButton.addEventListener("click", saveItem);
 deleteItemButton.addEventListener("click", deleteItem);
 
@@ -310,12 +328,6 @@ deleteItemButton.addEventListener("click", deleteItem);
 itemNameInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         saveItem();
-    }
-});
-
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && formMode !== "closed") {
-        closeForm();
     }
 });
 
@@ -328,3 +340,124 @@ document.addEventListener("keydown", function (event) {
 
 renderCategoryOptions();
 renderItems();
+
+
+/*********************************************************************************
+ADMIN PROFILE DROPDOWN (LOGOUT)
+Toggles the dropdown when the profile is clicked, closes it when the user
+clicks outside or presses Escape. The Logout link itself lives in the HTML
+and points to ../login/login.html.
+*********************************************************************************/
+(function () {
+    const adminProfile = document.querySelector("#admin-profile");
+    if (!adminProfile) return;
+
+    function setDropdownOpen(isOpen) {
+        adminProfile.classList.toggle("open", isOpen);
+        adminProfile.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    adminProfile.addEventListener("click", function (event) {
+        // Let the Logout link do its own navigation
+        if (event.target.closest(".dropdown-item")) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+        setDropdownOpen(!adminProfile.classList.contains("open"));
+    });
+
+    // Keyboard support: Enter or Space toggles the dropdown when focused
+    adminProfile.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setDropdownOpen(!adminProfile.classList.contains("open"));
+        }
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!adminProfile.contains(event.target)) {
+            setDropdownOpen(false);
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            setDropdownOpen(false);
+        }
+    });
+})();
+
+
+/*********************************************************************************
+MOBILE DRAWER
+(Move this block to lib/components.js if you want every admin page to get it.)
+*********************************************************************************/
+(function () {
+    const TABLET_MAX = 1024;
+
+    function setDrawer(open) {
+        const nav = document.querySelector(".admin-navigation-bar");
+        const overlay = document.querySelector(".nav-overlay");
+        const menuBtn = document.querySelector(".menu-btn");
+        if (!nav || !overlay) return;
+
+        document.body.classList.toggle("nav-open", open);
+        if (menuBtn) {
+            menuBtn.setAttribute("aria-expanded", String(open));
+            menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        }
+    }
+
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".menu-btn")) {
+            const isOpen = document.body.classList.contains("nav-open");
+            setDrawer(!isOpen);
+        } else if (
+            event.target.closest(".nav-overlay") ||
+            event.target.closest(".admin-navigation-bar a")
+        ) {
+            setDrawer(false);
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            setDrawer(false);
+        }
+    });
+
+    // Swipe left on the drawer (or the dimmed overlay) to close it
+    const SWIPE_MIN_DISTANCE = 50;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchTracking = false;
+
+    document.addEventListener("touchstart", function (event) {
+        const isDrawerOpen = document.body.classList.contains("nav-open");
+        const onDrawerArea = event.target.closest(".admin-navigation-bar, .nav-overlay");
+
+        touchTracking = Boolean(isDrawerOpen && onDrawerArea);
+        if (!touchTracking) return;
+
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener("touchend", function (event) {
+        if (!touchTracking) return;
+        touchTracking = false;
+
+        const deltaX = event.changedTouches[0].clientX - touchStartX;
+        const deltaY = event.changedTouches[0].clientY - touchStartY;
+
+        // Must be a mostly horizontal swipe to the left, so scrolling the menu up/down doesn't close it
+        if (deltaX < -SWIPE_MIN_DISTANCE && Math.abs(deltaX) > Math.abs(deltaY)) {
+            setDrawer(false);
+        }
+    }, { passive: true });
+
+    // Reset when growing back to desktop so the drawer state never gets stuck
+    window.addEventListener("resize", function () {
+        if (window.innerWidth > TABLET_MAX) setDrawer(false);
+    });
+})();

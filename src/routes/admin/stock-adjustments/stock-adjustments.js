@@ -224,3 +224,124 @@ document.addEventListener("keydown", function (event) {
 });
 
 renderAdjustments();
+
+
+/*********************************************************************************
+ADMIN PROFILE DROPDOWN (LOGOUT)
+Toggles the dropdown when the profile is clicked, closes it when the user
+clicks outside or presses Escape. The Logout link itself lives in the HTML
+and points to ../login/login.html.
+*********************************************************************************/
+(function () {
+    const adminProfile = document.querySelector("#admin-profile");
+    if (!adminProfile) return;
+
+    function setDropdownOpen(isOpen) {
+        adminProfile.classList.toggle("open", isOpen);
+        adminProfile.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    adminProfile.addEventListener("click", function (event) {
+        // Let the Logout link do its own navigation
+        if (event.target.closest(".dropdown-item")) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+        setDropdownOpen(!adminProfile.classList.contains("open"));
+    });
+
+    // Keyboard support: Enter or Space toggles the dropdown when focused
+    adminProfile.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setDropdownOpen(!adminProfile.classList.contains("open"));
+        }
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!adminProfile.contains(event.target)) {
+            setDropdownOpen(false);
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            setDropdownOpen(false);
+        }
+    });
+})();
+
+
+/*********************************************************************************
+MOBILE DRAWER
+(Move this block to lib/components.js if you want every admin page to get it.)
+*********************************************************************************/
+(function () {
+    const TABLET_MAX = 1024;
+
+    function setDrawer(open) {
+        const nav = document.querySelector(".admin-navigation-bar");
+        const overlay = document.querySelector(".nav-overlay");
+        const menuBtn = document.querySelector(".menu-btn");
+        if (!nav || !overlay) return;
+
+        document.body.classList.toggle("nav-open", open);
+        if (menuBtn) {
+            menuBtn.setAttribute("aria-expanded", String(open));
+            menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        }
+    }
+
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".menu-btn")) {
+            const isOpen = document.body.classList.contains("nav-open");
+            setDrawer(!isOpen);
+        } else if (
+            event.target.closest(".nav-overlay") ||
+            event.target.closest(".admin-navigation-bar a")
+        ) {
+            setDrawer(false);
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            setDrawer(false);
+        }
+    });
+
+    // Swipe left on the drawer (or the dimmed overlay) to close it
+    const SWIPE_MIN_DISTANCE = 50;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchTracking = false;
+
+    document.addEventListener("touchstart", function (event) {
+        const isDrawerOpen = document.body.classList.contains("nav-open");
+        const onDrawerArea = event.target.closest(".admin-navigation-bar, .nav-overlay");
+
+        touchTracking = Boolean(isDrawerOpen && onDrawerArea);
+        if (!touchTracking) return;
+
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener("touchend", function (event) {
+        if (!touchTracking) return;
+        touchTracking = false;
+
+        const deltaX = event.changedTouches[0].clientX - touchStartX;
+        const deltaY = event.changedTouches[0].clientY - touchStartY;
+
+        // Must be a mostly horizontal swipe to the left, so scrolling the menu up/down doesn't close it
+        if (deltaX < -SWIPE_MIN_DISTANCE && Math.abs(deltaX) > Math.abs(deltaY)) {
+            setDrawer(false);
+        }
+    }, { passive: true });
+
+    // Reset when growing back to desktop so the drawer state never gets stuck
+    window.addEventListener("resize", function () {
+        if (window.innerWidth > TABLET_MAX) setDrawer(false);
+    });
+})();
