@@ -1,7 +1,6 @@
 /*********************************************************************************
 BASE CODE
 *********************************************************************************/
-@charset "UTF-8";
 @import url("../../lib/variables.css");
 
 body {
@@ -14,12 +13,414 @@ body {
 }
 
 .main-container {
+    display: flex;
+    flex-direction: column;
+
     width: 100%;
+    height: 100vh;
+    min-height: 0;
 
     margin-left: var(--adm-navbar-width);
+
+    overflow: hidden;
 }
 
 
 /*********************************************************************************
 MAIN
 *********************************************************************************/
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+
+    box-sizing: border-box;
+    padding: 12px 24px 40px 24px;
+
+    background-color: var(--bgcolor-beige);
+
+    color: var(--color-black);
+
+    overflow: hidden;
+}
+
+
+/*********************************************************************************
+CATEGORIES CARD
+*********************************************************************************/
+.main .categories-card {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 560px;
+    gap: 20px;
+    min-height: 0;
+
+    box-sizing: border-box;
+    padding: 22px 24px 28px 24px;
+
+    border-radius: 24px;
+    background-color: var(--bgcolor-light);
+}
+
+/* SHARED BUTTONS */
+.main .button-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    height: 36px;
+    padding: 0 18px;
+
+    border: 1px solid var(--bgcolor-darkbrown);
+    border-radius: 8px;
+    background-color: var(--bgcolor-darkbrown);
+
+    font-family: var(--adm-font);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bgcolor-light);
+
+    cursor: pointer;
+
+    transition: opacity 0.2s ease;
+}
+
+.main .button-primary:hover {
+    opacity: 0.85;
+}
+
+.main .button-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    height: 36px;
+    padding: 0 18px;
+
+    border: 1px solid var(--color-black);
+    border-radius: 8px;
+    background-color: var(--bgcolor-light);
+
+    font-family: var(--adm-font);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.main .button-secondary:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+
+/*********************************************************************************
+CATEGORY FORM (ADD / EDIT)
+*********************************************************************************/
+.main .category-form {
+    display: none;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 12px;
+
+    box-sizing: border-box;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+}
+
+.main .category-form.open {
+    display: flex;
+}
+
+.main .category-form-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.main .category-form-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+/* DELETE BUTTON (EDIT MODE ONLY) */
+.main .delete-button {
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    padding: 0;
+
+    border: 1px solid #99080F;
+    border-radius: 8px;
+    background-color: transparent;
+
+    color: #99080F;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.main .category-form.editing .delete-button {
+    display: flex;
+}
+
+.main .delete-button:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+/* FORM CONTROLS */
+.main .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    min-width: 0;
+}
+
+.main .field-grow {
+    flex: 1;
+}
+
+.main .field-category-for {
+    width: 150px;
+}
+
+.main .field-label {
+    font-size: 11px;
+    color: var(--color-grey);
+}
+
+.main .field-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 38px;
+    padding: 0 12px;
+
+    border: 1px solid var(--color-grey);
+    border-radius: 8px;
+    background-color: var(--bgcolor-khaki);
+
+    font-family: var(--adm-font);
+    font-size: 13px;
+    color: var(--color-black);
+
+    transition: border-color 0.2s ease;
+}
+
+.main .field-input::placeholder {
+    color: var(--color-grey);
+}
+
+.main .field-input:focus {
+    border-color: var(--color-black);
+
+    outline: none;
+}
+
+.main .field-input.invalid {
+    border-color: #99080F;
+}
+
+.main .form-action-button {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+
+/*********************************************************************************
+CARD HEADER
+*********************************************************************************/
+.main .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.main .filter-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 5px 13px;
+
+    border: 1px solid var(--color-black);
+    border-radius: 999px;
+    background-color: transparent;
+
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main .filter-tab:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+.main .filter-tab.active {
+    background-color: var(--bgcolor-darkbrown);
+
+    color: var(--bgcolor-light);
+}
+
+.main .add-category-button {
+    height: 40px;
+    flex-shrink: 0;
+    padding: 0 22px;
+
+    border-radius: 10px;
+}
+
+.main .categories-card.form-open .add-category-button {
+    display: none;
+}
+
+
+/*********************************************************************************
+CATEGORIES TABLE
+*********************************************************************************/
+.main .categories-table {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+
+    overflow-y: auto;
+}
+
+.main .table-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    padding: 10px 24px;
+
+    border-radius: 8px;
+    background-color: var(--bgcolor-khaki);
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .categories-body {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.main .categories-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px 0;
+
+    font-size: 12px;
+    color: var(--color-grey);
+}
+
+.main .category-row {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    padding: 16px 24px;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .cell-category-name {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+
+    font-weight: 600;
+}
+
+.main .table-header .cell-category-name {
+    font-weight: 400;
+}
+
+.main .cell-category-count {
+    display: flex;
+    align-items: center;
+
+    width: 260px;
+    flex-shrink: 0;
+}
+
+.main .cell-action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 40px;
+    flex-shrink: 0;
+}
+
+.main .edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+
+    border: 1px solid var(--color-black);
+    border-radius: 50%;
+    background-color: transparent;
+
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main .edit-button:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+.main .edit-button.active {
+    background-color: var(--bgcolor-darkbrown);
+
+    color: var(--bgcolor-light);
+}

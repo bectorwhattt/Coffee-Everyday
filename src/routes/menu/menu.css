@@ -280,6 +280,22 @@ FOOTER
     border: 0;
     background-color: var(--color-grey);
 }
+}
+
+
+/**********************************************************
+SHARED COMPONENTS .
+**********************************************************/
+
+.button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+padding: 10px 22px;
+
+border: 1px solid var(--color-black);
+border-radius: 100px;
 
 #footer .copyright-section {
     display: flex;
@@ -377,6 +393,11 @@ MAIN
     }
 }
 
+.button-outline:hover {
+background-color: var(--color-black);
+
+color: var(--bgcolor-light);
+}
 
 /**********************************************************
 SHARED COMPONENTS

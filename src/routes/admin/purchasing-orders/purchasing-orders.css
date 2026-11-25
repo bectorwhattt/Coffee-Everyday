@@ -10,20 +10,271 @@ body {
     margin: 0;
     padding: 0;
 
-    font-family: var(--adm-font);
+    font-family: var(--adm-font, 'Poppins', 'Roboto', sans-serif);
+}
+
+/* Lock page scroll while the panel or the drawer is open */
+body:has(.panel.open),
+body.nav-open {
+    overflow: hidden;
 }
 
 .main-container {
     display: flex;
     flex-direction: column;
 
+    box-sizing: border-box;
     width: 100%;
-    height: 100vh;
-    min-height: 0;
+    min-height: 100vh;
 
-    margin-left: var(--adm-navbar-width);
+    margin-left: var(--adm-navbar-width, 290px);
+}
 
-    overflow: hidden;
+/*********************************************************************************
+ADMIN NAVIGATION BAR
+*********************************************************************************/
+.admin-navigation-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+    height: 100%;
+    width: var(--adm-navbar-width, 290px);
+    padding: 0 20px 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    /* Hide the scrollbar but keep the sidebar scrollable */
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;       /* old Edge / IE */
+
+    background-color: var(--adm-bgcolor-brown, #4A2C20);
+    color: var(--bgcolor-light, #F7F1E8);
+}
+
+.admin-navigation-bar::-webkit-scrollbar {
+    display: none;                  /* Chrome, Safari, new Edge */
+}
+
+.admin-navigation-bar .sidebar-logo {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+
+    padding: 24px 0 8px;
+}
+
+.admin-navigation-bar .logo-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 80px;
+    width: 185px;
+
+    background-color: var(--bgcolor-light, #F7F1E8);
+    border-radius: 15px;
+}
+
+.admin-navigation-bar .logo-frame img {
+    max-width: 150px;
+    max-height: 60px;
+}
+
+.admin-navigation-bar .navigation {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 4px;
+}
+
+.admin-navigation-bar .navigation hr {
+    width: 100%;
+    margin: 16px 0 8px;
+
+    border: none;
+    border-top: 1px solid rgba(247, 241, 232, 0.2);
+}
+
+.admin-navigation-bar .section-title {
+    margin: 0 12px 6px;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--color-gold, #C98A2B);
+}
+
+.admin-navigation-bar .navigation a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.admin-navigation-bar .frame {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: background-color 0.2s ease;
+}
+
+.admin-navigation-bar .frame img {
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+.admin-navigation-bar .navigation a:hover .frame {
+    background-color: rgba(247, 241, 232, 0.12);
+}
+
+/* Current page */
+.admin-navigation-bar .navigation a.active .frame {
+    background-color: var(--adm-bgcolor-terracotta, #9D6048);
+}
+
+/* Decorative coffee bean at the bottom of the sidebar */
+.admin-navigation-bar .sidebar-decor {
+    width: 110px;
+    flex-shrink: 0;
+    margin: auto 0 0 8px;
+    padding-top: 40px;
+
+    color: rgba(247, 241, 232, 0.85);
+}
+
+.admin-navigation-bar .sidebar-decor svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/*********************************************************************************
+ADMIN HEADER
+*********************************************************************************/
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 80px;
+    padding: 0 24px;
+
+    border-bottom: 1px solid var(--color-gold, #C98A2B);
+
+    background-color: var(--bgcolor-light, #F7F1E8);
+    color: var(--color-black, #1E1512);
+}
+
+.admin-header .page-title {
+    font-size: 22px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.admin-header-actions {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.admin-search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    box-sizing: border-box;
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    max-width: 420px;
+    margin-left: auto;
+    padding: 8px 16px;
+
+    border-radius: 999px;
+    background-color: var(--bgcolor-beige, #EFE3D1);
+}
+
+.admin-search-box .search-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.admin-search-box input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--color-black, #1E1512);
+}
+
+.admin-header .icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+    background-color: var(--bgcolor-beige, #EFE3D1);
+
+    cursor: pointer;
+}
+
+.admin-header .notif-btn {
+    margin-left: auto;
+}
+
+.admin-header .icon-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-profile .profile-avatar {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-profile .profile-name {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 
@@ -37,13 +288,17 @@ MAIN
     min-height: 0;
 
     box-sizing: border-box;
-    padding: 12px 24px 40px 24px;
+    padding: 20px 24px 40px;
 
-    background-color: var(--bgcolor-beige);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
+}
 
-    overflow: hidden;
+.main button,
+.main input,
+.main select {
+    font-family: inherit;
 }
 
 
@@ -61,7 +316,8 @@ PURCHASE ORDERS CARD
     padding: 22px 24px 28px 24px;
 
     border-radius: 24px;
-    background-color: var(--bgcolor-light);
+    background-color: var(--bgcolor-light, #F7F1E8);
+    box-shadow: 0 1px 8px rgba(59, 36, 24, 0.08);
 }
 
 
@@ -72,6 +328,8 @@ CARD HEADER
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 /* SHARED BUTTONS */
@@ -84,14 +342,14 @@ CARD HEADER
     height: 36px;
     padding: 0 18px;
 
-    border: 1px solid var(--bgcolor-darkbrown);
+    border: 1px solid var(--bgcolor-darkbrown, #371509);
     border-radius: 8px;
-    background-color: var(--bgcolor-darkbrown);
+    background-color: var(--bgcolor-darkbrown, #371509);
 
-    font-family: var(--adm-font);
+    font-family: var(--adm-font, 'Poppins', 'Roboto', sans-serif);
     font-size: 13px;
     font-weight: 600;
-    color: var(--bgcolor-light);
+    color: var(--bgcolor-light, #F7F1E8);
 
     cursor: pointer;
 
@@ -111,14 +369,14 @@ CARD HEADER
     height: 36px;
     padding: 0 18px;
 
-    border: 1px solid var(--color-black);
+    border: 1px solid var(--color-black, #1E1512);
     border-radius: 8px;
-    background-color: var(--bgcolor-light);
+    background-color: var(--bgcolor-light, #F7F1E8);
 
-    font-family: var(--adm-font);
+    font-family: var(--adm-font, 'Poppins', 'Roboto', sans-serif);
     font-size: 13px;
     font-weight: 400;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 
     cursor: pointer;
 
@@ -126,7 +384,7 @@ CARD HEADER
 }
 
 .main .button-secondary:hover {
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 }
 
 .main .new-purchase-order-button {
@@ -154,13 +412,13 @@ FILTER TABS
     box-sizing: border-box;
     padding: 5px 13px;
 
-    border: 1px solid var(--color-black);
+    border: 1px solid var(--color-black, #1E1512);
     border-radius: 999px;
     background-color: transparent;
 
     font-size: 13px;
     font-weight: 400;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 
     cursor: pointer;
 
@@ -168,13 +426,13 @@ FILTER TABS
 }
 
 .main .filter-tab:hover {
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 }
 
 .main .filter-tab.active {
-    background-color: var(--bgcolor-darkbrown);
+    background-color: var(--bgcolor-darkbrown, #371509);
 
-    color: var(--bgcolor-light);
+    color: var(--bgcolor-light, #F7F1E8);
 }
 
 
@@ -202,12 +460,12 @@ PURCHASE ORDERS TABLE
     padding: 10px 24px;
 
     border-radius: 8px;
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 
     flex-shrink: 0;
 
     font-size: 12px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .purchase-orders-body {
@@ -224,7 +482,7 @@ PURCHASE ORDERS TABLE
     padding: 32px 0;
 
     font-size: 12px;
-    color: var(--color-grey);
+    color: var(--color-grey, #7A685B);
 }
 
 .main .purchase-order-row {
@@ -232,7 +490,7 @@ PURCHASE ORDERS TABLE
     flex-direction: column;
     flex-shrink: 0;
 
-    border-bottom: 1px solid var(--bgcolor-khaki);
+    border-bottom: 1px solid var(--bgcolor-khaki, #EBD9C0);
 }
 
 .main .purchase-order-summary {
@@ -243,7 +501,7 @@ PURCHASE ORDERS TABLE
     padding: 16px 24px;
 
     font-size: 12px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .cell-order-number {
@@ -305,8 +563,10 @@ PURCHASE ORDERS TABLE
     align-items: center;
     justify-content: center;
 
+    box-sizing: border-box;
     width: 130px;
     flex-shrink: 0;
+    padding-right: 18px;
 }
 
 .main .status-pill {
@@ -321,7 +581,7 @@ PURCHASE ORDERS TABLE
 
     font-size: 9px;
     font-weight: 600;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .status-ordered {
@@ -357,11 +617,11 @@ PURCHASE ORDERS TABLE
     height: 20px;
     flex-shrink: 0;
 
-    border: 1px solid var(--color-black);
+    border: 1px solid var(--color-black, #1E1512);
     border-radius: 50%;
     background-color: transparent;
 
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 
     cursor: pointer;
 
@@ -373,9 +633,9 @@ PURCHASE ORDERS TABLE
 }
 
 .main .purchase-order-row.expanded .order-toggle {
-    background-color: var(--bgcolor-darkbrown);
+    background-color: var(--bgcolor-darkbrown, #371509);
 
-    color: var(--bgcolor-light);
+    color: var(--bgcolor-light, #F7F1E8);
 }
 
 .main .purchase-order-row.expanded .order-toggle svg {
@@ -396,10 +656,10 @@ PURCHASE ORDER DETAILS
     padding: 16px 24px 18px 24px;
 
     border-radius: 12px;
-    background-color: var(--bgcolor-beige);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 
     font-size: 12px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .purchase-order-row.expanded .purchase-order-details {
@@ -411,7 +671,7 @@ PURCHASE ORDER DETAILS
     align-items: center;
 
     font-size: 11px;
-    color: var(--color-grey);
+    color: var(--color-grey, #7A685B);
 }
 
 .main .details-line {
@@ -480,7 +740,7 @@ PURCHASE ORDER DETAILS
     height: 1px;
     margin: 6px 0;
 
-    background-color: var(--color-grey);
+    background-color: var(--color-grey, #7A685B);
 }
 
 .main .detail-summary-label {
@@ -496,7 +756,7 @@ PURCHASE ORDER DETAILS
 }
 
 .main .detail-muted {
-    color: var(--color-grey);
+    color: var(--color-grey, #7A685B);
 }
 
 
@@ -512,7 +772,7 @@ PANEL OVERLAY
     width: 100%;
     height: 100%;
 
-    background-color: var(--color-black);
+    background-color: var(--color-black, #1E1512);
 
     opacity: 0;
     visibility: hidden;
@@ -544,9 +804,9 @@ NEW PURCHASE ORDER PANEL
     height: 100%;
 
     border-radius: 24px 0 0 24px;
-    background-color: var(--bgcolor-light);
+    background-color: var(--bgcolor-light, #F7F1E8);
 
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 
     overflow: hidden;
     visibility: hidden;
@@ -582,12 +842,12 @@ PANEL HEADER
 .main .panel-title {
     font-size: 18px;
     font-weight: 600;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .panel-subtitle {
     font-size: 12px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .close-button {
@@ -600,11 +860,11 @@ PANEL HEADER
     height: 28px;
     padding: 0;
 
-    border: 1px solid var(--color-black);
+    border: 1px solid var(--color-black, #1E1512);
     border-radius: 50%;
     background-color: transparent;
 
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 
     cursor: pointer;
 
@@ -612,7 +872,7 @@ PANEL HEADER
 }
 
 .main .close-button:hover {
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 }
 
 .main .panel-body {
@@ -627,6 +887,137 @@ PANEL HEADER
     overflow-y: auto;
 }
 
+/*********************************************************************************
+ADMIN PROFILE + LOGOUT DROPDOWN
+*********************************************************************************
+
+This snippet adds the dropdown styles for the admin profile / logout button
+in purchasing-orders.html.
+
+The purchasing-orders.css file was not provided in your upload, so I cannot
+ship a complete merged file. Instead, paste the block below at the BOTTOM of
+your existing purchasing-orders.css (after all existing rules) — these rules
+are scoped to .admin-profile / .profile-dropdown / .dropdown-item so they
+will not collide with anything else in the page.
+
+If you prefer to keep the dropdown styles in their own file, save this as
+profile-dropdown.css in the same folder as purchasing-orders.html and add
+this line inside <head>, AFTER the purchasing-orders.css link:
+
+    <link rel="stylesheet" href="profile-dropdown.css">
+
+*********************************************************************************/
+
+.admin-profile {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s ease;
+}
+
+.admin-profile:hover,
+.admin-profile:focus-visible {
+    background-color: var(--bgcolor-beige, #EFE3D1);
+}
+
+.admin-profile .profile-avatar {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-profile .profile-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Small caret next to the name to hint that the profile is clickable */
+.admin-profile .profile-caret {
+    flex-shrink: 0;
+
+    color: var(--color-black, #1E1512);
+    transition: transform 0.2s ease;
+}
+
+.admin-profile.open .profile-caret {
+    transform: rotate(180deg);
+}
+
+/* The dropdown panel that contains the Logout link */
+.admin-profile .profile-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 50;
+
+    display: none;
+    min-width: 170px;
+
+    box-sizing: border-box;
+    padding: 6px;
+
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(59, 36, 24, 0.18);
+}
+
+.admin-profile.open .profile-dropdown {
+    display: block;
+}
+
+.admin-profile .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-black, #1E1512);
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.admin-profile .dropdown-item:hover,
+.admin-profile .dropdown-item:focus-visible {
+    background-color: var(--bgcolor-beige, #EFE3D1);
+
+    color: var(--adm-bgcolor-brown, #4A2C20);
+}
+
+.admin-profile .dropdown-item svg {
+    flex-shrink: 0;
+}
+
+/*********************************************************************************
+MOBILE: hide the caret when the profile name is collapsed to just the avatar
+*********************************************************************************/
+@media (max-width: 640px) {
+    .admin-profile {
+        padding: 4px;
+    }
+
+    .admin-profile .profile-name,
+    .admin-profile .profile-caret {
+        display: none;
+    }
+}
 
 /*********************************************************************************
 FORM CONTROLS
@@ -665,7 +1056,7 @@ FORM CONTROLS
 
 .main .field-label {
     font-size: 11px;
-    color: var(--color-grey);
+    color: var(--color-grey, #7A685B);
 }
 
 .main .field-input {
@@ -674,27 +1065,27 @@ FORM CONTROLS
     height: 38px;
     padding: 0 12px;
 
-    border: 1px solid var(--color-grey);
+    border: 1px solid var(--color-grey, #7A685B);
     border-radius: 8px;
-    background-color: var(--bgcolor-light);
+    background-color: var(--bgcolor-light, #F7F1E8);
 
-    font-family: var(--adm-font);
+    font-family: var(--adm-font, 'Poppins', 'Roboto', sans-serif);
     font-size: 13px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 
     transition: border-color 0.2s ease;
 }
 
 .main .field-input::placeholder {
-    color: var(--color-grey);
+    color: var(--color-grey, #7A685B);
 }
 
 .main select.field-input:invalid {
-    color: var(--color-grey);
+    color: var(--color-grey, #7A685B);
 }
 
 .main .field-input:focus {
-    border-color: var(--color-black);
+    border-color: var(--color-black, #1E1512);
 
     outline: none;
 }
@@ -709,6 +1100,7 @@ ORDER DETAILS
 *********************************************************************************/
 .main .order-details-row {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
 }
 
@@ -725,13 +1117,13 @@ ADD ITEM (COLLAPSIBLE)
     padding: 18px 20px 20px 20px;
 
     border-radius: 16px;
-    background-color: var(--bgcolor-beige);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 }
 
 .main .section-title {
     font-size: 15px;
     font-weight: 600;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .collapsible-toggle {
@@ -745,8 +1137,8 @@ ADD ITEM (COLLAPSIBLE)
     border: none;
     background: transparent;
 
-    font-family: var(--adm-font);
-    color: var(--color-black);
+    font-family: var(--adm-font, 'Poppins', 'Roboto', sans-serif);
+    color: var(--color-black, #1E1512);
 
     cursor: pointer;
 }
@@ -789,6 +1181,7 @@ ADD ITEM (COLLAPSIBLE)
 .main .add-item-row {
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -813,7 +1206,7 @@ ITEMS IN THIS ORDER
     padding: 18px 20px 20px 20px;
 
     border-radius: 16px;
-    background-color: var(--bgcolor-beige);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 }
 
 .main .order-items-heading {
@@ -824,7 +1217,7 @@ ITEMS IN THIS ORDER
 
 .main .order-items-count {
     font-size: 12px;
-    color: var(--color-grey);
+    color: var(--color-grey, #7A685B);
 }
 
 .main .order-items-table-header {
@@ -835,10 +1228,10 @@ ITEMS IN THIS ORDER
     padding: 8px 12px;
 
     border-radius: 6px;
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 
     font-size: 12px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .order-items-list {
@@ -857,7 +1250,7 @@ ITEMS IN THIS ORDER
     padding: 24px 0;
 
     font-size: 12px;
-    color: var(--color-grey);
+    color: var(--color-grey, #7A685B);
 }
 
 .main .order-item-row {
@@ -868,10 +1261,10 @@ ITEMS IN THIS ORDER
     box-sizing: border-box;
     padding: 12px;
 
-    border-bottom: 1px solid var(--bgcolor-khaki);
+    border-bottom: 1px solid var(--bgcolor-khaki, #EBD9C0);
 
     font-size: 12px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .order-item-name {
@@ -957,7 +1350,7 @@ ITEMS IN THIS ORDER
 }
 
 .main .delete-button:hover {
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 }
 
 .main .order-items-footer {
@@ -969,11 +1362,11 @@ ITEMS IN THIS ORDER
     padding: 6px 12px 0 12px;
 
     font-size: 12px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .order-items-summary {
-    color: var(--color-grey);
+    color: var(--color-grey, #7A685B);
 }
 
 .main .order-items-total {
@@ -1008,4 +1401,354 @@ PANEL FOOTER
 .main .panel-footer .button-primary,
 .main .panel-footer .button-secondary {
     min-width: 130px;
+}
+
+
+/*********************************************************************************
+HAMBURGER MENU + RESPONSIVE
+*********************************************************************************/
+/* Hamburger button: hidden on desktop */
+.menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+    background-color: var(--bgcolor-beige, #EFE3D1);
+    color: var(--color-black, #1E1512);
+
+    cursor: pointer;
+}
+
+.nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+
+    background-color: rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+/* TABLET (<= 1024px): sidebar becomes a drawer */
+@media (max-width: 1024px) {
+    body {
+        display: block;
+    }
+
+    body.nav-open .nav-overlay {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+
+    .admin-navigation-bar {
+        z-index: 100;
+
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    body.nav-open .admin-navigation-bar {
+        transform: translateX(0);
+
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .main-container {
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+    }
+
+    .admin-header {
+        padding: 0 16px;
+    }
+
+    .admin-header .page-title {
+        font-size: 20px;
+    }
+
+    .main {
+        padding: 16px 16px 32px;
+    }
+
+    .main .purchase-orders-card {
+        padding: 18px 16px 24px;
+        border-radius: 18px;
+    }
+
+    /* Let the page scroll naturally instead of being locked to the viewport */
+    .main {
+        overflow: visible;
+    }
+
+    .main .purchase-orders-table {
+        overflow: visible;
+    }
+}
+
+/* Small tablet / large phone (<= 760px): table rows become cards */
+@media (max-width: 760px) {
+    .main .table-header {
+        display: none;
+    }
+
+    .main .purchase-order-summary {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        row-gap: 10px;
+
+        padding: 16px 12px 12px;
+
+        font-size: 12px;
+    }
+
+    .main .purchase-order-summary .cell-order-number {
+        font-size: 13px;
+        width: auto;
+    }
+
+    .main .purchase-order-summary .cell-supplier,
+    .main .purchase-order-summary .cell-date,
+    .main .purchase-order-summary .cell-items {
+        grid-column: 1 / -1;
+        width: auto;
+        justify-content: flex-start;
+    }
+
+    .main .purchase-order-summary .cell-supplier::before,
+    .main .purchase-order-summary .cell-date::before,
+    .main .purchase-order-summary .cell-items::before {
+        display: block;
+
+        font-size: 9px;
+        color: var(--adm-bgcolor-terracotta, #9D6048);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .main .purchase-order-summary .cell-supplier::before { content: "Supplier"; }
+    .main .purchase-order-summary .cell-date::before      { content: "Date ordered"; }
+    .main .purchase-order-summary .cell-items::before     { content: "Items"; }
+
+    .main .purchase-order-summary .cell-total {
+        width: auto;
+    }
+
+    .main .purchase-order-summary .cell-status {
+        width: auto;
+    }
+
+    .main .order-toggle {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* Expanded details: each line becomes a stacked block */
+    .main .purchase-order-details {
+        margin: 0 6px 12px;
+        padding: 12px 14px;
+    }
+
+    .main .details-header {
+        display: none;
+    }
+
+    .main .details-line {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 2px;
+
+        padding: 10px 0;
+
+        border-bottom: 1px solid var(--bgcolor-khaki, #EBD9C0);
+    }
+
+    .main .details-line:last-child {
+        border-bottom: none;
+    }
+
+    .main .details-line .detail-item {
+        grid-column: 1 / -1;
+
+        font-size: 12px;
+        font-weight: 700;
+        width: auto;
+    }
+
+    .main .details-line .detail-quantity,
+    .main .details-line .detail-unit,
+    .main .details-line .detail-amount,
+    .main .details-line .detail-measure,
+    .main .details-line .detail-price,
+    .main .details-line .detail-subtotal {
+        width: auto;
+    }
+
+    .main .details-line .detail-quantity::before { content: "Qty: "; color: var(--color-grey, #7A685B); }
+    .main .details-line .detail-unit::before     { content: "Unit: "; color: var(--color-grey, #7A685B); }
+    .main .details-line .detail-amount::before   { content: "Amount: "; color: var(--color-grey, #7A685B); }
+    .main .details-line .detail-measure::before  { content: "Measure: "; color: var(--color-grey, #7A685B); }
+    .main .details-line .detail-price::before    { content: "Price each: "; color: var(--color-grey, #7A685B); }
+    .main .details-line .detail-subtotal::before { content: "Subtotal: "; color: var(--color-grey, #7A685B); }
+
+    .main .details-line .detail-summary-label {
+        width: auto;
+        grid-column: 1 / 2;
+    }
+
+    /* Divider + total rows: span both columns */
+    .main .details-line:has(.detail-summary-label) {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+}
+
+/* MOBILE (<= 640px): matches dashboard's mobile breakpoint */
+@media (max-width: 640px) {
+    /* Header: search hidden, name collapses to the avatar */
+    .admin-header {
+        height: 64px;
+        gap: 8px;
+    }
+
+    .admin-header .page-title {
+        font-size: 18px;
+    }
+
+    .admin-search-box,
+    .admin-profile .profile-name {
+        display: none;
+    }
+
+    .main {
+        padding: 12px 16px 32px;
+    }
+
+    .main .purchase-orders-card {
+        padding: 16px 12px 20px;
+        border-radius: 14px;
+    }
+
+    /* Card header stacks: filters on top, button on bottom */
+    .main .card-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .main .new-purchase-order-button {
+        width: 100%;
+    }
+
+    /* Panel goes full screen */
+    .main .panel {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .main .panel-header {
+        padding: 18px 16px 12px;
+    }
+
+    .main .panel-body {
+        padding: 0 16px 8px;
+    }
+
+    .main .panel-footer {
+        flex-wrap: wrap;
+        padding: 12px 16px 18px;
+    }
+
+    .main .panel-footer .button-primary,
+    .main .panel-footer .button-secondary {
+        flex: 1;
+        min-width: 0;
+    }
+
+    /* Order details row stacks */
+    .main .order-details-row .field {
+        flex: 1 1 100%;
+    }
+
+    /* Add item row: fields wrap onto two-per-line */
+    .main .add-item-row .field {
+        flex: 1 1 calc(50% - 5px);
+    }
+
+    .main .add-item-row .field-grow {
+        flex-basis: 100%;
+    }
+
+    .main .add-item-actions {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .main .add-item-actions button {
+        flex: 1;
+    }
+
+    /* Order items: stacked lines instead of columns */
+    .main .order-items-table-header {
+        display: none;
+    }
+
+    .main .order-item-row {
+        position: relative;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px 14px;
+
+        padding: 12px 44px 12px 4px;
+    }
+
+    .main .order-item-row .order-item-name {
+        flex: 1 1 100%;
+
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .main .order-item-row .order-item-quantity::before { content: "Qty "; color: var(--color-grey, #7A685B); }
+    .main .order-item-row .order-item-unit::before     { content: "Unit "; color: var(--color-grey, #7A685B); }
+    .main .order-item-row .order-item-amount::before   { content: "Amount "; color: var(--color-grey, #7A685B); }
+    .main .order-item-row .order-item-cost::before     { content: "Cost "; color: var(--color-grey, #7A685B); }
+    .main .order-item-row .order-item-subtotal::before { content: "Subtotal "; color: var(--color-grey, #7A685B); }
+
+    .main .order-item-action {
+        position: absolute;
+        top: 50%;
+        right: 2px;
+        width: auto;
+
+        transform: translateY(-50%);
+    }
+
+    /* Footer wraps */
+    .main .order-items-footer {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .main .order-items-total {
+        gap: 16px;
+    }
+
+    .main .order-items-total-amount {
+        font-size: 16px;
+    }
 }
