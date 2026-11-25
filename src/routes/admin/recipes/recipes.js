@@ -730,35 +730,30 @@
     RECIPE BROWSER
     *********************************************************************************/
     function renderBrowser() {
+        const wasEditing = !getRecipeElement("recipes-editor").hidden;
+
         getRecipeElement("recipes-browser").hidden = false;
+        getRecipeElement("recipes-browser").inert = false;
+        getRecipeElement("recipes-panel-overlay").hidden = true;
         getRecipeElement("recipes-editor").hidden = true;
 
         renderCategories();
 
-        getRecipeElement("recipes-category-title").textContent =
-            selectedCategory;
+        getRecipeElement("recipes-category-title").textContent = selectedCategory;
 
-        const shown = recipes.filter(recipe =>
-            recipe.category === selectedCategory
+        const shown = recipes.filter(
+            recipe => recipe.category === selectedCategory
         );
 
-        if (!shown.some(recipe =>
-            recipe.id === selectedRecipeId
-        )) {
-            selectedRecipeId = shown[0]
-                ? shown[0].id
-                : null;
+        if (!shown.some(recipe => recipe.id === selectedRecipeId)) {
+            selectedRecipeId = shown[0] ? shown[0].id : null;
         }
 
-        getRecipeElement("recipes-cards").innerHTML =
-            shown.length ? shown.map(recipe => {
-
-                const active =
-                    selectedRecipeId === recipe.id;
-
+        getRecipeElement("recipes-cards").innerHTML = shown.length
+            ? shown.map(recipe => {
+                const active = selectedRecipeId === recipe.id;
                 const menuPrice = Number(recipe.price);
 
-                // Display the selling price instead of ingredient cost.
                 const priceLabel =
                     Number.isFinite(menuPrice) && menuPrice > 0
                         ? "Price " + formatMoney(
@@ -767,28 +762,49 @@
                         )
                         : "Price \u2014";
 
-                return '<button type="button" class="recipes-card' +
+                return (
+                    '<button type="button" class="recipes-card' +
                     (active ? ' recipes-card-selected' : '') +
                     '" data-recipe-id="' +
                     escapeHtml(recipe.id) +
-                    '" aria-pressed="' + active + '">' +
+                    '" aria-pressed="' +
+                    active +
+                    '">' +
+
                     '<span class="recipes-card-image">' +
                     imageMarkup(recipe) +
                     '</span>' +
+
                     '<span class="recipes-card-name">' +
                     escapeHtml(recipe.name) +
                     '</span>' +
+
                     '<strong class="recipes-card-price">' +
                     escapeHtml(priceLabel) +
-                    '</strong></button>';
+                    '</strong>' +
 
-            }).join("") :
+                    '</button>'
+                );
+            }).join("")
+            : (
                 '<div class="recipes-empty-catalog">' +
                 'No recipes in this category yet.<br>' +
                 'Select <strong>+ New recipe</strong> to add one.' +
-                '</div>';
+                '</div>'
+            );
 
         renderPreview();
+
+        if (wasEditing) {
+            const button = addingNew
+                ? getRecipeElement("recipes-new-button")
+                : (
+                    getRecipeElement("recipes-edit-button") ||
+                    getRecipeElement("recipes-new-button")
+                );
+
+            button.focus();
+        }
     }
 
 
@@ -916,20 +932,24 @@
         addingNew = newRecipe;
         draft = clone(recipe);
 
-        getRecipeElement("recipes-browser").hidden = true;
+        getRecipeElement("recipes-browser").hidden = false;
+        getRecipeElement("recipes-browser").inert = true;
+        getRecipeElement("recipes-panel-overlay").hidden = false;
         getRecipeElement("recipes-editor").hidden = false;
-        getRecipeElement("recipes-editor").scrollTop = 0;
+        getRecipeElement("recipes-editor-body").scrollTop = 0;
+        getRecipeElement("recipes-delete-button").hidden = newRecipe;
 
-        getRecipeElement("recipes-editor-title").textContent =
-            newRecipe ? "Add new recipe" : "Edit recipe";
+        getRecipeElement("recipes-editor-title").textContent = newRecipe
+            ? "Add new recipe"
+            : "Edit recipe";
 
-        getRecipeElement("recipes-editor-description").textContent =
-            newRecipe
-                ? "Fill in the details, then add the ingredients."
-                : recipe.name + " - " + recipe.category;
+        getRecipeElement("recipes-editor-description").textContent = newRecipe
+            ? "Fill in the details, then add the ingredients."
+            : recipe.name + " - " + recipe.category;
 
-        getRecipeElement("recipes-save").textContent =
-            newRecipe ? "Save recipe" : "Save changes";
+        getRecipeElement("recipes-save").textContent = newRecipe
+            ? "Save recipe"
+            : "Save changes";
 
         getRecipeElement("recipes-name").value = draft.name;
 
@@ -937,25 +957,26 @@
             '<option value="">Select category</option>' +
             categories.map(category =>
                 '<option value="' +
-                escapeHtml(category.name) + '">' +
+                escapeHtml(category.name) +
+                '">' +
                 escapeHtml(category.name) +
                 '</option>'
             ).join("");
 
-        getRecipeElement("recipes-category").value =
-            draft.category;
+        getRecipeElement("recipes-category").value = draft.category;
+        getRecipeElement("recipes-serving").value = draft.serving;
 
-        getRecipeElement("recipes-serving").value =
-            draft.serving;
+        getRecipeElement("recipes-price").value = draft.price
+            ? Number(draft.price).toFixed(2)
+            : "";
 
-        getRecipeElement("recipes-price").value =
-            draft.price ? Number(draft.price).toFixed(2) : "";
+        getRecipeElement("recipes-labor").value = newRecipe
+            ? ""
+            : draft.labor;
 
-        getRecipeElement("recipes-labor").value =
-            newRecipe ? "" : draft.labor;
-
-        getRecipeElement("recipes-image-button").textContent =
-            newRecipe ? "Upload image" : "Change image";
+        getRecipeElement("recipes-image-button").textContent = newRecipe
+            ? "Upload image"
+            : "Change image";
 
         getRecipeElement("recipes-image-file").value = "";
 
@@ -963,7 +984,8 @@
             '<option value="">Select item</option>' +
             inventory.map(item =>
                 '<option value="' +
-                escapeHtml(item.name) + '">' +
+                escapeHtml(item.name) +
+                '">' +
                 escapeHtml(item.name) +
                 '</option>'
             ).join("") +
@@ -980,6 +1002,8 @@
         renderImage();
         renderIngredients();
         renderCostSummary();
+
+        getRecipeElement("recipes-back-button").focus();
     }
 
 
@@ -1084,53 +1108,55 @@
     COST SUMMARY
     *********************************************************************************/
     function renderCostSummary() {
-        if (!draft) {
-            return;
-        }
+        if (!draft) return;
 
         const subtotal = ingredientCost(draft);
+        const menuPrice = Number(draft.price || 0);
+        const laborRate = Number(draft.labor || 0);
 
-        const labor =
-            Number(draft.price || 0) *
-            Number(draft.labor || 0) / 100;
+        const labor = menuPrice * laborRate / 100;
+        const profit = menuPrice - subtotal - labor;
 
-        const profit =
-            Number(draft.price || 0) - subtotal - labor;
-
-        const margin = Number(draft.price) > 0
-            ? profit / Number(draft.price) * 100
+        const margin = menuPrice > 0
+            ? profit / menuPrice * 100
             : null;
 
         getRecipeElement("recipes-cost-summary").innerHTML =
+            '<div>' +
+                '<span>Ingredients cost</span>' +
+                '<strong>' + formatMoney(subtotal, 2) + '</strong>' +
+            '</div>' +
 
-            '<div><span>Ingredients cost</span><strong>' +
-                formatMoney(subtotal, 2) +
-            '</strong></div>' +
+            '<div>' +
+                '<span>' +
+                    (
+                        laborRate
+                            ? 'Labor cost (' +
+                              escapeHtml(laborRate) +
+                              '% of menu price)'
+                            : 'Labor cost'
+                    ) +
+                '</span>' +
 
-            '<div><span>' +
-                (Number(draft.labor)
-                    ? 'Labor cost (' +
-                        escapeHtml(draft.labor) +
-                        '% of menu price)'
-                    : 'Labor cost') +
-                '</span><strong>' +
-                formatMoney(labor, 2) +
-            '</strong></div>' +
+                '<strong>' + formatMoney(labor, 2) + '</strong>' +
+            '</div>' +
 
-            '<div><span>Menu price</span><strong>' +
-                formatMoney(draft.price, 2) +
-            '</strong></div>' +
+            '<div>' +
+                '<span>Menu price</span>' +
+                '<strong>' + formatMoney(menuPrice, 2) + '</strong>' +
+            '</div>' +
 
             '<div class="recipes-summary-profit">' +
-                '<strong>Estimated profit</strong><strong>' +
-                formatMoney(profit, 2) +
-            '</strong></div>' +
+                '<strong>Estimated profit</strong>' +
+                '<strong>' + formatMoney(profit, 2) + '</strong>' +
+            '</div>' +
 
-            '<div><span>Margin</span><strong>' +
-                (margin === null
-                    ? '-'
-                    : margin.toFixed(1) + '%') +
-            '</strong></div>';
+            '<div>' +
+                '<span>Margin</span>' +
+                '<strong>' +
+                    (margin === null ? '-' : margin.toFixed(1) + '%') +
+                '</strong>' +
+            '</div>';
 
         getRecipeElement("recipes-ingredient-total").textContent =
             formatMoney(subtotal);
@@ -1212,42 +1238,35 @@
     SAVE RECIPE
     *********************************************************************************/
     function saveRecipe() {
-        draft.name =
-            getRecipeElement("recipes-name").value.trim();
+        if (!draft) return;
 
-        draft.category =
-            getRecipeElement("recipes-category").value;
+        draft.name = getRecipeElement("recipes-name").value.trim();
+        draft.category = getRecipeElement("recipes-category").value;
+        draft.serving = getRecipeElement("recipes-serving").value.trim();
 
-        draft.serving =
-            getRecipeElement("recipes-serving").value.trim();
+        const priceInput = getRecipeElement("recipes-price").value.trim();
+        const laborInput = getRecipeElement("recipes-labor").value.trim();
 
-        draft.price = Number(
-            getRecipeElement("recipes-price").value
-        );
+        draft.price = Number(priceInput);
+        draft.labor = laborInput === "" ? 0 : Number(laborInput);
 
-        draft.labor =
-            getRecipeElement("recipes-labor").value.trim() === ""
-                ? 0
-                : Number(
-                    getRecipeElement("recipes-labor").value
-                );
-
-        if (
+        const invalidDetails =
             !draft.name ||
             !draft.category ||
             !draft.serving ||
-            getRecipeElement("recipes-price").value.trim() === "" ||
+            priceInput === "" ||
             !Number.isFinite(draft.price) ||
             draft.price <= 0 ||
             !Number.isFinite(draft.labor) ||
             draft.labor < 0 ||
-            draft.labor > 100
-        ) {
+            draft.labor > 100;
+
+        if (invalidDetails) {
             getRecipeElement("recipes-form-message").textContent =
                 "Complete the recipe name, category, serving size, " +
                 "valid menu price, and labor cost before saving.";
 
-            getRecipeElement("recipes-editor").scrollTop = 0;
+            getRecipeElement("recipes-editor-body").scrollTop = 0;
 
             return;
         }
@@ -1256,7 +1275,7 @@
             getRecipeElement("recipes-form-message").textContent =
                 "Add at least one ingredient before saving the recipe.";
 
-            getRecipeElement("recipes-editor").scrollTop = 0;
+            getRecipeElement("recipes-editor-body").scrollTop = 0;
 
             return;
         }
@@ -1268,8 +1287,8 @@
 
             recipes.push(clone(draft));
         } else {
-            const index = recipes.findIndex(item =>
-                item.id === draft.id
+            const index = recipes.findIndex(
+                recipe => recipe.id === draft.id
             );
 
             if (index !== -1) {
@@ -1290,6 +1309,36 @@
             persisted
                 ? "Recipe saved in this browser."
                 : "Recipe updated for this session; browser storage was unavailable."
+        );
+    }
+
+    /*********************************************************************************
+    DELETE RECIPE
+    *********************************************************************************/
+    function deleteRecipe() {
+        if (!draft || addingNew) return;
+
+        const confirmed = window.confirm(
+            "Delete " + draft.name + "?"
+        );
+
+        if (!confirmed) return;
+
+        recipes = recipes.filter(
+            recipe => recipe.id !== draft.id
+        );
+
+        selectedRecipeId = null;
+        draft = null;
+
+        const persisted = persist();
+
+        renderBrowser();
+
+        notify(
+            persisted
+                ? "Recipe deleted."
+                : "Recipe deleted for this session only; browser storage was unavailable."
         );
     }
 
@@ -1369,6 +1418,88 @@
 
         renderBrowser();
     };
+
+    getRecipeElement("recipes-back-button").addEventListener(
+        "click",
+        returnToBrowser
+    );
+
+    getRecipeElement("recipes-cancel-edit").addEventListener(
+        "click",
+        returnToBrowser
+    );
+
+    getRecipeElement("recipes-panel-overlay").addEventListener(
+        "click",
+        returnToBrowser
+    );
+
+    getRecipeElement("recipes-save").addEventListener(
+        "click",
+        saveRecipe
+    );
+
+    getRecipeElement("recipes-delete-button").addEventListener(
+        "click",
+        deleteRecipe
+    );
+
+    document.addEventListener("keydown", event => {
+        const editor = getRecipeElement("recipes-editor");
+
+        if (editor.hidden) return;
+
+        if (event.key === "Escape") {
+            event.preventDefault();
+
+            returnToBrowser();
+
+            return;
+        }
+
+        if (event.key !== "Tab") return;
+
+        const controls = Array.from(
+            editor.querySelectorAll(
+                "button, input, select, textarea, [tabindex]"
+            )
+        ).filter(control =>
+            !control.disabled &&
+            control.tabIndex >= 0 &&
+            control.getClientRects().length > 0
+        );
+
+        const firstControl = controls[0];
+        const lastControl = controls[controls.length - 1];
+
+        if (!firstControl) return;
+
+        const focusOutsideEditor = !editor.contains(
+            document.activeElement
+        );
+
+        if (
+            event.shiftKey &&
+            (
+                document.activeElement === firstControl ||
+                focusOutsideEditor
+            )
+        ) {
+            event.preventDefault();
+
+            lastControl.focus();
+        } else if (
+            !event.shiftKey &&
+            (
+                document.activeElement === lastControl ||
+                focusOutsideEditor
+            )
+        ) {
+            event.preventDefault();
+
+            firstControl.focus();
+        }
+    });
 
     getRecipeElement("recipes-back-button").addEventListener(
         "click",
