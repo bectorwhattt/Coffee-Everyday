@@ -1,20 +1,200 @@
-/**import all color and font variables**/
 @import url("../../lib/variables.css");
 
-body {
-    margin: 0;
-    padding: 0;
+
+/*********************************************************************************
+HEADER
+*********************************************************************************/
+
+#header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+    min-width: 0;
+
+    background-color: var(--bgcolor-light);
+
+    transform: translateY(0);
+
+    transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/**********************************************************
-MAIN                                                      .
-**********************************************************/
+#header.header-hidden {
+    transform: translateY(-100%);
+
+    pointer-events: none;
+}
+
+#header.header-hidden:has(:focus-visible) {
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+#header .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 95px;
+    padding: 0 5%;
+
+    border-bottom: 1px solid var(--color-black);
+    background-color: var(--bgcolor-light);
+}
+
+#header .logo {
+    display: flex;
+    align-items: center;
+    flex: none;
+
+    max-width: 100%;
+}
+
+#header .logo img {
+    display: block;
+
+    width: auto;
+    max-width: 160px;
+    height: auto;
+    max-height: 70px;
+
+    object-fit: contain;
+}
+
+#header .navigation-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 1 580px;
+    gap: 20px;
+
+    width: 580px;
+    min-width: 0;
+}
+
+#header .navigation-bar a {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    font-family: var(--body);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--color-grey);
+
+    transition: color 0.3s ease;
+}
+
+#header .navigation-bar a:hover {
+    color: var(--color-gold);
+}
+
+#header .navigation-bar a::after {
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    left: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background-color: var(--color-black);
+
+    content: "";
+    transform: scaleX(0);
+    transform-origin: center;
+
+    transition: transform 0.3s ease;
+}
+
+#header .navigation-bar a:hover::after {
+    transform: scaleX(1);
+}
+
+#header .call-to-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+}
+
+#header .call-to-action a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+}
+
+#header .call-to-action a::after {
+    display: none;
+}
+
+#header .call-to-action button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 140px;
+    min-height: 44px;
+    padding: 10px 16px;
+
+    border: 1px solid var(--color-black);
+    border-radius: 30px;
+    background-color: var(--color-black);
+
+    font-family: var(--body);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 120%;
+    white-space: nowrap;
+    color: var(--bgcolor-light);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+}
+
+#header .call-to-action button:hover {
+    border-color: var(--color-gold);
+    background-color: var(--color-gold);
+
+    color: var(--color-black);
+}
+
+#header a:focus-visible,
+#header button:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+}
+
+
+/*********************************************************************************
+MAIN
+*********************************************************************************/
 
 .main {
     display: flex;
     flex-direction: column;
 
+    box-sizing: border-box;
     width: 100%;
+    min-width: 0;
 
     background-color: var(--bgcolor-light);
 
@@ -24,36 +204,61 @@ MAIN                                                      .
     color: var(--color-black);
 }
 
-.main * {
+.main *,
+.main *::before,
+.main *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+.main > div {
+    min-width: 0;
 
-/**********************************************************
-INTRODUCTION                                              .
-**********************************************************/
+    scroll-margin-top: 100px;
+}
 
-.gallery-introduction {
+.main h1,
+.main h2 {
+    font-family: var(--headings);
+    font-weight: 600;
+    font-variation-settings: "WONK" 1;
+    line-height: 110%;
+    letter-spacing: -1px;
+}
+
+.main [hidden] {
+    display: none !important;
+}
+
+
+/*********************************************************************************
+INTRODUCTION
+*********************************************************************************/
+
+.main .gallery-introduction {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    gap: 24px;
 
     padding: 59px 5% 64px;
 }
 
-.gallery-introduction-text {
+.main .gallery-introduction-text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    flex: none;
+    flex: 1 1 0;
     gap: 16px;
+
+    min-width: 0;
 }
 
-.gallery-pill {
+.main .gallery-pill {
     display: flex;
     align-items: center;
+    justify-content: center;
 
     padding: 10px 27px;
 
@@ -61,73 +266,88 @@ INTRODUCTION                                              .
     background-color: var(--color-pink);
 
     font-size: 17px;
+    font-weight: 500;
     line-height: 120%;
     color: var(--color-black);
 }
 
-.gallery-title {
+.main .gallery-title {
     font-family: var(--headings);
     font-size: 80px;
     font-weight: 600;
     font-variation-settings: "WONK" 1;
     line-height: 95%;
     letter-spacing: -1px;
+
+    overflow-wrap: break-word;
 }
 
-.gallery-title-highlight {
+.main .gallery-title-highlight {
     font-style: italic;
     color: var(--color-gold);
 }
 
-.gallery-description {
-    width: 43%;
+.main .gallery-description {
+    flex: 0 1 38%;
+
+    min-width: 0;
 
     color: var(--color-grey);
 }
 
 
-/**********************************************************
-PHOTOS                                                    .
-**********************************************************/
+/*********************************************************************************
+PHOTOS
+*********************************************************************************/
 
-.gallery-photos {
+.main .gallery-photos {
     display: flex;
     align-items: flex-start;
     gap: 30px;
 
+    width: 100%;
     padding: 0 5% 104px;
 }
 
-.gallery-column {
+.main .gallery-column {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 1 1 0;
     gap: 30px;
+
+    min-width: 0;
 }
 
-.gallery-item {
+.main .gallery-item {
     position: relative;
 
     display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    min-width: 0;
 
     border-radius: 28px;
 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
 }
 
-.gallery-item:hover {
-    transform: scale(1.1);
-    box-shadow: 0 16px 32px -8px var(--color-grey);
-}
+.main .gallery-photo {
+    display: block;
 
-.gallery-photo {
     width: 100%;
+    max-width: 100%;
     height: auto;
 
-    border-radius: 28px;
+    border-radius: inherit;
+
+    object-fit: contain;
 }
 
-.gallery-overlay {
+.main .gallery-overlay {
     position: absolute;
     top: 0;
     right: 0;
@@ -137,13 +357,22 @@ PHOTOS                                                    .
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    gap: 2px;
+    gap: 4px;
 
     padding: 32px;
 
-    border-radius: 28px;
-    background-image: linear-gradient(to bottom, transparent 20%, var(--bgcolor-darkbrown));
+    border-radius: inherit;
+    background-image: linear-gradient(
+        to bottom,
+        transparent,
+        color-mix(
+            in srgb,
+            var(--bgcolor-darkbrown) 90%,
+            transparent
+        ) 82%
+    );
 
+    font-family: var(--body);
     text-decoration: none;
     color: var(--bgcolor-light);
 
@@ -152,61 +381,78 @@ PHOTOS                                                    .
     transition: opacity 0.3s ease;
 }
 
-.gallery-item:hover .gallery-overlay,
-.gallery-overlay:focus-visible {
+.main .gallery-overlay:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: -4px;
+
     opacity: 1;
 }
 
-.gallery-date {
+.main .gallery-date {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 700;
+    line-height: 130%;
     text-decoration: underline;
     color: var(--color-gold);
 }
 
-.gallery-caption {
-    text-decoration: underline;
+.main .gallery-caption {
     font-size: 18px;
-    line-height: 28px;
+    line-height: 155%;
+    text-decoration: underline;
+    color: var(--bgcolor-light);
+
+    overflow-wrap: anywhere;
 }
 
-.gallery-check-post {
+.main .gallery-check-post {
     display: inline-block;
 
     font-size: 14px;
     font-style: italic;
+    line-height: 150%;
     text-decoration: underline;
     color: var(--color-gold);
 }
 
 
-/**********************************************************
-CALL TO ACTION                                            .
-**********************************************************/
+/*********************************************************************************
+CALL TO ACTION
+*********************************************************************************/
 
-.gallery-call-to-action {
+.main .gallery-call-to-action {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 32px;
 
     padding: 30px 5%;
 
     background-color: var(--color-gold);
 }
 
-.gallery-call-to-action-title {
+.main .gallery-call-to-action-title {
+    flex: 1;
+
+    min-width: 0;
+
     font-family: var(--headings);
     font-size: 52px;
     font-weight: 600;
     font-variation-settings: "WONK" 1;
     line-height: 110%;
     letter-spacing: -1px;
+
+    overflow-wrap: break-word;
 }
 
-.button {
+.main .button {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex: none;
 
+    min-height: 44px;
     padding: 9px 24px;
 
     border: 1px solid var(--color-black);
@@ -216,20 +462,1175 @@ CALL TO ACTION                                            .
     font-size: 17px;
     font-weight: 500;
     line-height: 120%;
+    text-align: center;
     text-decoration: none;
 
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
 }
 
-.button-dark {
+.main .button-dark {
     background-color: var(--color-black);
 
     color: var(--bgcolor-light);
 }
 
-.button-dark:hover {
+.main .button-dark:hover {
     border-color: var(--color-black);
     background-color: var(--color-gold);
 
     color: var(--color-black);
+}
+
+.main .button:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 4px;
+}
+
+
+/*********************************************************************************
+FOOTER
+*********************************************************************************/
+
+#footer {
+    width: 100%;
+    min-width: 0;
+}
+
+#footer .footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    min-height: 380px;
+    padding: 48px 5% 24px;
+
+    background-color: var(--color-black);
+}
+
+#footer .footer-main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 48px;
+
+    width: 100%;
+    height: auto;
+}
+
+#footer .footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 1 35%;
+    gap: 16px;
+
+    min-width: 0;
+}
+
+#footer .footer-logo .logo-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+
+    box-sizing: border-box;
+    width: 185px;
+    max-width: 100%;
+    height: 80px;
+    padding: 12px;
+
+    border-radius: 15px;
+    background-color: var(--bgcolor-light);
+}
+
+#footer .footer-logo .logo-frame img {
+    display: block;
+
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+
+    object-fit: contain;
+}
+
+#footer .footer-logo p {
+    margin: 0;
+
+    font-family: var(--headings);
+    font-size: 18px;
+    font-style: italic;
+    line-height: 150%;
+    color: var(--bgcolor-light);
+}
+
+#footer .footer-menu {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex: 1 1 0;
+    gap: 32px;
+
+    width: auto;
+    min-width: 0;
+}
+
+#footer .footer-menu .menu-group {
+    flex: 1 1 0;
+
+    box-sizing: border-box;
+    width: auto;
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+}
+
+#footer .footer-menu h4 {
+    margin: 0 0 12px;
+
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: 2px;
+    color: var(--color-gold);
+}
+
+#footer .footer-menu span,
+#footer .footer-menu a {
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 160%;
+    color: var(--bgcolor-light);
+}
+
+#footer .footer-menu a {
+    display: inline-block;
+
+    margin: 0 0 6px;
+
+    text-decoration: none;
+
+    transition: color 0.3s ease;
+}
+
+#footer .footer-menu a:hover {
+    color: var(--color-gold);
+}
+
+#footer .footer-menu a:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+}
+
+#footer .footer hr {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+
+    border: 0;
+    background-color: var(--color-grey);
+}
+
+#footer .copyright-section {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: auto;
+    padding: 0;
+}
+
+#footer .copyright-section p {
+    margin: 0;
+
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-grey);
+}
+
+
+/*********************************************************************************
+GALLERY HOVER INTERACTIONS
+*********************************************************************************/
+
+@media (hover: hover) and (pointer: fine) {
+    .main .gallery-item:hover {
+        z-index: 1;
+
+        transform: scale(1.1);
+        box-shadow: 0 16px 32px -8px var(--color-grey);
+    }
+
+    .main .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+}
+
+
+/*********************************************************************************
+COMPACT DESKTOP
+*********************************************************************************/
+
+@media (max-width: 1200px) {
+
+    /**********************************************************
+    HEADER
+    **********************************************************/
+
+    #header .header {
+        gap: 20px;
+    }
+
+    #header .logo img {
+        max-width: 145px;
+        max-height: 64px;
+    }
+
+    #header .navigation-bar {
+        gap: 16px;
+    }
+
+    #header .navigation-bar a {
+        font-size: 17px;
+    }
+
+    #header .call-to-action button {
+        width: 130px;
+
+        font-size: 16px;
+    }
+
+
+    /**********************************************************
+    INTRODUCTION
+    **********************************************************/
+
+    .main .gallery-introduction {
+        gap: 24px;
+
+        padding: 52px 5% 56px;
+    }
+
+    .main .gallery-title {
+        font-size: 64px;
+    }
+
+    .main .gallery-description {
+        flex-basis: 38%;
+    }
+
+
+    /**********************************************************
+    PHOTOS
+    **********************************************************/
+
+    .main .gallery-photos {
+        gap: 24px;
+
+        padding-bottom: 80px;
+    }
+
+    .main .gallery-column {
+        gap: 24px;
+    }
+
+    .main .gallery-item {
+        border-radius: 24px;
+    }
+
+    .main .gallery-overlay {
+        padding: 24px;
+    }
+
+    .main .gallery-date {
+        font-size: 18px;
+    }
+
+    .main .gallery-caption {
+        font-size: 16px;
+    }
+
+    .main .gallery-check-post {
+        font-size: 13px;
+    }
+
+
+    /**********************************************************
+    CALL TO ACTION
+    **********************************************************/
+
+    .main .gallery-call-to-action-title {
+        font-size: 46px;
+    }
+
+
+    /**********************************************************
+    FOOTER
+    **********************************************************/
+
+    #footer .footer {
+        gap: 28px;
+
+        padding: 44px 5% 24px;
+    }
+
+    #footer .footer-main {
+        gap: 32px;
+    }
+
+    #footer .footer-logo {
+        flex-basis: 30%;
+    }
+
+    #footer .footer-menu {
+        gap: 24px;
+    }
+
+    #footer .footer-menu span,
+    #footer .footer-menu a {
+        font-size: 15px;
+    }
+}
+
+
+/*********************************************************************************
+TABLET
+*********************************************************************************/
+
+@media (max-width: 1024px) {
+
+    /**********************************************************
+    HEADER
+    **********************************************************/
+
+    #header .header {
+        gap: 16px;
+
+        height: auto;
+        min-height: 85px;
+        padding: 14px 4%;
+    }
+
+    #header .logo img {
+        max-width: 130px;
+        max-height: 60px;
+    }
+
+    #header .navigation-bar {
+        justify-content: center;
+        flex: 1 1 0;
+        flex-wrap: wrap;
+        gap: 4px 20px;
+
+        width: auto;
+    }
+
+    #header .navigation-bar a {
+        font-size: 16px;
+    }
+
+    #header .call-to-action button {
+        width: 120px;
+        min-height: 44px;
+
+        font-size: 15px;
+    }
+
+
+    /**********************************************************
+    MAIN
+    **********************************************************/
+
+    .main {
+        font-size: 16px;
+    }
+
+
+    /**********************************************************
+    INTRODUCTION
+    **********************************************************/
+
+    .main .gallery-introduction {
+        align-items: flex-end;
+        gap: 24px;
+
+        padding: 48px 4%;
+    }
+
+    .main .gallery-introduction-text {
+        gap: 14px;
+    }
+
+    .main .gallery-pill {
+        padding: 10px 22px;
+
+        font-size: 16px;
+    }
+
+    .main .gallery-title {
+        font-size: 54px;
+        line-height: 105%;
+    }
+
+    .main .gallery-description {
+        flex-basis: 38%;
+
+        font-size: 16px;
+    }
+
+
+    /**********************************************************
+    PHOTOS
+    **********************************************************/
+
+    .main .gallery-photos {
+        display: block;
+
+        padding: 0 4% 64px;
+
+        column-count: 2;
+        column-gap: 24px;
+    }
+
+    .main .gallery-column {
+        display: contents;
+    }
+
+    .main .gallery-item {
+        display: inline-flex;
+
+        width: 100%;
+        margin-bottom: 24px;
+
+        border-radius: 24px;
+
+        break-inside: avoid;
+    }
+
+    .main .gallery-overlay {
+        padding: 24px;
+    }
+
+    .main .gallery-date {
+        font-size: 18px;
+    }
+
+    .main .gallery-caption {
+        font-size: 16px;
+        line-height: 150%;
+    }
+
+    .main .gallery-check-post {
+        font-size: 13px;
+    }
+
+
+    /**********************************************************
+    CALL TO ACTION
+    **********************************************************/
+
+    .main .gallery-call-to-action {
+        gap: 24px;
+
+        padding: 30px 4%;
+    }
+
+    .main .gallery-call-to-action-title {
+        font-size: 40px;
+    }
+
+    .main .button {
+        min-height: 46px;
+        padding: 12px 20px;
+
+        font-size: 16px;
+    }
+
+
+    /**********************************************************
+    FOOTER
+    **********************************************************/
+
+    #footer .footer {
+        gap: 28px;
+
+        min-height: 0;
+        padding: 40px 4% 24px;
+    }
+
+    #footer .footer-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 32px;
+    }
+
+    #footer .footer-logo {
+        flex: none;
+        gap: 12px;
+
+        width: 100%;
+    }
+
+    #footer .footer-logo .logo-frame {
+        width: 175px;
+        height: 75px;
+    }
+
+    #footer .footer-logo p {
+        font-size: 17px;
+    }
+
+    #footer .footer-menu {
+        flex: none;
+        gap: 28px;
+
+        width: 100%;
+    }
+
+    #footer .footer-menu .menu-group {
+        flex: 1 1 0;
+    }
+
+    #footer .footer-menu h4 {
+        font-size: 12px;
+    }
+
+    #footer .footer-menu span,
+    #footer .footer-menu a {
+        font-size: 15px;
+    }
+
+    #footer .copyright-section p {
+        font-size: 13px;
+    }
+}
+
+
+/*********************************************************************************
+MOBILE
+*********************************************************************************/
+
+@media (max-width: 767px) {
+
+    /**********************************************************
+    HEADER
+    **********************************************************/
+
+    #header .header {
+        flex-wrap: wrap;
+        gap: 12px;
+
+        min-height: 0;
+        padding: 14px 5%;
+    }
+
+    #header .logo img {
+        max-width: 120px;
+        max-height: 54px;
+    }
+
+    #header .navigation-bar {
+        justify-content: space-between;
+        flex: 0 0 100%;
+        flex-wrap: wrap;
+        order: 3;
+        gap: 8px 16px;
+
+        box-sizing: border-box;
+        width: 100%;
+        padding-top: 10px;
+
+        border-top: 1px solid var(--bgcolor-khaki);
+    }
+
+    #header .navigation-bar a {
+        min-height: 44px;
+
+        font-size: 15px;
+    }
+
+    #header .call-to-action {
+        margin-left: auto;
+    }
+
+    #header .call-to-action button {
+        width: 115px;
+        min-height: 44px;
+
+        font-size: 15px;
+    }
+
+
+    /**********************************************************
+    MAIN
+    **********************************************************/
+
+    .main {
+        font-size: 16px;
+        line-height: 155%;
+    }
+
+    .main > div {
+        scroll-margin-top: 24px;
+    }
+
+
+    /**********************************************************
+    INTRODUCTION
+    **********************************************************/
+
+    .main .gallery-introduction {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        padding: 40px 5%;
+    }
+
+    .main .gallery-introduction-text {
+        align-items: center;
+        flex: none;
+        gap: 16px;
+
+        width: 100%;
+
+        text-align: center;
+    }
+
+    .main .gallery-pill {
+        padding: 9px 20px;
+
+        font-size: 15px;
+    }
+
+    .main .gallery-title {
+        font-size: 48px;
+        line-height: 110%;
+        letter-spacing: -0.5px;
+        text-align: center;
+    }
+
+    .main .gallery-description {
+        flex: none;
+
+        width: 100%;
+        max-width: 520px;
+
+        font-size: 16px;
+        text-align: center;
+    }
+
+
+    /**********************************************************
+    PHOTOS
+    **********************************************************/
+
+    .main .gallery-photos {
+        padding: 0 5% 48px;
+
+        column-gap: 16px;
+    }
+
+    .main .gallery-item {
+        margin-bottom: 16px;
+
+        border-radius: 20px;
+    }
+
+    .main .gallery-overlay {
+        gap: 4px;
+
+        padding: 14px;
+    }
+
+    .main .gallery-date {
+        font-size: 14px;
+        line-height: 130%;
+    }
+
+    .main .gallery-caption {
+        font-size: 13px;
+        line-height: 140%;
+    }
+
+    .main .gallery-check-post {
+        font-size: 12px;
+        line-height: 140%;
+    }
+
+
+    /**********************************************************
+    CALL TO ACTION
+    **********************************************************/
+
+    .main .gallery-call-to-action {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+
+        padding: 32px 5%;
+    }
+
+    .main .gallery-call-to-action-title {
+        flex: none;
+
+        width: 100%;
+
+        font-size: 36px;
+        letter-spacing: -0.5px;
+        text-align: center;
+    }
+
+    .main .button {
+        min-height: 46px;
+        padding: 12px 24px;
+
+        font-size: 15px;
+    }
+
+
+    /**********************************************************
+    FOOTER
+    **********************************************************/
+
+    #footer .footer {
+        gap: 24px;
+
+        padding: 36px 5% 24px;
+    }
+
+    #footer .footer-main {
+        gap: 28px;
+    }
+
+    #footer .footer-logo {
+        align-items: center;
+
+        text-align: center;
+    }
+
+    #footer .footer-logo .logo-frame {
+        width: 165px;
+        height: 72px;
+    }
+
+    #footer .footer-logo p {
+        font-size: 16px;
+    }
+
+    #footer .footer-menu {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 28px 24px;
+    }
+
+    #footer .footer-menu .menu-group {
+        flex: 0 0 calc((100% - 24px) / 2);
+    }
+
+    #footer .footer-menu h4 {
+        margin-bottom: 10px;
+
+        font-size: 12px;
+    }
+
+    #footer .footer-menu span,
+    #footer .footer-menu a {
+        font-size: 15px;
+        line-height: 160%;
+    }
+
+    #footer .copyright-section {
+        justify-content: center;
+
+        text-align: center;
+    }
+}
+
+
+/*********************************************************************************
+SMALL MOBILE
+*********************************************************************************/
+
+@media (max-width: 540px) {
+
+    /**********************************************************
+    HEADER
+    **********************************************************/
+
+    #header .header {
+        gap: 10px;
+
+        padding: 12px 5%;
+    }
+
+    #header .logo img {
+        max-width: 110px;
+        max-height: 48px;
+    }
+
+    #header .navigation-bar {
+        justify-content: space-between;
+        gap: 4px 8px;
+
+        padding-top: 6px;
+    }
+
+    #header .navigation-bar a {
+        font-size: 14px;
+    }
+
+    #header .call-to-action button {
+        width: 108px;
+        min-height: 44px;
+
+        font-size: 14px;
+    }
+
+
+    /**********************************************************
+    INTRODUCTION
+    **********************************************************/
+
+    .main .gallery-introduction {
+        gap: 18px;
+
+        padding: 32px 5% 36px;
+    }
+
+    .main .gallery-introduction-text {
+        gap: 14px;
+    }
+
+    .main .gallery-title {
+        font-size: 40px;
+    }
+
+    .main .gallery-description {
+        font-size: 15px;
+    }
+
+
+    /**********************************************************
+    PHOTOS
+    **********************************************************/
+
+    .main .gallery-photos {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        padding: 0 5% 40px;
+
+        column-count: auto;
+        column-gap: normal;
+    }
+
+    .main .gallery-column {
+        display: flex;
+        flex-direction: column;
+        flex: none;
+        gap: 20px;
+
+        width: 100%;
+    }
+
+    .main .gallery-item {
+        display: flex;
+
+        margin-bottom: 0;
+
+        border-radius: 24px;
+    }
+
+    .main .gallery-overlay {
+        gap: 4px;
+
+        padding: 20px;
+    }
+
+    .main .gallery-date {
+        font-size: 18px;
+    }
+
+    .main .gallery-caption {
+        font-size: 15px;
+        line-height: 150%;
+    }
+
+    .main .gallery-check-post {
+        font-size: 13px;
+    }
+
+
+    /**********************************************************
+    CALL TO ACTION
+    **********************************************************/
+
+    .main .gallery-call-to-action {
+        gap: 20px;
+
+        padding: 32px 5%;
+    }
+
+    .main .gallery-call-to-action-title {
+        font-size: 34px;
+    }
+
+    .main .button {
+        width: 100%;
+        max-width: 320px;
+    }
+
+
+    /**********************************************************
+    FOOTER
+    **********************************************************/
+
+    #footer .footer {
+        gap: 24px;
+
+        padding: 32px 5% 24px;
+    }
+
+    #footer .footer-main {
+        gap: 28px;
+    }
+
+    #footer .footer-logo {
+        gap: 12px;
+    }
+
+    #footer .footer-logo .logo-frame {
+        width: 155px;
+        height: 68px;
+    }
+
+    #footer .footer-logo p {
+        font-size: 16px;
+    }
+
+    #footer .footer-menu {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    #footer .footer-menu .menu-group {
+        flex: none;
+
+        width: 100%;
+        padding-bottom: 20px;
+
+        border-bottom: 1px solid var(--color-grey);
+    }
+
+    #footer .footer-menu .menu-group:last-child {
+        padding-bottom: 0;
+
+        border-bottom: 0;
+    }
+
+    #footer .footer-menu h4 {
+        margin-bottom: 10px;
+
+        font-size: 12px;
+    }
+
+    #footer .footer-menu span,
+    #footer .footer-menu a {
+        font-size: 14px;
+    }
+
+    #footer .footer-menu a {
+        margin-bottom: 8px;
+    }
+
+    #footer .copyright-section p {
+        font-size: 12px;
+    }
+}
+
+
+/*********************************************************************************
+EXTRA SMALL MOBILE
+*********************************************************************************/
+
+@media (max-width: 360px) {
+
+    /**********************************************************
+    HEADER
+    **********************************************************/
+
+    #header .header {
+        gap: 8px;
+    }
+
+    #header .logo img {
+        max-width: 100px;
+        max-height: 44px;
+    }
+
+    #header .navigation-bar {
+        justify-content: center;
+        gap: 4px 8px;
+    }
+
+    #header .navigation-bar a {
+        flex: 0 0 calc((100% - 8px) / 2);
+
+        font-size: 14px;
+    }
+
+    #header .call-to-action button {
+        width: 100px;
+
+        font-size: 13px;
+    }
+
+
+    /**********************************************************
+    INTRODUCTION
+    **********************************************************/
+
+    .main .gallery-introduction {
+        padding-top: 28px;
+        padding-bottom: 32px;
+    }
+
+    .main .gallery-title {
+        font-size: 34px;
+    }
+
+    .main .gallery-pill {
+        font-size: 14px;
+    }
+
+
+    /**********************************************************
+    PHOTOS
+    **********************************************************/
+
+    .main .gallery-photos,
+    .main .gallery-column {
+        gap: 16px;
+    }
+
+    .main .gallery-item {
+        border-radius: 20px;
+    }
+
+    .main .gallery-overlay {
+        padding: 16px;
+    }
+
+    .main .gallery-date {
+        font-size: 16px;
+    }
+
+    .main .gallery-caption {
+        font-size: 14px;
+    }
+
+    .main .gallery-check-post {
+        font-size: 12px;
+    }
+
+
+    /**********************************************************
+    CALL TO ACTION
+    **********************************************************/
+
+    .main .gallery-call-to-action-title {
+        font-size: 30px;
+    }
+
+    .main .button {
+        max-width: 100%;
+    }
+
+
+    /**********************************************************
+    FOOTER
+    **********************************************************/
+
+    #footer .footer-logo .logo-frame {
+        width: 145px;
+        height: 64px;
+    }
+
+    #footer .footer-logo p {
+        font-size: 15px;
+    }
+
+    #footer .footer-menu {
+        gap: 20px;
+    }
+
+    #footer .footer-menu span,
+    #footer .footer-menu a {
+        font-size: 14px;
+    }
+}
+
+
+/*********************************************************************************
+RESPONSIVE HOVER INTERACTIONS
+*********************************************************************************/
+
+@media (max-width: 1024px) and (hover: hover) and (pointer: fine) {
+    .main .gallery-item:hover {
+        transform: scale(1.04);
+    }
+}
+
+@media (max-width: 767px) and (hover: hover) and (pointer: fine) {
+    .main .gallery-item:hover {
+        transform: scale(1.02);
+    }
+}
+
+
+/*********************************************************************************
+TOUCH SCREEN INTERACTIONS
+*********************************************************************************/
+
+@media (hover: none), (pointer: coarse) {
+    .main .gallery-item {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .main .gallery-item:active .gallery-overlay {
+        opacity: 1;
+    }
+}
+
+
+/*********************************************************************************
+REDUCED MOTION
+*********************************************************************************/
+
+@media (prefers-reduced-motion: reduce) {
+    #header,
+    #header .navigation-bar a,
+    #header .navigation-bar a::after,
+    #header .call-to-action button,
+    .main .gallery-item,
+    .main .gallery-overlay,
+    .main .button,
+    #footer .footer-menu a {
+        transition: none;
+    }
+
+    .main .gallery-item:hover {
+        transform: none;
+    }
 }
