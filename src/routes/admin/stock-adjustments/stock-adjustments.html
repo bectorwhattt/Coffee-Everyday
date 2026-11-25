@@ -12,13 +12,103 @@
         <div class="main-container">
             <!--IMPORTED HEADER-->
             <div id="admin-header"></div>
-            
+
             <!--STOCK ADJUSTMENTS-->
             <div class="main">
-                only add new html codes here
+                <!-- ADJUSTMENTS CARD -->
+                <div class="adjustments-card">
+
+                    <!-- ADJUSTMENT FORM (ADD ONLY) -->
+                    <div class="adjustment-form" id="adjustment-form">
+                        <div class="adjustment-form-title">New adjustment</div>
+
+                        <div class="adjustment-form-row">
+                            <div class="field field-grow">
+                                <label class="field-label" for="item-select">Item name</label>
+                                <select class="field-input" id="item-select" required>
+                                    <option value="" disabled selected>Select item</option>
+                                    <option value="Brown Sugar">Brown Sugar</option>
+                                    <option value="Butter">Butter</option>
+                                    <option value="Coffee Beans">Coffee Beans</option>
+                                    <option value="Cup Lid">Cup Lid</option>
+                                    <option value="Heavy Cream">Heavy Cream</option>
+                                    <option value="Matcha Powder">Matcha Powder</option>
+                                    <option value="Paper Cup">Paper Cup</option>
+                                    <option value="Powdered Sugar">Powdered Sugar</option>
+                                    <option value="Vanilla Syrup">Vanilla Syrup</option>
+                                    <option value="Whole Milk">Whole Milk</option>
+                                </select>
+                            </div>
+                            <div class="field field-type">
+                                <label class="field-label" for="type-select">Type</label>
+                                <select class="field-input" id="type-select" required>
+                                    <option value="" disabled selected>Type</option>
+                                    <option value="Stock in">Stock in</option>
+                                    <option value="Stock out">Stock out</option>
+                                </select>
+                            </div>
+                            <div class="field field-quantity">
+                                <label class="field-label" for="quantity-input">Qty</label>
+                                <input class="field-input" id="quantity-input" type="number" min="0" step="any" placeholder="0">
+                            </div>
+                            <div class="field field-unit">
+                                <label class="field-label" for="unit-select">Unit</label>
+                                <select class="field-input" id="unit-select">
+                                    <option value="mL">mL</option>
+                                    <option value="L">L</option>
+                                    <option value="g">g</option>
+                                    <option value="kg">kg</option>
+                                    <option value="pcs">pcs</option>
+                                    <option value="Packets">Packets</option>
+                                </select>
+                            </div>
+                            <div class="field field-reason">
+                                <label class="field-label" for="reason-select">Reason</label>
+                                <select class="field-input" id="reason-select" required disabled>
+                                    <option value="" disabled selected>Reason</option>
+                                </select>
+                            </div>
+
+                            <button class="button-secondary form-action-button" id="cancel-adjustment-button" type="button" aria-label="Cancel">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                                    <line x1="2" y1="2" x2="10" y2="10"></line>
+                                    <line x1="10" y1="2" x2="2" y2="10"></line>
+                                </svg>
+                            </button>
+                            <button class="button-primary form-action-button" id="save-adjustment-button" type="button" aria-label="Save adjustment">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="4 12 10 18 20 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD HEADER -->
+                    <div class="card-header">
+                        <div class="card-title">Adjustment History</div>
+                        <button class="button-primary new-adjustment-button" id="open-add-adjustment-button" type="button">+ New Adjustment</button>
+                    </div>
+
+                    <!-- ADJUSTMENTS TABLE -->
+                    <div class="adjustments-table">
+                        <div class="table-header">
+                            <div class="cell-date">Date</div>
+                            <div class="cell-item">Item</div>
+                            <div class="cell-type">Type</div>
+                            <div class="cell-quantity">Qty</div>
+                            <div class="cell-unit">Unit</div>
+                            <div class="cell-reason">Reason</div>
+                        </div>
+
+                        <div class="adjustments-body" id="adjustments-body"></div>
+                    </div>
+                </div>
+
+                <!-- STOCK ADJUSTMENTS SCRIPT -->
+                <script src="stock-adjustments.js"></script>
             </div>
         </div>
-    
+
     <!--IMPORT SIDEBAR AND HEADER HTML-->
     <script src="../../../lib/components.js"></script>
     </body>
