@@ -13,8 +13,16 @@ body {
     font-family: var(--adm-font);
 }
 
+/* Locked to the viewport height so the page never scrolls.
+   .main takes whatever is left under the header and the charts row flexes to absorb the rest. */
 .main-container {
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
     width: 100%;
+    min-width: 0;
+    min-height: 100vh;
 
     margin-left: var(--adm-navbar-width);
 }
@@ -23,3 +31,636 @@ body {
 /*********************************************************************************
 MAIN
 *********************************************************************************/
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: clamp(8px, 1.2vh, 16px);
+
+    box-sizing: border-box;
+    padding: 12px 24px 40px 24px;
+
+    background-color: var(--bgcolor-beige);
+
+    color: var(--color-black);
+}
+
+
+/*********************************************************************************
+WELCOME BANNER
+*********************************************************************************/
+.main .welcome-banner {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 2px;
+
+    box-sizing: border-box;
+    padding: clamp(14px, 2vh, 26px) 30px;
+
+    border-radius: 14px;
+    background-image: linear-gradient(90deg, var(--bgcolor-khaki), var(--bgcolor-beige));
+
+    color: var(--color-black);
+}
+
+.main .welcome-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.main .welcome-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.main .welcome-date {
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.main .welcome-subtitle {
+    font-size: 14px;
+    color: #938884;
+}
+
+
+/*********************************************************************************
+STATISTICS
+*********************************************************************************/
+.main .statistics-row {
+    display: flex;
+    flex-shrink: 0;
+    gap: 12px;
+}
+
+.main .statistic-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+
+    box-sizing: border-box;
+    min-width: 0;
+    padding: clamp(12px, 1.8vh, 24px) 20px;
+
+    border-radius: 16px;
+    background-color: var(--bgcolor-light);
+}
+
+.main .statistic-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+    background-color: var(--bgcolor-khaki);
+
+    font-size: 18px;
+    font-weight: 600;
+    color: #4A2C20;
+}
+
+.main .statistic-icon-warning {
+    background-color: var(--color-pink);
+
+    color: var(--color-black);
+}
+
+.main .statistic-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+
+    min-width: 0;
+}
+
+.main .statistic-label {
+    font-size: 14px;
+    color: #4A2C20;
+}
+
+.main .statistic-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4A2C20;
+}
+
+.main .statistic-note {
+    display: flex;
+    gap: 4px;
+
+    font-size: 11px;
+    color: #938884;
+}
+
+.main .statistic-percentage-positive {
+    color: #3CA22A;
+}
+
+.main .statistic-percentage-negative {
+    color: #DA1818;
+}
+
+.main .statistic-note-negative {
+    color: #DA1818;
+}
+
+.main .statistic-note-neutral {
+    color: #938884;
+}
+
+.main .statistic-arrow {
+    display: flex;
+    align-self: flex-start;
+
+    color: var(--color-black);
+}
+
+
+/*********************************************************************************
+CHARTS
+*********************************************************************************/
+/* This row is the flexible one: it grows or shrinks to fill the leftover height. */
+.main .charts-row {
+    display: flex;
+    flex-shrink: 0;
+    gap: 12px;
+}
+
+.main .dashboard-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 0;
+    padding: clamp(12px, 1.6vh, 22px) 24px;
+
+    border-radius: 16px;
+    background-color: var(--bgcolor-light);
+}
+
+.main .card-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.main .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4A2C20;
+}
+
+.main .card-subtitle {
+    font-size: 11px;
+    color: #938884;
+}
+
+
+/*********************************************************************************
+SALES THIS WEEK
+*********************************************************************************/
+.main .sales-card {
+    flex: 1.3;
+}
+
+.main .bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+
+    min-height: 0;
+}
+
+/* Height is no longer fixed, it stretches with the card */
+.main .bar-plot {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    flex: 1;
+
+    box-sizing: border-box;
+    min-height: 130px;
+    padding: 0 6px;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+}
+
+.main .bar-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    flex: 1;
+}
+
+.main .bar-value {
+    font-size: 11px;
+    color: #4A2C20;
+}
+
+.main .bar-value-highlighted {
+    font-weight: 600;
+}
+
+.main .bar {
+    width: 100%;
+    max-width: 44px;
+
+    border-radius: 6px 6px 0 0;
+    background-color: var(--bgcolor-khaki);
+
+    transition: height 0.4s ease;
+}
+
+.main .bar-highlighted {
+    background-color: var(--adm-bgcolor-terracotta);
+}
+
+.main .bar-labels {
+    display: flex;
+    gap: 14px;
+
+    padding: 0 6px;
+}
+
+.main .bar-label {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+
+    font-size: 11px;
+    color: #938884;
+}
+
+
+/*********************************************************************************
+STOCK HEALTH
+*********************************************************************************/
+.main .stock-card {
+    flex: 1;
+}
+
+.main .stock-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 24px;
+    flex: 1;
+
+    min-height: 0;
+}
+
+.main .donut-chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 130px;
+    height: 130px;
+
+    border-radius: 50%;
+    background-color: var(--bgcolor-khaki);
+}
+
+.main .donut-hole {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+    background-color: var(--bgcolor-light);
+}
+
+.main .donut-total {
+    font-size: 26px;
+    font-weight: 600;
+    color: #4A2C20;
+}
+
+.main .donut-caption {
+    font-size: 11px;
+    color: #938884;
+}
+
+.main .stock-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+
+    max-width: 230px;
+}
+
+.main .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 13px;
+    color: #4A2C20;
+}
+
+.main .legend-dot {
+    flex-shrink: 0;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+}
+
+.main .legend-dot-in-stock {
+    background-color: #3CA22A;
+}
+
+.main .legend-dot-low {
+    background-color: #E0B232;
+}
+
+.main .legend-dot-no-stock {
+    background-color: #99080F;
+}
+
+.main .legend-label {
+    flex: 1;
+}
+
+.main .legend-value {
+    font-weight: 600;
+}
+
+
+/*********************************************************************************
+TOP SELLERS
+*********************************************************************************/
+.main .top-sellers-card {
+    flex: 1;
+    gap: 10px;
+}
+
+.main .top-sellers-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .period-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 18px;
+
+    border-radius: 999px;
+    background-color: var(--bgcolor-darkbrown);
+
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bgcolor-light);
+}
+
+.main .top-sellers-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(6px, 1vh, 16px);
+}
+
+.main .top-seller-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    font-size: 13px;
+    color: #4A2C20;
+}
+
+.main .top-seller-rank {
+    width: 20px;
+    flex-shrink: 0;
+
+    font-size: 20px;
+    font-weight: 600;
+    color: #916553;
+}
+
+.main .top-seller-name {
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.main .progress-track {
+    display: flex;
+    flex: 1;
+
+    height: 8px;
+
+    border-radius: 999px;
+    background-color: var(--bgcolor-beige);
+}
+
+.main .progress-fill {
+    height: 100%;
+
+    border-radius: 999px;
+    background-color: #9D6048;
+
+    transition: width 0.4s ease;
+}
+
+.main .top-seller-sold {
+    width: 60px;
+    flex-shrink: 0;
+
+    font-size: 12px;
+    text-align: right;
+    color: #4A2C2074;
+}
+
+
+/*********************************************************************************
+ORDERS
+*********************************************************************************/
+.main .orders-row {
+    display: flex;
+    flex-shrink: 0;
+    gap: 12px;
+}
+
+
+/*********************************************************************************
+TODAY'S ORDERS
+*********************************************************************************/
+.main .todays-orders-card {
+    flex: 1.65;
+    gap: 10px;
+}
+
+.main .todays-orders-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .view-all-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 11px;
+    text-decoration: none;
+    color: #938884;
+}
+
+.main .view-all-link:hover {
+    color: #4A2C20;
+}
+
+.main .todays-orders-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.main .table-header {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 6px 14px;
+
+    border-radius: 4px;
+    background-color: var(--bgcolor-khaki);
+
+    font-size: 11px;
+    color: #4A2C20;
+}
+
+.main .todays-orders-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.main .table-row {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: clamp(7px, 1.1vh, 14px) 14px;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+
+    font-size: 11px;
+    color: #4A2C20;
+}
+
+.main .cell-order-number {
+    display: flex;
+    align-items: center;
+
+    width: 70px;
+    flex-shrink: 0;
+}
+
+.main .table-row .cell-order-number {
+    font-weight: 600;
+}
+
+.main .cell-time {
+    display: flex;
+    align-items: center;
+
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.main .cell-items {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+    padding-right: 12px;
+}
+
+.main .cell-total {
+    display: flex;
+    align-items: center;
+
+    width: 70px;
+    flex-shrink: 0;
+}
+
+.main .table-row .cell-total {
+    font-weight: 600;
+}
+
+.main .cell-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.main .status-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 2px 12px;
+
+    border-radius: 999px;
+
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.main .status-processing {
+    background-color: #0796C127;
+
+    color: #0044F0;
+}
+
+.main .status-completed {
+    background-color: #3CA22A27;
+
+    color: #167A04;
+}
+
+.main .status-canceled {
+    background-color: #A22A2C27;
+
+    color: #99080F;
+}
+
+
+/*********************************************************************************
+SMALL SCREENS
+*********************************************************************************/
+@media (max-width: 1100px) {
+    .main .charts-row,
+    .main .orders-row {
+        flex-direction: column;
+    }
+}
