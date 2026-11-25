@@ -28,8 +28,8 @@
                 <button
                     class="checkout-navigation-button"
                     type="button"
-                    title="Barista Orders is not yet available"
-                    disabled
+                    data-checkout-view="orders"
+                    aria-pressed="false"
                 >
                     Orders
                 </button>
@@ -71,12 +71,57 @@
                     </svg>
                 </button>
 
-                <div class="checkout-profile">
-                    <svg class="checkout-profile-icon" aria-hidden="true">
-                        <use href="#checkout-profile-symbol"></use>
-                    </svg>
+                <!-- BARISTA PROFILE -->
+                <div class="checkout-profile" id="checkout-profile">
+                    <button
+                        class="checkout-profile-button"
+                        id="checkout-profile-button"
+                        type="button"
+                        aria-label="Barista account"
+                        aria-expanded="false"
+                        aria-controls="checkout-profile-menu"
+                    >
+                        <svg class="checkout-profile-icon" aria-hidden="true">
+                            <use href="#checkout-profile-symbol"></use>
+                        </svg>
 
-                    <span class="checkout-profile-name">Barista</span>
+                        <span class="checkout-profile-name">Barista</span>
+
+                        <span
+                            class="checkout-profile-chevron"
+                            aria-hidden="true"
+                        ></span>
+                    </button>
+
+                    <!-- PROFILE DROPDOWN -->
+                    <div
+                        class="checkout-profile-menu"
+                        id="checkout-profile-menu"
+                        inert
+                    >
+                        <button
+                            class="checkout-logout-button"
+                            id="checkout-logout-button"
+                            type="button"
+                        >
+                            <svg
+                                class="checkout-logout-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                            </svg>
+
+                            <span>Logout</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -302,6 +347,251 @@
                 </div>
             </div>
         </div>
+
+        <!-- ORDERS CONTENT -->
+        <div
+            class="checkout-content checkout-orders-content"
+            id="checkout-orders-content"
+            hidden
+        >
+            <div class="checkout-orders-panel">
+
+                <!-- ORDER FILTERS -->
+                <div
+                    class="checkout-orders-filters"
+                    id="checkout-orders-filters"
+                    role="group"
+                    aria-label="Order status filters"
+                ></div>
+
+                <!-- ORDERS LIST -->
+                <div
+                    class="checkout-orders-scroll"
+                    id="checkout-orders-scroll"
+                >
+
+                    <!-- ORDER COLUMN HEADINGS -->
+                    <div class="checkout-history-columns" aria-hidden="true">
+                        <span>Order #</span>
+                        <span>Time</span>
+                        <span>Items</span>
+                        <span>Type</span>
+                        <span>Pay</span>
+                        <span>Total</span>
+                        <span>Status</span>
+                        <span></span>
+                    </div>
+
+                    <!-- ORDER RECORDS -->
+                    <div
+                        class="checkout-history-list"
+                        id="checkout-history-list"
+                    ></div>
+                </div>
+            </div>
+
+            <!-- MOBILE ORDER DETAILS -->
+            <div
+                class="checkout-history-drawer-details"
+                id="checkout-history-drawer-details"
+            ></div>
+        </div>
+
+        <!-- MOBILE ORDER BAR -->
+        <div
+            class="checkout-mobile-order-bar"
+            id="checkout-mobile-order-bar"
+            hidden
+        >
+            <button
+                class="checkout-mobile-order-button"
+                id="checkout-mobile-order-button"
+                type="button"
+                aria-haspopup="dialog"
+            >
+                <div class="checkout-mobile-order-information">
+                    <span
+                        class="checkout-mobile-order-count"
+                        id="checkout-mobile-order-count"
+                    >
+                        0 items in order
+                    </span>
+
+                    <strong
+                        class="checkout-mobile-order-total"
+                        id="checkout-mobile-order-total"
+                    >
+                        &#8369;0
+                    </strong>
+                </div>
+
+                <div class="checkout-mobile-order-action">
+                    <span>View order</span>
+                    <span aria-hidden="true">&rarr;</span>
+                </div>
+            </button>
+        </div>
+
+        <!-- CHECKOUT DRAWER -->
+        <dialog
+            class="checkout-drawer"
+            id="checkout-drawer"
+            aria-labelledby="checkout-drawer-title"
+        >
+            <div class="checkout-drawer-surface">
+
+                <div class="checkout-drawer-handle" aria-hidden="true"></div>
+
+                <!-- DRAWER HEADER -->
+                <div class="checkout-drawer-header">
+                    <h2
+                        class="checkout-drawer-title"
+                        id="checkout-drawer-title"
+                    ></h2>
+
+                    <button
+                        class="checkout-drawer-close"
+                        id="checkout-drawer-close"
+                        type="button"
+                        aria-label="Close panel"
+                        autofocus
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- DRAWER CONTENT -->
+                <div class="checkout-drawer-body">
+
+                    <!-- BEVERAGE SELECTION -->
+                    <div
+                        class="checkout-beverage-selection"
+                        id="checkout-beverage-selection"
+                        hidden
+                    >
+                        <div class="checkout-beverage-information">
+                            <div
+                                class="checkout-beverage-image"
+                                id="checkout-beverage-image"
+                            ></div>
+
+                            <div class="checkout-beverage-details">
+                                <h3
+                                    class="checkout-beverage-name"
+                                    id="checkout-beverage-name"
+                                ></h3>
+
+                                <p
+                                    class="checkout-beverage-price"
+                                    id="checkout-beverage-price"
+                                ></p>
+                            </div>
+                        </div>
+
+                        <!-- SIZE OPTIONS -->
+                        <div class="checkout-beverage-size-section">
+                            <p class="checkout-beverage-label">
+                                Select beverage size
+                            </p>
+
+                            <div
+                                class="checkout-beverage-sizes"
+                                role="group"
+                                aria-label="Beverage sizes"
+                            >
+                                <button
+                                    class="checkout-beverage-size"
+                                    data-drawer-size="Tall"
+                                    type="button"
+                                    aria-pressed="false"
+                                >
+                                    <svg aria-hidden="true">
+                                        <use href="#checkout-cup-symbol"></use>
+                                    </svg>
+
+                                    <span>Tall</span>
+                                </button>
+
+                                <button
+                                    class="checkout-beverage-size"
+                                    data-drawer-size="Grande"
+                                    type="button"
+                                    aria-pressed="false"
+                                >
+                                    <svg aria-hidden="true">
+                                        <use href="#checkout-cup-symbol"></use>
+                                    </svg>
+
+                                    <span>Grande</span>
+                                </button>
+
+                                <button
+                                    class="checkout-beverage-size"
+                                    data-drawer-size="Venti"
+                                    type="button"
+                                    aria-pressed="false"
+                                >
+                                    <svg aria-hidden="true">
+                                        <use href="#checkout-cup-symbol"></use>
+                                    </svg>
+
+                                    <span>Venti</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- BEVERAGE QUANTITY -->
+                        <div class="checkout-beverage-quantity">
+                            <p class="checkout-beverage-label">Quantity</p>
+
+                            <div class="checkout-beverage-quantity-controls">
+                                <button
+                                    class="checkout-beverage-quantity-button"
+                                    id="checkout-beverage-decrease"
+                                    type="button"
+                                    aria-label="Decrease quantity"
+                                >
+                                    &minus;
+                                </button>
+
+                                <output
+                                    class="checkout-beverage-quantity-value"
+                                    id="checkout-beverage-quantity"
+                                    aria-live="polite"
+                                >
+                                    1
+                                </output>
+
+                                <button
+                                    class="checkout-beverage-quantity-button"
+                                    id="checkout-beverage-increase"
+                                    type="button"
+                                    aria-label="Increase quantity"
+                                >
+                                    +
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- ADD BEVERAGE -->
+                        <button
+                            class="checkout-beverage-add"
+                            id="checkout-beverage-add"
+                            type="button"
+                        >
+                            Add to order
+                        </button>
+                    </div>
+
+                    <!-- EXISTING ORDER OR RECIPE PANEL -->
+                    <div
+                        class="checkout-drawer-panel"
+                        id="checkout-drawer-panel"
+                        hidden
+                    ></div>
+                </div>
+            </div>
+        </dialog>
 
         <!-- REUSABLE ICONS -->
         <svg

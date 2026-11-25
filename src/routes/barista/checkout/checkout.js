@@ -551,9 +551,46 @@
             );
 
             addButton.addEventListener("click", () => {
-                const size = getSelectedSize(name, category);
+                if (
+                    hasSizes &&
+                    compactCatalogViewport.matches
+                ) {
+                    openBeverageSelection(
+                        name,
+                        category,
+                        price,
+                        addButton
+                    );
 
-                updateCart(name, size, price, 1);
+                    return;
+                }
+
+                const size = getSelectedSize(
+                    name,
+                    category
+                );
+
+                updateCart(
+                    name,
+                    size,
+                    price,
+                    1
+                );
+            });
+
+            product.addEventListener("click", (event) => {
+                if (!compactCatalogViewport.matches) return;
+
+                if (!hasSizes) return;
+
+                if (event.target.closest("button")) return;
+
+                openBeverageSelection(
+                    name,
+                    category,
+                    price,
+                    addButton
+                );
             });
 
             details.appendChild(addButton);
@@ -986,6 +1023,8 @@
         subtotalAmount.textContent = money(subtotal, 2);
         vatAmount.textContent = money(vat, 2);
         totalAmount.textContent = money(total);
+
+        synchronizeMobileOrderBar();
 
         if (exactCheckbox.checked) {
             cashInput.value = total.toFixed(2);
@@ -1591,6 +1630,10 @@
 
                 updateRecipeCards();
                 renderRecipePreview();
+
+                if (drawerViewport.matches) {
+                    openRecipeDetails(card);
+                }
             });
 
             recipeProductsContainer.appendChild(card);
@@ -1923,6 +1966,7 @@
     const displayCheckoutView = (view) => {
         if (
             view !== "pos" &&
+            view !== "orders" &&
             view !== "recipe"
         ) {
             return;
@@ -1935,10 +1979,16 @@
 
         activeCheckoutView = view;
 
-        const recipeView = view === "recipe";
+        checkoutPosView.hidden =
+            view !== "pos";
 
-        checkoutPosView.hidden = recipeView;
-        checkoutRecipeView.hidden = !recipeView;
+        orderHistoryView.hidden =
+            view !== "orders";
+
+        checkoutRecipeView.hidden =
+            view !== "recipe";
+
+        synchronizeMobileOrderBar();
 
         checkoutNavigationButtons.forEach((button) => {
             const active =
@@ -1955,21 +2005,28 @@
             );
         });
 
-        searchInput.value = checkoutSearchValues[view];
+        const searchLabels = {
+            pos: "Search products",
+            orders: "Search orders",
+            recipe: "Search recipes"
+        };
 
-        searchInput.placeholder = recipeView
-            ? "Search recipes..."
-            : "Search products...";
+        searchInput.value =
+            checkoutSearchValues[view] || "";
+
+        searchInput.placeholder =
+            `${searchLabels[view]}...`;
 
         searchInput.setAttribute(
             "aria-label",
-            recipeView
-                ? "Search recipes"
-                : "Search products"
+            searchLabels[view]
         );
 
-        if (recipeView) {
+        if (view === "recipe") {
             refreshRecipes();
+        } else if (view === "orders") {
+            updateOrderHistoryFilters();
+            renderOrderHistory();
         } else {
             window.requestAnimationFrame(
                 syncScrollShadows
@@ -1993,6 +2050,12 @@
     const handleCheckoutSearch = () => {
         if (activeCheckoutView === "recipe") {
             renderRecipeCards();
+        } else if (activeCheckoutView === "orders") {
+            expandedOrderId = null;
+
+            renderOrderHistory();
+
+            orderHistoryScroll.scrollTop = 0;
         } else {
             renderProducts();
         }
@@ -2103,6 +2166,1551 @@
             "Order submission is not yet available.";
     });
 
+    /*********************************************************************************
+    RESPONSIVE VIEWPORTS
+    *********************************************************************************/
+
+    const compactCatalogViewport = window.matchMedia(
+        "(max-width: 1199px)"
+    );
+
+    const drawerViewport = window.matchMedia(
+        "(max-width: 899px), " +
+        "(max-width: 1199px) and (orientation: portrait)"
+    );
+
+    const reducedMotionViewport = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
+
+
+    /*********************************************************************************
+    MOBILE ORDER BAR
+    *********************************************************************************/
+
+    const mobileOrderBar = checkout.querySelector(
+        "#checkout-mobile-order-bar"
+    );
+
+    const mobileOrderButton = checkout.querySelector(
+        "#checkout-mobile-order-button"
+    );
+
+    const mobileOrderCount = checkout.querySelector(
+        "#checkout-mobile-order-count"
+    );
+
+    const mobileOrderTotal = checkout.querySelector(
+        "#checkout-mobile-order-total"
+    );
+
+    const synchronizeMobileOrderBar = () => {
+        let quantity = 0;
+
+        cart.forEach((item) => {
+            quantity += item.quantity;
+        });
+
+        const total = calculateTotal();
+
+        const itemLabel = quantity === 1
+            ? "1 item in order"
+            : `${quantity} items in order`;
+
+        mobileOrderCount.textContent = itemLabel;
+
+        mobileOrderTotal.textContent = money(total);
+
+        mobileOrderButton.setAttribute(
+            "aria-label",
+            `View order, ${itemLabel}, total ${money(total)}`
+        );
+
+        mobileOrderBar.hidden =
+            activeCheckoutView !== "pos" ||
+            !drawerViewport.matches;
+    };
+
+
+    /*********************************************************************************
+    CHECKOUT DRAWER STATE
+    *********************************************************************************/
+
+    const checkoutDrawer = checkout.querySelector(
+        "#checkout-drawer"
+    );
+
+    const checkoutDrawerTitle = checkout.querySelector(
+        "#checkout-drawer-title"
+    );
+
+    const checkoutDrawerClose = checkout.querySelector(
+        "#checkout-drawer-close"
+    );
+
+    const checkoutDrawerBody = checkoutDrawer.querySelector(
+        ".checkout-drawer-body"
+    );
+
+    const checkoutDrawerPanel = checkout.querySelector(
+        "#checkout-drawer-panel"
+    );
+
+    const currentOrderPanel = checkoutPosView.querySelector(
+        ".checkout-order"
+    );
+
+    const beverageSelection = checkout.querySelector(
+        "#checkout-beverage-selection"
+    );
+
+    let activeDrawer = null;
+    let drawerClosing = false;
+    let drawerCloseTimer = null;
+    let drawerReturnFocus = null;
+    let drawerPanelPosition = null;
+
+
+    /*********************************************************************************
+    DRAWER PANEL MANAGEMENT
+    *********************************************************************************/
+
+    const moveDrawerPanel = (panel) => {
+        drawerPanelPosition = {
+            element: panel,
+            parent: panel.parentNode,
+            nextSibling: panel.nextSibling
+        };
+
+        checkoutDrawerPanel.appendChild(panel);
+    };
+
+    const restoreDrawerPanel = () => {
+        if (!drawerPanelPosition) return;
+
+        const {
+            element,
+            parent,
+            nextSibling
+        } = drawerPanelPosition;
+
+        const insertionPoint =
+            nextSibling?.parentNode === parent
+                ? nextSibling
+                : null;
+
+        parent.insertBefore(
+            element,
+            insertionPoint
+        );
+
+        drawerPanelPosition = null;
+    };
+
+
+    /*********************************************************************************
+    OPEN DRAWER
+    *********************************************************************************/
+
+    const openCheckoutDrawer = (
+        view,
+        title,
+        trigger,
+        panel = null
+    ) => {
+        if (checkoutDrawer.open || drawerClosing) {
+            return false;
+        }
+
+        activeDrawer = view;
+
+        drawerReturnFocus =
+            trigger || document.activeElement;
+
+        checkoutDrawer.dataset.drawerView = view;
+
+        checkoutDrawerTitle.textContent = title;
+
+        beverageSelection.hidden = view !== "beverage";
+
+        checkoutDrawerPanel.hidden = !panel;
+
+        if (panel) {
+            moveDrawerPanel(panel);
+        }
+
+        checkoutDrawer.classList.remove(
+            "checkout-drawer-closing"
+        );
+
+        checkoutDrawer.showModal();
+
+        checkoutDrawerBody.scrollTop = 0;
+
+        checkoutDrawerClose.focus({
+            preventScroll: true
+        });
+
+        if (view === "order") {
+            window.requestAnimationFrame(
+                syncScrollShadows
+            );
+        }
+
+        return true;
+    };
+
+
+    /*********************************************************************************
+    CLOSE DRAWER
+    *********************************************************************************/
+
+    const finishDrawerClose = () => {
+        window.clearTimeout(drawerCloseTimer);
+
+        drawerCloseTimer = null;
+
+        const returnFocus = drawerReturnFocus;
+
+        activeDrawer = null;
+        drawerClosing = false;
+        drawerReturnFocus = null;
+
+        if (checkoutDrawer.open) {
+            checkoutDrawer.close();
+        }
+
+        restoreDrawerPanel();
+
+        checkoutDrawer.classList.remove(
+            "checkout-drawer-closing"
+        );
+
+        checkoutDrawer.removeAttribute(
+            "data-drawer-view"
+        );
+
+        beverageSelection.hidden = true;
+
+        checkoutDrawerPanel.hidden = true;
+
+        activeBeverage = null;
+
+        if (
+            returnFocus?.isConnected &&
+            returnFocus.getClientRects().length &&
+            !returnFocus.disabled
+        ) {
+            returnFocus.focus({
+                preventScroll: true
+            });
+        }
+
+        window.requestAnimationFrame(
+            syncScrollShadows
+        );
+    };
+
+    const closeCheckoutDrawer = (immediate = false) => {
+        if (!checkoutDrawer.open) return;
+
+        if (
+            immediate ||
+            reducedMotionViewport.matches
+        ) {
+            finishDrawerClose();
+
+            return;
+        }
+
+        if (drawerClosing) return;
+
+        drawerClosing = true;
+
+        checkoutDrawer.classList.add(
+            "checkout-drawer-closing"
+        );
+
+        drawerCloseTimer = window.setTimeout(
+            finishDrawerClose,
+            300
+        );
+    };
+
+    checkoutDrawer.addEventListener(
+        "animationend",
+        (event) => {
+            if (
+                drawerClosing &&
+                event.target === checkoutDrawer &&
+                event.animationName === "checkout-drawer-exit"
+            ) {
+                finishDrawerClose();
+            }
+        }
+    );
+
+    checkoutDrawer.addEventListener("close", () => {
+        if (
+            activeDrawer &&
+            !checkoutDrawer.open
+        ) {
+            finishDrawerClose();
+        }
+    });
+
+
+    /*********************************************************************************
+    CURRENT ORDER DRAWER
+    *********************************************************************************/
+
+    const openCurrentOrder = () => {
+        if (!drawerViewport.matches) return;
+
+        if (activeCheckoutView !== "pos") return;
+
+        openCheckoutDrawer(
+            "order",
+            "Current order",
+            mobileOrderButton,
+            currentOrderPanel
+        );
+    };
+
+    mobileOrderButton.addEventListener(
+        "click",
+        openCurrentOrder
+    );
+
+
+    /*********************************************************************************
+    RECIPE DETAILS DRAWER
+    *********************************************************************************/
+
+    const openRecipeDetails = (trigger) => {
+        if (!drawerViewport.matches) return;
+
+        if (activeCheckoutView !== "recipe") return;
+
+        if (!selectedRecipeId) return;
+
+        openCheckoutDrawer(
+            "recipe",
+            "Recipe details",
+            trigger,
+            recipePreview
+        );
+    };
+
+
+    /*********************************************************************************
+    BEVERAGE SELECTION STATE
+    *********************************************************************************/
+
+    const beverageImage = checkout.querySelector(
+        "#checkout-beverage-image"
+    );
+
+    const beverageName = checkout.querySelector(
+        "#checkout-beverage-name"
+    );
+
+    const beveragePrice = checkout.querySelector(
+        "#checkout-beverage-price"
+    );
+
+    const beverageQuantityValue = checkout.querySelector(
+        "#checkout-beverage-quantity"
+    );
+
+    const beverageDecrease = checkout.querySelector(
+        "#checkout-beverage-decrease"
+    );
+
+    const beverageIncrease = checkout.querySelector(
+        "#checkout-beverage-increase"
+    );
+
+    const beverageAdd = checkout.querySelector(
+        "#checkout-beverage-add"
+    );
+
+    const beverageSizeButtons = checkout.querySelectorAll(
+        "[data-drawer-size]"
+    );
+
+    let activeBeverage = null;
+    let beverageSize = "Tall";
+    let beverageQuantity = 1;
+
+
+    /*********************************************************************************
+    BEVERAGE SELECTION
+    *********************************************************************************/
+
+    const getAvailableBeverageQuantity = () => {
+        if (!activeBeverage) return 0;
+
+        const key = getCartKey(
+            activeBeverage.name,
+            beverageSize
+        );
+
+        const currentQuantity =
+            cart.get(key)?.quantity || 0;
+
+        return Math.max(
+            0,
+            maximumQuantity - currentQuantity
+        );
+    };
+
+    const updateBeverageSelection = () => {
+        if (!activeBeverage) return;
+
+        const availableQuantity =
+            getAvailableBeverageQuantity();
+
+        beverageQuantity = Math.max(
+            1,
+            Math.min(
+                beverageQuantity,
+                availableQuantity
+            )
+        );
+
+        beverageSizeButtons.forEach((button) => {
+            const selected =
+                button.dataset.drawerSize === beverageSize;
+
+            button.classList.toggle(
+                "checkout-beverage-size-active",
+                selected
+            );
+
+            button.setAttribute(
+                "aria-pressed",
+                String(selected)
+            );
+        });
+
+        beverageQuantityValue.textContent =
+            String(beverageQuantity);
+
+        beverageDecrease.disabled =
+            beverageQuantity <= 1;
+
+        beverageIncrease.disabled =
+            beverageQuantity >= availableQuantity;
+
+        beverageAdd.disabled =
+            availableQuantity === 0;
+
+        beverageAdd.textContent =
+            availableQuantity === 0
+                ? "Maximum quantity reached"
+                : `Add to order — ${
+                    money(
+                        activeBeverage.price *
+                        beverageQuantity
+                    )
+                }`;
+    };
+
+    const openBeverageSelection = (
+        name,
+        category,
+        price,
+        trigger
+    ) => {
+        if (!compactCatalogViewport.matches) return;
+
+        if (checkoutDrawer.open || drawerClosing) return;
+
+        activeBeverage = {
+            name,
+            category,
+            price
+        };
+
+        beverageSize = getSelectedSize(
+            name,
+            category
+        ) || "Tall";
+
+        beverageQuantity = 1;
+
+        beverageImage.replaceChildren(
+            makeImage(name)
+        );
+
+        beverageName.textContent = name;
+
+        beveragePrice.textContent =
+            `${money(price)} each`;
+
+        updateBeverageSelection();
+
+        openCheckoutDrawer(
+            "beverage",
+            "Customize beverage",
+            trigger
+        );
+    };
+
+
+    /*********************************************************************************
+    BEVERAGE SIZE EVENTS
+    *********************************************************************************/
+
+    beverageSizeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (!activeBeverage || drawerClosing) return;
+
+            const size = button.dataset.drawerSize;
+
+            if (!beverageSizes.includes(size)) return;
+
+            beverageSize = size;
+
+            updateBeverageSelection();
+        });
+    });
+
+
+    /*********************************************************************************
+    BEVERAGE QUANTITY EVENTS
+    *********************************************************************************/
+
+    beverageDecrease.addEventListener("click", () => {
+        if (!activeBeverage || drawerClosing) return;
+
+        beverageQuantity = Math.max(
+            1,
+            beverageQuantity - 1
+        );
+
+        updateBeverageSelection();
+    });
+
+    beverageIncrease.addEventListener("click", () => {
+        if (!activeBeverage || drawerClosing) return;
+
+        beverageQuantity = Math.min(
+            getAvailableBeverageQuantity(),
+            beverageQuantity + 1
+        );
+
+        updateBeverageSelection();
+    });
+
+
+    /*********************************************************************************
+    DESKTOP SIZE SYNCHRONIZATION
+    *********************************************************************************/
+
+    const synchronizeProductSize = (name, size) => {
+        const productCards = productsContainer.querySelectorAll(
+            ".checkout-product"
+        );
+
+        productCards.forEach((product) => {
+            if (product.dataset.productName !== name) return;
+
+            const sizeButtons = product.querySelectorAll(
+                ".checkout-size-button"
+            );
+
+            sizeButtons.forEach((button) => {
+                const selected =
+                    button.dataset.size === size;
+
+                button.classList.toggle(
+                    "checkout-size-button-active",
+                    selected
+                );
+
+                button.setAttribute(
+                    "aria-pressed",
+                    String(selected)
+                );
+            });
+
+            const addButton = product.querySelector(
+                ".checkout-product-add"
+            );
+
+            if (addButton) {
+                addButton.setAttribute(
+                    "aria-label",
+                    `Add ${getProductLabel(name, size)} to the order`
+                );
+            }
+        });
+    };
+
+
+    /*********************************************************************************
+    ADD BEVERAGE TO ORDER
+    *********************************************************************************/
+
+    beverageAdd.addEventListener("click", () => {
+        if (!activeBeverage || drawerClosing) return;
+
+        const availableQuantity =
+            getAvailableBeverageQuantity();
+
+        if (
+            beverageQuantity < 1 ||
+            beverageQuantity > availableQuantity
+        ) {
+            updateBeverageSelection();
+
+            return;
+        }
+
+        const {
+            name,
+            price
+        } = activeBeverage;
+
+        selectedSizes.set(
+            name,
+            beverageSize
+        );
+
+        synchronizeProductSize(
+            name,
+            beverageSize
+        );
+
+        updateCart(
+            name,
+            beverageSize,
+            price,
+            beverageQuantity
+        );
+
+        synchronizeMobileOrderBar();
+
+        closeCheckoutDrawer();
+    });
+
+
+    /*********************************************************************************
+    DRAWER EVENTS
+    *********************************************************************************/
+
+    checkoutDrawerClose.addEventListener(
+        "click",
+        () => {
+            closeCheckoutDrawer();
+        }
+    );
+
+    checkoutDrawer.addEventListener(
+        "cancel",
+        (event) => {
+            event.preventDefault();
+
+            closeCheckoutDrawer();
+        }
+    );
+
+    checkoutDrawer.addEventListener(
+        "click",
+        (event) => {
+            if (event.target === checkoutDrawer) {
+                closeCheckoutDrawer();
+            }
+        }
+    );
+
+
+    /*********************************************************************************
+    RESPONSIVE VIEWPORT EVENTS
+    *********************************************************************************/
+
+    const updateResponsiveCheckout = () => {
+        if (checkoutDrawer.open) {
+            const panelDrawer =
+                activeDrawer === "order" ||
+                activeDrawer === "recipe" ||
+                activeDrawer === "order-details";
+
+            const beverageDrawer =
+                activeDrawer === "beverage";
+
+            if (
+                panelDrawer &&
+                !drawerViewport.matches
+            ) {
+                closeCheckoutDrawer(true);
+            }
+
+            if (
+                beverageDrawer &&
+                !compactCatalogViewport.matches
+            ) {
+                closeCheckoutDrawer(true);
+            }
+        }
+
+        synchronizeMobileOrderBar();
+
+        window.requestAnimationFrame(
+            syncScrollShadows
+        );
+    };
+
+    drawerViewport.addEventListener(
+        "change",
+        updateResponsiveCheckout
+    );
+
+    compactCatalogViewport.addEventListener(
+        "change",
+        updateResponsiveCheckout
+    );
+
+    /*********************************************************************************
+    ORDER RECORDS
+    *********************************************************************************/
+
+    const orderHistory = [
+        {
+            id: "0018",
+            time: "10:45 AM",
+            type: "Dine-in",
+            payment: "Cash",
+            status: "Processing",
+
+            items: [
+                {
+                    name: "French Vanilla",
+                    quantity: 1,
+                    price: 170
+                },
+                {
+                    name: "NYC Style Cookies",
+                    quantity: 1,
+                    price: 155
+                }
+            ]
+        },
+        {
+            id: "0017",
+            time: "10:21 AM",
+            type: "Take-out",
+            payment: "GCash",
+            status: "Completed",
+
+            items: [
+                {
+                    name: "Pain Au Chocolat",
+                    quantity: 1,
+                    price: 80
+                }
+            ]
+        },
+        {
+            id: "0016",
+            time: "9:58 AM",
+            type: "Dine-in",
+            payment: "Cash",
+            status: "Completed",
+
+            items: [
+                {
+                    name: "Nutella Latte",
+                    quantity: 1,
+                    price: 150
+                }
+            ]
+        },
+        {
+            id: "0015",
+            time: "9:30 AM",
+            type: "Take-out",
+            payment: "Cash",
+            status: "Canceled",
+
+            items: [
+                {
+                    name: "Cafe Latte",
+                    quantity: 1,
+                    price: 150
+                }
+            ]
+        }
+    ];
+
+
+    /*********************************************************************************
+    ORDER HISTORY STATE
+    *********************************************************************************/
+
+    const orderHistoryView = checkout.querySelector(
+        "#checkout-orders-content"
+    );
+
+    const orderHistoryFilters = checkout.querySelector(
+        "#checkout-orders-filters"
+    );
+
+    const orderHistoryScroll = checkout.querySelector(
+        "#checkout-orders-scroll"
+    );
+
+    const orderHistoryList = checkout.querySelector(
+        "#checkout-history-list"
+    );
+
+    const orderHistoryDrawerDetails = checkout.querySelector(
+        "#checkout-history-drawer-details"
+    );
+
+    const orderStatuses = [
+        "All",
+        "Processing",
+        "Completed",
+        "Canceled"
+    ];
+
+    let activeOrderStatus = "All";
+    let expandedOrderId = "0018";
+
+    checkoutSearchValues.orders = "";
+
+
+    /*********************************************************************************
+    ORDER CALCULATIONS
+    *********************************************************************************/
+
+    const getHistoryOrderTotal = (order) => {
+        return order.items.reduce((total, item) => {
+            return total + item.price * item.quantity;
+        }, 0);
+    };
+
+    const getHistoryOrderVat = (order) => {
+        const total = getHistoryOrderTotal(order);
+
+        return total - total / 1.12;
+    };
+
+    const getHistoryItemSummary = (order) => {
+        return order.items.map((item) => {
+            const size = item.size
+                ? ` (${item.size})`
+                : "";
+
+            return `${item.name}${size} ×${item.quantity}`;
+        }).join(", ");
+    };
+
+
+    /*********************************************************************************
+    ORDER STATUS
+    *********************************************************************************/
+
+    const makeHistoryStatus = (status) => {
+        const statusClass = status.toLowerCase();
+
+        return makeElement(
+            "span",
+            `checkout-history-status checkout-history-status-${statusClass}`,
+            status
+        );
+    };
+
+    const getHistoryStatusCount = (status) => {
+        if (status === "All") {
+            return orderHistory.length;
+        }
+
+        return orderHistory.filter((order) => {
+            return order.status === status;
+        }).length;
+    };
+
+
+    /*********************************************************************************
+    ORDER FILTERS
+    *********************************************************************************/
+
+    const updateOrderHistoryFilters = () => {
+        orderHistoryFilters.querySelectorAll(
+            ".checkout-orders-filter"
+        ).forEach((button) => {
+            const status = button.dataset.status;
+
+            const selected =
+                status === activeOrderStatus;
+
+            button.textContent =
+                `${status} (${getHistoryStatusCount(status)})`;
+
+            button.classList.toggle(
+                "checkout-orders-filter-active",
+                selected
+            );
+
+            button.setAttribute(
+                "aria-pressed",
+                String(selected)
+            );
+        });
+    };
+
+    const renderOrderHistoryFilters = () => {
+        orderHistoryFilters.replaceChildren();
+
+        orderStatuses.forEach((status) => {
+            const button = makeButton(
+                "checkout-orders-filter",
+                `Filter ${status.toLowerCase()} orders`
+            );
+
+            button.dataset.status = status;
+
+            button.addEventListener("click", () => {
+                activeOrderStatus = status;
+                expandedOrderId = null;
+
+                updateOrderHistoryFilters();
+                renderOrderHistory();
+
+                orderHistoryScroll.scrollTop = 0;
+            });
+
+            orderHistoryFilters.appendChild(button);
+        });
+
+        updateOrderHistoryFilters();
+    };
+
+
+    /*********************************************************************************
+    ORDER SEARCH
+    *********************************************************************************/
+
+    const getVisibleHistoryOrders = () => {
+        const search = searchInput.value
+            .trim()
+            .toLowerCase();
+
+        return orderHistory.filter((order) => {
+            const matchesStatus =
+                activeOrderStatus === "All" ||
+                order.status === activeOrderStatus;
+
+            const searchableText = [
+                order.id,
+                `#${order.id}`,
+                order.time,
+                order.type,
+                order.payment,
+                order.status,
+                getHistoryItemSummary(order),
+                String(getHistoryOrderTotal(order)),
+                money(getHistoryOrderTotal(order))
+            ].join(" ").toLowerCase();
+
+            const matchesSearch =
+                !search ||
+                search.split(/\s+/).every((term) => {
+                    return searchableText.includes(term);
+                });
+
+            return matchesStatus && matchesSearch;
+        });
+    };
+
+
+    /*********************************************************************************
+    ORDER DETAILS HEADING
+    *********************************************************************************/
+
+    const makeHistoryDetailsHeading = (order) => {
+        const heading = makeElement(
+            "div",
+            "checkout-history-detail-heading"
+        );
+
+        const headingTop = makeElement(
+            "div",
+            "checkout-history-detail-heading-top"
+        );
+
+        headingTop.appendChild(
+            makeElement(
+                "h3",
+                "checkout-history-detail-number",
+                `#${order.id}`
+            )
+        );
+
+        headingTop.appendChild(
+            makeHistoryStatus(order.status)
+        );
+
+        heading.appendChild(headingTop);
+
+        heading.appendChild(
+            makeElement(
+                "p",
+                "checkout-history-detail-information",
+                `${order.time} · ${order.type} · ${order.payment}`
+            )
+        );
+
+        heading.appendChild(
+            makeElement(
+                "h4",
+                "checkout-history-detail-title",
+                "Order items"
+            )
+        );
+
+        return heading;
+    };
+
+
+    /*********************************************************************************
+    ORDER DETAILS COLUMNS
+    *********************************************************************************/
+
+    const makeHistoryDetailsColumns = () => {
+        const columns = makeElement(
+            "div",
+            "checkout-history-detail-columns"
+        );
+
+        [
+            "Items",
+            "Qty",
+            "Price each",
+            "Subtotal"
+        ].forEach((label) => {
+            columns.appendChild(
+                makeElement("span", "", label)
+            );
+        });
+
+        return columns;
+    };
+
+
+    /*********************************************************************************
+    ORDER DETAILS ITEMS
+    *********************************************************************************/
+
+    const makeHistoryDetailsItem = (item) => {
+        const row = makeElement(
+            "div",
+            "checkout-history-detail-item"
+        );
+
+        const name = item.size
+            ? `${item.name} (${item.size})`
+            : item.name;
+
+        row.appendChild(
+            makeElement(
+                "span",
+                "checkout-history-detail-name",
+                name
+            )
+        );
+
+        const quantity = makeElement(
+            "span",
+            "checkout-history-detail-quantity",
+            String(item.quantity)
+        );
+
+        quantity.setAttribute(
+            "aria-label",
+            `Quantity: ${item.quantity}`
+        );
+
+        row.appendChild(quantity);
+
+        row.appendChild(
+            makeElement(
+                "span",
+                "checkout-history-detail-price",
+                money(item.price)
+            )
+        );
+
+        row.appendChild(
+            makeElement(
+                "span",
+                "checkout-history-detail-subtotal",
+                money(item.price * item.quantity)
+            )
+        );
+
+        return row;
+    };
+
+
+    /*********************************************************************************
+    ORDER DETAILS SUMMARY
+    *********************************************************************************/
+
+    const makeHistorySummaryLine = (
+        label,
+        value,
+        highlighted = false
+    ) => {
+        const line = makeElement(
+            "div",
+            "checkout-history-summary-line"
+        );
+
+        if (highlighted) {
+            line.classList.add(
+                "checkout-history-summary-total"
+            );
+        }
+
+        line.appendChild(
+            makeElement("span", "", label)
+        );
+
+        line.appendChild(
+            makeElement("strong", "", value)
+        );
+
+        return line;
+    };
+
+    const makeHistoryDetailsSummary = (order) => {
+        const summary = makeElement(
+            "div",
+            "checkout-history-detail-summary"
+        );
+
+        summary.appendChild(
+            makeHistorySummaryLine(
+                "VAT (12%, included)",
+                money(getHistoryOrderVat(order), 2)
+            )
+        );
+
+        summary.appendChild(
+            makeHistorySummaryLine(
+                "Total",
+                money(getHistoryOrderTotal(order)),
+                true
+            )
+        );
+
+        return summary;
+    };
+
+
+    /*********************************************************************************
+    ORDER DETAILS
+    *********************************************************************************/
+
+    const makeHistoryDetails = (order) => {
+        const details = makeElement(
+            "div",
+            "checkout-history-details"
+        );
+
+        details.appendChild(
+            makeHistoryDetailsHeading(order)
+        );
+
+        details.appendChild(
+            makeHistoryDetailsColumns()
+        );
+
+        order.items.forEach((item) => {
+            details.appendChild(
+                makeHistoryDetailsItem(item)
+            );
+        });
+
+        details.appendChild(
+            makeHistoryDetailsSummary(order)
+        );
+
+        return details;
+    };
+
+
+    /*********************************************************************************
+    MOBILE ORDER HISTORY DRAWER
+    *********************************************************************************/
+
+    const openHistoryOrderDetails = (order, trigger) => {
+        if (!drawerViewport.matches) return;
+
+        if (activeCheckoutView !== "orders") return;
+
+        if (checkoutDrawer.open || drawerClosing) return;
+
+        orderHistoryDrawerDetails.replaceChildren(
+            makeHistoryDetails(order)
+        );
+
+        openCheckoutDrawer(
+            "order-details",
+            "Order details",
+            trigger,
+            orderHistoryDrawerDetails
+        );
+    };
+
+
+    /*********************************************************************************
+    ORDER EXPANSION
+    *********************************************************************************/
+
+    const updateHistoryOrderExpansion = () => {
+        orderHistoryList.querySelectorAll(
+            ".checkout-history-record"
+        ).forEach((record) => {
+            const orderId = record.dataset.orderId;
+
+            const order = orderHistory.find((item) => {
+                return item.id === orderId;
+            });
+
+            const button = record.querySelector(
+                ".checkout-history-row"
+            );
+
+            const existingDetails = record.querySelector(
+                ".checkout-history-details"
+            );
+
+            const mobileView = drawerViewport.matches;
+
+            const expanded =
+                !mobileView &&
+                expandedOrderId === orderId;
+
+            record.classList.toggle(
+                "checkout-history-record-expanded",
+                expanded
+            );
+
+            if (mobileView) {
+                button.removeAttribute("aria-expanded");
+
+                button.setAttribute(
+                    "aria-haspopup",
+                    "dialog"
+                );
+            } else {
+                button.removeAttribute("aria-haspopup");
+
+                button.setAttribute(
+                    "aria-expanded",
+                    String(expanded)
+                );
+            }
+
+            if (expanded && !existingDetails && order) {
+                record.appendChild(
+                    makeHistoryDetails(order)
+                );
+            }
+
+            if (!expanded && existingDetails) {
+                existingDetails.remove();
+            }
+        });
+    };
+
+
+    /*********************************************************************************
+    ORDER RECORDS
+    *********************************************************************************/
+
+    const makeHistoryOrderRecord = (order) => {
+        const record = makeElement(
+            "div",
+            "checkout-history-record"
+        );
+
+        record.dataset.orderId = order.id;
+
+        const button = makeButton(
+            "checkout-history-row",
+            `Order #${order.id}, ${order.time}, ${
+                getHistoryItemSummary(order)
+            }, ${order.type}, ${order.payment}, ${
+                money(getHistoryOrderTotal(order))
+            }, ${order.status}. View details.`
+        );
+
+        const fields = [
+            [
+                "checkout-history-number",
+                `#${order.id}`
+            ],
+            [
+                "checkout-history-time",
+                order.time
+            ],
+            [
+                "checkout-history-items",
+                getHistoryItemSummary(order)
+            ],
+            [
+                "checkout-history-type",
+                order.type
+            ],
+            [
+                "checkout-history-payment",
+                order.payment
+            ],
+            [
+                "checkout-history-total",
+                money(getHistoryOrderTotal(order))
+            ]
+        ];
+
+        fields.forEach(([className, value]) => {
+            button.appendChild(
+                makeElement(
+                    "span",
+                    className,
+                    value
+                )
+            );
+        });
+
+        button.appendChild(
+            makeHistoryStatus(order.status)
+        );
+
+        const toggle = makeElement(
+            "span",
+            "checkout-history-toggle"
+        );
+
+        toggle.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        toggle.appendChild(
+            makeElement(
+                "span",
+                "checkout-history-detail-label",
+                "View details"
+            )
+        );
+
+        button.appendChild(toggle);
+
+        button.addEventListener("click", () => {
+            if (drawerViewport.matches) {
+                openHistoryOrderDetails(
+                    order,
+                    button
+                );
+
+                return;
+            }
+
+            expandedOrderId =
+                expandedOrderId === order.id
+                    ? null
+                    : order.id;
+
+            updateHistoryOrderExpansion();
+        });
+
+        record.appendChild(button);
+
+        return record;
+    };
+
+
+    /*********************************************************************************
+    RENDER ORDER HISTORY
+    *********************************************************************************/
+
+    const renderOrderHistory = () => {
+        const visibleOrders = getVisibleHistoryOrders();
+
+        const previousScrollTop =
+            orderHistoryScroll.scrollTop;
+
+        orderHistoryList.replaceChildren();
+
+        if (!visibleOrders.length) {
+            orderHistoryList.appendChild(
+                makeElement(
+                    "div",
+                    "checkout-history-empty",
+                    "No matching orders found."
+                )
+            );
+
+            return;
+        }
+
+        visibleOrders.forEach((order) => {
+            orderHistoryList.appendChild(
+                makeHistoryOrderRecord(order)
+            );
+        });
+
+        updateHistoryOrderExpansion();
+
+        orderHistoryScroll.scrollTop =
+            previousScrollTop;
+    };
+
+
+    /*********************************************************************************
+    ORDER HISTORY RESPONSIVENESS
+    *********************************************************************************/
+
+    drawerViewport.addEventListener("change", () => {
+        if (activeCheckoutView !== "orders") return;
+
+        updateHistoryOrderExpansion();
+    });
+
+    /*********************************************************************************
+    BARISTA PROFILE
+    *********************************************************************************/
+
+    const baristaProfile = checkout.querySelector(
+        "#checkout-profile"
+    );
+
+    const profileButton = checkout.querySelector(
+        "#checkout-profile-button"
+    );
+
+    const profileMenu = checkout.querySelector(
+        "#checkout-profile-menu"
+    );
+
+    const logoutButton = checkout.querySelector(
+        "#checkout-logout-button"
+    );
+
+    const profileIsOpen = () => {
+        return baristaProfile.classList.contains(
+            "checkout-profile-open"
+        );
+    };
+
+    const openProfileMenu = () => {
+        baristaProfile.classList.add(
+            "checkout-profile-open"
+        );
+
+        profileButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        profileMenu.inert = false;
+    };
+
+    const closeProfileMenu = () => {
+        baristaProfile.classList.remove(
+            "checkout-profile-open"
+        );
+
+        profileButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        profileMenu.inert = true;
+    };
+
+
+    /*********************************************************************************
+    PROFILE MENU EVENTS
+    *********************************************************************************/
+
+    profileButton.addEventListener("click", () => {
+        if (profileIsOpen()) {
+            closeProfileMenu();
+        } else {
+            openProfileMenu();
+        }
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!profileIsOpen()) return;
+
+        if (!baristaProfile.contains(event.target)) {
+            closeProfileMenu();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (
+            event.key === "Escape" &&
+            profileIsOpen()
+        ) {
+            event.preventDefault();
+
+            closeProfileMenu();
+
+            profileButton.focus({
+                preventScroll: true
+            });
+        }
+    });
+
+    baristaProfile.addEventListener("focusout", (event) => {
+        if (
+            event.relatedTarget &&
+            !baristaProfile.contains(event.relatedTarget)
+        ) {
+            closeProfileMenu();
+        }
+    });
+
+    checkoutNavigationButtons.forEach((button) => {
+        button.addEventListener(
+            "click",
+            closeProfileMenu
+        );
+    });
+
+
+    /*********************************************************************************
+    LOGOUT
+    *********************************************************************************/
+
+    logoutButton.addEventListener("click", () => {
+        if (cart.size > 0) {
+            const confirmed = window.confirm(
+                "You have an unfinished order. " +
+                "Are you sure you want to log out?"
+            );
+
+            if (!confirmed) return;
+        }
+
+        closeProfileMenu();
+
+        // Backend session termination
+
+        window.location.replace(
+            "../../admin/login/login.html"
+        );
+    });
 
     /*********************************************************************************
     INITIALIZATION
@@ -2117,5 +3725,7 @@
     renderCategories();
     renderProducts();
     renderOrder();
+    renderOrderHistoryFilters();
     updatePaymentMethod();
+    updateResponsiveCheckout();
 })();
