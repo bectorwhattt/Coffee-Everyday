@@ -1,2 +1,409 @@
 /**import all color and font variables**/
 @import url("../../lib/variables.css");
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+.main {
+  background-color: var(--bgcolor-light);
+
+  font-family: var(--body);
+  line-height: 150%;
+  color: var(--color-black);
+}
+
+/**********************************************************
+CONTACT HERO                                              .
+**********************************************************/
+
+.main .section-tag {
+  display: flex;
+  align-items: center;
+
+  width: fit-content;
+  height: 30px;
+  padding: 0 12px;
+
+  border: 1px solid var(--color-black);
+  border-radius: 100px;
+  background-color: var(--color-pink);
+
+  font-size: 16px;
+  line-height: 100%;
+}
+
+.main .accent-text {
+  font-style: italic;
+  color: var(--color-gold);
+}
+
+.main .contact-hero {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 36px 34px 0 30px;
+}
+
+.main .contact-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+
+  width: 500px;
+}
+
+.main .contact-hero-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.main .contact-hero-title {
+  font-family: var(--headings);
+  font-size: 84px;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: -2px;
+  font-variation-settings: "WONK" 1;
+  white-space: nowrap;
+}
+
+.main .contact-hero-description {
+  width: 460px;
+  margin-top: 8px;
+
+  font-size: 18px;
+  color: var(--color-grey);
+}
+
+/**********************************************************
+CONTACT INFORMATION                                       .
+**********************************************************/
+
+.main .contact-information-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.main .contact-information-item {
+  display: flex;
+  gap: 8px;
+
+  padding: 12px 0 24px 10px;
+
+  border-top: 1px solid var(--color-black);
+}
+
+.main .contact-information-icon {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.main .contact-information-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.main .contact-information-label {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.main .contact-information-detail {
+  font-size: 16px;
+  line-height: 140%;
+}
+
+.main .contact-information-link {
+  color: var(--color-black);
+  text-decoration: underline;
+}
+
+/**********************************************************
+CONTACT VISUAL                                            .
+**********************************************************/
+
+.main .contact-hero-visual {
+  position: relative;
+
+  width: 395px;
+  height: 378px;
+  margin-top: 128px;
+}
+
+.main .contact-storefront-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 355px;
+  height: 328px;
+
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.main .contact-map-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 188px;
+  height: 176px;
+
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.main .contact-directions-button {
+  position: absolute;
+  top: 291px;
+  right: 6px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 8px 16px;
+
+  border-radius: 100px;
+  background-color: var(--color-black);
+
+  font-size: 12px;
+  color: var(--bgcolor-light);
+  text-decoration: none;
+}
+
+/**********************************************************
+ORDER ON GRAB                                             .
+**********************************************************/
+
+.main .grab-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: calc(100% - 64px);
+  max-width: 986px;
+  margin: 60px auto 0;
+  padding: 44px 80px 44px 50px;
+
+  border-radius: 80px;
+  background-color: var(--color-black);
+}
+
+.main .grab-banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  width: 600px;
+}
+
+.main .grab-banner-tag {
+  display: flex;
+  align-items: center;
+
+  width: fit-content;
+  height: 30px;
+  padding: 0 22px;
+
+  border-radius: 100px;
+  background-color: var(--bgcolor-khaki);
+
+  font-size: 16px;
+  line-height: 100%;
+}
+
+.main .grab-banner-title {
+  font-family: var(--headings);
+  font-size: 55px;
+  font-weight: 600;
+  line-height: 110%;
+  color: var(--bgcolor-light);
+  font-variation-settings: "WONK" 1;
+  white-space: nowrap;
+}
+
+.main .grab-banner-description {
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--bgcolor-light);
+}
+
+.main .grab-banner-button {
+  display: flex;
+  align-items: center;
+
+  padding: 10px 22px;
+
+  border-radius: 100px;
+  background-color: var(--color-gold);
+
+  font-size: 16px;
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+/**********************************************************
+SEND US A MESSAGE                                         .
+**********************************************************/
+
+.main .contact-message {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1050px;
+  margin: 80px auto 0;
+  padding: 0 34px 0 30px;
+}
+
+.main .contact-message-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 470px;
+}
+
+.main .contact-section-title {
+  margin-top: 12px;
+
+  font-family: var(--headings);
+  font-size: 55px;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: -1px;
+  font-variation-settings: "WONK" 1;
+  white-space: nowrap;
+}
+
+.main .contact-section-description {
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--color-grey);
+}
+
+.main .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  width: 510px;
+}
+
+.main .contact-form-row {
+  display: flex;
+  gap: 30px;
+}
+
+.main .contact-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 100%;
+}
+
+.main .contact-form-field label {
+  font-size: 18px;
+}
+
+.main .contact-form-field input {
+  height: 46px;
+  padding: 0 14px;
+
+  border: 1px solid var(--color-grey);
+  border-radius: 8px;
+  /* REVIEWER: white is not in variables.css, raise in group chat */
+  background-color: #FFFFFF;
+
+  font-family: var(--body);
+  font-size: 18px;
+  color: var(--color-black);
+}
+
+.main .contact-form-field textarea {
+  height: 150px;
+  padding: 14px;
+
+  border: 1px solid var(--color-grey);
+  border-radius: 8px;
+  /* REVIEWER: white is not in variables.css, raise in group chat */
+  background-color: #FFFFFF;
+
+  font-family: var(--body);
+  font-size: 18px;
+  color: var(--color-black);
+
+  resize: none;
+}
+
+.main .contact-form-field input::placeholder,
+.main .contact-form-field textarea::placeholder {
+  color: var(--color-grey);
+}
+
+/**********************************************************
+BEFORE YOU VISIT                                          .
+**********************************************************/
+
+.main .visit-questions {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1050px;
+  margin: 60px auto 0;
+  padding: 0 34px 80px 30px;
+}
+
+.main .visit-questions-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 470px;
+}
+
+.main .visit-questions-list {
+  display: flex;
+  flex-direction: column;
+
+  width: 510px;
+  margin-top: 40px;
+}
+
+.main .visit-question-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  padding: 22px 0 20px;
+
+  border-top: 1px solid var(--color-black);
+}
+
+.main .visit-question {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.main .visit-answer {
+  font-size: 16px;
+  line-height: 140%;
+}

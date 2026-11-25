@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Coffee Everyday</title>
+        <link rel="stylesheet" href="../../../components/html-components.css">
+        <link rel="stylesheet" href="reports.css">
+    </head>
+    <body>
+        <!--IMPORTED SIDEBAR-->
+        <div id="admin-navigation-bar"></div>
+
+        <div class="main-container">
+            <!--IMPORTED HEADER-->
+            <div id="admin-header"></div>
+
+            <!--REPORTS-->
+            <div class="main">
+                <!-- PAGE HEADING -->
+                <div class="page-heading">
+                    <div class="page-title">Reports</div>
+                    <div class="page-subtitle">Track sales and inventory performance at a glance.</div>
+                </div>
+
+                <!-- WELCOME BANNER -->
+                <div class="welcome-banner">
+                    <div class="welcome-text">
+                        <div class="welcome-title">Welcome, Admin.</div>
+                        <div class="welcome-subtitle">Here's the business performance of Coffee Everyday.</div>
+                    </div>
+                    <div class="welcome-overview">
+                        <div class="welcome-overview-label">TODAY'S OVERVIEW</div>
+                        <div class="welcome-overview-date" id="current-date">November 21, 2026</div>
+                    </div>
+                </div>
+
+                <!-- STATISTICS -->
+                <div class="statistics-row">
+                    <div class="statistic-card">
+                        <div class="statistic-label">Total Sales Today</div>
+                        <div class="statistic-value">&#8369;12,850</div>
+                        <div class="tag tag-positive">+12.5% this week</div>
+                    </div>
+
+                    <div class="statistic-card">
+                        <div class="statistic-label">Total Orders</div>
+                        <div class="statistic-value">86 orders</div>
+                        <div class="tag tag-positive">+8.2% this week</div>
+                    </div>
+
+                    <div class="statistic-card">
+                        <div class="statistic-label">Low Stock Items</div>
+                        <div class="statistic-value">7 items</div>
+                        <div class="tag tag-negative">Needs attention</div>
+                    </div>
+
+                    <div class="statistic-card">
+                        <div class="statistic-label">Average Order Value</div>
+                        <div class="statistic-value">&#8369;149.42</div>
+                        <div class="tag tag-neutral">Across all orders</div>
+                    </div>
+                </div>
+
+                <!-- CHARTS -->
+                <div class="charts-row">
+
+                    <!-- SALES OVERVIEW -->
+                    <div class="report-card sales-card">
+                        <div class="card-heading">
+                            <div class="card-title">Sales Overview</div>
+                            <div class="card-subtitle">Sales performance &middot; This week</div>
+                        </div>
+                        <div class="bar-chart">
+                            <div class="bar-plot" id="sales-bar-plot"></div>
+                            <div class="bar-labels" id="sales-bar-labels"></div>
+                        </div>
+                    </div>
+
+                    <!-- STOCK HEALTH -->
+                    <div class="report-card stock-card">
+                        <div class="card-heading">
+                            <div class="card-title">Stock Health</div>
+                            <div class="card-subtitle">Inventory status</div>
+                        </div>
+                        <div class="stock-list" id="stock-list"></div>
+                    </div>
+                </div>
+
+                <!-- TOP SELLING ITEMS -->
+                <div class="report-card top-selling-card">
+                    <div class="card-title">Top Selling Items</div>
+                    <div class="top-selling-list" id="top-selling-list"></div>
+                </div>
+
+                <!-- ORDERS -->
+                <div class="orders-row">
+
+                    <!-- TODAY'S ORDERS -->
+                    <div class="report-card todays-orders-card">
+                        <div class="card-title">Today's Orders</div>
+
+                        <div class="orders-table">
+                            <div class="table-header">
+                                <div class="cell-order-number">ORDER ID</div>
+                                <div class="cell-time">TIME</div>
+                                <div class="cell-items">ITEMS</div>
+                                <div class="cell-total">TOTAL</div>
+                                <div class="cell-status">STATUS</div>
+                            </div>
+
+                            <div class="table-row">
+                                <div class="cell-order-number">#0019</div>
+                                <div class="cell-time">9:10 AM</div>
+                                <div class="cell-items">Spanish Latte</div>
+                                <div class="cell-total">&#8369;150</div>
+                                <div class="cell-status">Completed</div>
+                            </div>
+
+                            <div class="table-row">
+                                <div class="cell-order-number">#0020</div>
+                                <div class="cell-time">9:25 AM</div>
+                                <div class="cell-items">Iced Matcha</div>
+                                <div class="cell-total">&#8369;160</div>
+                                <div class="cell-status">Preparing</div>
+                            </div>
+
+                            <div class="table-row">
+                                <div class="cell-order-number">#0021</div>
+                                <div class="cell-time">9:42 AM</div>
+                                <div class="cell-items">Americano</div>
+                                <div class="cell-total">&#8369;120</div>
+                                <div class="cell-status">Completed</div>
+                            </div>
+
+                            <div class="table-row">
+                                <div class="cell-order-number">#0022</div>
+                                <div class="cell-time">10:05 AM</div>
+                                <div class="cell-items">Fudge Brownie</div>
+                                <div class="cell-total">&#8369;95</div>
+                                <div class="cell-status">Completed</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ORDERS BY TYPE -->
+                    <div class="report-card order-types-card">
+                        <div class="card-title">Orders by Type</div>
+                        <div class="order-types-list" id="order-types-list"></div>
+                    </div>
+                </div>
+
+                <!-- REPORTS SCRIPT -->
+                <script src="reports.js"></script>
+            </div>
+        </div>
+
+    <!--IMPORT SIDEBAR AND HEADER HTML-->
+    <script src="../../../lib/components.js"></script>
+    </body>
+</html>

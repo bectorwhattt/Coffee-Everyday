@@ -1,2 +1,190 @@
 /**import all color and font variables**/
 @import url("../../lib/variables.css");
+
+/* 1. CSS VARIABLES */
+:root {
+    --orange: #df9e38;
+    --gold: #c58d38;
+    --white: #ffffff;
+}
+
+
+/* 2. GENERAL STYLE */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bgcolor-light);
+    color: var(--bgcolor-darkbrown);
+    font-family: var(--body);
+}
+
+h1, h2 {
+    font-family: var(--headings);
+    font-weight: 600;
+}
+
+.main {
+    
+    font-size: 18px;
+}
+
+
+/* 3. HOME SECTION */
+.home {
+    display: flex;
+    align-items: center;
+    padding: 50px 7%;
+    gap: 30px;
+}
+
+.home-text {
+    width: 50%;
+}
+
+.tag {
+    background-color: #e9c9bd;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--bgcolor-darkbrown);
+    font-size: 14px;
+}
+
+.home h1 {
+    font-size: 80px;
+    margin: 15px 0;
+    line-height: 1;
+}
+
+.home h1 span {
+    color: var(--orange);
+    font-style: italic;
+}
+
+.home p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.home-image {
+    width: 50%;
+}
+
+.home-image img {
+    width: 100%;
+    height: 220px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+
+/* BUTTONS */
+.button {
+    background-color: var(--bgcolor-darkbrown);
+    color: var(--white);
+    padding: 9px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.outline {
+    border: 1px solid var(--bgcolor-darkbrown);
+    color: var(--bgcolor-darkbrown);
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+
+/* 4. SHOTS SECTION */
+.shots {
+    background-color: var(--bgcolor-beige);
+    padding: 35px 7%;
+}
+
+.shots h2 {
+    font-size: 30px;
+    margin: 20px 0 20px;
+}
+
+.shots h2 span {
+    color: var(--orange);
+    font-style: italic;
+}
+
+.pictures {
+    display: flex;
+    gap: 12px;
+}
+
+.pictures img {
+    width: 33.33%;
+    height: 130px;
+    border-radius: 10px;
+}
+
+
+/* 5. TEAM SECTION */
+.team {
+    padding: 40px 7%;
+}
+
+.team h2 {
+    font-size: 30px;
+    margin: 15px 0 25px;
+}
+
+.team h2 span {
+    color: var(--orange);
+    font-style: italic;
+}
+
+.members {
+    display: flex;
+    gap: 35px;
+}
+
+.member {
+    width: 40%;
+}
+
+.member-image {
+    background-color: var(--bgcolor-beige);
+    height: 300px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.second {
+    background-color: #ad9b8e;
+}
+
+.member b {
+    font-size: 15px;
+    font: var(--headings);
+}
+
+.member p {
+    font-size: 13px;
+}
+
+
+/* 6. VISIT US SECTION */
+.visit {
+    background-color: var(--orange);
+    margin: 30px 7% 45px;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.visit h2 {
+    font-size: 25px;
+}

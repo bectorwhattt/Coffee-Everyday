@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Coffee Everyday</title>
+        <link rel="stylesheet" href="../../../components/html-components.css">
+        <link rel="stylesheet" href="items.css">
+    </head>
+    <body>
+        <!--IMPORTED SIDEBAR-->
+        <div id="admin-navigation-bar"></div>
+
+        <div class="main-container">
+            <!--IMPORTED HEADER-->
+            <div id="admin-header"></div>
+
+            <!--ITEMS-->
+            <div class="main">
+                <!-- ITEMS CARD -->
+                <div class="items-card">
+
+                    <!-- ITEM FORM (ADD / EDIT) -->
+                    <div class="item-form" id="item-form">
+                        <div class="item-form-title" id="item-form-title">Add item</div>
+
+                        <div class="item-form-row">
+                            <button class="delete-button" id="delete-item-button" type="button" aria-label="Delete item">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                    <path d="M10 11v6M14 11v6"></path>
+                                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                                </svg>
+                            </button>
+
+                            <div class="field field-grow">
+                                <label class="field-label" for="item-name-input">Item name</label>
+                                <input class="field-input" id="item-name-input" type="text" placeholder="Enter item name" autocomplete="off">
+                            </div>
+                            <div class="field field-category">
+                                <label class="field-label" for="item-category-select">Category</label>
+                                <select class="field-input" id="item-category-select" required>
+                                    <option value="" disabled selected>Category</option>
+                                </select>
+                            </div>
+                            <div class="field field-unit">
+                                <label class="field-label" for="item-unit-select">Unit</label>
+                                <select class="field-input" id="item-unit-select">
+                                    <option value="mL">mL</option>
+                                    <option value="L">L</option>
+                                    <option value="g">g</option>
+                                    <option value="kg">kg</option>
+                                    <option value="pcs">pcs</option>
+                                    <option value="Packet">Packet</option>
+                                </select>
+                            </div>
+
+                            <button class="button-secondary form-action-button" id="cancel-item-button" type="button" aria-label="Cancel">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                                    <line x1="2" y1="2" x2="10" y2="10"></line>
+                                    <line x1="10" y1="2" x2="2" y2="10"></line>
+                                </svg>
+                            </button>
+                            <button class="button-primary form-action-button" id="save-item-button" type="button" aria-label="Save item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="4 12 10 18 20 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORY FILTER -->
+                    <div class="items-toolbar">
+                        <select class="category-filter" id="category-filter-select" aria-label="Filter items by category"></select>
+                        <button class="button-primary add-item-button" id="open-add-item-button" type="button">+ Add item</button>
+                    </div>
+
+                    <!-- ITEMS TABLE -->
+                    <div class="items-table">
+                        <div class="table-header">
+                            <div class="cell-item-name">Item Name</div>
+                            <div class="cell-used-in">Used In</div>
+                            <div class="cell-stocks">Stocks</div>
+                            <div class="cell-units">Units</div>
+                            <div class="cell-status">Status</div>
+                            <div class="cell-action"></div>
+                        </div>
+
+                        <div class="items-body" id="items-body"></div>
+                    </div>
+                </div>
+
+                <!-- ITEMS SCRIPT -->
+                <script src="items.js"></script>
+            </div>
+        </div>
+
+    <!--IMPORT SIDEBAR AND HEADER HTML-->
+    <script src="../../../lib/components.js"></script>
+    </body>
+</html>
