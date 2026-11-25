@@ -8,7 +8,7 @@
     const accountDestinations = Object.freeze({
         barista: {
             label: "Barista",
-            destination: "../barista/checkout/checkout.html"
+            destination: "../../barista/checkout/checkout.html"
         },
 
         admin: {
