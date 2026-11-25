@@ -16,12 +16,6 @@ body {
 MAIN
 *********************************************************************************/
 .main {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -29,7 +23,8 @@ MAIN
 
     box-sizing: border-box;
     width: 100%;
-    min-height: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
     padding: 24px;
 
     background-color: var(--bgcolor-beige);
@@ -37,8 +32,6 @@ MAIN
     font-family: var(--adm-font);
     font-size: 13px;
     color: var(--adm-bgcolor-brown);
-
-    overflow-y: auto;
 }
 
 .main *,
@@ -60,6 +53,7 @@ MAIN
 /*********************************************************************************
 LOGIN PHOTOGRAPH
 *********************************************************************************/
+
 .main .login-photograph-panel {
     position: relative;
 
@@ -119,6 +113,7 @@ LOGIN PHOTOGRAPH
 /*********************************************************************************
 LOGIN CONTENT
 *********************************************************************************/
+
 .main .login-content {
     display: flex;
     flex-direction: column;
@@ -126,14 +121,13 @@ LOGIN CONTENT
 
     min-width: 0;
     min-height: 0;
-
-    overflow-y: auto;
 }
 
 
 /*********************************************************************************
 SIGN IN
 *********************************************************************************/
+
 .main .login-card {
     display: flex;
     flex-direction: column;
@@ -152,6 +146,7 @@ SIGN IN
 /*********************************************************************************
 BRAND AND HEADING
 *********************************************************************************/
+
 .main .login-brand {
     display: flex;
     align-items: center;
@@ -207,6 +202,7 @@ BRAND AND HEADING
 /*********************************************************************************
 ACCOUNT SELECTION
 *********************************************************************************/
+
 .main .login-account-selection {
     display: flex;
     flex-direction: column;
@@ -225,7 +221,7 @@ ACCOUNT SELECTION
 
 .main .login-account-options {
     display: flex;
-    align-items: center;
+    align-items: stretch;
 
     width: 100%;
     padding: 5px;
@@ -238,7 +234,7 @@ ACCOUNT SELECTION
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
+    flex: 1 1 0;
 
     min-width: 0;
     padding: 11px 6px;
@@ -257,8 +253,8 @@ ACCOUNT SELECTION
     cursor: pointer;
 
     transition:
-        background-color 0.2s ease,
-        box-shadow 0.2s ease;
+        background-color 200ms ease,
+        box-shadow 200ms ease;
 }
 
 .main .login-account-option:hover:not(.login-account-option-active) {
@@ -284,6 +280,7 @@ ACCOUNT SELECTION
 /*********************************************************************************
 LOGIN FORM
 *********************************************************************************/
+
 .main .login-form {
     display: flex;
     flex-direction: column;
@@ -327,8 +324,8 @@ LOGIN FORM
     outline: none;
 
     transition:
-        border-color 0.2s ease,
-        background-color 0.2s ease;
+        border-color 200ms ease,
+        background-color 200ms ease;
 }
 
 .main .login-input::placeholder {
@@ -363,6 +360,7 @@ LOGIN FORM
 /*********************************************************************************
 LOGIN BUTTON
 *********************************************************************************/
+
 .main .login-submit {
     display: flex;
     align-items: center;
@@ -387,8 +385,8 @@ LOGIN BUTTON
     cursor: pointer;
 
     transition:
-        background-color 0.2s ease,
-        transform 0.15s ease;
+        background-color 200ms ease,
+        transform 150ms ease;
 }
 
 .main .login-submit:hover {
@@ -418,8 +416,9 @@ LOGIN BUTTON
 
 
 /*********************************************************************************
-RESPONSIVE LAYOUT
+WIDE DESKTOP
 *********************************************************************************/
+
 @media (min-aspect-ratio: 8/5) {
     .main .login-photograph {
         object-position: center 40%;
@@ -427,63 +426,78 @@ RESPONSIVE LAYOUT
     }
 }
 
+
+/*********************************************************************************
+COMPACT DESKTOP AND LANDSCAPE TABLET
+*********************************************************************************/
+
 @media (max-width: 1100px) {
     .main {
         gap: 32px;
+
+        padding: 20px;
     }
 
     .main .login-photograph-brand {
         padding: 32px;
-    }
-
-    .main .login-card {
-        padding: 32px;
-    }
-}
-
-@media (max-width: 900px) {
-    .main {
-        gap: 24px;
-    }
-
-    .main .login-photograph-brand {
-        padding: 24px;
     }
 
     .main .login-photograph-title {
-        font-size: 26px;
-        line-height: 39px;
-    }
-
-    .main .login-card {
-        padding: 28px;
-    }
-
-    .main .login-title {
         font-size: 28px;
         line-height: 42px;
     }
 
+    .main .login-card {
+        padding: 32px;
+    }
+
+    .main .login-title {
+        font-size: 30px;
+        line-height: 42px;
+    }
+
     .main .login-account-option {
+        min-height: 44px;
+
         font-size: 12px;
+    }
+
+    .main .login-input {
+        height: 48px;
+
+        font-size: 16px;
+    }
+
+    .main .login-submit {
+        min-height: 48px;
+
+        font-size: 13px;
     }
 }
 
-@media (max-width: 760px) {
+
+/*********************************************************************************
+PORTRAIT TABLET
+*********************************************************************************/
+
+@media (max-width: 900px),
+       (max-width: 1024px) and (orientation: portrait) {
+
     .main {
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         gap: 24px;
 
-        padding: 20px;
+        padding: 24px;
     }
 
     .main .login-photograph-panel {
         flex: none;
 
         width: 100%;
-        height: 280px;
+        max-width: 640px;
+        height: 220px;
 
         border-radius: 24px;
     }
@@ -499,57 +513,222 @@ RESPONSIVE LAYOUT
 
     .main .login-photograph-title {
         font-size: 28px;
-        line-height: 42px;
+        line-height: 38px;
+    }
+
+    .main .login-photograph-description {
+        font-size: 13px;
+        line-height: 20px;
     }
 
     .main .login-content {
         flex: none;
 
         width: 100%;
-
-        overflow: visible;
-    }
-
-    .main .login-card {
-        width: 444px;
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 38px;
-    }
-}
-
-@media (max-width: 480px) {
-    .main {
-        gap: 16px;
-
-        padding: 16px;
-    }
-
-    .main .login-photograph-panel {
-        height: 220px;
-
-        border-radius: 20px;
-    }
-
-    .main .login-photograph-brand {
-        padding: 20px;
-    }
-
-    .main .login-photograph-title {
-        font-size: 24px;
-        line-height: 36px;
-    }
-
-    .main .login-photograph-description {
-        font-size: 12px;
-        line-height: 18px;
+        max-width: 444px;
     }
 
     .main .login-card {
         width: 100%;
+        margin: 0;
+        padding: 32px;
+
+        border-radius: 24px;
+    }
+
+    .main .login-brand-logo {
+        width: 32px;
+        height: 32px;
+    }
+
+    .main .login-brand-name {
+        font-size: 13px;
+    }
+
+    .main .login-account-label,
+    .main .login-label {
+        font-size: 13px;
+    }
+
+    .main .login-account-option {
+        min-height: 46px;
+
+        font-size: 13px;
+    }
+
+    .main .login-input {
+        height: 48px;
+
+        font-size: 16px;
+    }
+
+    .main .login-submit {
+        min-height: 48px;
+
+        font-size: 13px;
+    }
+}
+
+
+/*********************************************************************************
+MOBILE
+*********************************************************************************/
+
+@media (max-width: 600px) {
+    .main {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 24px 16px;
+        padding-top: max(24px, env(safe-area-inset-top));
+        padding-bottom: max(24px, env(safe-area-inset-bottom));
+    }
+
+    .main .login-photograph-panel {
+        display: none;
+    }
+
+    .main .login-content {
+        flex: 1 0 auto;
+
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .main .login-card {
+        width: 100%;
+        max-width: 100%;
+        margin: auto;
         padding: 28px 24px;
 
         border-radius: 24px;
+    }
+
+    .main .login-brand {
+        gap: 10px;
+
+        min-height: 36px;
+    }
+
+    .main .login-brand-logo {
+        width: 34px;
+        height: 34px;
+    }
+
+    .main .login-brand-name {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .main .login-heading {
+        gap: 6px;
+
+        margin-top: 22px;
+        margin-bottom: 24px;
+    }
+
+    .main .login-title {
+        font-size: 28px;
+        line-height: 38px;
+    }
+
+    .main .login-description {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .main .login-account-selection {
+        gap: 8px;
+
+        margin-bottom: 20px;
+    }
+
+    .main .login-account-label {
+        font-size: 13px;
+    }
+
+    .main .login-account-options {
+        gap: 4px;
+
+        padding: 5px;
+
+        border-radius: 12px;
+    }
+
+    .main .login-account-option {
+        min-height: 46px;
+        padding: 10px 6px;
+
+        border-radius: 8px;
+
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 18px;
+
+        overflow-wrap: anywhere;
+    }
+
+    .main .login-form {
+        gap: 18px;
+    }
+
+    .main .login-field {
+        gap: 8px;
+    }
+
+    .main .login-label {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .main .login-input {
+        height: 50px;
+        padding: 0 14px;
+
+        border-radius: 10px;
+
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .main .login-field-error {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .main .login-submit {
+        min-height: 50px;
+        margin-top: 6px;
+        padding: 14px 16px;
+
+        border-radius: 10px;
+
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+    }
+}
+
+
+/*********************************************************************************
+SMALL MOBILE
+*********************************************************************************/
+
+@media (max-width: 420px) {
+    .main {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .main .login-card {
+        padding: 24px;
+
+        border-radius: 22px;
     }
 
     .main .login-heading {
@@ -559,11 +738,125 @@ RESPONSIVE LAYOUT
 
     .main .login-title {
         font-size: 26px;
-        line-height: 39px;
+        line-height: 36px;
+    }
+
+    .main .login-description {
+        font-size: 12px;
+        line-height: 19px;
     }
 
     .main .login-account-option {
         font-size: 12px;
+    }
+
+    .main .login-form {
+        gap: 16px;
+    }
+}
+
+
+/*********************************************************************************
+EXTRA SMALL MOBILE
+*********************************************************************************/
+
+@media (max-width: 360px) {
+    .main {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .main .login-card {
+        padding: 22px 18px;
+
+        border-radius: 20px;
+    }
+
+    .main .login-brand-name {
+        font-size: 12px;
+    }
+
+    .main .login-heading {
+        margin-top: 18px;
+        margin-bottom: 18px;
+    }
+
+    .main .login-title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .main .login-account-option {
+        padding-right: 4px;
+        padding-left: 4px;
+
+        font-size: 11px;
+    }
+
+    .main .login-account-selection {
+        margin-bottom: 16px;
+    }
+}
+
+
+/*********************************************************************************
+SHORT LANDSCAPE VIEWPORT
+*********************************************************************************/
+
+@media (max-width: 1100px) and (max-height: 540px) {
+    .main {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        padding: 16px;
+    }
+
+    .main .login-photograph-panel {
+        display: none;
+    }
+
+    .main .login-content {
+        flex: 1 0 auto;
+
+        width: 100%;
+        max-width: 444px;
+    }
+
+    .main .login-card {
+        width: 100%;
+        margin: auto;
+        padding: 24px;
+
+        border-radius: 22px;
+    }
+
+    .main .login-heading {
+        margin-top: 16px;
+        margin-bottom: 18px;
+    }
+}
+
+
+/*********************************************************************************
+TOUCH SCREEN INTERACTIONS
+*********************************************************************************/
+
+@media (hover: none) {
+    .main .login-account-option:hover:not(.login-account-option-active) {
+        background-color: transparent;
+    }
+
+    .main .login-submit:hover {
+        background-color: var(--adm-bgcolor-brown);
+    }
+
+    .main .login-submit:active {
+        background-color: var(--adm-bgcolor-terracotta);
+    }
+
+    .main .login-input:hover:not(:focus) {
+        border-color: transparent;
     }
 }
 
@@ -571,6 +864,7 @@ RESPONSIVE LAYOUT
 /*********************************************************************************
 REDUCED MOTION
 *********************************************************************************/
+
 @media (prefers-reduced-motion: reduce) {
     .main .login-account-option,
     .main .login-input,
@@ -580,5 +874,34 @@ REDUCED MOTION
 
     .main .login-submit:active {
         transform: none;
+    }
+}
+
+
+/*********************************************************************************
+STACKED LOGIN ALIGNMENT
+*********************************************************************************/
+
+@media (max-width: 900px),
+       (max-width: 1024px) and (orientation: portrait) {
+
+    .main .login-photograph-panel,
+    .main .login-content {
+        flex: none;
+
+        width: 100%;
+        max-width: 444px;
+    }
+
+    .main .login-photograph-panel {
+        height: 220px;
+
+        border-radius: 24px;
+    }
+
+    .main .login-card {
+        width: 100%;
+
+        border-radius: 24px;
     }
 }
