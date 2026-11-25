@@ -656,6 +656,35 @@ HAMBURGER MENU (SIDEBAR DRAWER)
         if (event.key === "Escape") setNavOpen(false);
     });
 
+    // Swipe left on the drawer (or the dimmed overlay) to close it
+    const sidebar = document.querySelector(".admin-navigation-bar");
+    const SWIPE_DISTANCE = 60;
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    function handleTouchStart(event) {
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    }
+
+    function handleTouchEnd(event) {
+        if (!document.body.classList.contains("nav-open")) return;
+
+        const deltaX = event.changedTouches[0].clientX - touchStartX;
+        const deltaY = event.changedTouches[0].clientY - touchStartY;
+
+        // Mostly horizontal, leftward swipe only (so vertical scrolling still works)
+        if (deltaX < -SWIPE_DISTANCE && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+            setNavOpen(false);
+        }
+    }
+
+    [sidebar, overlay].forEach(function (element) {
+        if (!element) return;
+        element.addEventListener("touchstart", handleTouchStart, { passive: true });
+        element.addEventListener("touchend", handleTouchEnd, { passive: true });
+    });
+
     // Close the drawer when the window grows back to desktop
     desktopQuery.addEventListener("change", function (event) {
         if (event.matches) setNavOpen(false);
