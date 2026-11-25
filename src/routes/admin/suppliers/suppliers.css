@@ -18,9 +18,12 @@ ADMIN NAVIGATION BAR
     left: 0;
     z-index: 10;
 
+    display: flex;
+    flex-direction: column;
+
     box-sizing: border-box;
     height: 100%;
-    width: var(--adm-navbar-width, 227px);
+    width: var(--adm-navbar-width, 290px);
     padding: 0 20px 24px;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -40,6 +43,7 @@ ADMIN NAVIGATION BAR
 .admin-navigation-bar .sidebar-logo {
     display: flex;
     justify-content: center;
+    flex-shrink: 0;
 
     padding: 24px 0 8px;
 }
@@ -64,6 +68,7 @@ ADMIN NAVIGATION BAR
 .admin-navigation-bar .navigation {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     gap: 4px;
 }
 
@@ -81,7 +86,7 @@ ADMIN NAVIGATION BAR
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 2px;
-    color: var(--color-gold, #D9A441);
+    color: var(--color-gold, #C98A2B);
 }
 
 .admin-navigation-bar .navigation a {
@@ -118,13 +123,15 @@ ADMIN NAVIGATION BAR
 
 /* Current page */
 .admin-navigation-bar .navigation a.active .frame {
-    background-color: #A0634A;
+    background-color: var(--adm-bgcolor-terracotta, #9D6048);
 }
 
 /* Decorative coffee bean at the bottom of the sidebar */
 .admin-navigation-bar .sidebar-decor {
     width: 110px;
-    margin: 40px 0 0 8px;
+    flex-shrink: 0;
+    margin: auto 0 0 8px;
+    padding-top: 40px;
 
     color: rgba(247, 241, 232, 0.85);
 }
@@ -149,10 +156,10 @@ ADMIN HEADER
     height: 80px;
     padding: 0 24px;
 
-    border-bottom: 1px solid var(--color-gold, #D9A441);
+    border-bottom: 1px solid var(--color-gold, #C98A2B);
 
     background-color: var(--bgcolor-light, #F7F1E8);
-    color: var(--color-black, #2B1A12);
+    color: var(--color-black, #1E1512);
 }
 
 .admin-header .page-title {
@@ -183,7 +190,7 @@ ADMIN HEADER
     padding: 8px 16px;
 
     border-radius: 999px;
-    background-color: var(--bgcolor-beige, #F0E8DC);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 }
 
 .admin-search-box .search-icon {
@@ -202,7 +209,7 @@ ADMIN HEADER
 
     font-family: inherit;
     font-size: 13px;
-    color: var(--color-black, #2B1A12);
+    color: var(--color-black, #1E1512);
 }
 
 .admin-header .icon-btn {
@@ -216,7 +223,7 @@ ADMIN HEADER
 
     border: none;
     border-radius: 50%;
-    background-color: var(--bgcolor-beige, #F0E8DC);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 
     cursor: pointer;
 }
@@ -255,7 +262,7 @@ body {
     margin: 0;
     padding: 0;
 
-    font-family: var(--adm-font, "Poppins", sans-serif);
+    font-family: var(--adm-font, 'Poppins', 'Roboto', sans-serif);
 }
 
 /* Lock page scroll while the add/edit panel is open OR the drawer is open */
@@ -271,7 +278,7 @@ body.nav-open {
     width: 100%;
     min-height: 100vh;
 
-    margin-left: var(--adm-navbar-width, 227px);
+    margin-left: var(--adm-navbar-width, 290px);
 }
 
 /*********************************************************************************
@@ -288,7 +295,7 @@ MAIN
     --sp-line: #E6DCCF;
     --sp-input-line: #D8CDC0;
     --sp-red: #B94A3F;
-    --sp-grey: var(--color-grey, #7A6F67);
+    --sp-grey: var(--color-grey, #7A685B);
 
     display: flex;
     flex-direction: column;
@@ -298,9 +305,9 @@ MAIN
     min-width: 0;
     padding: 20px 24px 40px;
 
-    background-color: var(--bgcolor-beige, #F0E8DC);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 
-    color: var(--color-black, #2B1A12);
+    color: var(--color-black, #1E1512);
 }
 
 .main button,
@@ -345,7 +352,7 @@ BUTTONS
 }
 
 .main .button-primary:hover {
-    background-color: #2B1A12;
+    background-color: #1E1512;
 }
 
 .main .button-secondary:hover,
@@ -882,8 +889,8 @@ HAMBURGER MENU + RESPONSIVE
 
     border: none;
     border-radius: 50%;
-    background-color: var(--bgcolor-beige, #F0E8DC);
-    color: var(--color-black, #2B1A12);
+    background-color: var(--bgcolor-beige, #EFE3D1);
+    color: var(--color-black, #1E1512);
 
     cursor: pointer;
 }
