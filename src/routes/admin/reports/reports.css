@@ -18,9 +18,18 @@ ADMIN NAVIGATION BAR
     width: var(--adm-navbar-width);
     padding: 0 20px 24px;
     overflow-y: auto;
+    overscroll-behavior: contain;
+
+    /* Hide the scrollbar but keep the sidebar scrollable */
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;       /* old Edge / IE */
 
     background-color: var(--adm-bgcolor-brown);
     color: var(--bgcolor-light);
+}
+
+.admin-navigation-bar::-webkit-scrollbar {
+    display: none;                  /* Chrome, Safari, new Edge */
 }
 
 .admin-navigation-bar .sidebar-logo {

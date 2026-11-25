@@ -13,8 +13,6 @@ body {
     font-family: var(--adm-font);
 }
 
-/* Locked to the viewport height so the page never scrolls.
-   .main takes whatever is left under the header and the charts row flexes to absorb the rest. */
 .main-container {
     display: flex;
     flex-direction: column;
@@ -25,6 +23,248 @@ body {
     min-height: 100vh;
 
     margin-left: var(--adm-navbar-width);
+}
+
+
+/*********************************************************************************
+ADMIN NAVIGATION BAR
+*********************************************************************************/
+.admin-navigation-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    box-sizing: border-box;
+    height: 100%;
+    width: var(--adm-navbar-width);
+    padding: 0 20px 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    /* Hide the scrollbar but keep the sidebar scrollable */
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;       /* old Edge / IE */
+
+    background-color: var(--adm-bgcolor-brown);
+    color: var(--bgcolor-light);
+}
+
+.admin-navigation-bar::-webkit-scrollbar {
+    display: none;                  /* Chrome, Safari, new Edge */
+}
+
+.admin-navigation-bar .sidebar-logo {
+    display: flex;
+    justify-content: center;
+
+    padding: 24px 0 8px;
+}
+
+.admin-navigation-bar .logo-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 80px;
+    width: 185px;
+
+    background-color: var(--bgcolor-light);
+    border-radius: 15px;
+}
+
+.admin-navigation-bar .logo-frame img {
+    max-width: 150px;
+    max-height: 60px;
+}
+
+.admin-navigation-bar .navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-navigation-bar .navigation hr {
+    width: 100%;
+    margin: 16px 0 8px;
+
+    border: none;
+    border-top: 1px solid rgba(247, 241, 232, 0.2);
+}
+
+.admin-navigation-bar .section-title {
+    margin: 0 12px 6px;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--color-gold);
+}
+
+.admin-navigation-bar .navigation a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.admin-navigation-bar .frame {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: background-color 0.2s ease;
+}
+
+.admin-navigation-bar .frame img {
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+.admin-navigation-bar .navigation a:hover .frame {
+    background-color: rgba(247, 241, 232, 0.12);
+}
+
+/* Current page */
+.admin-navigation-bar .navigation a.active .frame {
+    background-color: #A0634A;
+}
+
+/* Decorative coffee bean at the bottom of the sidebar */
+.admin-navigation-bar .sidebar-decor {
+    width: 110px;
+    margin: 40px 0 0 8px;
+
+    color: rgba(247, 241, 232, 0.85);
+}
+
+.admin-navigation-bar .sidebar-decor svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/*********************************************************************************
+ADMIN HEADER
+*********************************************************************************/
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 80px;
+    padding: 0 24px;
+
+    border-bottom: 1px solid var(--color-gold);
+
+    background-color: var(--bgcolor-light);
+    color: var(--color-black);
+}
+
+.admin-header .page-title {
+    font-size: 22px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.admin-header-actions {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.admin-search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    box-sizing: border-box;
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    max-width: 420px;
+    margin-left: auto;
+    padding: 8px 16px;
+
+    border-radius: 999px;
+    background-color: var(--bgcolor-beige);
+}
+
+.admin-search-box .search-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.admin-search-box input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--color-black);
+}
+
+.admin-header .icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+    background-color: var(--bgcolor-beige);
+
+    cursor: pointer;
+}
+
+.admin-header .notif-btn {
+    margin-left: auto;
+}
+
+.admin-header .icon-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-profile .profile-avatar {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-profile .profile-name {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 
@@ -189,7 +429,6 @@ STATISTICS
 /*********************************************************************************
 CHARTS
 *********************************************************************************/
-/* This row is the flexible one: it grows or shrinks to fill the leftover height. */
 .main .charts-row {
     display: flex;
     flex-shrink: 0;
@@ -265,6 +504,7 @@ SALES THIS WEEK
     justify-content: flex-end;
     gap: 6px;
     flex: 1;
+    min-width: 0;
 }
 
 .main .bar-value {
@@ -656,11 +896,247 @@ TODAY'S ORDERS
 
 
 /*********************************************************************************
-SMALL SCREENS
+RESPONSIVE: BASE (hidden on desktop)
 *********************************************************************************/
-@media (max-width: 1100px) {
+.admin-header .menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+    background-color: var(--bgcolor-beige);
+    color: var(--color-black);
+
+    cursor: pointer;
+}
+
+.nav-overlay {
+    display: none;
+}
+
+
+/*********************************************************************************
+TABLET (max 1024px): sidebar becomes a drawer
+*********************************************************************************/
+@media (max-width: 1024px) {
+    /* Drawer */
+    .admin-navigation-bar {
+        z-index: 30;
+
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+    }
+
+    .admin-navigation-bar.open {
+        transform: translateX(0);
+
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .nav-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+
+        background-color: rgba(0, 0, 0, 0.45);
+
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+    }
+
+    .nav-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    body.nav-open {
+        overflow: hidden;
+    }
+
+    /* Content takes the full width */
+    .main-container {
+        margin-left: 0;
+    }
+
+    .admin-header {
+        padding: 0 16px;
+    }
+
+    .admin-header .menu-btn {
+        display: flex;
+    }
+
+    .admin-header .page-title {
+        font-size: 20px;
+    }
+
+    /* Layout */
+    .main .statistics-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .main .charts-row,
     .main .orders-row {
         flex-direction: column;
+    }
+}
+
+
+/*********************************************************************************
+MOBILE (max 640px)
+*********************************************************************************/
+@media (max-width: 640px) {
+    /* Header: search is hidden, the name collapses to the avatar */
+    .admin-header {
+        height: 64px;
+        gap: 8px;
+    }
+
+    .admin-header .page-title {
+        font-size: 18px;
+    }
+
+    .admin-search-box,
+    .admin-profile .profile-name {
+        display: none;
+    }
+
+    /* Page */
+    .main {
+        padding: 12px 16px 32px;
+    }
+
+    .main .welcome-banner {
+        padding: 16px 18px;
+    }
+
+    .main .welcome-title {
+        font-size: 20px;
+    }
+
+    .main .welcome-subtitle {
+        font-size: 13px;
+    }
+
+    .main .dashboard-card {
+        padding: 16px;
+    }
+
+    .main .card-title {
+        font-size: 18px;
+    }
+
+    /* Statistics */
+    .main .statistic-card {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .main .statistic-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .main .statistic-label {
+        font-size: 13px;
+    }
+
+    .main .statistic-value {
+        font-size: 18px;
+    }
+
+    /* Sales chart */
+    .main .bar-plot,
+    .main .bar-labels {
+        gap: 6px;
+        padding: 0 2px;
+    }
+
+    .main .bar-value {
+        font-size: 9px;
+    }
+
+    .main .bar-label {
+        font-size: 10px;
+    }
+
+    /* Stock health */
+    .main .stock-body {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .main .stock-legend {
+        width: 100%;
+        max-width: none;
+    }
+
+    /* Top sellers: progress bar drops to its own line */
+    .main .top-seller-row {
+        flex-wrap: wrap;
+        gap: 6px 12px;
+    }
+
+    .main .top-seller-rank {
+        order: 0;
+    }
+
+    .main .top-seller-name {
+        order: 1;
+        flex: 1;
+        width: auto;
+    }
+
+    .main .top-seller-sold {
+        order: 2;
+    }
+
+    .main .top-seller-row .progress-track {
+        order: 3;
+        flex: 1 1 100%;
+    }
+
+    /* Today's orders: table rows become small cards */
+    .main .todays-orders-table .table-header {
+        display: none;
+    }
+
+    .main .table-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "number status"
+            "items  items"
+            "time   total";
+        gap: 6px 12px;
+
+        padding: 12px 4px;
+
+        font-size: 12px;
+    }
+
+    .main .table-row .cell-order-number { grid-area: number; width: auto; }
+    .main .table-row .cell-status       { grid-area: status; width: auto; justify-content: flex-end; }
+    .main .table-row .cell-items        { grid-area: items; padding-right: 0; }
+    .main .table-row .cell-time         { grid-area: time; width: auto; color: #938884; }
+    .main .table-row .cell-total        { grid-area: total; width: auto; justify-content: flex-end; }
+}
+
+
+/*********************************************************************************
+SMALL PHONES (max 420px)
+*********************************************************************************/
+@media (max-width: 420px) {
+    .main .statistics-row {
+        grid-template-columns: 1fr;
     }
 }
