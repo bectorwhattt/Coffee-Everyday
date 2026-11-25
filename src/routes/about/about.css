@@ -366,6 +366,7 @@ INTRODUCTION .
     max-height: 500px;
 
     object-fit: contain;
+    border-radius: 20px;
 }
 
 

@@ -1,69 +1,119 @@
+<!DOCTYPE html>
+<html>
     <head>
-        <title></title>
-        <link rel="stylesheet" href="../../components/html-components.css">
-        <link rel="stylesheet" href="menu.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&display=swap" rel="stylesheet" />
+        <title>Coffee Everyday</title>
+        <link rel="stylesheet" href="menu.css" />
     </head>
     <body>
-        <!--IMPORTED HEADER-->
-        <div class="header" id="header"></div>
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <img src="../../../assets/images/logos/brandmark.png">
+            </div>
+            <div class="navigation-bar">
+                <a href="../homepage/homepage.html">Home</a>
+                <a href="../menu/menu.html">Menu</a>
+                <a href="../about/about.html">About Us</a>
+                <a href="../gallery/gallery.html">Gallery</a>
+                <a href="../contact/contact.html">Contact Us</a>
+            </div>
+            <div class="call-to-action">
+                <a href="https://app.grab.com/s/joOMQISo" target="_blank">
+                    <button>Order Now</button>
+                </a>
+                
+            </div>
+        </div>
 
         <!--MENU-->
         <div class="main">
-              <!-- HERO -->
+            <!-- HERO -->
             <div class="hero">
-                <div class="container">
-                    <span class="pill" id="hero-pill">Our Menu</span>
-                    <h1 id="hero-title"></h1>
-                    <p id="hero-subtitle"></p>
-                </div>
+                <span class="pill" id="hero-pill">Our menu</span>
+                <h1 class="hero-title" id="hero-title"></h1>
+                <p class="hero-subtitle" id="hero-subtitle"></p>
             </div>
- 
-            <!-- FAVORITES -->
-            <div class="favorites container">
+
+            <!-- FAN FAVORITES -->
+            <div class="favorites">
                 <div class="favorites-header">
                     <div>
                         <h2>Fan favorites</h2>
                         <p id="favorite-subtitle"></p>
                     </div>
                     <div class="chips" role="tablist" aria-label="Menu categories">
-                        <button class="chip" role="tab" data-tab="coffee">Coffee</button>
-                        <button class="chip" role="tab" data-tab="non-coffee">Non-coffee</button>
-                        <button class="chip" role="tab" data-tab="pastries">Pastries</button>
-                        <button class="chip" role="tab" data-tab="snacks">Snacks &amp; meals</button>
+                        <button class="chip" type="button" role="tab" data-tab="coffee">Coffee</button>
+                        <button class="chip" type="button" role="tab" data-tab="non-coffee">Non-coffee</button>
+                        <button class="chip" type="button" role="tab" data-tab="pastries">Pastries</button>
+                        <button class="chip" type="button" role="tab" data-tab="snacks">Snacks &amp; meals</button>
                     </div>
                 </div>
- 
+
                 <div class="favorite-grid" id="favorite-grid"></div>
             </div>
- 
+
             <!-- MENU SECTIONS -->
-            <div class="menu-sections container" id="sections"></div>
- 
+            <div class="menu-sections" id="sections"></div>
+                
             <!-- ADD-ONS -->
-            <div class="addons-wrapper container" id="addons" hidden>
+            <div class="addons-wrapper" id="addons" hidden>
                 <div class="addons">
                     <h2>Make it <em>yours</em>.</h2>
                     <div class="addons-grid" id="addons-grid"></div>
                 </div>
             </div>
- 
+
             <!-- CALL TO ACTION -->
-            <div class="container">
-                <div class="call-to-action" id="call-to-action">
-                    <h3 id="call-to-action-text"></h3>
-                    <div class="call-to-action-actions" id="call-to-action-actions"></div>
-                </div>
+            <div class="menu-call-to-action">
+                <h2 id="call-to-action-text"></h2>
+                <div class="menu-call-to-action-actions" id="call-to-action-actions"></div>
             </div>
         </div>
 
-        <!--IMPORTED FOOTER-->
-        <div class="footer" id="footer"></div>
-    
-    <!--IMPORT HEADER AND FOOTER HTML-->
-    <script src="menu.js"></script>
-    <script src="../../lib/components.js"></script>
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-main">
+                <div class="footer-logo">
+                    <div class="logo-frame">
+                        <img src="../../../assets/images/logos/brandmark-tight.png">
+                    </div>
+                    <p>Start your day with Coffee Everyday.</p>
+                </div>
+                <div class="footer-menu">
+                    <div class="menu-group">
+                        <h4>EXPLORE</h4>
+                        <a href="../homepage/homepage.html">Home</a>
+                        <br>
+                        <a href="../menu/menu.html">Menu</a>
+                        <br>
+                        <a href="../about/about.html">About Us</a>
+                        <br>
+                        <a href="../contact/contact.html">Contact Us</a>
+                    </div>
+                    <div class="menu-group">
+                        <h4>VISIT</h4>
+                        <span>114 Dr. Sixto Ave. Caniogan, Pasig City, Metro Manila, Philippines, 1606</span>
+                        <br><br>
+                        <span>Mondays to Sundays</span>
+                        <br>
+                        <span>8:00am - 10:00pm</span>
+                    </div>
+                    <div class="menu-group">
+                        <h4>FOLLOW</h4>
+                        <span>Coffee Everyday</span>
+                        <br>
+                        <span>@coffee.everyday08</span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="copyright-section">
+                <p>
+                    © 2026 Coffee Everyday. All rights reserved.
+                </p>
+            </div>
+        </div>
+
+        <script src="menu.js"></script>
     </body>
 </html>
