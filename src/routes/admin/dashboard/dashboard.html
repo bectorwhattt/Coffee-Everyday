@@ -153,13 +153,26 @@
                         >
                     </button>
 
-                    <div class="admin-profile">
+                    <div class="admin-profile" id="admin-profile" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Open account menu">
                         <img
                             class="profile-avatar"
                             src="../../../../assets/images/admin-header/profile-icon.png"
                             alt="Admin"
                         >
                         <span class="profile-name">Admin</span>
+                        <svg class="profile-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="2.5,4.5 6,8 9.5,4.5"></polyline>
+                        </svg>
+                        <div class="profile-dropdown" id="profile-dropdown" role="menu">
+                            <a href="../login/login.html" class="dropdown-item" role="menuitem">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                                <span>Logout</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </header>
