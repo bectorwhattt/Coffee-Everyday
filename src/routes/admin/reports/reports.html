@@ -1,151 +1,328 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Coffee Everyday</title>
         <link rel="stylesheet" href="../../../components/html-components.css">
         <link rel="stylesheet" href="reports.css">
     </head>
     <body>
         <!--IMPORTED SIDEBAR-->
-        <div id="admin-navigation-bar"></div>
+        <div class="admin-navigation-bar">
+            <div class="sidebar-logo">
+                <div class="logo-frame">
+                    <img src="../../../../assets/images/logos/brandmark-tight.png">
+                </div>
+            </div>
+
+            <div class="navigation">
+                <hr>
+                <span class="section-title">GENERAL</span>
+
+                <a href="../dashboard/dashboard.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/dashboard-icon.png" alt="Dashboard">
+                        <span>Dashboard</span>
+                    </div>
+                </a>
+
+                <a href="../orders/orders.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/orders-icon.png" alt="Orders">
+                        <span>Orders</span>
+                    </div>
+                </a>
+
+                <a href="../reports/reports.html" class="active" aria-current="page">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/reports-icon.png" alt="Reports">
+                        <span>Reports</span>
+                    </div>
+                </a>
+
+                <hr>
+                <span class="section-title">INVENTORY MANAGEMENT</span>
+
+                <a href="../items/items.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/items-icon.png" alt="Items">
+                        <span>Items</span>
+                    </div>
+                </a>
+
+                <a href="../categories/categories.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/categories-icon.png" alt="Categories">
+                        <span>Categories</span>
+                    </div>
+                </a>
+
+                <a href="../recipes/recipes.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/recipes-icon.png" alt="Recipes">
+                        <span>Recipes</span>
+                    </div>
+                </a>
+
+                <a href="../stock-adjustments/stock-adjustments.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/stockadjustments-icon.png" alt="Stock Adjustments">
+                        <span>Stock Adjustments</span>
+                    </div>
+                </a>
+
+                <hr>
+                <span class="section-title">RESTOCKING</span>
+
+                <a href="../purchasing-orders/purchasing-orders.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/purchasingorders-icon.png" alt="Purchasing Orders">
+                        <span>Purchasing Orders</span>
+                    </div>
+                </a>
+
+                <a href="../suppliers/suppliers.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/suppliers-icon.png" alt="Suppliers">
+                        <span>Suppliers</span>
+                    </div>
+                </a>
+
+                <hr>
+                <span class="section-title">USER MANAGEMENT</span>
+
+                <a href="../user-permissions/user-permissions.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/userpermissions-icon.png" alt="User Permissions">
+                        <span>User Permissions</span>
+                    </div>
+                </a>
+
+                <a href="../audit-logs/audit-logs.html">
+                    <div class="frame">
+                        <img src="../../../../assets/images/admin-nav/auditlogs-icon.png" alt="Audit Logs">
+                        <span>Audit Logs</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Decorative coffee bean -->
+            <div class="sidebar-decor" aria-hidden="true">
+                <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <g transform="rotate(35 60 60)">
+                        <ellipse cx="60" cy="60" rx="30" ry="46"/>
+                        <path d="M60 14c-14 20 14 36 0 46s14 26 0 46"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!--DRAWER OVERLAY (tablet & mobile)-->
+        <div class="nav-overlay"></div>
 
         <div class="main-container">
             <!--IMPORTED HEADER-->
-            <div id="admin-header"></div>
+            <header class="admin-header">
+                <!--HAMBURGER BUTTON (tablet & mobile)-->
+                <button type="button" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <path d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+
+                <span class="page-title">Reports</span>
+
+                <div class="admin-header-actions">
+                    <label class="admin-search-box" aria-label="Global search">
+                        <img
+                            class="search-icon"
+                            src="../../../../assets/images/admin-header/search-icon.png"
+                            alt="Search"
+                        >
+                        <input
+                            type="search"
+                            placeholder="Search products, orders, or inventory..."
+                        >
+                    </label>
+
+                    <button type="button" class="icon-btn notif-btn" aria-label="Notifications">
+                        <img
+                            src="../../../../assets/images/admin-header/notifbell-icon.png"
+                            alt="Notifications"
+                        >
+                    </button>
+
+                    <div class="admin-profile">
+                        <img
+                            class="profile-avatar"
+                            src="../../../../assets/images/admin-header/profile-icon.png"
+                            alt="Admin"
+                        >
+                        <span class="profile-name">Admin</span>
+                    </div>
+                </div>
+            </header>
 
             <!--REPORTS-->
             <div class="main">
-                <!-- PAGE HEADING -->
-                <div class="page-heading">
-                    <div class="page-title">Reports</div>
-                    <div class="page-subtitle">Track sales and inventory performance at a glance.</div>
+
+                <!-- TOOLBAR -->
+                <div class="toolbar">
+                    <div class="period-tabs" id="period-tabs" role="group" aria-label="Report period">
+                        <button type="button" class="period-tab" data-period="today">Today</button>
+                        <button type="button" class="period-tab" data-period="week">This Week</button>
+                        <button type="button" class="period-tab active" data-period="month">This Month</button>
+                        <button type="button" class="period-tab" data-period="custom">Custom</button>
+                    </div>
+
+                    <div class="date-range">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="5" width="18" height="16" rx="2"/>
+                            <path d="M8 3v4M16 3v4M3 10h18"/>
+                        </svg>
+                        <span class="js-range">Nov 1 &ndash; Nov 25, 2026</span>
+                    </div>
+
+                    <button type="button" class="export-btn" id="export-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>
+                        </svg>
+                        Export
+                    </button>
                 </div>
 
-                <!-- WELCOME BANNER -->
-                <div class="welcome-banner">
-                    <div class="welcome-text">
-                        <div class="welcome-title">Welcome, Admin.</div>
-                        <div class="welcome-subtitle">Here's the business performance of Coffee Everyday.</div>
-                    </div>
-                    <div class="welcome-overview">
-                        <div class="welcome-overview-label">TODAY'S OVERVIEW</div>
-                        <div class="welcome-overview-date" id="current-date">November 21, 2026</div>
-                    </div>
-                </div>
-
-                <!-- STATISTICS -->
-                <div class="statistics-row">
-                    <div class="statistic-card">
-                        <div class="statistic-label">Total Sales Today</div>
-                        <div class="statistic-value">&#8369;12,850</div>
-                        <div class="tag tag-positive">+12.5% this week</div>
-                    </div>
-
-                    <div class="statistic-card">
-                        <div class="statistic-label">Total Orders</div>
-                        <div class="statistic-value">86 orders</div>
-                        <div class="tag tag-positive">+8.2% this week</div>
-                    </div>
-
-                    <div class="statistic-card">
-                        <div class="statistic-label">Low Stock Items</div>
-                        <div class="statistic-value">7 items</div>
-                        <div class="tag tag-negative">Needs attention</div>
-                    </div>
-
-                    <div class="statistic-card">
-                        <div class="statistic-label">Average Order Value</div>
-                        <div class="statistic-value">&#8369;149.42</div>
-                        <div class="tag tag-neutral">Across all orders</div>
-                    </div>
-                </div>
-
-                <!-- CHARTS -->
-                <div class="charts-row">
-
-                    <!-- SALES OVERVIEW -->
-                    <div class="report-card sales-card">
-                        <div class="card-heading">
-                            <div class="card-title">Sales Overview</div>
-                            <div class="card-subtitle">Sales performance &middot; This week</div>
+                <!-- SALES ANALYSIS -->
+                <section class="panel">
+                    <div class="panel-header">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Sales Analysis</h2>
+                            <p class="panel-subtitle">Profit, expenses and stock adjustments for the selected period</p>
                         </div>
-                        <div class="bar-chart">
-                            <div class="bar-plot" id="sales-bar-plot"></div>
-                            <div class="bar-labels" id="sales-bar-labels"></div>
+
+                        <div class="segmented" id="sales-granularity" role="group" aria-label="Group by">
+                            <button type="button" class="seg-btn active" data-value="weekly">Weekly</button>
+                            <button type="button" class="seg-btn" data-value="monthly">Monthly</button>
                         </div>
                     </div>
 
-                    <!-- STOCK HEALTH -->
-                    <div class="report-card stock-card">
-                        <div class="card-heading">
-                            <div class="card-title">Stock Health</div>
-                            <div class="card-subtitle">Inventory status</div>
+                    <div class="kpi-row" id="kpi-row"></div>
+
+                    <div class="charts-row">
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <div>
+                                    <div class="chart-title">Profit vs Expenses</div>
+                                    <div class="chart-subtitle" id="profit-subtitle"></div>
+                                </div>
+                                <div class="legend" id="profit-legend"></div>
+                            </div>
+                            <div class="col-chart" id="profit-chart"></div>
                         </div>
-                        <div class="stock-list" id="stock-list"></div>
+
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <div>
+                                    <div class="chart-title">Stock Adjustments</div>
+                                    <div class="chart-subtitle" id="adjust-subtitle"></div>
+                                </div>
+                                <div class="legend" id="adjust-legend"></div>
+                            </div>
+                            <div class="col-chart" id="adjust-chart"></div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- TOP SELLING ITEMS -->
-                <div class="report-card top-selling-card">
-                    <div class="card-title">Top Selling Items</div>
-                    <div class="top-selling-list" id="top-selling-list"></div>
-                </div>
+                    <details class="breakdown">
+                        <summary>
+                            <span id="breakdown-label">View weekly breakdown table</span>
+                            <span class="chev"></span>
+                        </summary>
+                        <div class="breakdown-table" id="breakdown-table"></div>
+                    </details>
+                </section>
 
-                <!-- ORDERS -->
-                <div class="orders-row">
+                <!-- RANKINGS -->
+                <section class="panel">
+                    <div class="panel-header">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Rankings</h2>
+                            <p class="panel-subtitle">Highest to lowest &middot; <span class="js-range">Nov 1 &ndash; Nov 25, 2026</span></p>
+                        </div>
 
-                    <!-- TODAY'S ORDERS -->
-                    <div class="report-card todays-orders-card">
-                        <div class="card-title">Today's Orders</div>
-
-                        <div class="orders-table">
-                            <div class="table-header">
-                                <div class="cell-order-number">ORDER ID</div>
-                                <div class="cell-time">TIME</div>
-                                <div class="cell-items">ITEMS</div>
-                                <div class="cell-total">TOTAL</div>
-                                <div class="cell-status">STATUS</div>
-                            </div>
-
-                            <div class="table-row">
-                                <div class="cell-order-number">#0019</div>
-                                <div class="cell-time">9:10 AM</div>
-                                <div class="cell-items">Spanish Latte</div>
-                                <div class="cell-total">&#8369;150</div>
-                                <div class="cell-status">Completed</div>
-                            </div>
-
-                            <div class="table-row">
-                                <div class="cell-order-number">#0020</div>
-                                <div class="cell-time">9:25 AM</div>
-                                <div class="cell-items">Iced Matcha</div>
-                                <div class="cell-total">&#8369;160</div>
-                                <div class="cell-status">Preparing</div>
-                            </div>
-
-                            <div class="table-row">
-                                <div class="cell-order-number">#0021</div>
-                                <div class="cell-time">9:42 AM</div>
-                                <div class="cell-items">Americano</div>
-                                <div class="cell-total">&#8369;120</div>
-                                <div class="cell-status">Completed</div>
-                            </div>
-
-                            <div class="table-row">
-                                <div class="cell-order-number">#0022</div>
-                                <div class="cell-time">10:05 AM</div>
-                                <div class="cell-items">Fudge Brownie</div>
-                                <div class="cell-total">&#8369;95</div>
-                                <div class="cell-status">Completed</div>
+                        <div class="sort-control">
+                            <span class="sort-label">Sort by</span>
+                            <div class="segmented" id="ranking-sort" role="group" aria-label="Sort by">
+                                <button type="button" class="seg-btn active" data-value="amount">Amount</button>
+                                <button type="button" class="seg-btn" data-value="profit">Profit</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ORDERS BY TYPE -->
-                    <div class="report-card order-types-card">
-                        <div class="card-title">Orders by Type</div>
-                        <div class="order-types-list" id="order-types-list"></div>
+                    <div class="ranking-tabs" id="ranking-tabs" role="group" aria-label="Ranking type">
+                        <button type="button" class="ranking-tab active" data-tab="products">Products</button>
+                        <button type="button" class="ranking-tab" data-tab="categories">Categories</button>
+                        <button type="button" class="ranking-tab" data-tab="purchased">Purchased Items</button>
+                        <button type="button" class="ranking-tab" data-tab="suppliers">Suppliers</button>
                     </div>
+
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <div>
+                                <div class="chart-title" id="ranking-chart-title"></div>
+                                <div class="chart-subtitle" id="ranking-chart-subtitle"></div>
+                            </div>
+                            <div class="legend" id="ranking-legend"></div>
+                        </div>
+                        <div class="hbar-list" id="ranking-bars"></div>
+                    </div>
+
+                    <div class="rank-table" id="ranking-table"></div>
+                </section>
+
+                <!-- PAYMENTS + PEAK -->
+                <div class="split-row">
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Payment Method Breakdown</h2>
+                            <p class="panel-subtitle">Share of total sales &middot; <span class="js-range">Nov 1 &ndash; Nov 25, 2026</span></p>
+                        </div>
+
+                        <div class="donut-wrap">
+                            <div class="donut" id="payment-donut">
+                                <div class="donut-center">
+                                    <div class="donut-total" id="payment-total"></div>
+                                    <div class="donut-caption">Total sales</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="payment-list" id="payment-list"></div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Peak Hours &amp; Days</h2>
+                            <p class="panel-subtitle">Orders placed &middot; <span class="js-range">Nov 1 &ndash; Nov 25, 2026</span></p>
+                        </div>
+
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <div class="chart-title">Orders by hour</div>
+                                <div class="peak-badge" id="hour-peak"></div>
+                            </div>
+                            <div class="col-chart" id="hour-chart"></div>
+                        </div>
+
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <div class="chart-title">Orders by day of week</div>
+                                <div class="peak-badge" id="day-peak"></div>
+                            </div>
+                            <div class="col-chart" id="day-chart"></div>
+                        </div>
+                    </section>
                 </div>
 
                 <!-- REPORTS SCRIPT -->
@@ -153,7 +330,5 @@
             </div>
         </div>
 
-    <!--IMPORT SIDEBAR AND HEADER HTML-->
-    <script src="../../../lib/components.js"></script>
     </body>
 </html>
