@@ -4,57 +4,172 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coffee Everyday | Account</title>
+
         <link rel="stylesheet" href="../../../components/html-components.css">
         <link rel="stylesheet" href="login.css">
     </head>
+
     <body>
         <div class="main-container">
             <!-- LOGIN -->
             <div class="main">
-                <!-- SIGN IN -->
-                <div class="login-card" id="login-sign-in-view">
-                    <div class="login-brand">
-                        <img class="login-brand-logo" src="/assets/images/logos/brandmark.png" alt="" width="28" height="28">
-                        <div class="login-brand-name">Coffee Everyday</div>
+
+                <!-- LOGIN PHOTOGRAPH -->
+                <div class="login-photograph-panel">
+                    <img
+                        class="login-photograph"
+                        src="../../../../assets/images/gallery/gallery-9.jpeg"
+                        alt=""
+                    >
+
+                    <div class="login-photograph-brand">
+                        <p class="login-photograph-title">
+                            Coffee Everyday
+                        </p>
+
+                        <p class="login-photograph-description">
+                            Barista &amp; Admin portal
+                        </p>
                     </div>
+                </div>
 
-                    <div class="login-heading">
-                        <h1 class="login-title">Welcome back!</h1>
-                        <p class="login-description">Select your account type to continue.</p>
-                    </div>
+                <!-- LOGIN CONTENT -->
+                <div class="login-content">
 
-                    <!-- ACCOUNT TYPE -->
-                    <div class="login-account-selection">
-                        <div class="login-account-label" id="login-account-label">Account type</div>
-                        <div class="login-account-options" role="group" aria-labelledby="login-account-label">
-                            <button class="login-account-option login-account-option-active" type="button"
-                                    data-account-role="barista" aria-pressed="true">Barista Account</button>
-                            <button class="login-account-option" type="button"
-                                    data-account-role="admin" aria-pressed="false">Admin Account</button>
-                        </div>
-                    </div>
+                    <!-- SIGN IN -->
+                    <div class="login-card" id="login-sign-in-view">
+                        <div class="login-brand">
+                            <img
+                                class="login-brand-logo"
+                                src="../../../../assets/images/logos/brandmark.png"
+                                alt=""
+                                width="28"
+                                height="28"
+                            >
 
-                    <!-- SIGN IN FORM -->
-                    <form class="login-form" id="login-sign-in-form" novalidate>
-                        <div class="login-field">
-                            <label class="login-label" for="login-email">Email address</label>
-                            <input class="login-input" id="login-email" name="email" type="email"
-                                   placeholder="Enter email address" autocomplete="username" required
-                                   aria-describedby="login-email-error">
-                            <div class="login-field-error" id="login-email-error" aria-live="polite"></div>
-                        </div>
-
-                        <div class="login-field">
-                            <label class="login-label" for="login-password">Password</label>
-                            <input class="login-input" id="login-password" name="password" type="password"
-                                   placeholder="Enter password" autocomplete="current-password" required
-                                   aria-describedby="login-password-error">
-                            <div class="login-field-error" id="login-password-error" aria-live="polite"></div>
+                            <div class="login-brand-name">
+                                Coffee Everyday
+                            </div>
                         </div>
 
-                        <button class="login-submit" id="login-submit" type="submit">Log In as Barista</button>
-                        <div class="login-form-status" id="login-sign-in-status" role="status" aria-live="polite"></div>
-                    </form>
+                        <div class="login-heading">
+                            <h1 class="login-title">
+                                Welcome back!
+                            </h1>
+
+                            <p class="login-description">
+                                Select your account type to continue.
+                            </p>
+                        </div>
+
+                        <!-- ACCOUNT TYPE -->
+                        <div class="login-account-selection">
+                            <div
+                                class="login-account-label"
+                                id="login-account-label"
+                            >
+                                Account type
+                            </div>
+
+                            <div
+                                class="login-account-options"
+                                role="group"
+                                aria-labelledby="login-account-label"
+                            >
+                                <button
+                                    class="login-account-option login-account-option-active"
+                                    type="button"
+                                    data-account-role="barista"
+                                    aria-pressed="true"
+                                >
+                                    Barista Account
+                                </button>
+
+                                <button
+                                    class="login-account-option"
+                                    type="button"
+                                    data-account-role="admin"
+                                    aria-pressed="false"
+                                >
+                                    Admin Account
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- SIGN IN FORM -->
+                        <form
+                            class="login-form"
+                            id="login-sign-in-form"
+                            novalidate
+                        >
+                            <div class="login-field">
+                                <label
+                                    class="login-label"
+                                    for="login-email"
+                                >
+                                    Email address
+                                </label>
+
+                                <input
+                                    class="login-input"
+                                    id="login-email"
+                                    name="email"
+                                    type="email"
+                                    placeholder="Enter email address"
+                                    autocomplete="username"
+                                    aria-describedby="login-email-error"
+                                    required
+                                >
+
+                                <div
+                                    class="login-field-error"
+                                    id="login-email-error"
+                                    aria-live="polite"
+                                ></div>
+                            </div>
+
+                            <div class="login-field">
+                                <label
+                                    class="login-label"
+                                    for="login-password"
+                                >
+                                    Password
+                                </label>
+
+                                <input
+                                    class="login-input"
+                                    id="login-password"
+                                    name="password"
+                                    type="password"
+                                    placeholder="Enter password"
+                                    autocomplete="current-password"
+                                    aria-describedby="login-password-error"
+                                    required
+                                >
+
+                                <div
+                                    class="login-field-error"
+                                    id="login-password-error"
+                                    aria-live="polite"
+                                ></div>
+                            </div>
+
+                            <button
+                                class="login-submit"
+                                id="login-submit"
+                                type="submit"
+                            >
+                                Log In as Barista
+                            </button>
+
+                            <div
+                                class="login-form-status"
+                                id="login-sign-in-status"
+                                role="status"
+                                aria-live="polite"
+                            ></div>
+                        </form>
+                    </div>
                 </div>
 
                 <!-- LOGIN FUNCTIONALITY -->
