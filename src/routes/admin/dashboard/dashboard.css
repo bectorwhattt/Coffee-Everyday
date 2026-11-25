@@ -2,27 +2,47 @@
 BASE CODE
 *********************************************************************************/
 @charset "UTF-8";
-@import url("../../lib/variables.css");
+@import url("../../../lib/variables.css");
 
-body {
-    display: flex;
+/*********************************************************************************
+SCROLLBAR
+A clean, coffee-themed scrollbar for the main content area. The sidebar keeps
+its own hidden scrollbar (see the ADMIN NAVIGATION BAR section below), and
+because scrollbar-width / scrollbar-color are not inherited and
+.main::-webkit-scrollbar only targets .main, these rules never reach the
+sidebar.
+*********************************************************************************/
 
-    margin: 0;
-    padding: 0;
-
-    font-family: var(--adm-font);
+/* Firefox: a thin terracotta thumb on a transparent track */
+.main {
+    scrollbar-width: thin;
+    scrollbar-color: #9D6048 transparent;
 }
 
-.main-container {
-    display: flex;
-    flex-direction: column;
+/* Chrome, Safari, new Edge */
+.main::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
 
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    min-height: 100vh;
+.main::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-    margin-left: var(--adm-navbar-width);
+.main::-webkit-scrollbar-thumb {
+    background-color: #9D6048;          /* terracotta, matches the chart highlights */
+    border: 3px solid transparent;      /* leaves a gap between thumb and track */
+    border-radius: 999px;
+    background-clip: padding-box;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+    background-color: #4A2C20;          /* dark brown on hover */
+    background-clip: padding-box;
+}
+
+.main::-webkit-scrollbar-corner {
+    background: transparent;
 }
 
 
@@ -37,7 +57,7 @@ ADMIN NAVIGATION BAR
 
     box-sizing: border-box;
     height: 100%;
-    width: var(--adm-navbar-width);
+    width: var(--adm-navbar-width, 290px);
     padding: 0 20px 24px;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -46,8 +66,8 @@ ADMIN NAVIGATION BAR
     scrollbar-width: none;          /* Firefox */
     -ms-overflow-style: none;       /* old Edge / IE */
 
-    background-color: var(--adm-bgcolor-brown);
-    color: var(--bgcolor-light);
+    background-color: var(--adm-bgcolor-brown, #4A2C20);
+    color: var(--bgcolor-light, #F7F1E8);
 }
 
 .admin-navigation-bar::-webkit-scrollbar {
@@ -69,7 +89,7 @@ ADMIN NAVIGATION BAR
     height: 80px;
     width: 185px;
 
-    background-color: var(--bgcolor-light);
+    background-color: var(--bgcolor-light, #F7F1E8);
     border-radius: 15px;
 }
 
@@ -98,7 +118,7 @@ ADMIN NAVIGATION BAR
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 2px;
-    color: var(--color-gold);
+    color: var(--color-gold, #C98A2B);
 }
 
 .admin-navigation-bar .navigation a {
@@ -167,10 +187,10 @@ ADMIN HEADER
     height: 80px;
     padding: 0 24px;
 
-    border-bottom: 1px solid var(--color-gold);
+    border-bottom: 1px solid var(--color-gold, #C98A2B);
 
-    background-color: var(--bgcolor-light);
-    color: var(--color-black);
+    background-color: var(--bgcolor-light, #F7F1E8);
+    color: var(--color-black, #1E1512);
 }
 
 .admin-header .page-title {
@@ -201,7 +221,7 @@ ADMIN HEADER
     padding: 8px 16px;
 
     border-radius: 999px;
-    background-color: var(--bgcolor-beige);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 }
 
 .admin-search-box .search-icon {
@@ -220,7 +240,7 @@ ADMIN HEADER
 
     font-family: inherit;
     font-size: 13px;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .admin-header .icon-btn {
@@ -234,7 +254,7 @@ ADMIN HEADER
 
     border: none;
     border-radius: 50%;
-    background-color: var(--bgcolor-beige);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 
     cursor: pointer;
 }
@@ -267,6 +287,37 @@ ADMIN HEADER
     font-weight: 600;
 }
 
+body {
+    display: flex;
+
+    /* Lock the page to the viewport so only .main scrolls, matching the
+       reports/purchasing-orders layout where the scrollbar lives inside the
+       beige content area instead of at the viewport edge. */
+    height: 100vh;
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+
+    font-family: var(--adm-font);
+}
+
+/* Keep the page locked while the mobile drawer is open */
+body.nav-open {
+    overflow: hidden;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: 100vh;          /* was min-height: 100vh */
+
+    margin-left: var(--adm-navbar-width, 290px);
+}
 
 /*********************************************************************************
 MAIN
@@ -278,11 +329,24 @@ MAIN
     gap: clamp(8px, 1.2vh, 16px);
 
     box-sizing: border-box;
+    min-height: 0;           /* allow .main to shrink so overflow-y kicks in */
     padding: 12px 24px 40px 24px;
 
-    background-color: var(--bgcolor-beige);
+    /* Scrollbar lives inside the beige content area, just like the
+       .purchase-orders-table scrollbar lives inside the white card and the
+       reports .main scrollbar lives inside its beige area. */
+    overflow-y: auto;
 
-    color: var(--color-black);
+    background-color: var(--bgcolor-beige, #EFE3D1);
+
+    color: var(--color-black, #1E1512);
+}
+
+/* Make every button inside the content area use the same font as the body,
+   matching the reports stylesheet. Without this, <button> elements fall back
+   to the browser default font and look different from the rest of the page. */
+.main button {
+    font-family: inherit;
 }
 
 
@@ -299,9 +363,9 @@ WELCOME BANNER
     padding: clamp(14px, 2vh, 26px) 30px;
 
     border-radius: 14px;
-    background-image: linear-gradient(90deg, var(--bgcolor-khaki), var(--bgcolor-beige));
+    background-image: linear-gradient(90deg, var(--bgcolor-khaki, #EBD9C0), var(--bgcolor-beige, #EFE3D1));
 
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .welcome-title-row {
@@ -348,7 +412,7 @@ STATISTICS
     padding: clamp(12px, 1.8vh, 24px) 20px;
 
     border-radius: 16px;
-    background-color: var(--bgcolor-light);
+    background-color: var(--bgcolor-light, #F7F1E8);
 }
 
 .main .statistic-icon {
@@ -361,7 +425,7 @@ STATISTICS
     height: 44px;
 
     border-radius: 50%;
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 
     font-size: 18px;
     font-weight: 600;
@@ -369,9 +433,9 @@ STATISTICS
 }
 
 .main .statistic-icon-warning {
-    background-color: var(--color-pink);
+    background-color: var(--color-pink, #F4C7B8);
 
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .statistic-details {
@@ -422,7 +486,7 @@ STATISTICS
     display: flex;
     align-self: flex-start;
 
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 
@@ -446,7 +510,7 @@ CHARTS
     padding: clamp(12px, 1.6vh, 22px) 24px;
 
     border-radius: 16px;
-    background-color: var(--bgcolor-light);
+    background-color: var(--bgcolor-light, #F7F1E8);
 }
 
 .main .card-heading {
@@ -494,7 +558,7 @@ SALES THIS WEEK
     min-height: 130px;
     padding: 0 6px;
 
-    border-bottom: 1px solid var(--bgcolor-khaki);
+    border-bottom: 1px solid var(--bgcolor-khaki, #EBD9C0);
 }
 
 .main .bar-column {
@@ -521,13 +585,13 @@ SALES THIS WEEK
     max-width: 44px;
 
     border-radius: 6px 6px 0 0;
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 
     transition: height 0.4s ease;
 }
 
 .main .bar-highlighted {
-    background-color: var(--adm-bgcolor-terracotta);
+    background-color: var(--adm-bgcolor-terracotta, #9D6048);
 }
 
 .main .bar-labels {
@@ -574,7 +638,7 @@ STOCK HEALTH
     height: 130px;
 
     border-radius: 50%;
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 }
 
 .main .donut-hole {
@@ -587,7 +651,7 @@ STOCK HEALTH
     height: 90px;
 
     border-radius: 50%;
-    background-color: var(--bgcolor-light);
+    background-color: var(--bgcolor-light, #F7F1E8);
 }
 
 .main .donut-total {
@@ -671,11 +735,11 @@ TOP SELLERS
     padding: 6px 18px;
 
     border-radius: 999px;
-    background-color: var(--bgcolor-darkbrown);
+    background-color: var(--bgcolor-darkbrown, #371509);
 
     font-size: 13px;
     font-weight: 600;
-    color: var(--bgcolor-light);
+    color: var(--bgcolor-light, #F7F1E8);
 }
 
 .main .top-sellers-list {
@@ -714,7 +778,7 @@ TOP SELLERS
     height: 8px;
 
     border-radius: 999px;
-    background-color: var(--bgcolor-beige);
+    background-color: var(--bgcolor-beige, #EFE3D1);
 }
 
 .main .progress-fill {
@@ -787,7 +851,7 @@ TODAY'S ORDERS
     padding: 6px 14px;
 
     border-radius: 4px;
-    background-color: var(--bgcolor-khaki);
+    background-color: var(--bgcolor-khaki, #EBD9C0);
 
     font-size: 11px;
     color: #4A2C20;
@@ -805,7 +869,7 @@ TODAY'S ORDERS
     box-sizing: border-box;
     padding: clamp(7px, 1.1vh, 14px) 14px;
 
-    border-bottom: 1px solid var(--bgcolor-khaki);
+    border-bottom: 1px solid var(--bgcolor-khaki, #EBD9C0);
 
     font-size: 11px;
     color: #4A2C20;
@@ -873,7 +937,7 @@ TODAY'S ORDERS
 
     font-size: 9px;
     font-weight: 600;
-    color: var(--color-black);
+    color: var(--color-black, #1E1512);
 }
 
 .main .status-processing {
@@ -910,8 +974,8 @@ RESPONSIVE: BASE (hidden on desktop)
 
     border: none;
     border-radius: 50%;
-    background-color: var(--bgcolor-beige);
-    color: var(--color-black);
+    background-color: var(--bgcolor-beige, #EFE3D1);
+    color: var(--color-black, #1E1512);
 
     cursor: pointer;
 }
@@ -925,6 +989,13 @@ RESPONSIVE: BASE (hidden on desktop)
 TABLET (max 1024px): sidebar becomes a drawer
 *********************************************************************************/
 @media (max-width: 1024px) {
+    body {
+        /* Let the page scroll naturally instead of being locked to the viewport,
+           matching reports' tablet behaviour. */
+        height: auto;
+        overflow: visible;
+    }
+
     /* Drawer */
     .admin-navigation-bar {
         z-index: 30;
@@ -964,6 +1035,9 @@ TABLET (max 1024px): sidebar becomes a drawer
     /* Content takes the full width */
     .main-container {
         margin-left: 0;
+
+        height: auto;          /* was 100vh */
+        min-height: 100vh;
     }
 
     .admin-header {
@@ -976,6 +1050,11 @@ TABLET (max 1024px): sidebar becomes a drawer
 
     .admin-header .page-title {
         font-size: 20px;
+    }
+
+    /* Release the scroll containment on tablet so the page scrolls naturally. */
+    .main {
+        overflow: visible;
     }
 
     /* Layout */

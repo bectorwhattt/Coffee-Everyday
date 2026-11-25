@@ -247,18 +247,29 @@ ADMIN HEADER
 body {
     display: flex;
 
+    /* Lock the page to the viewport so only .main scrolls, matching the
+       purchasing-orders layout where the scrollbar lives inside the card. */
+    height: 100vh;
+    overflow: hidden;
+
     margin: 0;
     padding: 0;
 
     font-family: var(--adm-font);
 }
 
+/* Keep the page locked while the mobile drawer is open */
+body.nav-open {
+    overflow: hidden;
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
 
+    box-sizing: border-box;
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;          /* was min-height: 100vh */
 
     margin-left: var(--adm-navbar-width);
 }
@@ -286,7 +297,12 @@ MAIN
 
     box-sizing: border-box;
     min-width: 0;
+    min-height: 0;           /* allow .main to shrink so overflow-y kicks in */
     padding: 20px 24px 40px;
+
+    /* Scrollbar lives inside the beige content area, just like the
+       .purchase-orders-table scrollbar lives inside the white card. */
+    overflow-y: auto;
 
     background-color: var(--bgcolor-beige);
 
@@ -1058,6 +1074,11 @@ HAMBURGER MENU + RESPONSIVE (TABLET AND MOBILE)
 @media (max-width: 1024px) {
     body {
         display: block;
+
+        /* Let the page scroll naturally instead of being locked to the viewport,
+           matching purchasing-orders' tablet behaviour. */
+        height: auto;
+        overflow: visible;
     }
 
     body.nav-open .nav-overlay {
@@ -1085,6 +1106,9 @@ HAMBURGER MENU + RESPONSIVE (TABLET AND MOBILE)
         width: 100%;
         min-width: 0;
         margin-left: 0;
+
+        height: auto;          /* was 100vh */
+        min-height: 100vh;
     }
 
     .admin-header {
@@ -1093,6 +1117,9 @@ HAMBURGER MENU + RESPONSIVE (TABLET AND MOBILE)
 
     .main {
         padding: 16px 16px 32px;
+
+        /* Release the scroll containment on tablet so the page scrolls naturally. */
+        overflow: visible;
     }
 }
 
