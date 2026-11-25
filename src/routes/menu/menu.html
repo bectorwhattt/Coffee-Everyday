@@ -1,22 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coffee Everyday</title>
-        <link rel="stylesheet" href="../../components/html-components.css">
-        <link rel="stylesheet" href="menu.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="menu.css" />
     </head>
     <body>
-        <div id="header"></div>
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <img src="../../../assets/images/logos/brandmark.png" alt="Coffee Everyday logo">
+            </div>
 
+            <!-- Hamburger toggle (CSS-driven, JS enhances UX) -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" tabindex="-1">
+            <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation" aria-expanded="false" role="button">
+                <span></span>
+            </label>
+
+            <div class="navigation-bar" id="navigation-bar">
+                <a href="../homepage/homepage.html">Home</a>
+                <a href="../menu/menu.html">Menu</a>
+                <a href="../about/about.html">About Us</a>
+                <a href="../gallery/gallery.html">Gallery</a>
+                <a href="../contact/contact.html">Contact Us</a>
+            </div>
+            <div class="call-to-action">
+                <a href="https://app.grab.com/s/joOMQISo" target="_blank" rel="noopener noreferrer">
+                    <button type="button">Order Now</button>
+                </a>
+            </div>
+        </div>
+
+        <!--MENU-->
         <div class="main">
-            <!--only add new html codes here-->
+            <!-- HERO -->
+            <div class="hero">
+                <span class="pill" id="hero-pill">Our menu</span>
+                <h1 class="hero-title" id="hero-title"></h1>
+                <p class="hero-subtitle" id="hero-subtitle"></p>
+            </div>
+
+            <!-- FAN FAVORITES -->
+            <div class="favorites">
+                <div class="favorites-header">
+                    <div>
+                        <h2>Fan favorites</h2>
+                        <p id="favorite-subtitle"></p>
+                    </div>
+                    <div class="chips" role="tablist" aria-label="Menu categories">
+                        <button class="chip" type="button" role="tab" data-tab="coffee">Coffee</button>
+                        <button class="chip" type="button" role="tab" data-tab="non-coffee">Non-coffee</button>
+                        <button class="chip" type="button" role="tab" data-tab="pastries">Pastries</button>
+                        <button class="chip" type="button" role="tab" data-tab="snacks">Snacks &amp; meals</button>
+                    </div>
+                </div>
+
+                <div class="favorite-grid" id="favorite-grid"></div>
+            </div>
+
+            <!-- MENU SECTIONS -->
+            <div class="menu-sections" id="sections"></div>
+
+            <!-- ADD-ONS -->
+            <div class="addons-wrapper" id="addons" hidden>
+                <div class="addons">
+                    <h2>Make it <em>yours</em>.</h2>
+                    <div class="addons-grid" id="addons-grid"></div>
+                </div>
+            </div>
+
+            <!-- CALL TO ACTION -->
+            <div class="menu-call-to-action">
+                <h2 id="call-to-action-text"></h2>
+                <div class="menu-call-to-action-actions" id="call-to-action-actions"></div>
+            </div>
         </div>
 
         <!--IMPORTED FOOTER-->
-        <div class="footer" id="footer"></div>
-    
-    <!--IMPORT HEADER AND FOOTER HTML-->
-    <script src="../../lib/components.js"></script>
+        <div id="footer">
+            <!-- FOOTER -->
+            <div class="footer">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <div class="logo-frame">
+                            <img src="../../../assets/images/logos/brandmark-tight.png" alt="Coffee Everyday logo">
+                        </div>
+                        <p>Start your day with Coffee Everyday.</p>
+                    </div>
+                    <div class="footer-menu">
+                        <div class="menu-group">
+                            <h4>EXPLORE</h4>
+                            <a href="../homepage/homepage.html">Home</a>
+                            <br>
+                            <a href="../menu/menu.html">Menu</a>
+                            <br>
+                            <a href="../about/about.html">About Us</a>
+                            <br>
+                            <a href="../contact/contact.html">Contact Us</a>
+                        </div>
+                        <div class="menu-group">
+                            <h4>VISIT</h4>
+                            <span>114 Dr. Sixto Ave. Caniogan, Pasig City, Metro Manila, Philippines, 1606</span>
+                            <br><br>
+                            <span>Mondays to Sundays</span>
+                            <br>
+                            <span>8:00am - 10:00pm</span>
+                        </div>
+                        <div class="menu-group">
+                            <h4>FOLLOW</h4>
+                            <span>Coffee Everyday</span>
+                            <br>
+                            <span>@coffee.everyday08</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="copyright-section">
+                    <p>
+                        © 2026 Coffee Everyday. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script src="menu.js"></script>
     </body>
 </html>

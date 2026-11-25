@@ -1,5 +1,6 @@
 const PESO = "\u20B1";
 const GRAB_URL = "https://app.grab.com/s/joOMQISo";
+const CONTACT_URL = "../contact/contact.html";
 const IMG = "../../../assets/images/products/";
 
 const MENU = {
@@ -174,7 +175,7 @@ const MENU = {
     callToAction: {
       text: "Come sip and dine with us.",
       actions: [
-        { label: "Find us", href: "#", dark: true },
+        { label: "Find us", href: CONTACT_URL, dark: true },
         { label: "View menu", tab: "coffee" },
       ],
     },
@@ -217,7 +218,7 @@ function renderFavorites(data) {
     card.appendChild(imageWrapper);
     card.insertAdjacentHTML(
       "beforeend",
-      `<h4>${favorite.name}</h4><span class="price">${money(favorite.price)}</span>`
+      `<h3 class="favorite-name">${favorite.name}</h3><span class="favorite-price">${money(favorite.price)}</span>`
     );
     grid.appendChild(card);
   });
@@ -245,16 +246,16 @@ function renderSections(data) {
     body.innerHTML =
       (section.tag ? `<span class="size-tag">${section.tag}</span>` : "") +
       `<ul class="menu-list">${rows}</ul>` +
-      `<a class="button button-dark button-small grab" href="${GRAB_URL}" target="_blank" rel="noopener">Order on Grab</a>`;
+      `<a class="button button-dark button-small grab" href="${GRAB_URL}" target="_blank" rel="noopener noreferrer">Order on Grab</a>`;
 
-    sectionElement.insertAdjacentHTML("beforeend", `<h3>${section.title}</h3>`);
+    sectionElement.insertAdjacentHTML("beforeend", `<h3 class="menu-section-title">${section.title}</h3>`);
     sectionElement.appendChild(media);
     sectionElement.appendChild(body);
     root.appendChild(sectionElement);
   });
 }
 
-function renderaddons(data) {
+function renderAddons(data) {
   const wrapper = selectElement("#addons");
   const grid = selectElement("#addons-grid");
   if (!wrapper || !grid) { if (data.addons) console.warn("[menu] #addons / #addons-grid not found in the HTML"); return; }
@@ -297,7 +298,7 @@ function showTab(tab, { scroll = false } = {}) {
 
   renderFavorites(data);
   renderSections(data);
-  renderaddons(data);
+  renderAddons(data);
   renderCallToAction(data);
 
   const main = selectElement(".main");
@@ -314,6 +315,7 @@ function setHash(tab) {
   try {
     history.replaceState(null, "", `#${tab}`);
   } catch (error) {
+    /* ignore (e.g. file:// restrictions) */
   }
 }
 
@@ -329,14 +331,56 @@ window.addEventListener("hashchange", () => {
   if (MENU[tab]) showTab(tab, { scroll: true });
 });
 
-const navigationToggle = selectElement(".navigation-toggle");
-const navigation = selectElement("#site-navigation");
-if (navigationToggle && navigation) {
-  navigationToggle.addEventListener("click", () => {
-    const open = navigation.classList.toggle("open");
-    navigationToggle.setAttribute("aria-expanded", open);
-  });
-}
+/* Mobile navigation (same behavior as contact.js) */
+(function () {
+  var navToggle = document.getElementById("nav-toggle");
+  var navLabel = document.querySelector(".nav-toggle-label");
+  var navBar = document.getElementById("navigation-bar");
+  if (!navToggle || !navLabel) return;
 
-showTab("coffee");
-setHash("coffee");
+  function isMobileMenu() {
+    return window.matchMedia("(max-width: 640px)").matches;
+  }
+  function closeMenu() {
+    navToggle.checked = false;
+    navLabel.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("nav-open");
+  }
+  function menuIsOpen() {
+    return navToggle.checked && isMobileMenu();
+  }
+
+  navToggle.addEventListener("change", function () {
+    navLabel.setAttribute("aria-expanded", navToggle.checked ? "true" : "false");
+    if (navToggle.checked && isMobileMenu()) document.body.classList.add("nav-open");
+    else document.body.classList.remove("nav-open");
+  });
+
+  if (navBar) {
+    navBar.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") closeMenu();
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    if (!menuIsOpen()) return;
+    if (e.target.closest && e.target.closest(".navigation-bar, .nav-toggle-label, .nav-toggle")) return;
+    closeMenu();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && menuIsOpen()) {
+      closeMenu();
+      navLabel.focus();
+    }
+  });
+
+  window.addEventListener("resize", function () {
+    if (!isMobileMenu()) closeMenu();
+  });
+})();
+
+/* Open on the tab named in the URL (e.g. menu.html#pastries), else coffee */
+const initialTab = MENU[location.hash.slice(1)] ? location.hash.slice(1) : "coffee";
+showTab(initialTab);
+setHash(initialTab);
