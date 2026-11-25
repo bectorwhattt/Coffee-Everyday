@@ -1,161 +1,713 @@
-<!doctype html>
-<html>
-    <head>
-        <title>Coffee Everyday</title>
-        <link rel="stylesheet" href="../../../components/html-components.css" />
-        <link rel="stylesheet" href="checkout.css" />
-    </head>
-    <body>
-        <!--IMPORTED SIDEBAR-->
-        <div id="admin-navigation-bar"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <div class="main-container">
-            <!--IMPORTED HEADER-->
-            <div id="admin-header"></div>
+    <title>Coffee Everyday | Barista POS</title>
 
-            <!-- CHECKOUT -->
-            <div class="main">
-                <!-- CATEGORIES -->
-                <div class="checkout-categories" role="group" aria-label="Menu categories">
-                    <button class="checkout-category checkout-category-active" type="button" data-category="Coffee Classics" aria-pressed="true">
-                        <div class="checkout-category-name">Coffee Classics</div>
-                        <div class="checkout-category-count">12</div>
-                    </button>
-                    <button class="checkout-category" type="button" data-category="Coffee Specials" aria-pressed="false">
-                        <div class="checkout-category-name">Coffee Specials</div>
-                        <div class="checkout-category-count">8</div>
-                    </button>
-                    <button class="checkout-category" type="button" data-category="Non-coffee" aria-pressed="false">
-                        <div class="checkout-category-name">Non-coffee</div>
-                        <div class="checkout-category-count">8</div>
-                    </button>
-                    <button class="checkout-category" type="button" data-category="Frappes & Shakes" aria-pressed="false">
-                        <div class="checkout-category-name">Frappes &amp; Shakes</div>
-                        <div class="checkout-category-count">9</div>
-                    </button>
-                    <button class="checkout-category" type="button" data-category="Soda Pop" aria-pressed="false">
-                        <div class="checkout-category-name">Soda Pop</div>
-                        <div class="checkout-category-count">3</div>
-                    </button>
-                    <button class="checkout-category" type="button" data-category="Bread & Pastries" aria-pressed="false">
-                        <div class="checkout-category-name">Bread &amp; Pastries</div>
-                        <div class="checkout-category-count">4</div>
-                    </button>
-                    <button class="checkout-category" type="button" data-category="Sandwiches" aria-pressed="false">
-                        <div class="checkout-category-name">Sandwiches</div>
-                        <div class="checkout-category-count">3</div>
-                    </button>
-                    <button class="checkout-category" type="button" data-category="Snacks" aria-pressed="false">
-                        <div class="checkout-category-name">Snacks</div>
-                        <div class="checkout-category-count">7</div>
-                    </button>
-                    <button class="checkout-category" type="button" data-category="Pastas" aria-pressed="false">
-                        <div class="checkout-category-name">Pastas</div>
-                        <div class="checkout-category-count">5</div>
-                    </button>
-                    <button class="checkout-category" type="button" data-category="Rice Meals" aria-pressed="false">
-                        <div class="checkout-category-name">Rice Meals</div>
-                        <div class="checkout-category-count">8</div>
-                    </button>
+    <link rel="stylesheet" href="checkout.css">
+</head>
+
+<body>
+    <!-- CHECKOUT -->
+    <div class="main">
+
+        <!-- BARISTA HEADER -->
+        <div class="checkout-header">
+            <div class="checkout-navigation" role="group" aria-label="Barista navigation">
+                <button
+                    class="checkout-navigation-button checkout-navigation-active"
+                    type="button"
+                    data-checkout-view="pos"
+                    aria-pressed="true"
+                >
+                    POS
+                </button>
+
+                <button
+                    class="checkout-navigation-button"
+                    type="button"
+                    data-checkout-view="orders"
+                    aria-pressed="false"
+                >
+                    Orders
+                </button>
+
+                <button
+                    class="checkout-navigation-button"
+                    type="button"
+                    data-checkout-view="recipe"
+                    aria-pressed="false"
+                >
+                    Recipe
+                </button>
+            </div>
+
+            <div class="checkout-header-actions">
+                <div class="checkout-search">
+                    <svg class="checkout-search-icon" aria-hidden="true">
+                        <use href="#checkout-search-symbol"></use>
+                    </svg>
+
+                    <input
+                        class="checkout-search-input"
+                        id="checkout-search"
+                        type="search"
+                        placeholder="Search products..."
+                        aria-label="Search products"
+                        autocomplete="off"
+                    >
                 </div>
 
-                <!-- MENU ITEMS -->
-                <div class="checkout-items">
-                    <h2 class="checkout-items-title" id="checkout-items-title">Coffee Classics</h2>
-                    <div class="checkout-products" id="checkout-products"></div>
-                </div>
+                <button
+                    class="checkout-notification"
+                    type="button"
+                    aria-label="Notifications not yet available"
+                    disabled
+                >
+                    <svg aria-hidden="true">
+                        <use href="#checkout-notification-symbol"></use>
+                    </svg>
+                </button>
 
-                <!-- CURRENT ORDER -->
-                <div class="checkout-order">
-                    <div class="order-heading">
-                        <p class="order-label">Current order</p>
-                        <h2 class="order-title">Order #0019</h2>
-                        <p class="order-details">Cashier: Admin &bull; Nov 20</p>
-                    </div>
+                <!-- BARISTA PROFILE -->
+                <div class="checkout-profile" id="checkout-profile">
+                    <button
+                        class="checkout-profile-button"
+                        id="checkout-profile-button"
+                        type="button"
+                        aria-label="Barista account"
+                        aria-expanded="false"
+                        aria-controls="checkout-profile-menu"
+                    >
+                        <svg class="checkout-profile-icon" aria-hidden="true">
+                            <use href="#checkout-profile-symbol"></use>
+                        </svg>
 
-                    <div class="order-options">
-                        <div class="order-field">
-                            <label class="order-field-label" for="order-type">Type</label>
-                            <select class="order-select" id="order-type">
-                                <option selected>Dine-in</option>
-                                <option>Take-out</option>
-                            </select>
-                        </div>
-                        <div class="order-field">
-                            <label class="order-field-label" for="order-payment">Pay</label>
-                            <select class="order-select" id="order-payment">
-                                <option>Cash</option>
-                                <option selected>GCash</option>
-                            </select>
-                        </div>
-                    </div>
+                        <span class="checkout-profile-name">Barista</span>
 
-                    <!-- ORDER LIST COLUMN LABELS -->
-                    <div class="order-list-heading" aria-hidden="true">
-                        <div class="order-list-heading-item">
-                            <div class="order-list-heading-image-label">Item</div>
-                        </div>
-                        <div class="order-list-heading-quantity">Quantity</div>
-                        <div class="order-list-heading-amount">Amount</div>
-                    </div>
-                    <!-- SCROLLABLE ORDER LIST -->
-                    <div class="order-list-scroll" id="order-list-scroll">
-                        <div class="order-items" id="order-items" aria-live="polite"></div>
-                    </div>
+                        <span
+                            class="checkout-profile-chevron"
+                            aria-hidden="true"
+                        ></span>
+                    </button>
 
-                    <div class="order-summary">
-                        <div class="order-line">
-                            <p class="order-line-label">Subtotal</p>
-                            <p class="order-line-amount" id="order-subtotal">&#8369;232.14</p>
-                        </div>
-                        <div class="order-line">
-                            <p class="order-line-label">VAT (12%, included)</p>
-                            <p class="order-line-amount" id="order-vat">&#8369;27.86</p>
-                        </div>
-                        <div class="order-total">
-                            <p class="order-total-label">Total</p>
-                            <p class="order-total-amount" id="order-total">&#8369;260</p>
-                        </div>
-                        <div class="order-line">
-                            <p class="order-line-label">Change</p>
-                            <p class="order-line-amount" id="order-change">&#8369;0</p>
-                        </div>
+                    <!-- PROFILE DROPDOWN -->
+                    <div
+                        class="checkout-profile-menu"
+                        id="checkout-profile-menu"
+                        inert
+                    >
+                        <button
+                            class="checkout-logout-button"
+                            id="checkout-logout-button"
+                            type="button"
+                        >
+                            <svg
+                                class="checkout-logout-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                            </svg>
 
-                        <div class="order-cash-heading">
-                            <label class="order-cash-label" for="order-cash-amount">Cash received</label>
-                            <p class="order-cash-error" id="order-cash-error" role="alert" aria-live="polite"></p>
-                        </div>
-                        <div class="order-cash-row">
-                            <input class="order-cash-input" id="order-cash-amount" type="text" inputmode="decimal" placeholder="Enter amount (&#8369;)" aria-invalid="false" aria-describedby="order-cash-error" />
-                            <div class="order-exact">
-                                <input class="order-exact-checkbox" id="order-exact" type="checkbox" />
-                                <label class="order-exact-label" for="order-exact">Exact</label>
-                            </div>
-                            <button class="order-calculate order-button" id="order-calculate" type="button">Calculate</button>
-                        </div>
-                        <div class="order-actions">
-                            <button class="order-cancel order-button" id="order-cancel" type="button">Cancel Order</button>
-                            <button class="order-submit order-button" id="order-submit" type="button">Submit Order</button>
-                        </div>
-                        <p class="order-status" id="order-status" role="status" aria-live="polite"></p>
+                            <span>Logout</span>
+                        </button>
                     </div>
                 </div>
-
-                <!-- REUSABLE PLACEHOLDER IMAGE -->
-                <svg class="checkout-icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <symbol id="checkout-image-symbol" viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"></rect>
-                        <circle cx="8.5" cy="8.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
-                        <path d="m4 18 6-6 4 3 3-3 4 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-                    </symbol>
-                </svg>
-
-                <!-- CHECKOUT FUNCTIONALITY -->
-                <script src="checkout.js" defer></script>
             </div>
         </div>
 
-        <!--IMPORT SIDEBAR AND HEADER HTML-->
-        <script src="../../../lib/components.js"></script>
-    </body>
+        <!-- RECIPE CONTENT -->
+        <div class="checkout-content checkout-recipe-content" id="checkout-recipe-content" hidden>
+
+            <!-- RECIPE CATEGORIES -->
+            <div
+                class="checkout-categories"
+                id="checkout-recipe-categories"
+                role="group"
+                aria-label="Recipe categories"
+            ></div>
+
+            <!-- RECIPE CARDS -->
+            <div class="checkout-items">
+                <h2 class="checkout-items-title" id="checkout-recipe-title">
+                    Coffee Classics
+                </h2>
+
+                <div
+                    class="checkout-products"
+                    id="checkout-recipe-products"
+                ></div>
+            </div>
+
+            <!-- SELECTED RECIPE -->
+            <div
+                class="checkout-order checkout-recipe-preview"
+                id="checkout-recipe-preview"
+                aria-live="polite"
+            ></div>
+        </div>
+
+        <!-- CHECKOUT CONTENT -->
+        <div class="checkout-content">
+
+            <!-- CATEGORIES -->
+            <div
+                class="checkout-categories"
+                id="checkout-categories"
+                role="group"
+                aria-label="Menu categories"
+            ></div>
+
+            <!-- MENU ITEMS -->
+            <div class="checkout-items">
+                <h2 class="checkout-items-title" id="checkout-items-title">
+                    Coffee Classics
+                </h2>
+
+                <div
+                    class="checkout-products"
+                    id="checkout-products"
+                ></div>
+            </div>
+
+            <!-- CURRENT ORDER -->
+            <div class="checkout-order">
+                <div class="order-heading">
+                    <div class="order-heading-top">
+                        <p class="order-label">Current order</p>
+
+                        <button
+                            class="order-cancel"
+                            id="order-cancel"
+                            type="button"
+                        >
+                            Cancel Order
+                        </button>
+                    </div>
+
+                    <h2 class="order-title">Order #0019</h2>
+
+                    <p class="order-details">
+                        Cashier: Barista &bull;
+                        <span id="order-date"></span>
+                    </p>
+                </div>
+
+                <!-- ORDER OPTIONS -->
+                <div class="order-options">
+                    <div class="order-field">
+                        <label class="order-field-label" for="order-type">
+                            Type
+                        </label>
+
+                        <select class="order-select" id="order-type">
+                            <option selected>Dine-in</option>
+                            <option>Take-out</option>
+                        </select>
+                    </div>
+
+                    <div class="order-field">
+                        <label class="order-field-label" for="order-payment">
+                            Pay
+                        </label>
+
+                        <select class="order-select" id="order-payment">
+                            <option selected>Cash</option>
+                            <option>GCash</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ORDER LIST COLUMN LABELS -->
+                <div class="order-list-heading" aria-hidden="true">
+                    <div class="order-list-heading-item">Item</div>
+                    <div class="order-list-heading-quantity">Quantity</div>
+                    <div class="order-list-heading-amount">Amount</div>
+                </div>
+
+                <!-- SCROLLABLE ORDER LIST -->
+                <div class="order-list-scroll" id="order-list-scroll">
+                    <div
+                        class="order-items"
+                        id="order-items"
+                        aria-live="polite"
+                    ></div>
+                </div>
+
+                <!-- ORDER SUMMARY -->
+                <div class="order-summary">
+                    <div class="order-line">
+                        <p class="order-line-label">Subtotal</p>
+                        <p class="order-line-amount" id="order-subtotal">
+                            &#8369;0.00
+                        </p>
+                    </div>
+
+                    <div class="order-line">
+                        <p class="order-line-label">VAT (12%, included)</p>
+                        <p class="order-line-amount" id="order-vat">
+                            &#8369;0.00
+                        </p>
+                    </div>
+
+                    <div class="order-total">
+                        <p class="order-total-label">Total</p>
+                        <p class="order-total-amount" id="order-total">
+                            &#8369;0
+                        </p>
+                    </div>
+
+                    <div class="order-line">
+                        <p class="order-line-label">Change</p>
+                        <p class="order-line-amount" id="order-change">
+                            &#8369;0
+                        </p>
+                    </div>
+
+                    <!-- CASH PAYMENT -->
+                    <div class="order-cash-controls" id="order-cash-controls">
+                        <div class="order-cash-heading">
+                            <label
+                                class="order-cash-label"
+                                for="order-cash-amount"
+                            >
+                                Cash received
+                            </label>
+
+                            <p
+                                class="order-cash-error"
+                                id="order-cash-error"
+                                role="alert"
+                            ></p>
+                        </div>
+
+                        <div class="order-cash-row">
+                            <input
+                                class="order-cash-input"
+                                id="order-cash-amount"
+                                type="text"
+                                inputmode="decimal"
+                                placeholder="Enter amount (&#8369;)"
+                                autocomplete="off"
+                                aria-invalid="false"
+                                aria-describedby="order-cash-error"
+                            >
+
+                            <div class="order-exact">
+                                <input
+                                    class="order-exact-checkbox"
+                                    id="order-exact"
+                                    type="checkbox"
+                                >
+
+                                <label
+                                    class="order-exact-label"
+                                    for="order-exact"
+                                >
+                                    Exact
+                                </label>
+                            </div>
+
+                            <button
+                                class="order-calculate order-button"
+                                id="order-calculate"
+                                type="button"
+                            >
+                                Calculate
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ORDER ACTIONS -->
+                    <div class="order-actions">
+                        <button
+                            class="order-submit order-button"
+                            id="order-submit"
+                            type="button"
+                        >
+                            Submit Order
+                        </button>
+                    </div>
+
+                    <p
+                        class="order-status"
+                        id="order-status"
+                        role="status"
+                    ></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDERS CONTENT -->
+        <div
+            class="checkout-content checkout-orders-content"
+            id="checkout-orders-content"
+            hidden
+        >
+            <div class="checkout-orders-panel">
+
+                <!-- ORDER FILTERS -->
+                <div
+                    class="checkout-orders-filters"
+                    id="checkout-orders-filters"
+                    role="group"
+                    aria-label="Order status filters"
+                ></div>
+
+                <!-- ORDERS LIST -->
+                <div
+                    class="checkout-orders-scroll"
+                    id="checkout-orders-scroll"
+                >
+
+                    <!-- ORDER COLUMN HEADINGS -->
+                    <div class="checkout-history-columns" aria-hidden="true">
+                        <span>Order #</span>
+                        <span>Time</span>
+                        <span>Items</span>
+                        <span>Type</span>
+                        <span>Pay</span>
+                        <span>Total</span>
+                        <span>Status</span>
+                        <span></span>
+                    </div>
+
+                    <!-- ORDER RECORDS -->
+                    <div
+                        class="checkout-history-list"
+                        id="checkout-history-list"
+                    ></div>
+                </div>
+            </div>
+
+            <!-- MOBILE ORDER DETAILS -->
+            <div
+                class="checkout-history-drawer-details"
+                id="checkout-history-drawer-details"
+            ></div>
+        </div>
+
+        <!-- MOBILE ORDER BAR -->
+        <div
+            class="checkout-mobile-order-bar"
+            id="checkout-mobile-order-bar"
+            hidden
+        >
+            <button
+                class="checkout-mobile-order-button"
+                id="checkout-mobile-order-button"
+                type="button"
+                aria-haspopup="dialog"
+            >
+                <div class="checkout-mobile-order-information">
+                    <span
+                        class="checkout-mobile-order-count"
+                        id="checkout-mobile-order-count"
+                    >
+                        0 items in order
+                    </span>
+
+                    <strong
+                        class="checkout-mobile-order-total"
+                        id="checkout-mobile-order-total"
+                    >
+                        &#8369;0
+                    </strong>
+                </div>
+
+                <div class="checkout-mobile-order-action">
+                    <span>View order</span>
+                    <span aria-hidden="true">&rarr;</span>
+                </div>
+            </button>
+        </div>
+
+        <!-- CHECKOUT DRAWER -->
+        <dialog
+            class="checkout-drawer"
+            id="checkout-drawer"
+            aria-labelledby="checkout-drawer-title"
+        >
+            <div class="checkout-drawer-surface">
+
+                <div class="checkout-drawer-handle" aria-hidden="true"></div>
+
+                <!-- DRAWER HEADER -->
+                <div class="checkout-drawer-header">
+                    <h2
+                        class="checkout-drawer-title"
+                        id="checkout-drawer-title"
+                    ></h2>
+
+                    <button
+                        class="checkout-drawer-close"
+                        id="checkout-drawer-close"
+                        type="button"
+                        aria-label="Close panel"
+                        autofocus
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- DRAWER CONTENT -->
+                <div class="checkout-drawer-body">
+
+                    <!-- BEVERAGE SELECTION -->
+                    <div
+                        class="checkout-beverage-selection"
+                        id="checkout-beverage-selection"
+                        hidden
+                    >
+                        <div class="checkout-beverage-information">
+                            <div
+                                class="checkout-beverage-image"
+                                id="checkout-beverage-image"
+                            ></div>
+
+                            <div class="checkout-beverage-details">
+                                <h3
+                                    class="checkout-beverage-name"
+                                    id="checkout-beverage-name"
+                                ></h3>
+
+                                <p
+                                    class="checkout-beverage-price"
+                                    id="checkout-beverage-price"
+                                ></p>
+                            </div>
+                        </div>
+
+                        <!-- SIZE OPTIONS -->
+                        <div class="checkout-beverage-size-section">
+                            <p class="checkout-beverage-label">
+                                Select beverage size
+                            </p>
+
+                            <div
+                                class="checkout-beverage-sizes"
+                                role="group"
+                                aria-label="Beverage sizes"
+                            >
+                                <button
+                                    class="checkout-beverage-size"
+                                    data-drawer-size="Tall"
+                                    type="button"
+                                    aria-pressed="false"
+                                >
+                                    <svg aria-hidden="true">
+                                        <use href="#checkout-cup-symbol"></use>
+                                    </svg>
+
+                                    <span>Tall</span>
+                                </button>
+
+                                <button
+                                    class="checkout-beverage-size"
+                                    data-drawer-size="Grande"
+                                    type="button"
+                                    aria-pressed="false"
+                                >
+                                    <svg aria-hidden="true">
+                                        <use href="#checkout-cup-symbol"></use>
+                                    </svg>
+
+                                    <span>Grande</span>
+                                </button>
+
+                                <button
+                                    class="checkout-beverage-size"
+                                    data-drawer-size="Venti"
+                                    type="button"
+                                    aria-pressed="false"
+                                >
+                                    <svg aria-hidden="true">
+                                        <use href="#checkout-cup-symbol"></use>
+                                    </svg>
+
+                                    <span>Venti</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- BEVERAGE QUANTITY -->
+                        <div class="checkout-beverage-quantity">
+                            <p class="checkout-beverage-label">Quantity</p>
+
+                            <div class="checkout-beverage-quantity-controls">
+                                <button
+                                    class="checkout-beverage-quantity-button"
+                                    id="checkout-beverage-decrease"
+                                    type="button"
+                                    aria-label="Decrease quantity"
+                                >
+                                    &minus;
+                                </button>
+
+                                <output
+                                    class="checkout-beverage-quantity-value"
+                                    id="checkout-beverage-quantity"
+                                    aria-live="polite"
+                                >
+                                    1
+                                </output>
+
+                                <button
+                                    class="checkout-beverage-quantity-button"
+                                    id="checkout-beverage-increase"
+                                    type="button"
+                                    aria-label="Increase quantity"
+                                >
+                                    +
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- ADD BEVERAGE -->
+                        <button
+                            class="checkout-beverage-add"
+                            id="checkout-beverage-add"
+                            type="button"
+                        >
+                            Add to order
+                        </button>
+                    </div>
+
+                    <!-- EXISTING ORDER OR RECIPE PANEL -->
+                    <div
+                        class="checkout-drawer-panel"
+                        id="checkout-drawer-panel"
+                        hidden
+                    ></div>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- REUSABLE ICONS -->
+        <svg
+            class="checkout-icon-definitions"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+        >
+            <symbol id="checkout-image-symbol" viewBox="0 0 24 24">
+                <rect
+                    x="3" y="3" width="18" height="18" rx="2"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                ></rect>
+
+                <circle
+                    cx="8.5" cy="8.5" r="1.6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                ></circle>
+
+                <path
+                    d="m4 18 6-6 4 3 3-4 4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                ></path>
+            </symbol>
+
+            <symbol id="checkout-search-symbol" viewBox="0 0 24 24">
+                <circle
+                    cx="10.5" cy="10.5" r="7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                ></circle>
+
+                <path
+                    d="m16 16 5 5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                ></path>
+            </symbol>
+
+            <symbol id="checkout-notification-symbol" viewBox="0 0 24 24">
+                <path
+                    d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                ></path>
+            </symbol>
+
+            <symbol id="checkout-profile-symbol" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="12" fill="currentColor"></circle>
+
+                <circle
+                    cx="12" cy="8" r="3.4"
+                    fill="var(--bgcolor-light)"
+                ></circle>
+
+                <path
+                    d="M5 18c0-6 14-6 14 0"
+                    fill="var(--bgcolor-light)"
+                ></path>
+            </symbol>
+
+            <symbol id="checkout-cart-symbol" viewBox="0 0 24 24">
+                <path
+                    d="M2 3h3l3 12h11l3-9H6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                ></path>
+
+                <circle cx="9" cy="20" r="1.5" fill="currentColor"></circle>
+                <circle cx="18" cy="20" r="1.5" fill="currentColor"></circle>
+            </symbol>
+
+            <symbol id="checkout-cup-symbol" viewBox="0 0 24 24">
+                <path
+                    d="M6 7h12l-2 14H8ZM5 4h14v2H5Z"
+                    fill="currentColor"
+                ></path>
+
+                <path
+                    d="M8 12h8"
+                    fill="none"
+                    stroke="var(--bgcolor-light)"
+                    stroke-width="2"
+                ></path>
+            </symbol>
+
+            <symbol id="checkout-delete-symbol" viewBox="0 0 24 24">
+                <path
+                    d="M4 7h16M10 4h4M7 7l1 13h8l1-13M10 10v7M14 10v7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                ></path>
+            </symbol>
+        </svg>
+    </div>
+
+    <!-- CHECKOUT FUNCTIONALITY -->
+    <script src="checkout.js" defer></script>
+</body>
 </html>
