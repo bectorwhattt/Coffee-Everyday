@@ -204,6 +204,10 @@ MAIN
     color: var(--color-black);
 }
 
+body {
+    padding: 0; margin: 0
+}
+
 .main *,
 .main *::before,
 .main *::after {
