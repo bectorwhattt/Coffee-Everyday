@@ -14,12 +14,860 @@ body {
 }
 
 .main-container {
+    display: flex;
+    flex-direction: column;
+
     width: 100%;
+    height: 100vh;
+    min-height: 0;
 
     margin-left: var(--adm-navbar-width);
+
+    overflow: hidden;
 }
 
 
 /*********************************************************************************
 MAIN
 *********************************************************************************/
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+
+    box-sizing: border-box;
+    padding: 12px 24px 40px 24px;
+
+    background-color: var(--bgcolor-beige);
+
+    color: var(--color-black);
+
+    overflow: hidden;
+}
+
+
+/*********************************************************************************
+SUPPLIERS CARD
+*********************************************************************************/
+.main .suppliers-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 20px;
+    min-height: 0;
+
+    box-sizing: border-box;
+    padding: 22px 24px 28px 24px;
+
+    border-radius: 24px;
+    background-color: var(--bgcolor-light);
+}
+
+
+/*********************************************************************************
+CARD HEADER
+*********************************************************************************/
+.main .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* SHARED BUTTONS */
+.main .button-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    height: 36px;
+    padding: 0 18px;
+
+    border: 1px solid var(--bgcolor-darkbrown);
+    border-radius: 8px;
+    background-color: var(--bgcolor-darkbrown);
+
+    font-family: var(--adm-font);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bgcolor-light);
+
+    cursor: pointer;
+
+    transition: opacity 0.2s ease;
+}
+
+.main .button-primary:hover {
+    opacity: 0.85;
+}
+
+.main .button-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    height: 36px;
+    padding: 0 18px;
+
+    border: 1px solid var(--color-black);
+    border-radius: 8px;
+    background-color: var(--bgcolor-light);
+
+    font-family: var(--adm-font);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.main .button-secondary:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+.main .button-danger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    height: 36px;
+    padding: 0 18px;
+
+    border: 1px solid #99080F;
+    border-radius: 8px;
+    background-color: var(--bgcolor-light);
+
+    font-family: var(--adm-font);
+    font-size: 13px;
+    font-weight: 400;
+    color: #99080F;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.main .button-danger:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+.main .button-danger[hidden] {
+    display: none;
+}
+
+.main .add-supplier-button {
+    height: 40px;
+    padding: 0 22px;
+
+    border-radius: 10px;
+}
+
+.main .card-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+
+/*********************************************************************************
+SUPPLIERS TABLE
+*********************************************************************************/
+.main .suppliers-table {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+
+    overflow-y: auto;
+}
+
+.main .table-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 10px 24px;
+
+    border-radius: 8px;
+    background-color: var(--bgcolor-khaki);
+
+    flex-shrink: 0;
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .suppliers-body {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.main .suppliers-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px 0;
+
+    font-size: 12px;
+    color: var(--color-grey);
+}
+
+.main .supplier-row {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+}
+
+.main .supplier-summary {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 16px 24px;
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .cell-supplier-name {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+
+    font-weight: 600;
+}
+
+.main .table-header .cell-supplier-name {
+    font-weight: 400;
+}
+
+.main .cell-categories {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+}
+
+.main .cell-contact {
+    display: flex;
+    align-items: center;
+
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.main .cell-status {
+    display: flex;
+    align-items: center;
+
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.main .cell-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+
+    width: 56px;
+    flex-shrink: 0;
+}
+
+.main .status-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 3px 14px;
+
+    border-radius: 999px;
+
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.main .status-active {
+    background-color: #3CA22A27;
+
+    color: #167A04;
+}
+
+.main .status-inactive {
+    background-color: #A22A2C27;
+
+    color: #99080F;
+}
+
+.main .row-action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    flex-shrink: 0;
+
+    border: 1px solid var(--color-black);
+    border-radius: 50%;
+    background-color: transparent;
+
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main .row-action-button svg {
+    transition: transform 0.2s ease;
+}
+
+.main .supplier-row.expanded .row-action-button {
+    background-color: var(--bgcolor-darkbrown);
+
+    color: var(--bgcolor-light);
+}
+
+.main .supplier-row.expanded .row-toggle svg {
+    transform: rotate(180deg);
+}
+
+
+/*********************************************************************************
+SUPPLIER DETAILS
+*********************************************************************************/
+.main .supplier-details {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+
+    box-sizing: border-box;
+    margin: 0 12px 14px 12px;
+    padding: 16px 24px 18px 24px;
+
+    border-radius: 12px;
+    background-color: var(--bgcolor-beige);
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .supplier-row.expanded .supplier-details {
+    display: flex;
+}
+
+.main .details-header {
+    display: flex;
+    align-items: center;
+
+    font-size: 11px;
+    color: var(--color-grey);
+}
+
+.main .details-line {
+    display: flex;
+    align-items: center;
+}
+
+.main .detail-item {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+}
+
+.main .detail-unit {
+    display: flex;
+    align-items: center;
+
+    width: 110px;
+    flex-shrink: 0;
+}
+
+.main .detail-amount {
+    display: flex;
+    align-items: center;
+
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.main .detail-measure {
+    display: flex;
+    align-items: center;
+
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.main .detail-price {
+    display: flex;
+    align-items: center;
+
+    width: 110px;
+    flex-shrink: 0;
+}
+
+.main .details-empty {
+    font-size: 12px;
+    color: var(--color-grey);
+}
+
+
+/*********************************************************************************
+PANEL OVERLAY
+*********************************************************************************/
+.main .panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--color-black);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.main .panel-overlay.open {
+    opacity: 0.35;
+    visibility: visible;
+}
+
+
+/*********************************************************************************
+SUPPLIER PANEL
+*********************************************************************************/
+.main .panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+    width: 640px;
+    max-width: 100%;
+    height: 100%;
+
+    border-radius: 24px 0 0 24px;
+    background-color: var(--bgcolor-light);
+
+    color: var(--color-black);
+
+    overflow: hidden;
+    visibility: hidden;
+    transform: translateX(100%);
+
+    transition: transform 0.3s ease, visibility 0.3s ease;
+}
+
+.main .panel.open {
+    visibility: visible;
+    transform: translateX(0);
+}
+
+
+/*********************************************************************************
+PANEL HEADER
+*********************************************************************************/
+.main .panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+    padding: 28px 28px 16px 28px;
+}
+
+.main .panel-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.main .panel-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.main .panel-subtitle {
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+
+    border: 1px solid var(--color-black);
+    border-radius: 50%;
+    background-color: transparent;
+
+    color: var(--color-black);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.main .close-button:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+.main .panel-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 16px;
+
+    box-sizing: border-box;
+    padding: 0 28px 16px 28px;
+
+    overflow-y: auto;
+}
+
+
+/*********************************************************************************
+FORM CONTROLS
+*********************************************************************************/
+.main .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    min-width: 0;
+}
+
+.main .field-contact {
+    width: 190px;
+}
+
+.main .field-status {
+    width: 110px;
+}
+
+.main .field-grow {
+    flex: 1;
+}
+
+.main .field-quantity {
+    width: 80px;
+}
+
+.main .field-unit {
+    width: 120px;
+}
+
+.main .field-cost {
+    width: 130px;
+}
+
+.main .field-amount {
+    width: 130px;
+}
+
+.main .field-measure {
+    width: 130px;
+}
+
+.main .field-label {
+    font-size: 11px;
+    color: var(--color-grey);
+}
+
+.main .field-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 38px;
+    padding: 0 12px;
+
+    border: 1px solid var(--color-grey);
+    border-radius: 8px;
+    background-color: var(--bgcolor-light);
+
+    font-family: var(--adm-font);
+    font-size: 13px;
+    color: var(--color-black);
+
+    transition: border-color 0.2s ease;
+}
+
+.main .field-input::placeholder {
+    color: var(--color-grey);
+}
+
+.main select.field-input:invalid {
+    color: var(--color-grey);
+}
+
+.main .field-input:focus {
+    border-color: var(--color-black);
+
+    outline: none;
+}
+
+.main .field-input:disabled {
+    background-color: var(--bgcolor-khaki);
+
+    color: var(--color-grey);
+
+    cursor: not-allowed;
+}
+
+.main .field-input.invalid {
+    border-color: #99080F;
+}
+
+
+/*********************************************************************************
+SUPPLIER DETAILS ROW
+*********************************************************************************/
+.main .supplier-details-row {
+    display: flex;
+    gap: 12px;
+}
+
+
+/*********************************************************************************
+ADD ITEM
+*********************************************************************************/
+.main .add-item-card {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 14px;
+
+    box-sizing: border-box;
+    padding: 18px 20px 20px 20px;
+
+    border-radius: 16px;
+    background-color: var(--bgcolor-beige);
+}
+
+.main .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.main .add-item-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.main .add-item-actions {
+    display: flex;
+    gap: 8px;
+
+    margin-left: auto;
+}
+
+
+/*********************************************************************************
+ITEMS OFFERS
+*********************************************************************************/
+.main .offered-items-card {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 12px;
+
+    box-sizing: border-box;
+    padding: 18px 20px 20px 20px;
+
+    border-radius: 16px;
+    background-color: var(--bgcolor-beige);
+}
+
+.main .offered-items-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .offered-items-count {
+    font-size: 12px;
+    color: var(--color-grey);
+}
+
+.main .offered-items-table-header {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 8px 12px;
+
+    border-radius: 6px;
+    background-color: var(--bgcolor-khaki);
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .offered-items-list {
+    display: flex;
+    flex-direction: column;
+
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.main .offered-items-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px 0;
+
+    font-size: 12px;
+    color: var(--color-grey);
+}
+
+.main .offered-item-row {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    padding: 12px;
+
+    border-bottom: 1px solid var(--bgcolor-khaki);
+
+    font-size: 12px;
+    color: var(--color-black);
+}
+
+.main .offered-item-name {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+    min-width: 0;
+}
+
+.main .offered-item-quantity {
+    display: flex;
+    align-items: center;
+
+    width: 44px;
+    flex-shrink: 0;
+}
+
+.main .offered-item-unit {
+    display: flex;
+    align-items: center;
+
+    width: 70px;
+    flex-shrink: 0;
+}
+
+.main .offered-item-amount {
+    display: flex;
+    align-items: center;
+
+    width: 70px;
+    flex-shrink: 0;
+}
+
+.main .offered-item-cost {
+    display: flex;
+    align-items: center;
+
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.main .offered-item-action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 32px;
+    flex-shrink: 0;
+}
+
+.main .delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+
+    border: 1px solid #99080F;
+    border-radius: 6px;
+    background-color: transparent;
+
+    color: #99080F;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.main .delete-button:hover {
+    background-color: var(--bgcolor-khaki);
+}
+
+
+/*********************************************************************************
+PANEL FOOTER
+*********************************************************************************/
+.main .panel-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+
+    box-sizing: border-box;
+    padding: 16px 28px 24px 28px;
+}
+
+.main .panel-footer .delete-supplier-button {
+    margin-right: auto;
+}
+
+.main .panel-footer .button-primary,
+.main .panel-footer .button-secondary {
+    min-width: 130px;
+}
