@@ -887,6 +887,137 @@ PANEL HEADER
     overflow-y: auto;
 }
 
+/*********************************************************************************
+ADMIN PROFILE + LOGOUT DROPDOWN
+*********************************************************************************
+
+This snippet adds the dropdown styles for the admin profile / logout button
+in purchasing-orders.html.
+
+The purchasing-orders.css file was not provided in your upload, so I cannot
+ship a complete merged file. Instead, paste the block below at the BOTTOM of
+your existing purchasing-orders.css (after all existing rules) — these rules
+are scoped to .admin-profile / .profile-dropdown / .dropdown-item so they
+will not collide with anything else in the page.
+
+If you prefer to keep the dropdown styles in their own file, save this as
+profile-dropdown.css in the same folder as purchasing-orders.html and add
+this line inside <head>, AFTER the purchasing-orders.css link:
+
+    <link rel="stylesheet" href="profile-dropdown.css">
+
+*********************************************************************************/
+
+.admin-profile {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s ease;
+}
+
+.admin-profile:hover,
+.admin-profile:focus-visible {
+    background-color: var(--bgcolor-beige, #EFE3D1);
+}
+
+.admin-profile .profile-avatar {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-profile .profile-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Small caret next to the name to hint that the profile is clickable */
+.admin-profile .profile-caret {
+    flex-shrink: 0;
+
+    color: var(--color-black, #1E1512);
+    transition: transform 0.2s ease;
+}
+
+.admin-profile.open .profile-caret {
+    transform: rotate(180deg);
+}
+
+/* The dropdown panel that contains the Logout link */
+.admin-profile .profile-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 50;
+
+    display: none;
+    min-width: 170px;
+
+    box-sizing: border-box;
+    padding: 6px;
+
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(59, 36, 24, 0.18);
+}
+
+.admin-profile.open .profile-dropdown {
+    display: block;
+}
+
+.admin-profile .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-black, #1E1512);
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.admin-profile .dropdown-item:hover,
+.admin-profile .dropdown-item:focus-visible {
+    background-color: var(--bgcolor-beige, #EFE3D1);
+
+    color: var(--adm-bgcolor-brown, #4A2C20);
+}
+
+.admin-profile .dropdown-item svg {
+    flex-shrink: 0;
+}
+
+/*********************************************************************************
+MOBILE: hide the caret when the profile name is collapsed to just the avatar
+*********************************************************************************/
+@media (max-width: 640px) {
+    .admin-profile {
+        padding: 4px;
+    }
+
+    .admin-profile .profile-name,
+    .admin-profile .profile-caret {
+        display: none;
+    }
+}
 
 /*********************************************************************************
 FORM CONTROLS

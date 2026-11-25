@@ -512,6 +512,52 @@ renderOrderItems();
 
 
 /*********************************************************************************
+ADMIN PROFILE DROPDOWN (LOGOUT)
+Toggles the dropdown when the profile is clicked, closes it when the user
+clicks outside or presses Escape. The Logout link itself lives in the HTML
+and points to ../login/login.html.
+*********************************************************************************/
+(function () {
+    const adminProfile = document.querySelector("#admin-profile");
+    if (!adminProfile) return;
+
+    function setDropdownOpen(isOpen) {
+        adminProfile.classList.toggle("open", isOpen);
+        adminProfile.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    adminProfile.addEventListener("click", function (event) {
+        // Let the Logout link do its own navigation
+        if (event.target.closest(".dropdown-item")) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+        setDropdownOpen(!adminProfile.classList.contains("open"));
+    });
+
+    // Keyboard support: Enter or Space toggles the dropdown when focused
+    adminProfile.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setDropdownOpen(!adminProfile.classList.contains("open"));
+        }
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!adminProfile.contains(event.target)) {
+            setDropdownOpen(false);
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            setDropdownOpen(false);
+        }
+    });
+})();
+
+
+/*********************************************************************************
 MOBILE DRAWER
 (Move this block to lib/components.js if you want every admin page to get it.)
 *********************************************************************************/
